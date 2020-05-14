@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<settings>
+		<setting name="cacheEnabled" value="false" />
+		<setting name="jdbcTypeForNull" value="NULL" />
+	</settings>
+<!-- 	<typeAliases>
+		<typeAlias type="maeggi.seggi.mypage.BoardVO" alias="board" />
+		<typeAlias type="maeggi.seggi.loginandcustomer.memberVO" alias="member" />
+		<typeAlias type="maeggi.seggi.recipe.RecipeVO" alias="recipe"/>
+		<typeAlias type="maeggi.seggi.restaurant.RecipePlannerAddVO" alias="add"/>
+		<typeAlias type="maeggi.seggi.restaurant.weatherVO" alias="weather"/>
+		<typeAlias type="maeggi.seggi.recipe.weatherVO" alias="recipeweather"/>
+		fridge
+		<typeAlias type="maeggi.seggi.fridge.FridgeVO" alias="fridge"/>
+		<typeAlias type="maeggi.seggi.fridge.FridgeDetailVO" alias="fridgeDetail"/>
+		Ingredient
+		<typeAlias type="maeggi.seggi.ingredient.IngredientVO" alias="ingredients"/>
+		reply
+		<typeAlias type="maeggi.seggi.reply.replyBoardVO" alias="reply"/>
+		meal_planner
+		<typeAlias type="maeggi.seggi.mealPlanner.mealPlannerVO" alias="meal"/>
+		<typeAlias type="maeggi.seggi.recipe.RecipeDetailVO" alias="recipeDetail"/>
+		MyPoint
+		<typeAlias type="maeggi.seggi.mypage.PointVO" alias="point"/>
+		favorite
+		<typeAlias type="maeggi.seggi.recipeFavorite.RecipeFavoriteVO" alias="favorite"/>
+		댓글 작성
+		<typeAlias type="maeggi.seggi.comment.CommentVO" alias="comment"/>
+	</typeAliases>
+	<mappers>
+		<mapper resource="mapper/mypage_board.xml" />
+		<mapper resource="mapper/loginandcustomer_member.xml" />
+		<mapper resource="mapper/recipe.xml"/>
+		<mapper resource="mapper/add.xml"/>
+		<mapper resource="mapper/weather.xml"/>
+		<mapper resource="mapper/recipeweather.xml"/>
+		fridge
+		<mapper resource="mapper/fridge.xml"/>
+		<mapper resource="mapper/fridge_detail.xml"/>
+		Ingredient
+		<mapper resource="mapper/ingredient.xml"/>
+		reply
+		<mapper resource="mapper/reply.xml"/>
+		meal_planner
+		<mapper resource="mapper/meal_planner.xml"/>
+		<mapper resource="mapper/recipe_favorite.xml"/>
+		댓글 작성
+		<mapper resource="mapper/comment.xml"/>
+	</mappers> -->
+</configuration>
