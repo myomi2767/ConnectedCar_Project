@@ -7,13 +7,16 @@
 	<definition name="inventory/inventoryManagement" extends="mycarTemplate">
 		<put-attribute name="content" value="/WEB-INF/views/inventory/inventory_management.jsp"/>
 	</definition>
-	<definition name="inventory/inventoryManagementDetail" extends="mycarTemplate">
+	<definition name="inventory/inventoryManagementDetail" extends="popupTemplate">
+		<put-attribute name="header" value="/WEB-INF/views/inventory/inventory_header.jsp"/>
 		<put-attribute name="content" value="/WEB-INF/views/inventory/inventory_managementDetail.jsp"/>
 	</definition>
-	<definition name="inventory/inventoryRecieve" extends="mycarTemplate">
+	<definition name="inventory/inventoryRecieve" extends="popupTemplate">
+		<put-attribute name="header" value="/WEB-INF/views/inventory/inventory_header.jsp"/>
 		<put-attribute name="content" value="/WEB-INF/views/inventory/inventory_recieve.jsp"/>
 	</definition>
-	<definition name="inventory/inventoryRelease" extends="mycarTemplate">
+	<definition name="inventory/inventoryRelease" extends="popupTemplate">
+		<put-attribute name="header" value="/WEB-INF/views/inventory/inventory_header.jsp"/>
 		<put-attribute name="content" value="/WEB-INF/views/inventory/inventory_release.jsp"/>
 	</definition>
 	
