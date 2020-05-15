@@ -6,6 +6,7 @@
 <tiles-definitions>
 	<definition name="inventory/inventoryhome" extends="mycarTemplate">
 		<put-attribute name="content" value="/WEB-INF/views/inventory/inventoryhome.jsp"/>
+	</definition>
 	<definition name="inventory/inventoryManagement" extends="mycarTemplate">
 		<put-attribute name="content" value="/WEB-INF/views/inventory/inventory_management.jsp"/>
 	</definition>
