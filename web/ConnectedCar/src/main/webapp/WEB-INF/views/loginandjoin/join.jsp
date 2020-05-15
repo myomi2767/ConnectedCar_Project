@@ -174,7 +174,7 @@
 	<div id="outter">
 ​
 ​
-		<div class="container">
+		<div class="container mtb">
 			<form action="/mycar/loginandjoin/join.do" name="userInfo" method="POST" onsubmit="return join_check()">
 				<div class="join_form">
 					<label for="id">아이디:</label> 
