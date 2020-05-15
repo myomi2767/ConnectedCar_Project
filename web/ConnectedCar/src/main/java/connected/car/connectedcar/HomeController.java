@@ -1,4 +1,4 @@
-package connected.car.mycar;
+package connected.car.connectedcar;
 
 import java.text.DateFormat;
 import java.util.Date;
