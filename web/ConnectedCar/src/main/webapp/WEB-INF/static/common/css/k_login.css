@@ -1,0 +1,87 @@
+@charset "UTF-8";
+
+
+/* 메인 로그인 페이지  CSS [시작] */
+#outter {
+	
+	padding : 0 auto;
+	
+	
+	
+}
+
+#right_inner{
+	padding : 50px;
+	font-family: 'PapyrusM';
+	text-align: center;
+}
+
+#input_button{
+	margin-top : 20px;
+}
+
+.input_logintext{
+	width : 300px;
+	height : 50px;
+}
+
+.logintext_div{
+	margin-bottom:10px;
+	
+}
+#loginbutton{
+	width : 300px;
+	height : 50px;
+	margin-bottom : 30px;
+	font-size: 20pt;
+}
+.socialbutton{
+	width : 300px;
+	height : 50px;
+	margin : 5px;
+}
+#notmember_box{
+	font-size: 15pt;
+	margin : 10px;
+	color: grey;
+	font-family: PapyrusM;
+}
+
+#socialLogin_box{
+	font-family : dohyeon;
+	font-size: 15pt;
+	margin-top: 15px;
+	margin-bottom : 15px;
+}
+#joinAndsearch li {
+	list-style : none;
+	display:inline;
+	margin-left: auto;
+	margin-right : auto;
+	font-size: 15px;
+}
+#joinlist{
+	font-size: 40px;
+	
+}
+
+#social1{
+	background-color: #3EC728;
+	color : white;
+}
+
+#social2{
+	background-color : #FAE100;
+
+	
+}
+#social3{
+	background-color: #FF4600; 
+	color : white;
+}
+
+
+#top3title{
+	margin : 30px 30px 30px 0px;
+	font-size: 20px;
+}
