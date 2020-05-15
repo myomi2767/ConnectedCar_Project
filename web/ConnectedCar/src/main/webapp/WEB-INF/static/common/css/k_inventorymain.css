@@ -3,135 +3,16 @@
 
 #table_expendable{
 	width: 500px; 
-	margin-left: 100px;
+	margin-left:30px;
+	margin-right:30px;
+	margin-top: 50px;
+
+}
+
+#graph_expendable{
+	width : 500px;
+	margin-left:30px;	
+	margin-right:30px;
+	margin-top: 50px;
 	
 }
-.mypage_main{
-	width: 63.5%; 
-	margin-left: auto; 
-	margin-right: auto;
-}
-
-
-.mypage_one{
-	width: 600px; 
-	margin-right: auto; 
-	margin-left: auto;
-}
-.mypage_table{ 
-	width: 800px;
-	height: 300px;
-	margin-left: auto;
-	margin-right: auto;
-}
-.search:hover{
-	color: white;
-	background-color: #fc6c3f;
-}
-
-.mypage_table_tr{ 
-	font-weight: bolder;
-}
-
-.mypage_info_texts{
-	margin-bottom: 10px;
-}
-
-
-#mypage_ask_reply_send{
-width : 100px;
-
-}
-#mypage_ask_reply_pause{
-	width : 100px;
-	
-}
-#mypage_AskMangerForm button{
-	width : 100px;	
-	margin-left:auto;
-	margin-right:auto;
-}
-
-
-#mypage_askdetail_reply_managername{
-	display: inline;
-	padding-right : 10px;
-	
-}
-#mypage_feedback_box{
-	display: inline;
-}
-#mypage_text_feedback{
-	margin : 20px;
-	float : left;
-	width : 800px;
-	padding-top : 30px;
-}
-#mypage_reply_buttons{
-	margin-left : auto;
-	margin-right : auto;
-	text-align: center;
-	
-}
-#mypage_asklist_customview{
-	margin-top : 10px;
-	margin-bottom: 10px;
-}
-.mypage_askboard{
-	margin-top : 50px;
-	margin-left : auto;
-	margin-right: auto;
-	width : 700px;
-	text-align: center;
-	height : 300px;
-	border: 2px solid #E4DDFA;
-	font-size: 20px;
-}
-.mypage_askboard th {
-    text-align: center;
-    
-  }
-  
-.basic {
-    background-color: #E4DDFA;
-    
-  }
-  
- #replysubmitform{
- 
- 	width: 700px;
- 	margin-left: auto;
- 	margin-right: auto;
- 
- }
- 
-.replysubmittext{
-	width : 600px;
-	
-}
-  
-#replytable{
-	width : 700px;
-	margin-left : auto;
-	margin-right: auto;
-
-}
-
-#replytable th{
-	text-align : center;
-
-}
-#mypage_ansComplete {
-	float : right;
-	width : 100px;
-	margin-left : 50px;
-	margin-right : 50px;
-	margin-bottom : 30px;
-}
-#mypage_askdetail_reply_managername{
-	margin-left : 100px;
-	margin-right : 50px;
-	margin-top : 50px;
-	float: left;
-}
-

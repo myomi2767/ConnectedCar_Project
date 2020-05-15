@@ -17,6 +17,7 @@ public class BoardController {
 	@RequestMapping(value = "/inventory/inventorymain.do", method = RequestMethod.GET)
 	public String insertView() {
 		return "inventory/inventorymain";
+	}
 	//재고관리 상세 페이지
 	@RequestMapping(value = "/inventory/manageDetail.do", method = RequestMethod.GET)
 	public String manageDetailView() {

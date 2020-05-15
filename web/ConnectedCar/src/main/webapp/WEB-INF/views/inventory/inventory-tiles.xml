@@ -4,7 +4,7 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
        
 <tiles-definitions>
-	<definition name="inventory/inventoryhome" extends="mycarTemplate">
+<!-- 	<definition name="inventory/inventoryhome" extends="mycarTemplate">
 		<put-attribute name="content" value="/WEB-INF/views/inventory/inventoryhome.jsp"/>
 	<definition name="inventory/inventoryManagement" extends="mycarTemplate">
 		<put-attribute name="content" value="/WEB-INF/views/inventory/inventory_management.jsp"/>
@@ -16,8 +16,8 @@
 		<put-attribute name="content" value="/WEB-INF/views/inventory/inventory_recieve.jsp"/>
 	</definition>
 	<definition name="inventory/inventoryRelease" extends="mycarTemplate">
-		<put-attribute name="content" value="/WEB-INF/views/inventory/inventory_release.jsp"/>
-	</definition>
+		<put-attribute name="content" value="/WEB-INF/views/inventory/inventory_release.jsp"/> 
+	</definition>-->
 	
 	<definition name="inventory/inventorymain" extends="mycarTemplate">
 		<put-attribute name="content" value="/WEB-INF/views/inventory/inventorymain.jsp"/>
