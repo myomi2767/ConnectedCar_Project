@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- Title -->
-    <title>매끼세끼</title>
+    <title>Carnect</title>
 </head>
 <body>
 	<div class="col-12">
