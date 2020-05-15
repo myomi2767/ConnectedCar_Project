@@ -38,7 +38,7 @@
 </head>
 
 <body>
-<!-- Fixed navbar -->
+	<!-- Fixed navbar -->
 	<div class="navbar navbar-default navbar-fixed-top" role="navigation">
 		<div class="container">
 			<div class="navbar-header">
@@ -68,11 +68,12 @@
 			<!--/.nav-collapse -->
 		</div>
 	</div>
-	
+
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="/mycar/common/js/bootstrap.min.js"></script>
 	<script src="/mycar/common/js/retina-1.1.0.js"></script>
 	<script src="/mycar/common/js/jquery.hoverdir.js"></script>
