@@ -7,8 +7,10 @@
 	<title>inventory_release</title>
 </head>
 <body>
-<h1>출고</h1>
-<div><input type="number" size="5px" required="required"></div><!-- 숫자가 있을 때만 등록가능 => required속성 -->
-<div style="padding-top: 10px"><input type="submit" value="확인" onclick="self.close()"></div>
+<div class="container">
+	<h1>출고</h1>
+	<div><input type="number" size="5px" required="required"></div><!-- 숫자가 있을 때만 등록가능 => required속성 -->
+	<div style="padding-top: 10px"><input type="submit" value="확인" onclick="self.close()"></div>
+</div>
 </body>
 </html>

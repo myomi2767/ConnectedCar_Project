@@ -10,10 +10,10 @@
 </head>
 <body>
 	<div>
-		<tiles:insertAttribute name="content"></tiles:insertAttribute>
+		<tiles:insertAttribute name="header"></tiles:insertAttribute>
 	</div>
 	<div>
-		<tiles:insertAttribute name="bottom"></tiles:insertAttribute>
+		<tiles:insertAttribute name="content"></tiles:insertAttribute>
 	</div>
 </body>
 </html>
