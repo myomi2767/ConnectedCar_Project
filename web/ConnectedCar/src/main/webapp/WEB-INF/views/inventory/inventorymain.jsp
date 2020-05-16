@@ -15,21 +15,9 @@
 <!-- Title -->
 <title>1:1문의사항</title>
 
-<!-- Jquery-3.2.1 js -->
-<script src="/connectedcar/common/js/jquery-3.2.1.min.js"></script>
-
 <!-- 
 <!-- Core Stylesheet -->
 <link href="/connectedcar/common/css/k_inventorymain.css" rel="stylesheet">
-
-
-<!-- All Plugins JS (지우지말것)-->
-<script src="/connectedcar/common/js/others/plugins.js"></script>
-
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-
-
 
 </head>
 <body>
@@ -54,7 +42,7 @@
 	<div id="div_expendable">
 
 		
-		<div class="container">
+		<div class="container mtb">
 			<div class="col-sm-6" id="table_expendable">
 			<h3>재고 관리</h3>
 						<table class="table table-striped">

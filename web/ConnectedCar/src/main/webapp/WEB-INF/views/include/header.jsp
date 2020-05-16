@@ -32,8 +32,9 @@
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	<script src="/connectedcar/common/js/bootstrap.min.js"></script>
 	<script src="/connectedcar/common/js/retina-1.1.0.js"></script>
 	<script src="/connectedcar/common/js/jquery.hoverdir.js"></script>
 	<script src="/connectedcar/common/js/jquery.hoverex.min.js"></script>

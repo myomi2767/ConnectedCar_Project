@@ -19,7 +19,7 @@
 <title>SOLID - Bootstrap 3 Theme</title>
 
 <!-- Bootstrap core CSS -->
-<link href="/connectedcar/common/css/bootstrap.css" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
 <!-- Custom styles for this template -->
 <link href="/connectedcar/common/css/style.css" rel="stylesheet">
@@ -35,6 +35,8 @@
     <![endif]-->
 
 <script src="/connectedcar/common/js/modernizr.js"></script>
+<script src="/connectedcar/common/js/jquery-3.2.1.min.js"></script>
+
 </head>
 
 <body>
