@@ -24,8 +24,8 @@
 				<option value="">4</option>
 			</select>
 		</div>
-		
-		
+		<button id="search">검색</button>
+		<%  %>		
 		<div class="form-group">
 			<label for="InputName1">부품명 </label> 
 			<input type="text" disabled="disabled" value="불러온값">
@@ -41,5 +41,9 @@
 		<button type="submit" class="btn btn-theme">추가</button>
 		<button type="reset" class="btn btn-theme">취소</button>
 	</form>
+	
+	<script type="text/javascript">
+		$("#search").
+	</script>
 </body>
 </html>
