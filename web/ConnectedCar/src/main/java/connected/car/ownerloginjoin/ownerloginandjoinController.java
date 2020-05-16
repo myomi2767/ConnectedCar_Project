@@ -1,25 +1,22 @@
-package connected.car.loginandjoin;
+package connected.car.ownerloginjoin;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class loginandjoinController {
+public class ownerloginandjoinController {
 
-
-
+	// 로그인 화면
 	@RequestMapping(value = "/loginandjoin/login.do", method = RequestMethod.GET)
 	public String loginView() {
 		return "loginandjoin/login";
 	}
-	
-	// 게시글을 작성하기 위한 뷰를 response할 메소드
-		@RequestMapping(value = "/loginandjoin/join.do", method = RequestMethod.GET)
-		public String joinView() {
-			return "loginandjoin/join";
-		}
 
+	// 회원가입 화면
+	@RequestMapping(value = "/loginandjoin/join.do", method = RequestMethod.GET)
+	public String joinView() {
+		return "loginandjoin/join";
+	}
 
-	
 }
