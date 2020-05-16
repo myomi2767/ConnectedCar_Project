@@ -32,13 +32,10 @@
 			<div class="col-sm-1"></div>
 			<div class="col-sm-10">
 				<div class="pull-right">
-					<button id="add parts" class="btn btn-primary"class="btn btn-primary"
-						onclick="window.open('adminexpendableAdd.do', '_blank', 'width=300px,height=300px')">부품추가</button>
+					<button id="add parts" class="btn btn-primary"
+						onclick="window.open('adminexpendableAdd.do', '_blank', 'width=500px,height=500px')">부품추가</button>
 				</div>
 			</div>
-			<!-- <div align="right" style="padding-right: 40px">
-			<div><button id="add parts" onclick="window.open('여기에 부품추가 컨트롤러 url쓰기', '_blank', 'width=300px,height=300px')">부품추가</button></div>
-		</div> -->
 			<div class="col-sm-1"></div>
 		</div>
 		<!-- management area start -->

@@ -25,7 +25,6 @@
 			</select>
 		</div>
 		
-		
 		<div class="form-group">
 			<label for="InputName1">부품명 </label> 
 			<input type="text" value="불러온값">

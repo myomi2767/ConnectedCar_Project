@@ -12,10 +12,8 @@
 		<put-attribute name="content" value="/WEB-INF/views/admin/admin_expendable.jsp"/>
 	</definition>
 
-	<!-- <definition name="admin/adminexpendableAdd" extends="popupTemplate">
-		<put-attribute name="header" value="/WEB-INF/views/inventory/inventory_header.jsp"/>
-		<put-attribute name="content" value="/WEB-INF/views/admin/inventory_recieve.jsp"/>
-	</definition> -->
-
-
+	<definition name="admin/adminexpendableAdd" extends="popupTemplate">
+		<put-attribute name="header" value="/WEB-INF/views/admin/admin_header.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/views/admin/adminexpendableAdd.jsp"/>
+	</definition>
 </tiles-definitions>   
