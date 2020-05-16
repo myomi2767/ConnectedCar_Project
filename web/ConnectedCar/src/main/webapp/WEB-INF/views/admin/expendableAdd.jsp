@@ -16,7 +16,7 @@
 			<input type="radio" value="기아">기아
 		</div>
 		<div class="form-group">
-			<label for="InputName1">부품코드</label> 
+			<label for="InputName1">부품코드 :</label> 
 			<select name="">
 				<option value="">1</option>
 				<option value="">2</option>
@@ -27,15 +27,15 @@
 		
 		
 		<div class="form-group">
-			<label for="InputName1">부품명 </label> 
+			<label for="InputName1">부품명 :</label> 
 			<input type="text" disabled="disabled" value="불러온값">
 		</div>
 		<div class="form-group">
-			<label for="InputName1">차량모델</label> 
+			<label for="InputName1">차량모델 :</label> 
 			<input type="text" disabled="disabled" value="불러온값">
 		</div>
 		<div class="form-group">
-		    <label for="InputSubject1">개수</label>
+		    <label for="InputSubject1">개수 :</label>
 		    <input type="number" class="form-control" id="">
 		</div>
 		<button type="submit" class="btn btn-theme">추가</button>
