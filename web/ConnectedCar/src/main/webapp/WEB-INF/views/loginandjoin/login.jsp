@@ -22,14 +22,14 @@
 
 
 <!-- font -->
-<!--  <link href="/mycar/common/css/maeggiFonts.css" rel="stylesheet"> -->
+<!--  <link href="/connectedcar/common/css/maeggiFonts.css" rel="stylesheet"> -->
 <!-- Core Stylesheet -->
-<link href="/mycar/common/css/style.css" rel="stylesheet">
-<link href="/mycar/common/css/k_login.css" rel="stylesheet">
+<link href="/connectedcar/common/css/style.css" rel="stylesheet">
+<link href="/connectedcar/common/css/k_login.css" rel="stylesheet">
 
 
 <!-- Responsive CSS -->
-<!--  <link href="/mycar/common/css/responsive/responsive.css"
+<!--  <link href="/connectedcar/common/css/responsive/responsive.css"
 	rel="stylesheet">  -->
 
 </head>

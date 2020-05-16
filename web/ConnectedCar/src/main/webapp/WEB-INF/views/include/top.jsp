@@ -14,7 +14,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="shortcut icon" href="/mycar/images/favicon.png">
+<link rel="shortcut icon" href="/connectedcar/images/favicon.png">
 
 <title>SOLID - Bootstrap 3 Theme</title>
 
