@@ -13,7 +13,7 @@ public class InventoryController {
 		return "inventory/inventoryManagement";
 	}
 
-	// 게시글을 작성하기 위한 뷰를 response할 메소드
+	//재고관리 메인화면
 	@RequestMapping(value = "/inventory/inventorymain.do", method = RequestMethod.GET)
 	public String insertView() {
 		return "inventory/inventorymain";
