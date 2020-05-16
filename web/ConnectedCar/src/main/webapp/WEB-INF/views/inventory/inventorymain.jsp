@@ -50,7 +50,7 @@
 	
 	
 	
-	<!-- 1:1 ask area start -->
+
 	<div id="div_expendable">
 
 		
@@ -98,6 +98,45 @@
 					<div class="col-sm-6"  id = "graph_expendable">
 					<h3>재고 현황 그래프</h3>
 					
+						<table class="table table-striped">
+  							<thead class="thead-dark">
+							<tr>
+							<th>부품코드</th>
+							<th>부품명</th>
+							<th>수량</th>
+												
+							</tr>
+							</thead>
+						<%-- 
+							<%
+								for (int i = 0; i < mealplan.size(); i++) {
+									mealPlannerVO meal = mealplan.get(i);
+							%> --%>
+							<% 
+							for (int i = 0; i < 10; i++) {
+								%>
+							
+							<tr>
+
+								<td><%--  <%=meal.getPlanner_date()%> --%> </td>
+								<td><%-- <% if(meal.getPlanner_code()==1){
+									out.println("아침");
+								}else if(meal.getPlanner_code()==2){
+									out.println("점심");
+								}else{
+									out.println("저녁");
+								}%> --%></td>
+								<td><%-- <%=meal.getMeal_name()%> --%></td>
+							
+
+								<%
+									}
+								%>
+							</tr>
+
+						</table>
+						
+							<h3>재고 관리</h3>
 						<table class="table table-striped">
   							<thead class="thead-dark">
 							<tr>
