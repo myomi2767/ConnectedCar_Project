@@ -23,8 +23,13 @@
 		<put-attribute name="content" value="/WEB-INF/views/inventory/inventory_release.jsp"/> 
 	</definition>
 	
+	<definition name="inventory/expendableAdd" extends="popupTemplate">
+		<put-attribute name="header" value="/WEB-INF/views/inventory/inventory_header.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/views/admin/expendableAdd.jsp"/>
+	</definition>
 	
 	<definition name="inventory/inventorymain" extends="mycarTemplate">
 		<put-attribute name="content" value="/WEB-INF/views/inventory/inventorymain.jsp"/>
 	</definition>
+	
 </tiles-definitions>   

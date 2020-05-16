@@ -16,6 +16,8 @@ public class ownerloginandjoinController {
 	// 회원가입 화면
 	@RequestMapping(value = "/loginandjoin/join.do", method = RequestMethod.GET)
 	public String joinView() {
+		
+		
 		return "loginandjoin/join";
 	}
 

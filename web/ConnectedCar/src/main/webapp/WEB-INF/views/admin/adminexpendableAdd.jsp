@@ -28,11 +28,11 @@
 		
 		<div class="form-group">
 			<label for="InputName1">부품명 </label> 
-			<input type="text" disabled="disabled" value="불러온값">
+			<input type="text" value="불러온값">
 		</div>
 		<div class="form-group">
 			<label for="InputName1">차량모델</label> 
-			<input type="text" disabled="disabled" value="불러온값">
+			<input type="text" value="불러온값">
 		</div>
 		<div class="form-group">
 		    <label for="InputSubject1">개수</label>

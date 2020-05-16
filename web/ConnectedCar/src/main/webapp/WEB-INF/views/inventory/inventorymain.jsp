@@ -16,15 +16,15 @@
 <title>1:1문의사항</title>
 
 <!-- Jquery-3.2.1 js -->
-<script src="/mycar/common/js/jquery-3.2.1.min.js"></script>
+<script src="/connectedcar/common/js/jquery-3.2.1.min.js"></script>
 
 <!-- 
 <!-- Core Stylesheet -->
-<link href="/mycar/common/css/k_inventorymain.css" rel="stylesheet">
+<link href="/connectedcar/common/css/k_inventorymain.css" rel="stylesheet">
 
 
 <!-- All Plugins JS (지우지말것)-->
-<script src="/mycar/common/js/others/plugins.js"></script>
+<script src="/connectedcar/common/js/others/plugins.js"></script>
 
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
