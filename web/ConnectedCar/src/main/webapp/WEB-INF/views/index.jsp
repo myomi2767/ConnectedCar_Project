@@ -13,11 +13,11 @@
 <title>SOLID - Bootstrap 3 Theme</title>
 
 <!-- Bootstrap core CSS -->
-<link href="/mycar/common/css/bootstrap.css" rel="stylesheet">
+<link href="/connectedcar/common/css/bootstrap.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<link href="/mycar/common/css/style.css" rel="stylesheet">
-<link href="/mycar/common/css/font-awesome.min.css" rel="stylesheet">
+<link href="/connectedcar/common/css/style.css" rel="stylesheet">
+<link href="/connectedcar/common/css/font-awesome.min.css" rel="stylesheet">
 
 
 <!-- Just for debugging purposes. Don't actually copy this line! -->
@@ -29,7 +29,7 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-<script src="/mycar/common/js/modernizr.js"></script>
+<script src="/connectedcar/common/js/modernizr.js"></script>
 </head>
 
 <body>
@@ -92,13 +92,13 @@
 			<div class="recentitems portfolio">
 				<div class="portfolio-item graphic-design">
 					<div class="he-wrap tpl6">
-						<img src="/mycar/images/portfolio/portfolio_09.jpg" alt="">
+						<img src="/connectedcar/images/portfolio/portfolio_09.jpg" alt="">
 						<div class="he-view">
 							<div class="bg a0" data-animate="fadeIn">
 								<h3 class="a1" data-animate="fadeInDown">A Graphic Design
 									Item</h3>
 								<a data-rel="prettyPhoto"
-									href="/mycar/images/portfolio/portfolio_09.jpg"
+									href="/connectedcar/images/portfolio/portfolio_09.jpg"
 									class="dmbutton a2" data-animate="fadeInUp"><i
 									class="fa fa-search"></i></a> <a href="single-project.html"
 									class="dmbutton a2" data-animate="fadeInUp"><i
@@ -114,12 +114,12 @@
 
 				<div class="portfolio-item web-design">
 					<div class="he-wrap tpl6">
-						<img src="/mycar/images/portfolio/portfolio_02.jpg" alt="">
+						<img src="/connectedcar/images/portfolio/portfolio_02.jpg" alt="">
 						<div class="he-view">
 							<div class="bg a0" data-animate="fadeIn">
 								<h3 class="a1" data-animate="fadeInDown">A Web Design Item</h3>
 								<a data-rel="prettyPhoto"
-									href="/mycar/images/portfolio/portfolio_02.jpg"
+									href="/connectedcar/images/portfolio/portfolio_02.jpg"
 									class="dmbutton a2" data-animate="fadeInUp"><i
 									class="fa fa-search"></i></a> <a href="single-project.html"
 									class="dmbutton a2" data-animate="fadeInUp"><i
@@ -135,13 +135,13 @@
 
 				<div class="portfolio-item graphic-design">
 					<div class="he-wrap tpl6">
-						<img src="/mycar/images/portfolio/portfolio_03.jpg" alt="">
+						<img src="/connectedcar/images/portfolio/portfolio_03.jpg" alt="">
 						<div class="he-view">
 							<div class="bg a0" data-animate="fadeIn">
 								<h3 class="a1" data-animate="fadeInDown">A Graphic Design
 									Item</h3>
 								<a data-rel="prettyPhoto"
-									href="/mycar/images/portfolio/portfolio_03.jpg"
+									href="/connectedcar/images/portfolio/portfolio_03.jpg"
 									class="dmbutton a2" data-animate="fadeInUp"><i
 									class="fa fa-search"></i></a> <a href="single-project.html"
 									class="dmbutton a2" data-animate="fadeInUp"><i
@@ -157,13 +157,13 @@
 
 				<div class="portfolio-item graphic-design">
 					<div class="he-wrap tpl6">
-						<img src="/mycar/images/portfolio/portfolio_04.jpg" alt="">
+						<img src="/connectedcar/images/portfolio/portfolio_04.jpg" alt="">
 						<div class="he-view">
 							<div class="bg a0" data-animate="fadeIn">
 								<h3 class="a1" data-animate="fadeInDown">A Graphic Design
 									Item</h3>
 								<a data-rel="prettyPhoto"
-									href="/mycar/images/portfolio/portfolio_04.jpg"
+									href="/connectedcar/images/portfolio/portfolio_04.jpg"
 									class="dmbutton a2" data-animate="fadeInUp"><i
 									class="fa fa-search"></i></a> <a href="single-project.html"
 									class="dmbutton a2" data-animate="fadeInUp"><i
@@ -179,12 +179,12 @@
 
 				<div class="portfolio-item books">
 					<div class="he-wrap tpl6">
-						<img src="/mycar/images/portfolio/portfolio_05.jpg" alt="">
+						<img src="/connectedcar/images/portfolio/portfolio_05.jpg" alt="">
 						<div class="he-view">
 							<div class="bg a0" data-animate="fadeIn">
 								<h3 class="a1" data-animate="fadeInDown">A Book Design Item</h3>
 								<a data-rel="prettyPhoto"
-									href="/mycar/images/portfolio/portfolio_05.jpg"
+									href="/connectedcar/images/portfolio/portfolio_05.jpg"
 									class="dmbutton a2" data-animate="fadeInUp"><i
 									class="fa fa-search"></i></a> <a href="single-project.html"
 									class="dmbutton a2" data-animate="fadeInUp"><i
@@ -200,13 +200,13 @@
 
 				<div class="portfolio-item graphic-design">
 					<div class="he-wrap tpl6">
-						<img src="/mycar/images/portfolio/portfolio_06.jpg" alt="">
+						<img src="/connectedcar/images/portfolio/portfolio_06.jpg" alt="">
 						<div class="he-view">
 							<div class="bg a0" data-animate="fadeIn">
 								<h3 class="a1" data-animate="fadeInDown">A Graphic Design
 									Item</h3>
 								<a data-rel="prettyPhoto"
-									href="/mycar/images/portfolio/portfolio_06.jpg"
+									href="/connectedcar/images/portfolio/portfolio_06.jpg"
 									class="dmbutton a2" data-animate="fadeInUp"><i
 									class="fa fa-search"></i></a> <a href="single-project.html"
 									class="dmbutton a2" data-animate="fadeInUp"><i
@@ -222,12 +222,12 @@
 
 				<div class="portfolio-item books">
 					<div class="he-wrap tpl6">
-						<img src="/mycar/images/portfolio/portfolio_07.jpg" alt="">
+						<img src="/connectedcar/images/portfolio/portfolio_07.jpg" alt="">
 						<div class="he-view">
 							<div class="bg a0" data-animate="fadeIn">
 								<h3 class="a1" data-animate="fadeInDown">A Book Design Item</h3>
 								<a data-rel="prettyPhoto"
-									href="/mycar/images/portfolio/portfolio_07.jpg"
+									href="/connectedcar/images/portfolio/portfolio_07.jpg"
 									class="dmbutton a2" data-animate="fadeInUp"><i
 									class="fa fa-search"></i></a> <a href="single-project.html"
 									class="dmbutton a2" data-animate="fadeInUp"><i
@@ -243,13 +243,13 @@
 
 				<div class="portfolio-item graphic-design">
 					<div class="he-wrap tpl6">
-						<img src="/mycar/images/portfolio/portfolio_08.jpg" alt="">
+						<img src="/connectedcar/images/portfolio/portfolio_08.jpg" alt="">
 						<div class="he-view">
 							<div class="bg a0" data-animate="fadeIn">
 								<h3 class="a1" data-animate="fadeInDown">A Graphic Design
 									Item</h3>
 								<a data-rel="prettyPhoto"
-									href="/mycar/images/portfolio/portfolio_08.jpg"
+									href="/connectedcar/images/portfolio/portfolio_08.jpg"
 									class="dmbutton a2" data-animate="fadeInUp"><i
 									class="fa fa-search"></i></a> <a href="single-project.html"
 									class="dmbutton a2" data-animate="fadeInUp"><i
@@ -265,12 +265,12 @@
 
 				<div class="portfolio-item web-design">
 					<div class="he-wrap tpl6">
-						<img src="/mycar/images/portfolio/portfolio_01.jpg" alt="">
+						<img src="/connectedcar/images/portfolio/portfolio_01.jpg" alt="">
 						<div class="he-view">
 							<div class="bg a0" data-animate="fadeIn">
 								<h3 class="a1" data-animate="fadeInDown">A Web Design Item</h3>
 								<a data-rel="prettyPhoto"
-									href="/mycar/images/portfolio/portfolio_01.jpg"
+									href="/connectedcar/images/portfolio/portfolio_01.jpg"
 									class="dmbutton a2" data-animate="fadeInUp"><i
 									class="fa fa-search"></i></a> <a href="single-project.html"
 									class="dmbutton a2" data-animate="fadeInUp"><i
@@ -286,12 +286,12 @@
 
 				<div class="portfolio-item books">
 					<div class="he-wrap tpl6">
-						<img src="/mycar/images/portfolio/portfolio_10.jpg" alt="">
+						<img src="/connectedcar/images/portfolio/portfolio_10.jpg" alt="">
 						<div class="he-view">
 							<div class="bg a0" data-animate="fadeIn">
 								<h3 class="a1" data-animate="fadeInDown">A Book Design Item</h3>
 								<a data-rel="prettyPhoto"
-									href="/mycar/images/portfolio/portfolio_10.jpg"
+									href="/connectedcar/images/portfolio/portfolio_10.jpg"
 									class="dmbutton a2" data-animate="fadeInUp"><i
 									class="fa fa-search"></i></a> <a href="single-project.html"
 									class="dmbutton a2" data-animate="fadeInUp"><i
@@ -412,16 +412,16 @@
 			<div class="row centered">
 				<h3>OUR CLIENTS</h3>
 				<div class="col-lg-3 col-md-3 col-sm-3">
-					<img src="/mycar/images/clients/client01.png" class="img-responsive">
+					<img src="/connectedcar/images/clients/client01.png" class="img-responsive">
 				</div>
 				<div class="col-lg-3 col-md-3 col-sm-3">
-					<img src="/mycar/images/clients/client02.png" class="img-responsive">
+					<img src="/connectedcar/images/clients/client02.png" class="img-responsive">
 				</div>
 				<div class="col-lg-3 col-md-3 col-sm-3">
-					<img src="/mycar/images/clients/client03.png" class="img-responsive">
+					<img src="/connectedcar/images/clients/client03.png" class="img-responsive">
 				</div>
 				<div class="col-lg-3 col-md-3 col-sm-3">
-					<img src="/mycar/images/clients/client04.png" class="img-responsive">
+					<img src="/connectedcar/images/clients/client04.png" class="img-responsive">
 				</div>
 			</div>
 			<! --/row -->
@@ -435,13 +435,13 @@
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	<script src="/mycar/common/js/bootstrap.min.js"></script>
-	<script src="/mycar/common/js/retina-1.1.0.js"></script>
-	<script src="/mycar/common/js/jquery.hoverdir.js"></script>
-	<script src="/mycar/common/js/jquery.hoverex.min.js"></script>
-	<script src="/mycar/common/js/jquery.prettyPhoto.js"></script>
-	<script src="/mycar/common/js/jquery.isotope.min.js"></script>
-	<script src="/mycar/common/js/custom.js"></script>
+	<script src="/connectedcar/common/js/bootstrap.min.js"></script>
+	<script src="/connectedcar/common/js/retina-1.1.0.js"></script>
+	<script src="/connectedcar/common/js/jquery.hoverdir.js"></script>
+	<script src="/connectedcar/common/js/jquery.hoverex.min.js"></script>
+	<script src="/connectedcar/common/js/jquery.prettyPhoto.js"></script>
+	<script src="/connectedcar/common/js/jquery.isotope.min.js"></script>
+	<script src="/connectedcar/common/js/custom.js"></script>
 
 
 	<script>

@@ -20,7 +20,7 @@
 					<h5>More Lorem Ipsum added here too.</h5>
 				</div>
 				<div class="col-lg-8 col-lg-offset-2 himg">
-					<img src="/mycar/images/browser.png" class="img-responsive">
+					<img src="/connectedcar/images/browser.png" class="img-responsive">
 				</div>
 			</div>
 			<!-- /row -->
@@ -33,12 +33,12 @@
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	<script src="/mycar/common/js/bootstrap.min.js"></script>
-	<script src="/mycar/common/js/retina-1.1.0.js"></script>
-	<script src="/mycar/common/js/jquery.hoverdir.js"></script>
-	<script src="/mycar/common/js/jquery.hoverex.min.js"></script>
-	<script src="/mycar/common/js/jquery.prettyPhoto.js"></script>
-	<script src="/mycar/common/js/jquery.isotope.min.js"></script>
-	<script src="/mycar/common/js/custom.js"></script>
+	<script src="/connectedcar/common/js/bootstrap.min.js"></script>
+	<script src="/connectedcar/common/js/retina-1.1.0.js"></script>
+	<script src="/connectedcar/common/js/jquery.hoverdir.js"></script>
+	<script src="/connectedcar/common/js/jquery.hoverex.min.js"></script>
+	<script src="/connectedcar/common/js/jquery.prettyPhoto.js"></script>
+	<script src="/connectedcar/common/js/jquery.isotope.min.js"></script>
+	<script src="/connectedcar/common/js/custom.js"></script>
 </body>
 </html>

@@ -8,7 +8,7 @@
 <head>
 <title>inventory_management</title>
 <link rel="stylesheet" type="text/css"
-	href="/mycar/common/css/minjae/table.css">
+	href="/connectedcar/common/css/minjae/table.css">
 
 </head>
 

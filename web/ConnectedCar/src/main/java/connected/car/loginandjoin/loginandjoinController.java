@@ -15,10 +15,12 @@ public class loginandjoinController {
 	}
 	
 	// 게시글을 작성하기 위한 뷰를 response할 메소드
-		@RequestMapping(value = "/loginandjoin/join.do", method = RequestMethod.GET)
-		public String joinView() {
-			return "loginandjoin/join";
-		}
+	@RequestMapping(value = "/loginandjoin/join.do", method = RequestMethod.GET)
+	public String joinView() {
+		
+		
+		return "loginandjoin/join";
+	}
 
 
 	

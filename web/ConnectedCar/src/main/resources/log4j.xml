@@ -11,7 +11,7 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="connected.car.mycar">
+	<logger name="connected.car.connectedcar">
 		<level value="info" />
 	</logger>
 	
