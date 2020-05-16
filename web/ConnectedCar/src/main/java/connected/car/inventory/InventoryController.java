@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class BoardController {
+public class InventoryController {
 
 	//재고관리 리스트 페이지
 	@RequestMapping(value = "/inventory/manageList.do", method = RequestMethod.GET)
@@ -35,5 +35,12 @@ public class BoardController {
 	public String releaseView() {
 		return "inventory/inventoryRelease";
 	}
+	
+	//부품 추가, 삭제 정비소업주 페이지
+	@RequestMapping(value = "/inventory/expendableAdd.do", method = RequestMethod.GET)
+	public String expendableAdd() {
+		return "inventory/expendableAdd";
+	}
+		
 	
 }

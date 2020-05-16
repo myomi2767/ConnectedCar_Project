@@ -14,16 +14,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="shortcut icon" href="/mycar/images/favicon.png">
+<link rel="shortcut icon" href="/connectedcar/images/favicon.png">
 
 <title>SOLID - Bootstrap 3 Theme</title>
 
 <!-- Bootstrap core CSS -->
-<link href="/connectdcar/common/css/bootstrap.css" rel="stylesheet">
+<link href="/connectedcar/common/css/bootstrap.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<link href="/connectdcar/common/css/style.css" rel="stylesheet">
-<link href="/connectdcar/common/css/font-awesome.min.css" rel="stylesheet">
+<link href="/connectedcar/common/css/style.css" rel="stylesheet">
+<link href="/connectedcar/common/css/font-awesome.min.css" rel="stylesheet">
 
 <!-- Just for debugging purposes. Don't actually copy this line! -->
 <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -34,7 +34,7 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-<script src="/connectdcar/common/js/modernizr.js"></script>
+<script src="/connectedcar/common/js/modernizr.js"></script>
 </head>
 
 <body>
@@ -74,12 +74,12 @@
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	<script src="/connectdcar/common/js/bootstrap.min.js"></script>
-	<script src="/connectdcar/common/js/retina-1.1.0.js"></script>
-	<script src="/connectdcar/common/js/jquery.hoverdir.js"></script>
-	<script src="/connectdcar/common/js/jquery.hoverex.min.js"></script>
-	<script src="/connectdcar/common/js/jquery.prettyPhoto.js"></script>
-	<script src="/connectdcar/common/js/jquery.isotope.min.js"></script>
-	<script src="/connectdcar/common/js/custom.js"></script>
+	<script src="/connectedcar/common/js/bootstrap.min.js"></script>
+	<script src="/connectedcar/common/js/retina-1.1.0.js"></script>
+	<script src="/connectedcar/common/js/jquery.hoverdir.js"></script>
+	<script src="/connectedcar/common/js/jquery.hoverex.min.js"></script>
+	<script src="/connectedcar/common/js/jquery.prettyPhoto.js"></script>
+	<script src="/connectedcar/common/js/jquery.isotope.min.js"></script>
+	<script src="/connectedcar/common/js/custom.js"></script>
 </body>
 </html>

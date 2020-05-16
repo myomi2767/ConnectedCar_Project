@@ -19,7 +19,7 @@
 ​
 
 <!-- Core Stylesheet -->
-<link href="/mycar/common/css/k_join.css" rel="stylesheet">
+<link href="/connectedcar/common/css/k_join.css" rel="stylesheet">
 ​
 ​
 <!-- Responsive CSS -->
@@ -175,28 +175,28 @@
 ​
 ​
 		<div class="container mtb">
-			<form action="/mycar/loginandjoin/join.do" name="userInfo" method="POST" onsubmit="return join_check()">
+			<form action="/connectedcar/loginandjoin/join.do" name="userInfo" method="POST" onsubmit="return join_check()">
 				<div class="join_form">
-					<label for="id">아이디:</label> 
+					<label for="id">아이디 :</label> 
 					<input type="text"
 						class="form-control" id="member_id" name="member_id" placeholder="Enter id">
 					<span id="checkVal" style="color: red;"></span>
 				</div>												
 								
 				<div class="join_form">
-					<label for="pwd">비밀번호:</label> <input type="password"
+					<label for="pwd">비밀번호 :</label> <input type="password"
 						class="form-control" id="pass" name="pass" placeholder="최소3자 이상 최대 12자 이하">
 ​
 				</div>
 				<div class="join_form">
-					<label for="pwd">비밀번호 확인:</label> <input type="password"
+					<label for="pwd">비밀번호 확인 :</label> <input type="password"
 						class="form-control" id="pass_confirm" name="pass_cofirm"
 						placeholder="Enter password">
 					<div class="alert alert-success" id="alert-success">비밀번호가 일치합니다.</div>
 					<div class="alert alert-danger" id="alert-danger">비밀번호가 일치하지 않습니다.</div>
 				</div>
 				<div class="join_form">
-					<label for="pwd">이름:</label> <input type="text"
+					<label for="pwd">이름 :</label> <input type="text"
 						class="form-control" id="name" name="name" placeholder="name">
 				</div>
 ​

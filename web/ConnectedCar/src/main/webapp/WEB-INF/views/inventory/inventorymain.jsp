@@ -16,15 +16,15 @@
 <title>1:1문의사항</title>
 
 <!-- Jquery-3.2.1 js -->
-<script src="/mycar/common/js/jquery-3.2.1.min.js"></script>
+<script src="/connectedcar/common/js/jquery-3.2.1.min.js"></script>
 
 <!-- 
 <!-- Core Stylesheet -->
-<link href="/mycar/common/css/k_inventorymain.css" rel="stylesheet">
+<link href="/connectedcar/common/css/k_inventorymain.css" rel="stylesheet">
 
 
 <!-- All Plugins JS (지우지말것)-->
-<script src="/mycar/common/js/others/plugins.js"></script>
+<script src="/connectedcar/common/js/others/plugins.js"></script>
 
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -50,7 +50,7 @@
 	
 	
 	
-	<!-- 1:1 ask area start -->
+
 	<div id="div_expendable">
 
 		
@@ -98,6 +98,45 @@
 					<div class="col-sm-6"  id = "graph_expendable">
 					<h3>재고 현황 그래프</h3>
 					
+						<table class="table table-striped">
+  							<thead class="thead-dark">
+							<tr>
+							<th>부품코드</th>
+							<th>부품명</th>
+							<th>수량</th>
+												
+							</tr>
+							</thead>
+						<%-- 
+							<%
+								for (int i = 0; i < mealplan.size(); i++) {
+									mealPlannerVO meal = mealplan.get(i);
+							%> --%>
+							<% 
+							for (int i = 0; i < 10; i++) {
+								%>
+							
+							<tr>
+
+								<td><%--  <%=meal.getPlanner_date()%> --%> </td>
+								<td><%-- <% if(meal.getPlanner_code()==1){
+									out.println("아침");
+								}else if(meal.getPlanner_code()==2){
+									out.println("점심");
+								}else{
+									out.println("저녁");
+								}%> --%></td>
+								<td><%-- <%=meal.getMeal_name()%> --%></td>
+							
+
+								<%
+									}
+								%>
+							</tr>
+
+						</table>
+						
+							<h3>재고 관리</h3>
 						<table class="table table-striped">
   							<thead class="thead-dark">
 							<tr>

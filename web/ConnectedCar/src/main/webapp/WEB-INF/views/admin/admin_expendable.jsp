@@ -32,8 +32,8 @@
 			<div class="col-sm-1"></div>
 			<div class="col-sm-10">
 				<div class="pull-right">
-					<button id="add parts" class="btn btn-primary"
-						onclick="window.open('expendableAdd.do', '_blank', 'width=300px,height=300px')">부품추가</button>
+					<button id="add parts" class="btn btn-primary"class="btn btn-primary"
+						onclick="window.open('adminexpendableAdd.do', '_blank', 'width=300px,height=300px')">부품추가</button>
 				</div>
 			</div>
 			<!-- <div align="right" style="padding-right: 40px">
@@ -49,27 +49,22 @@
 				<table id="table_managementList" class="type01">
 					<thead>
 						<tr style="font-weight: bold;">
-							<th scope="col">최근 입고일</th>
 							<th scope="col">부품코드</th>
 							<th scope="col">종류</th>
 							<th scope="col">제조사</th>
-							<th scope="col">모델이름</th>
-							<th scope="col">개수</th>
-							<th scope="col">가격</th>
-							<th scope="col">관리</th>
+							<th scope="col">모델</th>
+							<th scope="col">이름</th>
+							<th scope="col">비고</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td>오늘</td>
 							<td>AA001</td>
 							<td>브레이크 패드</td>
 							<td>현대</td>
 							<td>그랜져</td>
-							<td>5</td>
-							<td>15000</td>
-							<td><a
-								onclick="window.open('manageDetail.do', '_blank', 'width=800px,height=500px')">관리</a></td>
+							<td>이름???</td>
+							<td><a href="#">비고</a></td>
 						</tr>
 						<%-- <%
 						for (int i = 0; i < list.size(); i++) {
