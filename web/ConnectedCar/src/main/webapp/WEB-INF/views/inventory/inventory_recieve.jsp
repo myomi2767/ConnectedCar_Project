@@ -9,9 +9,16 @@
 <body>
 <div class="container">
 	<h4>입고</h4>
-	
-	<div><input type="number" size="5px" required="required"></div><!-- 숫자가 있을 때만 등록가능 => required속성 -->
-	<div style="padding-top: 10px"><input type="submit" value="확인" onclick="self.close()"></div>
+	<div class="row">
+		<div class="col-sm-4"></div>
+		<div class="col-sm-4"><input type="number" size="5px" required="required"></div><!-- 숫자가 있을 때만 등록가능 => required속성 -->
+		<div class="col-sm-4"></div>
+	</div>
+	<div class="row">
+	<div class="col-sm-4"></div>
+		<div class="col-sm-4" style="padding-top: 10px"><input type="submit" value="확인" onclick="self.close()"></div>
+	</div>
+	<div class="col-sm-4"></div>
 </div>
 </body>
 </html>

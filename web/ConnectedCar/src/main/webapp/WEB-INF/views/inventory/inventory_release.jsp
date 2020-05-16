@@ -8,9 +8,19 @@
 </head>
 <body>
 <div class="container">
-	<h1>출고</h1>
-	<div><input type="number" size="5px" required="required"></div><!-- 숫자가 있을 때만 등록가능 => required속성 -->
-	<div style="padding-top: 10px"><input type="submit" value="확인" onclick="self.close()"></div>
+	<h3>출고</h3>
+	<div class="row">
+		<div class="col-sm-3"></div>
+		<div class="col-sm-3"><input type="number" size="5px" required="required"></div><!-- 숫자가 있을 때만 등록가능 => required속성 -->
+		<div class="col-sm-3" style="padding-top: 10px"><input type="submit" value="확인" onclick="self.close()"></div>
+		<div class="col-sm-3"></div>
+	</div>
+	<!-- <div class="row">
+		<div class="col-sm-4"></div>
+		
+		<div class="col-sm-4" style="padding-top: 10px"><input type="submit" value="확인" onclick="self.close()"></div>
+		<div class="col-sm-4"></div>
+	</div> -->
 </div>
 </body>
 </html>

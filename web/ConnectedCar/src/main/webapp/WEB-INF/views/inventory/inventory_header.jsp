@@ -14,11 +14,11 @@
 <title>SOLID - Bootstrap 3 Theme</title>
 
 <!-- Bootstrap core CSS -->
-<link href="/mycar/common/css/bootstrap.css" rel="stylesheet">
+<link href="/connectedcar/common/css/bootstrap.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<link href="/mycar/common/css/style.css" rel="stylesheet">
-<link href="/mycar/common/css/font-awesome.min.css" rel="stylesheet">
+<link href="/connectedcar/common/css/style.css" rel="stylesheet">
+<link href="/connectedcar/common/css/font-awesome.min.css" rel="stylesheet">
 
 <!-- Just for debugging purposes. Don't actually copy this line! -->
 <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -31,7 +31,7 @@
     
 
 
-<script src="/mycar/common/js/modernizr.js"></script>
+<script src="/connectedcar/common/js/modernizr.js"></script>
 </head>
 <body>
 	<!-- *****************************************************************************************************************

@@ -19,11 +19,11 @@
 <title>SOLID - Bootstrap 3 Theme</title>
 
 <!-- Bootstrap core CSS -->
-<link href="/mycar/common/css/bootstrap.css" rel="stylesheet">
+<link href="/connectedcar/common/css/bootstrap.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<link href="/mycar/common/css/style.css" rel="stylesheet">
-<link href="/mycar/common/css/font-awesome.min.css" rel="stylesheet">
+<link href="/connectedcar/common/css/style.css" rel="stylesheet">
+<link href="/connectedcar/common/css/font-awesome.min.css" rel="stylesheet">
 
 <!-- Just for debugging purposes. Don't actually copy this line! -->
 <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -34,7 +34,7 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-<script src="/mycar/common/js/modernizr.js"></script>
+<script src="/connectedcar/common/js/modernizr.js"></script>
 </head>
 
 <body>
@@ -74,12 +74,12 @@
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	<script src="/mycar/common/js/bootstrap.min.js"></script>
-	<script src="/mycar/common/js/retina-1.1.0.js"></script>
-	<script src="/mycar/common/js/jquery.hoverdir.js"></script>
-	<script src="/mycar/common/js/jquery.hoverex.min.js"></script>
-	<script src="/mycar/common/js/jquery.prettyPhoto.js"></script>
-	<script src="/mycar/common/js/jquery.isotope.min.js"></script>
-	<script src="/mycar/common/js/custom.js"></script>
+	<script src="/connectedcar/common/js/bootstrap.min.js"></script>
+	<script src="/connectedcar/common/js/retina-1.1.0.js"></script>
+	<script src="/connectedcar/common/js/jquery.hoverdir.js"></script>
+	<script src="/connectedcar/common/js/jquery.hoverex.min.js"></script>
+	<script src="/connectedcar/common/js/jquery.prettyPhoto.js"></script>
+	<script src="/connectedcar/common/js/jquery.isotope.min.js"></script>
+	<script src="/connectedcar/common/js/custom.js"></script>
 </body>
 </html>
