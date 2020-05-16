@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+       
+<tiles-definitions>
+	<definition name="inventory/inventoryManagement" extends="mycarTemplate">
+		<put-attribute name="content" value="/WEB-INF/views/inventory/inventory_management.jsp"/>
+	</definition>
+
+	<definition name="inventory/inventoryManagementDetail" extends="popupTemplate">
+		<put-attribute name="header" value="/WEB-INF/views/inventory/inventory_header.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/views/inventory/inventory_managementDetail.jsp"/>
+	</definition>
+
+	<definition name="inventory/inventoryRecieve" extends="popupTemplate">
+		<put-attribute name="header" value="/WEB-INF/views/inventory/inventory_header.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/views/inventory/inventory_recieve.jsp"/>
+	</definition>
+
+	<definition name="inventory/inventoryRelease" extends="popupTemplate">
+		<put-attribute name="header" value="/WEB-INF/views/inventory/inventory_header.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/views/inventory/inventory_release.jsp"/> 
+	</definition>
+	
+	<definition name="inventory/expendableAdd" extends="popupTemplate">
+		<put-attribute name="header" value="/WEB-INF/views/inventory/inventory_header.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/views/admin/expendableAdd.jsp"/>
+	</definition>
+	
+	<definition name="inventory/inventorymain" extends="mycarTemplate">
+		<put-attribute name="content" value="/WEB-INF/views/inventory/inventorymain.jsp"/>
+	</definition>
+	
+</tiles-definitions>   
