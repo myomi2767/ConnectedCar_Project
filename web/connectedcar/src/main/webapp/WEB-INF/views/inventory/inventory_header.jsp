@@ -11,7 +11,7 @@
 <meta name="author" content="">
 <link rel="shortcut icon" href="/connectedcar/images/favicon.png">
 
-<title>SOLID - Bootstrap 3 Theme</title>
+<title>Carnect</title>
 
 <!-- Bootstrap core CSS -->
 <link href="/connectedcar/common/css/bootstrap.css" rel="stylesheet">
@@ -36,11 +36,9 @@
 	</div>
 	<hr>
 	<!-- /container -->
-<<<<<<< HEAD
 	
 	<!-- Placed at the end of the document so the pages load faster -->
-=======
->>>>>>> 49c9b6d39141eb5ccddb2a2df43dbb41418730e4
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="/connectedcar/common/js/bootstrap.min.js"></script>
 	<script src="/connectedcar/common/js/retina-1.1.0.js"></script>

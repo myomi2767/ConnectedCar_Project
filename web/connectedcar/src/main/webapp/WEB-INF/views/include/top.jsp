@@ -36,12 +36,36 @@
 
 <script src="/connectedcar/common/js/modernizr.js"></script>
 <script src="/connectedcar/common/js/jquery-3.2.1.min.js"></script>
+<style type="text/css">
+ul {list-style-type:none;margin:0;padding:0;}
+li {display:inline-block;}
 
+</style>
 </head>
 
 <body>
+                
+                <!--  Login Register Area -->
+         
+
 	<!-- Fixed navbar -->
-	<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div >
+	<div class ="Login">
+	          <ul class ="loginlist" >
+                            <li >
+                                <a href="#" >sign in</a>
+                            </li>
+                            <li >
+                                <a href="#" >sign out</a>
+                            </li>
+                            <li >
+                                <a href="#">sign up</a>
+                            </li>
+             </ul>
+	</div>
+	</div>
+	<div class="navbar navbar-default " role="navigation">
+	
 		<div class="container">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse"
@@ -50,7 +74,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="index.html">SOLID.</a>
+				<a class="navbar-brand" href="index.html">Carnect</a>
 			</div>
 			<div class="navbar-collapse collapse navbar-right">
 				<ul class="nav navbar-nav">

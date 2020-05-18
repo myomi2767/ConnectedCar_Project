@@ -20,7 +20,18 @@
 		margin: 0;
 		padding: 0px;
 	} 
+.Login{
 
+}
+.loginlist {
+	padding:5px;
+	text-align: right;
+}
+.loginlist li{
+	margin:5px;
+	/*display:inline;*/
+	/* border-left:1px solid #999; */
+}
 body { 
 	background: #ffffff; 
 	margin: 0; 
@@ -37,13 +48,13 @@ h1, h2, h3, h4, h5, h6 {
 
 p { 
 	padding: 0; 
-	margin-bottom: 12px; 
+ 	margin-bottom: 12px;  
 	font-family: 'Lato', sans-serif;
 	font-weight: 400;
 	font-size: 14px; 
 	line-height: 24px;
 	color: #384452; 
-	margin-top: 10px; 
+ 	margin-top: 10px; 
 }
 
 img {
@@ -85,15 +96,15 @@ a:focus {
 /*	################################################################
 	BOOTSTRAP MODIFICATIONS & TWEAKS
 ################################################################# */
-.navbar {
+ .navbar {
 	min-height: 70px;
-	padding-top: 10px;
 	margin-bottom: 0px;
-}
+} 
 
 .navbar-brand {
 	font-family: 'Raleway', sans-serif;
-	font-weight: 900;
+	font-weight: 700;
+	font-size: xx-large;
 }
 
 .navbar-header .navbar-brand {
@@ -103,20 +114,21 @@ a:focus {
 .navbar-default .navbar-nav > li > a {
 	color: white;
 	font-weight: 700;
-	font-size: 12px;
+	font-size: 14px;
+	padding-top: 10px;
 }
 
 .navbar-default .navbar-nav > li > a:hover {
-	color: #00b3fe;
+	color: #556FBA;
 }
 
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
-	color: #00b3fe;
+	color: #FEE2E1;
 	background-color: transparent;
 }
 
 .navbar-default {
-	background-color: #76B7B5;
+	background-color: #314589;
 	border-color: transparent;
 }
 
@@ -127,7 +139,7 @@ a:focus {
 .dropdown-menu > li > a {
 	color: white;
 	font-weight: 700;
-	font-size: 12px;
+	font-size: 14px;
 }
 
 .btn-theme {
