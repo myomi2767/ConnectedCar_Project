@@ -2,13 +2,19 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="connected.car.weblogin">
+<mapper namespace="connected.car.ownerlogin">
 
-	<select id="shoplogin" resultType="ownervo" parameterType="ownervo">
+	<select id="login" resultType="ownervo" parameterType="ownervo">
 		select *
 		from repair_shop_user
 		where owner_id = #{owner_id} and owner_password = #{owner_password}
 	</select>
+	
+	<insert id="join">
+	insert into repair_shop_user(owner_id, owner_password, owner_shop, owner_name, owner_phone)
+	values(#{owner_id}, #{owner_password}, #{owner_shop}, #{owner_name}, #{owner_phone}, #{owner_regdate})
+	</insert>
+	
 	<!-- <insert id="register">
 		insert into member
 		values(#{member_id}, #{pass},
