@@ -2,38 +2,52 @@ package multi.connect.smartcar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.skt.Tmap.TMapCircle;
+import com.skt.Tmap.TMapData;
 import com.skt.Tmap.TMapGpsManager;
+import com.skt.Tmap.TMapMarkerItem;
+import com.skt.Tmap.TMapPOIItem;
 import com.skt.Tmap.TMapPoint;
 import com.skt.Tmap.TMapTapi;
 import com.skt.Tmap.TMapView;
+
+import java.util.ArrayList;
 
 import de.nitri.gauge.Gauge;
 
@@ -44,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TMapView tmapview;
     LinearLayout linearLayoutTmap;
     Bitmap carImg;
+    AlertDialog alert;
     float speed = 0;
     String[] permission_list = {
             Manifest.permission.ACCESS_COARSE_LOCATION,
@@ -58,6 +73,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     EditText destiName;
     Button btnDesti;
     ListView destiList;
+    ArrayAdapter<POI> POIAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         linearLayoutTmap = findViewById(R.id.layoutMapView);
         loading = findViewById(R.id.loading);
         mapViewTotal = findViewById(R.id.mapViewTotal);
+        //네비 목적지 검색
         naviSearchView = findViewById(R.id.naviSearchView);
         fabNavi = findViewById(R.id.fabNavi);
         fabNavi.setOnClickListener(this);
@@ -85,6 +103,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnDesti = findViewById(R.id.btnDesti);
         btnDesti.setOnClickListener(this);
         destiList = findViewById(R.id.destiList);
+        POIAdapter = new ArrayAdapter<POI>(this,android.R.layout.simple_list_item_1);
+        destiList.setAdapter(POIAdapter);
+        destiList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String des = parent.getItemAtPosition(position).toString();
+                Toast.makeText(getApplicationContext(),des,Toast.LENGTH_SHORT).show();
+
+                AlertDialog.Builder builder
+                        = new AlertDialog.Builder(MainActivity.this);
+                builder.setCancelable(true);
+                builder .setTitle("목적지를 "+des+"로 설정합니다")
+                        .setPositiveButton("확인", null)
+                        .setNegativeButton("취소", null);
+                alert = builder.create();
+                alert.show();
+            }
+        });
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(permission_list, 1000);
@@ -92,7 +128,53 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             init();
         }
     }
+    private void searchPOI() {
+        TMapData data = new TMapData();
+        String keyword = destiName.getText().toString();
+        if (!TextUtils.isEmpty(keyword)) {
+            data.findAllPOI(keyword, new TMapData.FindAllPOIListenerCallback() {
+                @Override
+                public void onFindAllPOI(final ArrayList<TMapPOIItem> arrayList) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            tmapview.removeAllMarkerItem();
+                            POIAdapter.clear();
 
+                            for (TMapPOIItem poi : arrayList) {
+                                addMarker(poi);
+                                POIAdapter.add(new POI(poi));
+                            }
+
+                            if (arrayList.size() > 0) {
+                                TMapPOIItem poi = arrayList.get(0);
+                                moveMap(poi.getPOIPoint().getLatitude(), poi.getPOIPoint().getLongitude());
+                            }
+                        }
+                    });
+                }
+            });
+        }
+    }
+    public void addMarker(TMapPOIItem poi) {
+        TMapMarkerItem item = new TMapMarkerItem();
+        item.setTMapPoint(poi.getPOIPoint());
+        Bitmap icon = ((BitmapDrawable) ContextCompat.getDrawable(this, android.R.drawable.ic_input_add)).getBitmap();
+        item.setIcon(icon);
+        item.setPosition(0.5f, 1);
+        item.setCalloutTitle(poi.getPOIName());
+        item.setCalloutSubTitle(poi.getPOIContent());
+        Bitmap left = ((BitmapDrawable) ContextCompat.getDrawable(this, android.R.drawable.ic_dialog_alert)).getBitmap();
+        item.setCalloutLeftImage(left);
+        Bitmap right = ((BitmapDrawable) ContextCompat.getDrawable(this, android.R.drawable.ic_input_get)).getBitmap();
+        item.setCalloutRightButtonImage(right);
+        item.setCanShowCallout(true);
+        tmapview.addMarkerItem(poi.getPOIID(), item);
+    }
+
+    private void moveMap(double lat,double lng){
+        tmapview.setCenterPoint(lng,lat);
+    }
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
@@ -149,6 +231,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tmapview.addTMapCircle("circle1", tMapCircle);
 
         linearLayoutTmap.addView(tmapview);
+
+        //지도에 마커찍기
+        final ArrayList alTMapPoint = new ArrayList();
+        alTMapPoint.add(new TMapPoint(37.576016, 126.976867));//광화문
+        alTMapPoint.add(new TMapPoint(37.570432, 126.992169));// 종로3가
+        alTMapPoint.add(new TMapPoint(37.570194, 126.983045));//종로5가
+        final Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mapmark);
+        for(int i=0; i<alTMapPoint.size(); i++){
+            TMapMarkerItem markerItem1 = new TMapMarkerItem();
+            // 마커 아이콘 지정
+            markerItem1.setIcon(bitmap);
+            // 마커의 좌표 지정
+            markerItem1.setTMapPoint((TMapPoint)alTMapPoint.get(i));
+            //지도에 마커 추가
+            tmapview.addMarkerItem("markerItem"+i, markerItem1);
+        }
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -248,8 +346,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             naviSearchView.setVisibility(View.VISIBLE);
             mapViewTotal.setVisibility(View.INVISIBLE);
         }else if(v.getId()==R.id.btnDesti){
-            naviSearchView.setVisibility(View.INVISIBLE);
-            mapViewTotal.setVisibility(View.VISIBLE);
+            searchPOI();
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (imm!=null) {
+                imm.hideSoftInputFromWindow(naviSearchView.getWindowToken(), 0);
+            }
+            /*naviSearchView.setVisibility(View.INVISIBLE);
+            mapViewTotal.setVisibility(View.VISIBLE);*/
         }
     }
 
