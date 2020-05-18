@@ -29,7 +29,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-8 col-lg-offset-1">
-				<h3>부품 관리</h3>
+				<h3>부품 추가</h3>
 			</div>
 		</div>
 		<!-- /row -->
