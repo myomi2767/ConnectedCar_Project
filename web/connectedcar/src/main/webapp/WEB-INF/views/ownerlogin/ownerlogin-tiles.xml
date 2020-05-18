@@ -12,6 +12,4 @@
 		<put-attribute name="content" value="/WEB-INF/views/ownerlogin/join.jsp"/>
 	</definition>
 	
-	
-	
 </tiles-definitions>   
