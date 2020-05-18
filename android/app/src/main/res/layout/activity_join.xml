@@ -17,7 +17,7 @@
         <TextView
             android:layout_width="110dp"
             android:layout_height="match_parent"
-            android:text="아이디 :"
+            android:text="아이디"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:gravity="center"
             android:textAlignment="center"
@@ -30,8 +30,6 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:singleLine="true"
-            android:nextFocusDown="@id/edit_carNum"
             android:hint="아이디를 입력하세요."/>
 
     </LinearLayout>
@@ -49,7 +47,7 @@
             android:textAlignment="center"
             android:background="#384452"
             android:textColor="#FFFFFF"
-            android:text="차량번호 :"/>
+            android:text="차량번호"/>
         <EditText
             android:id="@+id/edit_carNum"
             android:layout_marginLeft="10dp"
@@ -57,9 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:singleLine="true"
-            android:nextFocusDown="@id/edit_password"
-            android:hint="차량 등록 번호를 입력하세요."/>
+            android:hint="차량 등록 번호"/>
 
     </LinearLayout>
     <LinearLayout
@@ -76,7 +72,7 @@
             android:textAlignment="center"
             android:background="#384452"
             android:textColor="#FFFFFF"
-            android:text="비밀번호 :"/>
+            android:text="비밀번호"/>
         <EditText
             android:id="@+id/edit_password"
             android:layout_marginLeft="10dp"
@@ -84,8 +80,6 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:singleLine="true"
-            android:nextFocusDown="@id/edit_name"
             android:hint="비밀번호를 입력하세요."/>
 
     </LinearLayout>
@@ -103,15 +97,13 @@
             android:textAlignment="center"
             android:background="#384452"
             android:textColor="#FFFFFF"
-            android:text="이름 :"/>
+            android:text="이름"/>
         <EditText
             android:id="@+id/edit_name"
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:singleLine="true"
-            android:nextFocusDown="@id/edit_birth"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:hint="이름을 입력하세요."/>
 
@@ -130,15 +122,13 @@
             android:textAlignment="center"
             android:background="#384452"
             android:textColor="#FFFFFF"
-            android:text="생년월일 :"/>
+            android:text="생년월일"/>
         <EditText
             android:id="@+id/edit_birth"
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:singleLine="true"
-            android:nextFocusDown="@id/spinner_gender"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:hint="생년월일을 입력하세요."/>
 
@@ -157,15 +147,13 @@
             android:textAlignment="center"
             android:background="#384452"
             android:textColor="#FFFFFF"
-            android:text="성별 :"/>
+            android:text="성별"/>
         <Spinner
             android:layout_marginLeft="10dp"
             android:id="@+id/spinner_gender"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:singleLine="true"
-            android:nextFocusDown="@id/edit_license"
             android:defaultFocusHighlightEnabled="true"
             >
 
@@ -185,7 +173,7 @@
             android:textAlignment="center"
             android:background="#384452"
             android:textColor="#FFFFFF"
-            android:text="면허 정보 :"/>
+            android:text="면허 정보"/>
         <EditText
             android:id="@+id/edit_license"
             android:layout_weight="1"
@@ -193,7 +181,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:hint="운전 면허 번호를 입력하세요."/>
+            android:hint="운전 면허 번호"/>
 
     </LinearLayout>
 
@@ -202,9 +190,9 @@
         android:backgroundTint="#384452"
         android:layout_margin="5dp"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="70dp"
         android:textColor="#ffffff"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        tools:text="회원가입" />
+        android:text="회원가입" />
 
 </LinearLayout>

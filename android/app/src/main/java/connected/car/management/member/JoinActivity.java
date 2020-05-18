@@ -20,8 +20,7 @@ import java.util.regex.Pattern;
 import connected.car.management.R;
 
 public class JoinActivity extends AppCompatActivity implements View.OnClickListener,
-        View.OnFocusChangeListener,
-        TextView.OnEditorActionListener {
+        View.OnFocusChangeListener {
     EditText editTextId;
     EditText editTextCarId;
     EditText editTextPassword;
@@ -139,11 +138,4 @@ public class JoinActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    @Override
-    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-        if(event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
-
-        }
-        return false;
-    }
 }
