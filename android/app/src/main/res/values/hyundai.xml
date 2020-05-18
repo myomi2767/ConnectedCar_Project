@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="hyundai_avante">
+        <item>올 뉴 아반떼(CN7)</item>
+        <item>더 뉴 아반떼 AD</item>
+        <item>아반떼 스포츠</item>
+        <item>아반떼 AD</item>
+        <item>더 뉴 아반떼</item>
+        <item>아반떼 쿠페</item>
+        <item>아반떼 MD</item>
+        <item>아반떼 하이브리드</item>
+        <item>아반떼 HD</item>
+        <item>뉴 아반떼 XD</item>
+        <item>아반떼 XD</item>
+    </string-array>
+
+    <string-array name="hyundai_sonata">
+        <item>쏘나타 8세대 하이브리드</item>
+        <item>쏘나타 8세대</item>
+        <item>LF 쏘나타 뉴 라이즈  PHEV</item>
+        <item>LF 쏘나타 뉴 라이즈 하이브리드</item>
+        <item>LF 쏘나타 뉴 라이즈</item>
+        <item>LF 쏘나타 하이브리드</item>
+        <item>LF 쏘나타</item>
+        <item>쏘나타 하이브리드</item>
+        <item>LF 쏘나타</item>
+        <item>쏘나타 더 브릴리언트</item>
+        <item>쏘나타 하이브리드</item>
+        <item>YF 쏘나타</item>
+        <item>뉴 EF 쏘나타</item>
+    </string-array>
+
+    <string-array name="hyundai_grandeur">
+        <item>더 뉴 그랜저 하이브리드</item>
+        <item>더 뉴 그랜저</item>
+        <item>그랜저 IG 하이브리드</item>
+        <item>그랜저 IG </item>
+        <item>그랜저 하이브리드</item>
+        <item>그랜저 HG</item>
+        <item>그랜저 HG 하이브리드</item>
+        <item>더 럭셔리 그랜저</item>
+        <item>그랜저 뉴 럭셔리</item>
+        <item>그랜저 TG</item>
+        <item>뉴 그랜저 XG</item>
+
+    </string-array>
+
+</resources>

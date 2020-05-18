@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="gender">
+        <item>남자</item>
+        <item>여자</item>
+    </string-array>
+
+    <string-array name="hyundai">
+        <item>아반떼</item>
+        <item>쏘나타</item>
+        <item>그랜저</item>
+        <item>싼타페</item>
+        <item>투싼</item>
+        <item>코나</item>
+        <item>i30</item>
+        <item>팰리세이드</item>
+        <item>제네시스</item>
+        <item>스타렉스</item>
+        <item>포터</item>
+        <item>벨로스터</item>
+        <item>엑센트</item>
+        <item>맥스크루즈</item>
+        <item>베뉴</item>
+        <item>베라크루즈</item>
+        <item>아이오닉</item>
+        <item>i40</item>
+        <item>에쿠스</item>
+        <item>넥쏘</item>
+        <item>아슬란</item>
+        <item>마이티</item>
+        <item>메가트럭</item>
+        <item>트라고 엑시언트</item>
+        <item>카운티</item>
+    </string-array>
+    <string-array name="kia">
+        <item>K5</item>
+        <item>모닝</item>
+        <item>쏘렌토</item>
+        <item>스포티지</item>
+        <item>K3</item>
+        <item>K7</item>
+        <item>K9</item>
+        <item>카니발</item>
+        <item>니로</item>
+        <item>레이</item>
+        <item>셀토스</item>
+        <item>프라이드</item>
+        <item>포르테</item>
+        <item>모하비</item>
+        <item>스팅어</item>
+        <item>카렌스</item>
+        <item>스토닉</item>
+        <item>쏘울</item>
+        <item>봉고</item>
+        <item>쎄라토</item>
+    </string-array>
+</resources>
+

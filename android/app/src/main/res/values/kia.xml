@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="kia_k5">
+        <item>신형 K5(DL3) 하이브리드</item>
+        <item>신형 K5(DL3)</item>
+        <item>더 뉴 K5(JF) 하이브리드</item>
+        <item>더 뉴 Kt(JF)</item>
+        <item>K5 2세대</item>
+        <item>K5 플러그인 하이브리드</item>
+        <item>K5(JF) 하이브리드</item>
+        <item>올 뉴 K5(JF)</item>
+        <item>더 뉴 K5</item>
+        <item>K5 하이브리드</item>
+        <item>K5</item>
+    </string-array>
+
+    <string-array name="kia_morning">
+        <item>올 뉴 모닝(JA)</item>
+        <item>더 뉴 모닝</item>
+        <item>올 뉴 모닝</item>
+        <item>뉴모닝</item>
+        <item>모닝</item>
+    </string-array>
+
+    <string-array name="kia_sorento">
+        <item>쏘렌토 하이브리드(MQ4)</item>
+        <item>쏘렌토(MQ4)</item>
+        <item>더 뉴 쏘렌토</item>
+        <item>올 뉴 쏘렌토</item>
+        <item>뉴 쏘렌토 R</item>
+        <item>쏘렌토R</item>
+        <item>뉴쏘렌토</item>
+        <item>쏘렌토</item>
+    </string-array>
+    
+    <string-array name="kia_sportage">
+        <item>스포티지 더 볼트</item>
+        <item>The SUV 스포티지</item>
+        <item>더 뉴 스포티지R</item>
+        <item>스포티지R</item>
+        <item>New 스포티지</item>
+        <item>스포티지</item>
+    </string-array>
+
+    <string-array name="kia_k3">
+        <item>K3 GT</item>
+        <item>올 뉴 K3</item>
+        <item>K3 유로</item>
+        <item>더 뉴 K3</item>
+        <item>K3 쿱</item>
+        <item>K3</item>
+    </string-array>
+
+    <string-array name="kia_k7">
+        <item>K7 프리미어 하이브리드</item>
+        <item>K7 프리미어</item>
+        <item>올 뉴 K7 하이브리드</item>
+        <item>올 뉴 K7</item>
+        <item>K7 하이브리드</item>
+        <item>더 뉴 K7</item>
+        <item>더 프레스티지 K7</item>
+        <item>K7</item>
+    </string-array>
+
+    <string-array name="kia_carnival">
+
+    </string-array>
+</resources>
