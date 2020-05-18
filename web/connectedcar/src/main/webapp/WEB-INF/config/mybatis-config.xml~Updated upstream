@@ -1,0 +1,38 @@
+<<<<<<< Updated upstream:web/connectedcar/src/main/webapp/WEB-INF/config/mybatis-config.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<settings>
+		<setting name="cacheEnabled" value="false" />
+		<setting name="jdbcTypeForNull" value="NULL" />
+	</settings>
+ 	<typeAliases>
+		<typeAlias type="connected.car.ownerloginjoin.ownerVO" alias="ownervo" />
+		
+	</typeAliases>
+	<mappers>
+		<mapper resource="mapper/ownerloginjoin.xml" />	
+	</mappers>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<settings>
+		<setting name="cacheEnabled" value="false" />
+		<setting name="jdbcTypeForNull" value="NULL" />
+	</settings>
+ 	<typeAliases>
+		<typeAlias type="connected.car.owner.OwnerVO" alias="ownervo" />
+		
+	</typeAliases>
+	<mappers>
+		<mapper resource="mapper/ownerloginjoin.xml" />	
+	</mappers>
+>>>>>>> Stashed changes:web/ConnectedCar/src/main/webapp/WEB-INF/config/mybatis-config.xml
+</configuration>
