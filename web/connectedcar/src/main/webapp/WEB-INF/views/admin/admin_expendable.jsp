@@ -51,7 +51,7 @@
 							<th scope="col">제조사</th>
 							<th scope="col">모델</th>
 							<th scope="col">이름</th>
-							<th scope="col">비고</th>
+							<th scope="col">부품삭제</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -61,7 +61,7 @@
 							<td>현대</td>
 							<td>그랜져</td>
 							<td>이름???</td>
-							<td><a href="#">비고</a></td>
+							<td><a href="#">부품삭제</a></td>
 						</tr>
 						<%-- <%
 						for (int i = 0; i < list.size(); i++) {

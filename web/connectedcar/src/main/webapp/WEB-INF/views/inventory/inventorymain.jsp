@@ -13,7 +13,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- The above 4 meta tags must come first in the head; any other head content must come after these tags -->
 <!-- Title -->
-<title>1:1문의사항</title>
+<title>재고 관리</title>
 
 <!-- 
 <!-- Core Stylesheet -->
