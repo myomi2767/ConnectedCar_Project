@@ -9,7 +9,7 @@
 		<setting name="jdbcTypeForNull" value="NULL" />
 	</settings>
  	<typeAliases>
-		<typeAlias type="connected.car.ownerloginjoin.ownerVO" alias="ownervo" />
+		<typeAlias type="connected.car.owner.OwnerVO" alias="ownervo" />
 		
 	</typeAliases>
 	<mappers>

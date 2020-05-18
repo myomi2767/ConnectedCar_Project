@@ -19,6 +19,7 @@
 <!-- Core Stylesheet -->
 <link href="/connectedcar/common/css/k_inventorymain.css" rel="stylesheet">
 
+
 </head>
 <body>
 	<%-- <%
@@ -36,9 +37,6 @@
 		  -->
 	
 	
-	
-	
-
 	<div id="div_expendable">
 
 		

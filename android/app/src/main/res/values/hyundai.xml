@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="hyundai_avante">
+        <item>올 뉴 아반떼(CN7)</item>
+        <item>더 뉴 아반떼 AD</item>
+        <item>아반떼 스포츠</item>
+        <item>아반떼 AD</item>
+        <item>더 뉴 아반떼</item>
+        <item>아반떼 쿠페</item>
+        <item>아반떼 MD</item>
+        <item>아반떼 하이브리드</item>
+        <item>아반떼 HD</item>
+        <item>뉴 아반떼 XD</item>
+        <item>아반떼 XD</item>
+    </string-array>
+
+    <string-array name="hyundai_sonata">
+        <item>쏘나타 8세대 하이브리드</item>
+        <item>쏘나타 8세대</item>
+        <item>LF 쏘나타 뉴 라이즈  PHEV</item>
+        <item>LF 쏘나타 뉴 라이즈 하이브리드</item>
+        <item>LF 쏘나타 뉴 라이즈</item>
+        <item>LF 쏘나타 하이브리드</item>
+        <item>LF 쏘나타</item>
+        <item>쏘나타 하이브리드</item>
+        <item>LF 쏘나타</item>
+        <item>쏘나타 더 브릴리언트</item>
+        <item>쏘나타 하이브리드</item>
+        <item>YF 쏘나타</item>
+        <item>뉴 EF 쏘나타</item>
+    </string-array>
+
+    <string-array name="hyundai_grandeur">
+        <item>더 뉴 그랜저 하이브리드</item>
+        <item>더 뉴 그랜저</item>
+        <item>그랜저 IG 하이브리드</item>
+        <item>그랜저 IG </item>
+        <item>그랜저 하이브리드</item>
+        <item>그랜저 HG</item>
+        <item>그랜저 HG 하이브리드</item>
+        <item>더 럭셔리 그랜저</item>
+        <item>그랜저 뉴 럭셔리</item>
+        <item>그랜저 TG</item>
+        <item>뉴 그랜저 XG</item>
+    </string-array>
+
+    <!--<string-array name="hyundai_santafe">
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+    </string-array>-->
+
+
+    <string-array name="hyundai_santafe">
+        <item>싼타페 TM</item>
+        <item>싼타페 더 프라임</item>
+        <item>싼타페 DM</item>
+        <item>싼타페 CM</item>
+        <item>싼타페</item>
+    </string-array>
+
+    <string-array name="hyundai_tucson">
+        <item>투싼 TL</item>
+        <item>올 뉴 투싼</item>
+        <item>뉴 투싼 ix</item>
+        <item>투싼 ix</item>
+        <item>투싼</item>
+    </string-array>
+
+    <string-array name="hyundai_kona">
+        <item>코나 하이브리드</item>
+        <item>코나 EV</item>
+        <item>코나</item>
+    </string-array>
+
+    <string-array name="hyundai_i30">
+        <item>신형 i30</item>
+        <item>더 뉴 i30</item>
+        <item>i30(신형)</item>
+        <item>i30 cw</item>
+        <item>i30</item>
+    </string-array>
+
+    <string-array name="hyundai_palisade">
+        <item>펠리세이드</item>
+    </string-array>
+
+    <string-array name="hyundai_genesis">
+        <item>제네시스 DH</item>
+        <item>더 뉴 제네시스 쿠페</item>
+        <item>제네시스</item>
+        <item>제네시스 쿠페</item>
+    </string-array>
+
+    <string-array name="hyundai_starex">
+        <item>더 뉴 그랜드 스타렉스</item>
+        <item>그랜드 스타렉스</item>
+        <item>스타렉스 점보</item>
+        <item>스타렉스</item>
+    </string-array>
+
+    <string-array name="hyundai_porter">
+        <item>포터2 EV(HR)</item>
+        <item>포터2</item>
+        <item>뉴 포터</item>
+        <item>포터</item>
+    </string-array>
+    <!-- <string-array name="hyundai_">
+           <item></item>
+           <item></item>
+           <item></item>
+           <item></item>
+       </string-array>-->
+
+    <string-array name="hyundai_veloster">
+        <item>벨로스터-N</item>
+        <item>벨로스터 JS</item>
+        <item>더 뉴 벨로스터</item>
+        <item>벨로스터</item>
+    </string-array>
+
+    <string-array name="hyundai_accent">
+        <item>엑센트(신형)</item>
+        <item>뉴 엑센트</item>
+        <item>엑센트</item>
+    </string-array>
+
+    <string-array name="hyundai_maxcruz">
+        <item>더 뉴 맥스크루즈</item>
+        <item>맥스크루즈</item>
+    </string-array>
+
+    <string-array name="hyundai_ioniq">
+        <item>더 뉴 아이오닉 PHEV</item>
+        <item>더 뉴 아이오닉 electric</item>
+        <item>더 뉴 아이오닉 하이브리드</item>
+        <item>아이오닉 PHEV</item>
+        <item>아이오닉 일렉트릭</item>
+        <item>아이오닉 하이브리드</item>
+    </string-array>
+
+    <string-array name="hyundai_i40">
+        <item>더 뉴 i40</item>
+        <item>더 뉴 i40 살룬</item>
+        <item>i40 살룬</item>
+        <item>i40</item>
+    </string-array>
+
+    <string-array name="hyundai_equus">
+        <item>에쿠스(신형)</item>
+        <item>에쿠스</item>
+    </string-array>
+
+    <string-array name="hyundai_trajet">
+        <item>트라제 XG</item>
+    </string-array>
+
+    <string-array name="hyundai_nexo">
+        <item>넥쏘</item>
+    </string-array>
+
+    <string-array name="hyundai_verna">
+        <item>베르나 트랜스폼</item>
+        <item>베르나(신형)</item>
+        <item>New 베르나</item>
+        <item>베르나</item>
+    </string-array>
+
+    <string-array name="hyundai_aslan">
+        <item>아슬란</item>
+    </string-array>
+
+    <string-array name="hyundai_mighty">
+        <item>올 뉴 마이티</item>
+    </string-array>
+    
+    <string-array name="hyundai_tuscani">
+        <item>투스카니(신형)</item>
+        <item>투스카니</item>
+    </string-array>
+
+    <string-array name="hyundai_terracan">
+        <item>테라칸</item>
+    </string-array>
+
+    <string-array name="hyundai_megatruck">
+        <item>메가트럭 와이드캡</item>
+        <item>메가트럭 5톤</item>
+        <item>메가트럭 4.5톤</item>
+        <item>메가트럭 특장차</item>
+    </string-array>
+
+    <string-array name="hyundai_click">
+        <item>뉴 클릭</item>
+        <item>클릭 하이브리드</item>
+        <item>클릭</item>
+    </string-array>
+
+    <string-array name="hyundai_xceint">
+        <item>트라고 엑시언트</item>
+    </string-array>
+
+    <string-array name="hyundai_county">
+        <item>e-카운티</item>
+    </string-array>
+
+
+</resources>
