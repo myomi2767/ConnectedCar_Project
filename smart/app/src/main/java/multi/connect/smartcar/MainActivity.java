@@ -22,10 +22,13 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.skt.Tmap.TMapCircle;
 import com.skt.Tmap.TMapGpsManager;
 import com.skt.Tmap.TMapPoint;
@@ -46,9 +49,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.ACCESS_FINE_LOCATION,
     };
-    LinearLayout loading;
+    LinearLayout loading,mapViewTotal,naviSearchView;
     TMapPoint tMapPoint;
     TMapCircle tMapCircle;
+    Location location;
+    LocationManager lm;
+    FloatingActionButton fabNavi;
+    EditText destiName;
+    Button btnDesti;
+    ListView destiList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +77,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         speedometer.setLowerText("0");
         linearLayoutTmap = findViewById(R.id.layoutMapView);
         loading = findViewById(R.id.loading);
+        mapViewTotal = findViewById(R.id.mapViewTotal);
+        naviSearchView = findViewById(R.id.naviSearchView);
+        fabNavi = findViewById(R.id.fabNavi);
+        fabNavi.setOnClickListener(this);
+        destiName = findViewById(R.id.destiName);
+        btnDesti = findViewById(R.id.btnDesti);
+        btnDesti.setOnClickListener(this);
+        destiList = findViewById(R.id.destiList);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(permission_list, 1000);
@@ -106,11 +123,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //현재 보는 방향
         tmapview.setCompassMode(true);
         //현재위치 불러오기
-        final LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
-        Location location = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+        Location net_location = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+        Location gps_location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        if (net_location!=null){
+            location = net_location;
+        }else {
+            if (gps_location!=null){
+                location =gps_location;
+            }
+        }
         tmapview.setLocationPoint(location.getLongitude(),location.getLatitude());
         //차 반경 10m 원 표시
         tMapPoint = new TMapPoint(location.getLatitude(),location.getLongitude());
@@ -129,7 +154,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void run() {
                 loading.setVisibility(View.INVISIBLE);
-                linearLayoutTmap.setVisibility(View.VISIBLE);
+                mapViewTotal.setVisibility(View.VISIBLE);
             }
         },1900);
 
@@ -173,10 +198,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         }
-        lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, // 등록할 위치제공자(실내에선 NETWORK_PROVIDER 권장)
-                1000, // 통지사이의 최소 시간간격 (miliSecond)
-                1, // 통지사이의 최소 변경거리 (m)
-                mLocationListener);
+        if (lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+            lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, // 등록할 위치제공자(실내에선 NETWORK_PROVIDER 권장)
+                    1000, // 통지사이의 최소 시간간격 (miliSecond)
+                    1, // 통지사이의 최소 변경거리 (m)
+                    mLocationListener);
+        }else if (lm.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+            lm.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+                    1000, // 통지사이의 최소 시간간격 (miliSecond)
+                    1, // 통지사이의 최소 변경거리 (m)
+                    mLocationListener);
+        }
     }
 
 
@@ -212,6 +244,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             speed = 90;
             speedometer.moveToValue(speed);
             speedometer.setLowerText(Integer.toString((int)speed));
+        }else if(v.getId()==R.id.fabNavi){
+            naviSearchView.setVisibility(View.VISIBLE);
+            mapViewTotal.setVisibility(View.INVISIBLE);
+        }else if(v.getId()==R.id.btnDesti){
+            naviSearchView.setVisibility(View.INVISIBLE);
+            mapViewTotal.setVisibility(View.VISIBLE);
         }
     }
 
