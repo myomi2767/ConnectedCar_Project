@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="gender">
-        <item>남자</item>
-        <item>여자</item>
-    </string-array>
-
     <string-array name="hyundai">
         <item>아반떼</item>
         <item>쏘나타</item>
@@ -32,6 +27,7 @@
         <item>트라고 엑시언트</item>
         <item>카운티</item>
     </string-array>
+
     <string-array name="kia">
         <item>K5</item>
         <item>모닝</item>
@@ -53,6 +49,30 @@
         <item>쏘울</item>
         <item>봉고</item>
         <item>쎄라토</item>
+    </string-array>
+
+    <string-array name="car_year">
+        <item>2020년</item>
+        <item>2019년</item>
+        <item>2018년</item>
+        <item>2017년</item>
+        <item>2016년</item>
+        <item>2015년</item>
+        <item>2014년</item>
+        <item>2013년</item>
+        <item>2012년</item>
+        <item>2011년</item>
+        <item>2010년</item>
+        <item>2009년</item>
+        <item>2008년</item>
+        <item>2007년</item>
+        <item>2006년</item>
+        <item>2005년</item>
+        <item>2004년</item>
+        <item>2003년</item>
+        <item>2002년</item>
+        <item>2001년</item>
+        <item>2000년</item>
     </string-array>
 </resources>
 
