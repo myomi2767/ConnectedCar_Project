@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".control">
+    tools:context=".control.CarRemoteControl">
 
     <LinearLayout
         android:id="@+id/contView"
@@ -17,10 +17,12 @@
             android:layout_marginTop="15dp"
             android:orientation="horizontal">
             <Button
+                android:id="@+id/engineStart"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:background="@drawable/enginestart1"/>
             <Button
+                android:id="@+id/engineStop"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:background="@drawable/enginestop1"/>
