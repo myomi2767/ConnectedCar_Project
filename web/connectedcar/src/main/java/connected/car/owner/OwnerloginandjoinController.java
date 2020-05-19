@@ -45,6 +45,15 @@ public class OwnerloginandjoinController {
 		return mav;
 	}
 	
+	//로그아웃
+	@RequestMapping("/ownerlogin/logout.do")
+	public String logout(HttpSession session) {
+		if(session!=null) {
+			session.invalidate();
+		}
+		return "redirect:/ownerlogin/login.do";
+	}
+	
 	//회원가입 화면으로 가기
 	@RequestMapping(value = "/ownerlogin/join.do", method = RequestMethod.GET)
 	public String joinView() {

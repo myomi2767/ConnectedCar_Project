@@ -1,3 +1,5 @@
+<%@page import="java.nio.channels.SeekableByteChannel"%>
+<%@page import="connected.car.owner.OwnerVO"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.Calendar"%>
@@ -44,22 +46,46 @@ li {display:inline-block;}
 </head>
 
 <body>
+
+<!-- 로그인 세션 걸어 줄 로그인유저 정보 정의 -->
+<%
+	OwnerVO loginuser = (OwnerVO)session.getAttribute("loginuser");
+%>
+
+<%
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-mm-dd");
+		Calendar today = Calendar.getInstance();
+		int year = today.get(Calendar.YEAR);
+		int month = today.get(Calendar.MONTH) + 1;
+		int date = today.get(Calendar.DATE);
+		String Dday = Integer.toString(year)+'-'+Integer.toString(month)+'-'+Integer.toString(date);
+	
+	%>
+                
+                
                 
                 <!--  Login Register Area -->
          
 
-	<!-- Fixed navbar -->
 	<div >
 	<div class ="Login">
 	          <ul class ="loginlist" >
+	          <% if(loginuser == null){ %>
                             <li >
-                                <a href="#" >sign in</a>
+                                <a href="/connectedcar/ownerlogin/login.do" >sign in</a>
                             </li>
-                            <li >
-                                <a href="#" >sign out</a>
+                            <% } else {
+                            	session.setAttribute("loginuser", loginuser);
+                            	session.setAttribute("today", Dday);
+                            	session.setAttribute("id", loginuser.getOwner_id());
+                            	session.setAttribute("name", loginuser.getOwner_name());
+                            %>
+                            <li ><span><%= session.getAttribute("name") %>님 환영합니다.&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+                                <a href="/connectedcar/ownerlogin/logout.do" >sign out</a>
                             </li>
+                             <% } %>
                             <li >
-                                <a href="#">sign up</a>
+                                <a href="/connectedcar/ownerlogin/join.do">sign up</a>
                             </li>
              </ul>
 	</div>
