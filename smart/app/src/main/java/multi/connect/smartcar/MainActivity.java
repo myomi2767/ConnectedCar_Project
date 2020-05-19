@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
@@ -44,10 +45,12 @@ import com.skt.Tmap.TMapGpsManager;
 import com.skt.Tmap.TMapMarkerItem;
 import com.skt.Tmap.TMapPOIItem;
 import com.skt.Tmap.TMapPoint;
+import com.skt.Tmap.TMapPolyLine;
 import com.skt.Tmap.TMapTapi;
 import com.skt.Tmap.TMapView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import de.nitri.gauge.Gauge;
 
@@ -65,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Manifest.permission.ACCESS_FINE_LOCATION,
     };
     LinearLayout loading,mapViewTotal,naviSearchView;
-    TMapPoint tMapPoint;
+    TMapPoint tMapPoint,startpoint,endpoint;
     TMapCircle tMapCircle;
     Location location;
     LocationManager lm;
@@ -74,7 +77,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btnDesti;
     ListView destiList;
     ArrayAdapter<POI> POIAdapter;
-
+    String des,loc_lat,loc_lon;
+    TMapTapi tmaptapi;
+    boolean isTmapApp;
+    TMapGpsManager tMapGpsManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,19 +109,51 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnDesti = findViewById(R.id.btnDesti);
         btnDesti.setOnClickListener(this);
         destiList = findViewById(R.id.destiList);
-        POIAdapter = new ArrayAdapter<POI>(this,android.R.layout.simple_list_item_1);
+        POIAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1);
         destiList.setAdapter(POIAdapter);
         destiList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String des = parent.getItemAtPosition(position).toString();
+                String[] destiList = parent.getItemAtPosition(position).toString().split(",");
+                des = destiList[0];
+                String[] locList = destiList[1].split(" ");
+                loc_lat = locList[1];
+                loc_lon = locList[3];
                 Toast.makeText(getApplicationContext(),des,Toast.LENGTH_SHORT).show();
 
                 AlertDialog.Builder builder
                         = new AlertDialog.Builder(MainActivity.this);
                 builder.setCancelable(true);
-                builder .setTitle("목적지를 "+des+"로 설정합니다")
-                        .setPositiveButton("확인", null)
+                builder .setTitle("목적지를 "+des+"으로 설정합니다")
+                        .setPositiveButton("T네비", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                tmaptapi= new TMapTapi(MainActivity.this);
+                                tmaptapi.setSKTMapAuthentication("l7xx69415d661c8445a8b35bd80789e07ebf");
+                                isTmapApp = tmaptapi.isTmapApplicationInstalled();
+                                if (isTmapApp){
+                                    startpoint = tMapGpsManager.getLocation();
+                                    HashMap pathInfo = new HashMap();
+                                    pathInfo.put("rGoName", des);
+                                    pathInfo.put("rGoY", loc_lat);
+                                    pathInfo.put("rGoX", loc_lon);
+                                    tmaptapi.invokeRoute(pathInfo);
+                                    naviSearchView.setVisibility(View.INVISIBLE);
+                                    mapViewTotal.setVisibility(View.VISIBLE);
+                                }
+                            }
+                        })
+                        .setNeutralButton("경로표시", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                startpoint = tMapGpsManager.getLocation();
+                                endpoint = new TMapPoint(Double.parseDouble(loc_lat),Double.parseDouble(loc_lon));
+                                searchRoute(startpoint,endpoint);
+                                tmapview.setZoomLevel(16);
+                                naviSearchView.setVisibility(View.INVISIBLE);
+                                mapViewTotal.setVisibility(View.VISIBLE);
+                            }
+                        })
                         .setNegativeButton("취소", null);
                 alert = builder.create();
                 alert.show();
@@ -142,13 +180,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             POIAdapter.clear();
 
                             for (TMapPOIItem poi : arrayList) {
-                                addMarker(poi);
                                 POIAdapter.add(new POI(poi));
-                            }
-
-                            if (arrayList.size() > 0) {
-                                TMapPOIItem poi = arrayList.get(0);
-                                moveMap(poi.getPOIPoint().getLatitude(), poi.getPOIPoint().getLongitude());
                             }
                         }
                     });
@@ -156,7 +188,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             });
         }
     }
-    public void addMarker(TMapPOIItem poi) {
+    /*public void addMarker(TMapPOIItem poi) {
         TMapMarkerItem item = new TMapMarkerItem();
         item.setTMapPoint(poi.getPOIPoint());
         Bitmap icon = ((BitmapDrawable) ContextCompat.getDrawable(this, android.R.drawable.ic_input_add)).getBitmap();
@@ -170,7 +202,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         item.setCalloutRightButtonImage(right);
         item.setCanShowCallout(true);
         tmapview.addMarkerItem(poi.getPOIID(), item);
-    }
+    }*/
 
     private void moveMap(double lat,double lng){
         tmapview.setCenterPoint(lng,lat);
@@ -232,7 +264,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         linearLayoutTmap.addView(tmapview);
 
-        //지도에 마커찍기
+        /*//지도에 마커찍기
         final ArrayList alTMapPoint = new ArrayList();
         alTMapPoint.add(new TMapPoint(37.576016, 126.976867));//광화문
         alTMapPoint.add(new TMapPoint(37.570432, 126.992169));// 종로3가
@@ -246,7 +278,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             markerItem1.setTMapPoint((TMapPoint)alTMapPoint.get(i));
             //지도에 마커 추가
             tmapview.addMarkerItem("markerItem"+i, markerItem1);
-        }
+        }*/
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -276,7 +308,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 tMapCircle.setLineColor(Color.BLUE);
                 tMapCircle.setAreaColor(Color.GRAY);
                 tMapCircle.setAreaAlpha(100);
-                tmapview.addTMapCircle("circle", tMapCircle);
+                tmapview.addTMapCircle("circle1", tMapCircle);
+
+                if (tMapGpsManager.getLocation().equals(endpoint)){
+                    tmapview.removeTMapPath();
+                }
             }
 
         }
@@ -307,10 +343,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     1, // 통지사이의 최소 변경거리 (m)
                     mLocationListener);
         }
+        tMapGpsManager = new TMapGpsManager(this);
+        tMapGpsManager.setMinTime(1000);
+        tMapGpsManager.setMinDistance(5);
+        tMapGpsManager.setProvider(TMapGpsManager.GPS_PROVIDER);
+        tMapGpsManager.OpenGps();
     }
 
-
-
+    public void searchRoute(TMapPoint startpoint,TMapPoint endpoint){
+        TMapData data = new TMapData();
+        data.findPathData(startpoint,endpoint, new TMapData.FindPathDataListenerCallback() {
+            @Override
+            public void onFindPathData(final TMapPolyLine path) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        path.setLineWidth(5);
+                        path.setLineColor(Color.RED);
+                        tmapview.addTMapPath(path);
+                        Bitmap s = ((BitmapDrawable)ContextCompat.getDrawable(MainActivity.this,R.drawable.startpoint)).getBitmap();
+                        Bitmap e = ((BitmapDrawable)ContextCompat.getDrawable(MainActivity.this,R.drawable.endpoint)).getBitmap();
+                        tmapview.setTMapPathIcon(s,e);
+                    }
+                });
+            }
+        });
+    }
 
     @Override
     public void onClick(View v) {
@@ -351,8 +409,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (imm!=null) {
                 imm.hideSoftInputFromWindow(naviSearchView.getWindowToken(), 0);
             }
-            /*naviSearchView.setVisibility(View.INVISIBLE);
-            mapViewTotal.setVisibility(View.VISIBLE);*/
         }
     }
 

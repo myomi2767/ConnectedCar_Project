@@ -14,6 +14,6 @@ public class POI {
 
     @Override
     public String toString() {
-        return item.getPOIName();
+        return item.getPOIName()+","+item.getPOIPoint();
     }
 }
