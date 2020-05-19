@@ -9,6 +9,10 @@ public class MemberVO {
 	private String user_gender;
 	private String driver_license;
 	
+	public MemberVO() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public MemberVO(String user_id, String car_id, String user_password, String user_name, String user_birthdate,
 			String user_gender, String driver_license) {
 		super();

@@ -14,5 +14,6 @@
 	</typeAliases>
 	<mappers>
 		<mapper resource="mapper/ownerloginjoin.xml" />	
+		<mapper resource="mapper/member.xml"/>
 	</mappers>
 </configuration>
