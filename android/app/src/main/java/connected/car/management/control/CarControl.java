@@ -1,4 +1,4 @@
-package connected.car.management;
+package connected.car.management.control;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,19 +16,21 @@ import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 
+import connected.car.management.R;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class condition extends Fragment {
+public class CarControl extends Fragment {
     TabLayout tabLayout;
     ViewPager viewPager;
     ArrayList<Fragment> fragmentArrayList = new ArrayList<Fragment>();
     String[] titleList = {"원격제어","차량상태"};
-    control control = new control();
-    status status = new status();
+    CarRemoteControl control = new CarRemoteControl();
+    CarRemoteStatus status = new CarRemoteStatus();
 
-    public condition() {
+    public CarControl() {
         // Required empty public constructor
     }
 
@@ -36,7 +38,7 @@ public class condition extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_condition, container, false);
+        View view = inflater.inflate(R.layout.fragment_car_control, container, false);
         tabLayout = view.findViewById(R.id.tablayout);
         viewPager = view.findViewById(R.id.pager);
 

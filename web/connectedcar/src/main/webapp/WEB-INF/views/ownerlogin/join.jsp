@@ -208,23 +208,6 @@
 	</div>
 	
 	
-	<!-- <!-- 모달 창입니다 ---------------------------------------------------------------------- -->
-    <div id="fridge_modal" class="modal" role="dialog" aria-hidden="true">
-    	<div id="manage_fridge">
-    		<div id="check_box">
-    		</div>
-    		<div class="fridge-img-div">
-  				<img class="fridge-img-ico" src="">
-  				<p></p>
-  			</div>
-    	</div>
-    	
-    	<div id="pm-btn">
-    		<button class="plus-btn" title="냉장고 추가"><i class="fas fa-plus-circle fa-2x" style="color:orange;"></i></button>
-    		<button class="plus-btn" title="냉장고 제거"><i class="fas fa-minus-circle fa-2x" style="color:gray;"></i></button>
-    	</div>
-  		<a href="#" class="" rel="modal:close" style="padding-left: 95%; position: static;">Close</a>
-	</div> -->
 ​
 ​
 </body>

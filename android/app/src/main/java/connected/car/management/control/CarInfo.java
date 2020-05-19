@@ -1,4 +1,4 @@
-package connected.car.management;
+package connected.car.management.control;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,13 +7,15 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
+import connected.car.management.R;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class car_info extends Fragment {
+public class CarInfo extends Fragment {
 
-    public car_info() {
+    public CarInfo() {
         // Required empty public constructor
     }
 
