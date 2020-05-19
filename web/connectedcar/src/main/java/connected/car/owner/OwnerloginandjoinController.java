@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -49,30 +50,36 @@ public class OwnerloginandjoinController {
 	public String joinView() {
 		return "ownerlogin/join";
 	}
+	
+	//회원가입에서 정비소찾기 팝업으로 가기
+		@RequestMapping(value = "/ownerlogin/joinshoppopup.do", method = RequestMethod.GET)
+		public String joinPopupView() {
+			return "ownerlogin/joinshoppopup";
+		}
+		
 	//회원가입하기
 		@RequestMapping(value = "/ownerlogin/join.do", method = RequestMethod.POST)
 		public String join(OwnerVO owner) {
 			System.out.println("회원가입창에서 넘어온 정보:"+owner);
-			//service.join(owner);
+			service.join(owner);
 			return "redirect:/ownerlogin/login.do";
 		}
+		
+		@RequestMapping(value = "/ownerlogin/idCheck.do", method = RequestMethod.GET ,
+				produces="application/text;charset=utf-8")
+		public @ResponseBody String idCheck(String owner_id) {
+			boolean state = service.idCheck(owner_id);
+		    String result ="";
+			if(state) {
+				result = "사용 불가능한 아이디";
+			}else {
+				result = "사용 가능한 아이디";
+			}
+			return result;
+		}	
+		
 	
 	
-	/*
-	 * 
-	@RequestMapping(value = "/loginandcustomer/idCheck.do", method = RequestMethod.GET ,
-			produces="application/text;charset=utf-8")
-	public @ResponseBody String idCheck(String member_id) {
-		boolean state = service.idCheck(member_id);
-	    String result ="";
-		if(state) {
-			result = "사용 불가능한 아이디";
-		}else {
-			result = "사용 가능한 아이디";
-		}
-		return result;
-	}
-	 * 
-	 */
+
 
 }

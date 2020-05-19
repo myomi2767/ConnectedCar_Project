@@ -32,13 +32,13 @@
 					</div>
 				</div>
 				<!-- 검색버튼을 눌렀을 때 나와야할 화면 들 표현식을 이용한 화면 구성 -->
-				<%  %>		
+				<%  %>
 				<div class="form-group">
-					<label for="InputName1">부품명 :</label> 
+					<label for="InputName1">부품명 :</label>
 					<input type="text" class="form-control col-10" disabled="disabled" value="불러온값">
 				</div>
 				<div class="form-group">
-					<label for="InputName1">차량모델 :</label> 
+					<label for="InputName1">차량모델 :</label>
 					<input type="text" class="form-control col-10" disabled="disabled" value="불러온값">
 				</div>
 				<div class="form-group">
