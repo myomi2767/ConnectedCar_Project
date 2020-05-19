@@ -121,17 +121,18 @@
                         android:id="@+id/fabNavi"
                         android:layout_gravity="bottom|right"
                         android:src="@drawable/gps"
-                        android:padding="0dp"
+                        android:layout_marginRight="10dp"
                         android:layout_marginBottom="10dp"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         app:useCompatPadding="true"
                         android:scaleType="centerCrop"
                         android:backgroundTint="@android:color/transparent"
+                        gauge:borderWidth="0dp"
                         android:clickable="true"/>
                     <LinearLayout
                         android:layout_height="match_parent"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:id="@+id/layoutMapView"
                         android:orientation="vertical"
                         android:gravity="end|bottom"
@@ -165,11 +166,27 @@
                         android:layout_gravity="center"
                         android:textSize="50sp" />
                 </LinearLayout>
-                <ListView
-                    android:id="@+id/destiList"
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="left|top"/>
+                    android:layout_height="match_parent">
+                    <ListView
+                        android:id="@+id/destiList"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="left|top"/>
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/btnBack"
+                        android:layout_gravity="bottom|right"
+                        android:src="@drawable/back"
+                        android:background="#ffffff"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        app:useCompatPadding="true"
+                        android:scaleType="centerCrop"
+                        gauge:borderWidth="0dp"
+                        android:backgroundTint="@android:color/transparent"
+                        android:clickable="true"/>
+                </FrameLayout>
             </LinearLayout>
         </FrameLayout>
         <LinearLayout

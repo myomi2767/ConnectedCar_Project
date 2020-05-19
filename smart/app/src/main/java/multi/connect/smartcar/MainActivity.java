@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TMapCircle tMapCircle;
     Location location;
     LocationManager lm;
-    FloatingActionButton fabNavi;
+    FloatingActionButton fabNavi,btnBack;
     EditText destiName;
     Button btnDesti;
     ListView destiList;
@@ -97,6 +97,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn60.setOnClickListener(this);
         btn90 = findViewById(R.id.btn90);
         btn90.setOnClickListener(this);
+        btnBack = findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(this);
         speedometer.setLowerText("0");
         linearLayoutTmap = findViewById(R.id.layoutMapView);
         loading = findViewById(R.id.loading);
@@ -128,6 +130,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .setPositiveButton("T네비", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                destiName.setText("");
+                                POIAdapter.clear();
                                 tmaptapi= new TMapTapi(MainActivity.this);
                                 tmaptapi.setSKTMapAuthentication("l7xx69415d661c8445a8b35bd80789e07ebf");
                                 isTmapApp = tmaptapi.isTmapApplicationInstalled();
@@ -146,6 +150,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .setNeutralButton("경로표시", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                destiName.setText("");
+                                POIAdapter.clear();
                                 startpoint = tMapGpsManager.getLocation();
                                 endpoint = new TMapPoint(Double.parseDouble(loc_lat),Double.parseDouble(loc_lon));
                                 searchRoute(startpoint,endpoint);
@@ -400,6 +406,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             speed = 90;
             speedometer.moveToValue(speed);
             speedometer.setLowerText(Integer.toString((int)speed));
+        }else if(v.getId()==R.id.btnBack){
+            destiName.setText("");
+            naviSearchView.setVisibility(View.INVISIBLE);
+            mapViewTotal.setVisibility(View.VISIBLE);
         }else if(v.getId()==R.id.fabNavi){
             naviSearchView.setVisibility(View.VISIBLE);
             mapViewTotal.setVisibility(View.INVISIBLE);
