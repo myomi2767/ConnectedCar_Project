@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     tools:context=".control.CarRemoteControl">
 
     <LinearLayout
@@ -15,89 +16,117 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:layout_marginTop="15dp"
-            android:orientation="horizontal">
-            <Button
-                android:id="@+id/engineStart"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:background="@drawable/enginestart1"/>
-            <Button
-                android:id="@+id/engineStop"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:background="@drawable/enginestop1"/>
-        </LinearLayout>
+            android:orientation="vertical">
+
+            <ToggleButton
+                android:id="@+id/powerOff"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:textOn=""
+                android:textOff=""
+                android:background="@drawable/poweroff"/>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:text="도어제어"
-            android:textSize="25dp"/>
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textStyle="bold"
+            />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <Button
                 android:id="@+id/btnDoorOpen"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
                 android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="60dp"
-                android:text="문열기"
-                android:textSize="15dp"/>
+                android:background="#AFDEE4"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:layout_marginLeft="8dp"
+                android:text="OPEN"
+                android:layout_marginRight="10dp"
+                android:textStyle="bold"/>
             <Button
                 android:id="@+id/btnDoorLock"
-                android:layout_width="wrap_content"
-                android:layout_height="60dp"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
                 android:layout_weight="1"
-                android:text="잠금"
-                android:textSize="15dp"/>
+                android:background="#AFDEE4"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:text="LOCK"
+                android:layout_marginRight="10dp"
+                android:textStyle="bold"/>
         </LinearLayout>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:text="비상등"
-            android:textSize="25dp"/>
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textStyle="bold"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <Button
                 android:id="@+id/btnEmerLightOn"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
                 android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="60dp"
-                android:text="비상등ON"
-                android:textSize="13dp"/>
+                android:background="#AFDEE4"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:text="ON"
+                android:layout_marginRight="8dp"
+                android:layout_marginLeft="8dp"
+                android:textStyle="bold"/>/>
             <Button
                 android:id="@+id/btnEmerLightOnSiren"
-                android:layout_width="wrap_content"
-                android:layout_height="60dp"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
                 android:layout_weight="1"
-                android:text="비상등+경적"
-                android:textSize="13dp"/>
+                android:background="#AFDEE4"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:text="OFF"
+                android:layout_marginRight="10dp"
+                android:textStyle="bold"/>/>
         </LinearLayout><TextView
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:text="공조제어"
-        android:textSize="25dp"/>
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textStyle="bold"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <Button
                 android:id="@+id/btnAirOn"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
                 android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="60dp"
-                android:text="에어컨 ON"
-                android:textSize="15dp"/>
+                android:background="#AFDEE4"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:text="AIR-ON"
+                android:layout_marginRight="8dp"
+                android:layout_marginLeft="8dp"
+                android:textStyle="bold"/>/>
             <Button
                 android:id="@+id/btnAirOff"
-                android:layout_width="wrap_content"
-                android:layout_height="60dp"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
                 android:layout_weight="1"
-                android:text="에어컨 OFF"
-                android:textSize="15dp"/>
+                android:background="#AFDEE4"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:text="AIR-OFF"
+                android:layout_marginRight="8dp"
+                android:layout_marginLeft="8dp"
+                android:textStyle="bold"/>/>
         </LinearLayout>
     </LinearLayout>
 
+</LinearLayout>
 </LinearLayout>
