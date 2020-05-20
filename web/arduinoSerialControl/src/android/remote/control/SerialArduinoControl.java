@@ -18,7 +18,7 @@ public class SerialArduinoControl {
 	}
 	public void connect(String portName) {
 		try {
-			CommPortIdentifier commPortIdentifier = CommPortIdentifier.getPortIdentifier(portName);
+			commPortIdentifier commPortIdentifier = CommPortIdentifier.getPortIdentifier(portName);
 			if(commPortIdentifier.isCurrentlyOwned()) {
 				System.out.println("포트 사용 불가");
 			}else {
