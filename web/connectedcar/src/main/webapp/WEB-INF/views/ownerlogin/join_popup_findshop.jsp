@@ -21,7 +21,7 @@
 	<div class="container">
 		<div class="col-lg-8 col-lg-offset-2">
 			<h4>내 정비소 찾기</h4>
-			<form action="" name="findshop" method="POST" onsubmit="">
+			<form action="/connectedcar/admin/crawling.do" name="findshop" method="POST" onsubmit="">
 
 				<div class="btn-group btn-group-toggle" data-toggle="buttons"
 					style="">

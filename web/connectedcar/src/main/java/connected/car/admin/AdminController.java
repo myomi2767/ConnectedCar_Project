@@ -39,8 +39,9 @@ public class AdminController {
 	}
 	
 	//정비소 추가
-	@RequestMapping(value="/admin/crawling.do", method=RequestMethod.GET, produces="application/json;charset=UTF-8") 
-	public @ResponseBody String crawlingRepairShop(AddressVO vo) {
+	@RequestMapping(value="/admin/crawling.do", method=RequestMethod.POST, produces="application/json;charset=UTF-8") 
+	public @ResponseBody String crawlingRepairShop(AddressVO findshop) {
+		System.out.println(findshop.toString());
 		String result = "";
 		StringBuilder urlBuilder = new StringBuilder("http://api.data.go.kr/openapi/tn_pubr_public_auto_maintenance_company_api"); /*URL*/
         try {
@@ -50,7 +51,7 @@ public class AdminController {
 	        urlBuilder.append("&" + URLEncoder.encode("type","UTF-8") + "=" + URLEncoder.encode("json", "UTF-8")); /*XML/JSON 여부*/
 	        //urlBuilder.append("&" + URLEncoder.encode("inspofcNm","UTF-8") + "=" + URLEncoder.encode("세종모터스", "UTF-8")); /*자동차정비업체명*/
 	        //urlBuilder.append("&" + URLEncoder.encode("inspofcType","UTF-8") + "=" + URLEncoder.encode("01", "UTF-8")); /*자동차정비업체종류*/
-	        urlBuilder.append("&" + URLEncoder.encode("rdnmadr","UTF-8") + "=" + URLEncoder.encode("세종특별자치시 부강면 구들기길 17(부강리 776-3)", "UTF-8")); /*소재지도로명주소*/
+	        urlBuilder.append("&" + URLEncoder.encode("rdnmadr","UTF-8") + "=" + URLEncoder.encode(findshop.getAddress_do() + " " + findshop.getAddress_si() + " " + findshop.getAddress_gu(), "UTF-8")); /*소재지도로명주소*/
 	        urlBuilder.append("&" + URLEncoder.encode("lnmadr","UTF-8") + "=" + URLEncoder.encode("", "UTF-8")); /*소재지지번주소*/
 	        //urlBuilder.append("&" + URLEncoder.encode("latitude","UTF-8") + "=" + URLEncoder.encode("36.519360", "UTF-8")); /*위도*/
 	        //urlBuilder.append("&" + URLEncoder.encode("hardness","UTF-8") + "=" + URLEncoder.encode("127.368817", "UTF-8")); /*경도*/

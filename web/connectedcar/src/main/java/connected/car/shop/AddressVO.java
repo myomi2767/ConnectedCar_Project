@@ -4,14 +4,16 @@ public class AddressVO {
 	private String address_do;
 	private String address_si;
 	private String address_gu;
-	private String address_street;
 	
-	public AddressVO(String address_do, String address_si, String address_gu, String address_street) {
+	public AddressVO() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public AddressVO(String address_do, String address_si, String address_gu) {
 		super();
 		this.address_do = address_do;
 		this.address_si = address_si;
 		this.address_gu = address_gu;
-		this.address_street = address_street;
 	}
 
 	public String getAddress_do() {
@@ -37,17 +39,9 @@ public class AddressVO {
 	public void setAddress_gu(String address_gu) {
 		this.address_gu = address_gu;
 	}
-	
-	public String getAddress_street() {
-		return address_street;
-	}
-
-	public void setAddress_street(String address_street) {
-		this.address_street = address_street;
-	}
 
 	@Override
 	public String toString() {
-		return "AddressVO [address_do=" + address_do + ", address_si=" + address_si + ", address_gu=" + address_gu + ", address_street=" + address_street + "]";
+		return "AddressVO [address_do=" + address_do + ", address_si=" + address_si + ", address_gu=" + address_gu + "]";
 	}
 }
