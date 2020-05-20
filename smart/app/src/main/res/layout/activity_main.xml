@@ -8,12 +8,6 @@
     android:orientation="horizontal"
     android:id="@+id/activity_main"
     tools:context=".MainActivity">
-    <!--
-        faceColor : 바탕색
-        scaleColor : 숫자,마크 색
-        needleColor : 바늘 색
-        initialValue : 바늘이 가리키는 값
-    -->
     <LinearLayout
         android:layout_width="400dp"
         android:layout_height="wrap_content"
@@ -100,14 +94,6 @@
                     android:layout_height="150dp"
                     android:visibility="visible" />
             </LinearLayout>
-            <!--<LinearLayout
-                android:layout_height="match_parent"
-                android:layout_width="match_parent"
-                android:visibility="invisible"
-                android:id="@+id/layoutMapView"
-                android:orientation="vertical"
-                android:background="@android:color/white">
-            </LinearLayout>-->
             <LinearLayout
                 android:id="@+id/mapViewTotal"
                 android:visibility="invisible"
@@ -117,6 +103,19 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/fabMsg"
+                        android:layout_gravity="bottom|right"
+                        android:src="@drawable/msg"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="130dp"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        app:useCompatPadding="true"
+                        android:scaleType="centerCrop"
+                        android:backgroundTint="@android:color/transparent"
+                        gauge:borderWidth="0dp"
+                        android:clickable="true"/>
                     <com.google.android.material.floatingactionbutton.FloatingActionButton
                         android:id="@+id/fabNavi"
                         android:layout_gravity="bottom|right"
@@ -178,13 +177,12 @@
                         android:id="@+id/btnBack"
                         android:layout_gravity="bottom|right"
                         android:src="@drawable/back"
-                        android:background="#ffffff"
+                        android:background="#00232323"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         app:useCompatPadding="true"
                         android:scaleType="centerCrop"
                         gauge:borderWidth="0dp"
-                        android:backgroundTint="@android:color/transparent"
                         android:clickable="true"/>
                 </FrameLayout>
             </LinearLayout>

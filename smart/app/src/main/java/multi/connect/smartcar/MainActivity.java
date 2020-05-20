@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TMapCircle tMapCircle;
     Location location;
     LocationManager lm;
-    FloatingActionButton fabNavi,btnBack;
+    FloatingActionButton fabNavi,btnBack,fabMsg;
     EditText destiName;
     Button btnDesti;
     ListView destiList;
@@ -105,6 +105,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mapViewTotal = findViewById(R.id.mapViewTotal);
         //네비 목적지 검색
         naviSearchView = findViewById(R.id.naviSearchView);
+        fabMsg = findViewById(R.id.fabMsg);
+        fabMsg.setOnClickListener(this);
         fabNavi = findViewById(R.id.fabNavi);
         fabNavi.setOnClickListener(this);
         destiName = findViewById(R.id.destiName);
@@ -194,21 +196,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             });
         }
     }
-    /*public void addMarker(TMapPOIItem poi) {
-        TMapMarkerItem item = new TMapMarkerItem();
-        item.setTMapPoint(poi.getPOIPoint());
-        Bitmap icon = ((BitmapDrawable) ContextCompat.getDrawable(this, android.R.drawable.ic_input_add)).getBitmap();
-        item.setIcon(icon);
-        item.setPosition(0.5f, 1);
-        item.setCalloutTitle(poi.getPOIName());
-        item.setCalloutSubTitle(poi.getPOIContent());
-        Bitmap left = ((BitmapDrawable) ContextCompat.getDrawable(this, android.R.drawable.ic_dialog_alert)).getBitmap();
-        item.setCalloutLeftImage(left);
-        Bitmap right = ((BitmapDrawable) ContextCompat.getDrawable(this, android.R.drawable.ic_input_get)).getBitmap();
-        item.setCalloutRightButtonImage(right);
-        item.setCanShowCallout(true);
-        tmapview.addMarkerItem(poi.getPOIID(), item);
-    }*/
 
     private void moveMap(double lat,double lng){
         tmapview.setCenterPoint(lng,lat);
@@ -284,6 +271,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             markerItem1.setTMapPoint((TMapPoint)alTMapPoint.get(i));
             //지도에 마커 추가
             tmapview.addMarkerItem("markerItem"+i, markerItem1);
+        }*/
+        /*public void addMarker(TMapPOIItem poi) {
+            TMapMarkerItem item = new TMapMarkerItem();
+            item.setTMapPoint(poi.getPOIPoint());
+            Bitmap icon = ((BitmapDrawable) ContextCompat.getDrawable(this, android.R.drawable.ic_input_add)).getBitmap();
+            item.setIcon(icon);
+            item.setPosition(0.5f, 1);
+            item.setCalloutTitle(poi.getPOIName());
+            item.setCalloutSubTitle(poi.getPOIContent());
+            Bitmap left = ((BitmapDrawable) ContextCompat.getDrawable(this, android.R.drawable.ic_dialog_alert)).getBitmap();
+            item.setCalloutLeftImage(left);
+            Bitmap right = ((BitmapDrawable) ContextCompat.getDrawable(this, android.R.drawable.ic_input_get)).getBitmap();
+            item.setCalloutRightButtonImage(right);
+            item.setCanShowCallout(true);
+            tmapview.addMarkerItem(poi.getPOIID(), item);
         }*/
 
         new Handler().postDelayed(new Runnable() {
@@ -419,6 +421,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (imm!=null) {
                 imm.hideSoftInputFromWindow(naviSearchView.getWindowToken(), 0);
             }
+        }else if(v.getId()==R.id.fabMsg){
+
         }
     }
 
