@@ -129,6 +129,7 @@
                         android:backgroundTint="@android:color/transparent"
                         gauge:borderWidth="0dp"
                         android:clickable="true"/>
+
                     <LinearLayout
                         android:layout_height="match_parent"
                         android:layout_width="match_parent"
@@ -183,6 +184,7 @@
                         app:useCompatPadding="true"
                         android:scaleType="centerCrop"
                         gauge:borderWidth="0dp"
+                        android:backgroundTint="@android:color/transparent"
                         android:clickable="true"/>
                 </FrameLayout>
             </LinearLayout>

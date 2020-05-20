@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     LinearLayout linearLayoutTmap;
     Bitmap carImg;
     AlertDialog alert;
-    float speed = 0;
+    int speed = 0;
     String[] permission_list = {
             Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.ACCESS_FINE_LOCATION,
@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TMapTapi tmaptapi;
     boolean isTmapApp;
     TMapGpsManager tMapGpsManager;
+    int zoomLev;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -216,7 +217,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void init() {
         tmapview = new TMapView(this);
         tmapview.setSKTMapApiKey("l7xx69415d661c8445a8b35bd80789e07ebf");
-        tmapview.setZoomLevel(20);
+        tmapview.setZoomLevel(19);
         //아이콘 표시
         carImg = BitmapFactory.decodeResource(this.getResources(), R.drawable.carimoticon);
         Bitmap carIcon = Bitmap.createScaledBitmap(carImg, 30, 50, true);
@@ -245,7 +246,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         tmapview.setLocationPoint(location.getLongitude(),location.getLatitude());
         //차 반경 10m 원 표시
-        tMapPoint = new TMapPoint(location.getLatitude(),location.getLongitude());
+        /*tMapPoint = new TMapPoint(location.getLatitude(),location.getLongitude());
         tMapCircle = new TMapCircle();
         tMapCircle.setCenterPoint(tMapPoint);
         tMapCircle.setRadius(10);
@@ -253,7 +254,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tMapCircle.setLineColor(Color.BLUE);
         tMapCircle.setAreaColor(Color.GRAY);
         tMapCircle.setAreaAlpha(100);
-        tmapview.addTMapCircle("circle1", tMapCircle);
+        tmapview.addTMapCircle("circle1", tMapCircle);*/
 
         linearLayoutTmap.addView(tmapview);
 
@@ -307,11 +308,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 tmapview.setCenterPoint(longitude, latitude);
 
                 //차량 주변 원 따라다니기
+                zoomLev = tmapview.getZoomLevel();
                 tmapview.removeTMapCircle("circle1");
                 tMapPoint = new TMapPoint(location.getLatitude(),location.getLongitude());
                 tMapCircle = new TMapCircle();
                 tMapCircle.setCenterPoint(tMapPoint);
-                tMapCircle.setRadius(10);
+                switch (zoomLev){
+                    case 19:
+                        tMapCircle.setRadius(50);
+                        break;
+                    case 18:
+                        tMapCircle.setRadius(170);
+                        break;
+                    case 17:
+                        tMapCircle.setRadius(290);
+                        break;
+                    case 16:
+                        tMapCircle.setRadius(420);
+                }
                 tMapCircle.setCircleWidth(2);
                 tMapCircle.setLineColor(Color.BLUE);
                 tMapCircle.setAreaColor(Color.GRAY);
@@ -383,11 +397,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(v.getId()==R.id.btnUp){
             if(speed<=237) {
                 speed = speed + 3;
-            }else if(speed>237){
+            }else {
                 speed = 240;
             }
             speedometer.moveToValue(speed);
-            speedometer.setLowerText(Integer.toString((int)speed));
+            speedometer.setLowerText(Integer.toString(speed));
         }else if(v.getId()==R.id.btnDown){
             if(speed>=3) {
                 speed = speed - 3;
@@ -395,19 +409,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 speed = 0;
             }
             speedometer.moveToValue(speed);
-            speedometer.setLowerText(Integer.toString((int)speed));
+            speedometer.setLowerText(Integer.toString(speed));
         }else if(v.getId()==R.id.btn30){
             speed = 30;
             speedometer.moveToValue(speed);
-            speedometer.setLowerText(Integer.toString((int)speed));
+            speedometer.setLowerText(Integer.toString(speed));
         }else if(v.getId()==R.id.btn60){
             speed = 60;
             speedometer.moveToValue(speed);
-            speedometer.setLowerText(Integer.toString((int)speed));
+            speedometer.setLowerText(Integer.toString(speed));
         }else if(v.getId()==R.id.btn90){
             speed = 90;
             speedometer.moveToValue(speed);
-            speedometer.setLowerText(Integer.toString((int)speed));
+            speedometer.setLowerText(Integer.toString(speed));
         }else if(v.getId()==R.id.btnBack){
             destiName.setText("");
             naviSearchView.setVisibility(View.INVISIBLE);
@@ -422,7 +436,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 imm.hideSoftInputFromWindow(naviSearchView.getWindowToken(), 0);
             }
         }else if(v.getId()==R.id.fabMsg){
-
+            zoomLev = tmapview.getZoomLevel();
+            Toast.makeText(MainActivity.this,Integer.toString(zoomLev),Toast.LENGTH_SHORT).show();
+            tmapview.removeTMapCircle("circle1");
+            tMapPoint = new TMapPoint(tMapGpsManager.getLocation().getLatitude(),tMapGpsManager.getLocation().getLongitude());
+            tMapCircle = new TMapCircle();
+            tMapCircle.setCenterPoint(tMapPoint);
+            switch (zoomLev){
+                case 19:
+                    tMapCircle.setRadius(50);
+                    break;
+                case 18:
+                    tMapCircle.setRadius(170);
+                    break;
+                case 17:
+                    tMapCircle.setRadius(290);
+                    break;
+                case 16:
+                    tMapCircle.setRadius(420);
+            }
+            tMapCircle.setCircleWidth(2);
+            tMapCircle.setLineColor(Color.BLUE);
+            tMapCircle.setAreaColor(Color.GRAY);
+            tMapCircle.setAreaAlpha(100);
+            tmapview.addTMapCircle("circle1", tMapCircle);
         }
     }
 
