@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ConnectedCar</string>
+    <string name="app_name">Carnect</string>
     <string-array name="gender">
         <item>남자</item>
         <item>여자</item>
