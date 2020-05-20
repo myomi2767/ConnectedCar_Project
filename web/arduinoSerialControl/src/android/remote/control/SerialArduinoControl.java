@@ -46,4 +46,12 @@ public class SerialArduinoControl {
 		}
 		
 	}
+	//시리얼 출력을 위한 필요한 OutputStream리턴
+	public OutputStream getOutput() {
+		return out;
+	}
+	
+	public static void main(String[] args) {
+		new SerialArduinoControl().connect("COM5");
+	}
 }

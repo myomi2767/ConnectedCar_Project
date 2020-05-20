@@ -21,6 +21,8 @@ public class AndroidControlServer {
 						client = server.accept();
 						String ip = client.getInetAddress().getHostAddress();
 						System.out.println(ip+"가 접속\n");
+						
+						new ReceiverThread(client).start();
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
