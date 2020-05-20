@@ -38,13 +38,22 @@
 					<input type="text" class="form-control col-10" disabled="disabled" value="불러온값">
 				</div>
 				<div class="form-group">
-					<label for="InputName1">차량모델 :</label>
+					<label for="InputName1">부품종류 :</label>
+					<input type="text" class="form-control col-10" disabled="disabled" value="불러온값">
+				</div>
+				<div class="form-group">
+					<label for="InputName1">부품가격 :</label>
+					<input type="text" class="form-control col-10" disabled="disabled" value="불러온값">
+				</div>
+				<div class="form-group">
+					<label for="InputName1">부품 자동차 모델 :</label>
 					<input type="text" class="form-control col-10" disabled="disabled" value="불러온값">
 				</div>
 				<div class="form-group">
 				    <label for="InputSubject1">개수 :</label>
 				    <input type="number" class="form-control col-10" id="">
 				</div>
+				
 				<button type="submit" class="btn btn-theme">추가</button>
 				<button type="reset" class="btn btn-theme">취소</button>
 			</form>
