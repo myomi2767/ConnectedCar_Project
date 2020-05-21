@@ -43,34 +43,21 @@
         <item>뉴 그랜저 XG</item>
     </string-array>
 
-    <!--<string-array name="hyundai_santafe">
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-    </string-array>-->
-
 
     <string-array name="hyundai_santafe">
         <item>싼타페 TM</item>
-        <item>싼타페 더 프라임</item>
-        <item>싼타페 DM</item>
-        <item>싼타페 CM</item>
-        <item>싼타페</item>
+        <item>싼타페 더 프라임 (15~18년)</item>
+        <item>싼타페 DM (12~15년)</item>
+        <item>싼타페 CM (05~12년)</item>
+        <item>싼타페 (00~05년)</item>
     </string-array>
 
     <string-array name="hyundai_tucson">
         <item>투싼 TL</item>
-        <item>올 뉴 투싼</item>
-        <item>뉴 투싼 ix</item>
-        <item>투싼 ix</item>
-        <item>투싼</item>
+        <item>올 뉴 투싼 (15~18년)</item>
+        <item>뉴 투싼 ix (13~15년)</item>
+        <item>투싼 ix (09~13년)</item>
+        <item>투싼 (04~09년)</item>
     </string-array>
 
     <string-array name="hyundai_kona">
@@ -81,10 +68,10 @@
 
     <string-array name="hyundai_i30">
         <item>신형 i30</item>
-        <item>더 뉴 i30</item>
-        <item>i30(신형)</item>
-        <item>i30 cw</item>
-        <item>i30</item>
+        <item>더 뉴 i30 (15~16년)</item>
+        <item>i30(신형) (11년~15년)</item>
+        <item>i30 cw (08년~11년)</item>
+        <item>i30 (07~11년)</item>
     </string-array>
 
     <string-array name="hyundai_palisade">
@@ -92,24 +79,30 @@
     </string-array>
 
     <string-array name="hyundai_genesis">
-        <item>제네시스 DH</item>
-        <item>더 뉴 제네시스 쿠페</item>
-        <item>제네시스</item>
-        <item>제네시스 쿠페</item>
+        <item>G80</item>
+        <item>제네시스 G70</item>
+        <item>제네시스 G80</item>
+        <item>EQ900 (HI)</item>
+        <item>제네시스 G90</item>
+
+        <item>제네시스 DH(13~16년)</item>
+        <item>더 뉴 제네시스 쿠페(11~16년)</item>
+        <item>제네시스(08~13년)</item>
+        <item>제네시스 쿠페(08~11년)</item>
     </string-array>
 
     <string-array name="hyundai_starex">
-        <item>더 뉴 그랜드 스타렉스</item>
-        <item>그랜드 스타렉스</item>
-        <item>스타렉스 점보</item>
-        <item>스타렉스</item>
+        <item>더 뉴 그랜드 스타렉스 (17년~)</item>
+        <item>그랜드 스타렉스 (07~17년)</item>
+        <item>스타렉스 (97~07년)</item>
+        <item>스타렉스 점보 (97~07년)</item>
     </string-array>
 
     <string-array name="hyundai_porter">
-        <item>포터2 EV(HR)</item>
-        <item>포터2</item>
-        <item>뉴 포터</item>
-        <item>포터</item>
+        <item>포터2 EV(HR) (19년~)</item>
+        <item>포터2 (04년~)</item>
+        <item>뉴 포터 (96~04년)</item>
+        <item>포터 (87~96년)</item>
     </string-array>
     <!-- <string-array name="hyundai_">
            <item></item>
@@ -119,37 +112,37 @@
        </string-array>-->
 
     <string-array name="hyundai_veloster">
-        <item>벨로스터-N</item>
-        <item>벨로스터 JS</item>
-        <item>더 뉴 벨로스터</item>
-        <item>벨로스터</item>
+        <item>벨로스터 JS (18년~)</item>
+        <item>벨로스터-N (18년~)</item>
+        <item>더 뉴 벨로스터 (15~18년)</item>
+        <item>벨로스터 (11~14년)</item>
     </string-array>
 
     <string-array name="hyundai_accent">
-        <item>엑센트(신형)</item>
-        <item>뉴 엑센트</item>
-        <item>엑센트</item>
+        <item>엑센트(신형) (10~16년)</item>
+        <item>뉴 엑센트 (97~99년)</item>
+        <item>엑센트 (94~97년)</item>
     </string-array>
 
     <string-array name="hyundai_maxcruz">
-        <item>더 뉴 맥스크루즈</item>
-        <item>맥스크루즈</item>
+        <item>더 뉴 맥스크루즈(15년~)</item>
+        <item>맥스크루즈 (13~15년)</item>
     </string-array>
 
     <string-array name="hyundai_ioniq">
-        <item>더 뉴 아이오닉 PHEV</item>
         <item>더 뉴 아이오닉 electric</item>
-        <item>더 뉴 아이오닉 하이브리드</item>
-        <item>아이오닉 PHEV</item>
-        <item>아이오닉 일렉트릭</item>
-        <item>아이오닉 하이브리드</item>
+        <item>더 뉴 아이오닉 PHEV</item>
+        <item>더 뉴 아이오닉 하이브리드 (19년~)</item>
+        <item>아이오닉 PHEV (17년~)</item>
+        <item>아이오닉 하이브리드 (16년~)</item>
+        <item>아이오닉 일렉트릭 (16년~)</item>
     </string-array>
 
     <string-array name="hyundai_i40">
-        <item>더 뉴 i40</item>
-        <item>더 뉴 i40 살룬</item>
-        <item>i40 살룬</item>
-        <item>i40</item>
+        <item>더 뉴 i40 (15년~)</item>
+        <item>더 뉴 i40 살룬 (15년~)</item>
+        <item>i40 살룬 (12~15년)</item>
+        <item>i40 (11~15년)</item>
     </string-array>
 
     <string-array name="hyundai_equus">
@@ -166,10 +159,10 @@
     </string-array>
 
     <string-array name="hyundai_verna">
-        <item>베르나 트랜스폼</item>
-        <item>베르나(신형)</item>
-        <item>New 베르나</item>
-        <item>베르나</item>
+        <item>베르나 트랜스폼 (09~10년)</item>
+        <item>베르나(신형) (05~19년)</item>
+        <item>New 베르나 (02~05년)</item>
+        <item>베르나 (99~02년)</item>
     </string-array>
 
     <string-array name="hyundai_aslan">
@@ -197,16 +190,14 @@
     </string-array>
 
     <string-array name="hyundai_click">
-        <item>뉴 클릭</item>
-        <item>클릭 하이브리드</item>
-        <item>클릭</item>
+        <item>뉴 클릭 (05~10년)</item>
+        <item>클릭 하이브리드 (04~06년)</item>
+        <item>클릭 (02~05년)</item>
     </string-array>
 
-    <string-array name="hyundai_xceint">
-        <item>트라고 엑시언트</item>
-    </string-array>
 
-    <string-array name="hyundai_county">
+
+   <string-array name="hyundai_county">
         <item>e-카운티</item>
     </string-array>
 
