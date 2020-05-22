@@ -7,38 +7,38 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h3>부품 추가</h3>
-	<div class="hline"></div>
-	<form role="form">
-		<div class="form-group">
-			<label for="InputName1">제조사</label> 
-			<input type="radio" value="현대">현대
-			<input type="radio" value="기아">기아
+	<div class="container">
+		<div class="col-lg-8 col-lg-offset-2">
+			<h4>부품 추가</h4>
+			<form role="form-horizontal">
+				<div class="form-group">
+					<label class="col-2 control-label" for="code">부품코드 :</label>
+					<input type="text" class="form-control col-10" value="불러온값">
+				</div>
+				<div class="form-group">
+					<label class="col-2 control-label" for="InputName1">부품종류 :</label>
+					<input type="text" class="form-control col-10" value="불러온값">
+				</div>
+				<div class="form-group">
+					<label class="col-2 control-label" for="InputName1">부품명 :</label>
+					<input type="text" class="form-control col-10" value="불러온값">
+				</div>
+				<div class="form-group">
+					<label class="col-2 control-label" for="InputName1">부품가격 :</label>
+					<input type="text" class="form-control col-10" value="불러온값">
+				</div>
+				<div class="form-group">
+					<label class="col-2 control-label" for="InputName1">부품브랜드 :</label>
+					<input type="text" class="form-control col-10" value="불러온값">
+				</div>
+				<div class="form-group">
+					<label class="col-2 control-label" for="InputName1">부품 자동차 모델 :</label>
+					<input type="text" class="form-control col-10" value="불러온값">
+				</div>
+				<button type="submit" class="btn btn-theme">추가</button>
+				<button type="reset" class="btn btn-theme">취소</button>
+			</form>
 		</div>
-		<div class="form-group">
-			<label for="InputName1">부품코드</label> 
-			<select name="">
-				<option value="">1</option>
-				<option value="">2</option>
-				<option value="">3</option>
-				<option value="">4</option>
-			</select>
-		</div>
-		
-		<div class="form-group">
-			<label for="InputName1">부품명 </label> 
-			<input type="text" value="불러온값">
-		</div>
-		<div class="form-group">
-			<label for="InputName1">차량모델</label> 
-			<input type="text" value="불러온값">
-		</div>
-		<div class="form-group">
-		    <label for="InputSubject1">개수</label>
-		    <input type="number" class="form-control" id="">
-		</div>
-		<button type="submit" class="btn btn-theme">추가</button>
-		<button type="reset" class="btn btn-theme">취소</button>
-	</form>
+	</div>
 </body>
 </html>

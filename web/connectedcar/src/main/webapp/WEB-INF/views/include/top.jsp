@@ -1,3 +1,5 @@
+<%@page import="java.nio.channels.SeekableByteChannel"%>
+<%@page import="connected.car.owner.OwnerVO"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.Calendar"%>
@@ -44,22 +46,46 @@ li {display:inline-block;}
 </head>
 
 <body>
+
+<!-- 로그인 세션 걸어 줄 로그인유저 정보 정의 -->
+<%
+	OwnerVO loginuser = (OwnerVO)session.getAttribute("loginuser");
+%>
+
+<%
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-mm-dd");
+		Calendar today = Calendar.getInstance();
+		int year = today.get(Calendar.YEAR);
+		int month = today.get(Calendar.MONTH) + 1;
+		int date = today.get(Calendar.DATE);
+		String Dday = Integer.toString(year)+'-'+Integer.toString(month)+'-'+Integer.toString(date);
+	
+	%>
+                
+                
                 
                 <!--  Login Register Area -->
          
 
-	<!-- Fixed navbar -->
 	<div >
 	<div class ="Login">
 	          <ul class ="loginlist" >
+	          <% if(loginuser == null){ %>
                             <li >
-                                <a href="#" >sign in</a>
+                                <a href="/connectedcar/ownerlogin/login.do" >sign in</a>
                             </li>
-                            <li >
-                                <a href="#" >sign out</a>
+                            <% } else {
+                            	session.setAttribute("loginuser", loginuser);
+                            	session.setAttribute("today", Dday);
+                            	session.setAttribute("id", loginuser.getOwner_id());
+                            	session.setAttribute("name", loginuser.getOwner_name());
+                            %>
+                            <li ><span><%= session.getAttribute("name") %>님 환영합니다.&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+                                <a href="/connectedcar/ownerlogin/logout.do" >sign out</a>
                             </li>
+                             <% } %>
                             <li >
-                                <a href="#">sign up</a>
+                                <a href="/connectedcar/ownerlogin/join.do">sign up</a>
                             </li>
              </ul>
 	</div>
@@ -76,19 +102,16 @@ li {display:inline-block;}
 				</button>
 				<a class="navbar-brand" href="index.html">Carnect</a>
 			</div>
-			<div class="navbar-collapse collapse navbar-right">
+			<div class="navbar-collapse collapse navbar-right" style="margin-top: 12px;">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="index.html">HOME</a></li>
-					<li><a href="about.html">ABOUT</a></li>
-					<li><a href="contact.html">CONTACT</a></li>
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown">PAGES <b class="caret"></b></a>
+					<li class="active"><a href="/connectedcar/inventory/inventorymain.do">MAIN</a></li>
+					<li><a href="/connectedcar/inventory/manageList.do">재고관리</a></li>	
+					 <li class="dropdown"><a href="/connectedcar/admin/expendable.do" class="dropdown-toggle"
+						data-toggle="dropdown">MANAGER <b class="caret"></b></a>
 						<ul class="dropdown-menu">
-							<li><a href="blog.html">BLOG</a></li>
-							<li><a href="single-post.html">SINGLE POST</a></li>
-							<li><a href="portfolio.html">PORTFOLIO</a></li>
-							<li><a href="single-project.html">SINGLE PROJECT</a></li>
-						</ul></li>
+							<li><a href="/connectedcar/admin/expendable.do">부품추가 및 삭제</a></li>
+							<li><a href="/connectedcar/admin/member.do">회원 관리</a></li>
+						</ul></li> 
 				</ul>
 			</div>
 			<!--/.nav-collapse -->

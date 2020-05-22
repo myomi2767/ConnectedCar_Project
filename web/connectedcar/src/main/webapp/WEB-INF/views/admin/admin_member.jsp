@@ -39,7 +39,7 @@
 							<td>오늘</td>
 							<td>김정비소</td>
 							<td>성민재</td>
-							<td><a href="#">비고</a></td>
+							<td><a href="#">삭제</a></td>
 						</tr>
 						<%-- <%
 						for (int i = 0; i < list.size(); i++) {

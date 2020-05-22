@@ -32,7 +32,7 @@
 			<div class="col-sm-1"></div>
 			<div class="col-sm-10">
 				<div class="pull-right">
-					<button id="add parts" class="btn btn-primary"
+					<button id="add_parts" class="btn btn-primary"
 						onclick="window.open('expendableAdd.do', '_blank', 'width=500px,height=500px')">부품추가</button>
 				</div>
 			</div>

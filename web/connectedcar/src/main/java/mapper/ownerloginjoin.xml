@@ -15,6 +15,10 @@
 	values(#{owner_id}, #{owner_password}, #{owner_shop}, #{owner_name}, #{owner_phone}, #{owner_regdate})
 	</insert>
 	
+	<select id="idcheck" resultType="ownervo" parameterType="String">
+		select * from repair_shop_user where owner_id = #{owner_id}
+	</select>
+	
 	<!-- <insert id="register">
 		insert into member
 		values(#{member_id}, #{pass},

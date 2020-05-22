@@ -6,6 +6,8 @@ import java.util.List;
 public interface OwnerDAO {
 
 	OwnerVO login(OwnerVO ownerlogin);
-	void join(OwnerVO ownerinfo);
+	int join(OwnerVO ownerinfo);
+	boolean idCheck(String ownerid);
+	
 	
 }

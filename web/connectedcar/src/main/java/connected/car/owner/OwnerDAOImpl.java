@@ -21,9 +21,21 @@ public class OwnerDAOImpl implements OwnerDAO {
 		return data;
 	}
 
+	
+
 	@Override
-	public void join(OwnerVO ownerinfo) {
-		System.out.println("mapper로 갈 ownerinfo:"+ownerinfo);
-		sqlSession.insert("connected.car.ownerlogin.join",ownerinfo);
+	public boolean idCheck(String ownerid) {
+		boolean result = false;
+		OwnerVO user = sqlSession.selectOne("connected.car.ownerlogin.idcheck", ownerid);
+		if(user!=null) {
+			result = true;
+		}
+		return result;
+	}
+
+	@Override
+	public int join(OwnerVO ownerjoin) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("connected.car.ownerlogin.join",ownerjoin );
 	}
 }

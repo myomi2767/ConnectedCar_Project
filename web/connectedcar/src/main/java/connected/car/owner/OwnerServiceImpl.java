@@ -19,6 +19,18 @@ public class OwnerServiceImpl implements OwnerService {
 		return dao.login(ownerlogin);
 	}
 
+	@Override
+	public boolean idCheck(String ownerid) {
+		// TODO Auto-generated method stub
+		return dao.idCheck(ownerid);
+	}
+
+	@Override
+	public int join(OwnerVO ownerjoin) {
+		// TODO Auto-generated method stub
+		return dao.join(ownerjoin);
+	}
+
 
 	
 	
