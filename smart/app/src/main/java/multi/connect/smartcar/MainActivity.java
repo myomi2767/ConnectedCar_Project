@@ -308,7 +308,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 tmapview.setCenterPoint(longitude, latitude);
 
                 //차량 주변 원 따라다니기
-                zoomLev = tmapview.getZoomLevel();
+                /*zoomLev = tmapview.getZoomLevel();
                 tmapview.removeTMapCircle("circle1");
                 tMapPoint = new TMapPoint(location.getLatitude(),location.getLongitude());
                 tMapCircle = new TMapCircle();
@@ -330,7 +330,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 tMapCircle.setLineColor(Color.BLUE);
                 tMapCircle.setAreaColor(Color.GRAY);
                 tMapCircle.setAreaAlpha(100);
-                tmapview.addTMapCircle("circle1", tMapCircle);
+                tmapview.addTMapCircle("circle1", tMapCircle);*/
 
                 if (tMapGpsManager.getLocation().equals(endpoint)){
                     tmapview.removeTMapPath();
