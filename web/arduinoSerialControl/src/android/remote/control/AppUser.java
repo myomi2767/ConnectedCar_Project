@@ -10,8 +10,6 @@ import java.net.Socket;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
-import sun.util.locale.StringTokenIterator;
-
 public class AppUser extends Thread{
 	Socket client;
 	
@@ -34,6 +32,7 @@ public class AppUser extends Thread{
 		super();
 		this.client = client;
 		this.userlist = userlist;
+		ioWork();
 	}
 
 	public void ioWork() {
@@ -67,6 +66,9 @@ public class AppUser extends Thread{
 		st = new StringTokenizer(msg, "/");
 		String protocol = st.nextToken();
 		//차에게 받은 메시지 수행!!
+		if(protocol.equals("user")) {
+			
+		}
 	}
 	
 	public void run() {

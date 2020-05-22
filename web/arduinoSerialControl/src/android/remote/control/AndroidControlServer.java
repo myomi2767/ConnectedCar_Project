@@ -1,6 +1,8 @@
 package android.remote.control;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Vector;
@@ -8,6 +10,7 @@ import java.util.Vector;
 public class AndroidControlServer {
 	ServerSocket server;
 	Socket client;
+	BufferedReader br;
 	Vector<AppUser> userlist = new Vector<AppUser>();
 	Vector<Car> carlist = new Vector<Car>();
 	public static void main(String[] args) {
@@ -33,10 +36,12 @@ public class AndroidControlServer {
 						String ip = client.getInetAddress().getHostAddress();
 						System.out.println(ip+"가 접속\n");
 						//user인지 차인지 판단해야 하는 부분
-						if(client.getInetAddress().getHostName()!=null) {
+						br = new BufferedReader(new InputStreamReader(client.getInputStream()));
+						String msg = br.readLine();
+						if(msg.equals("user")) {
 							AppUser user = new AppUser(client, userlist);
 							user.start();
-						}else {
+						}else if(msg.equals("car")){
 							Car car = new Car(client, carlist);
 							car.start();
 						}
