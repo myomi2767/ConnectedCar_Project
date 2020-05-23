@@ -38,8 +38,9 @@ public class AndroidControlServer {
 						//user인지 차인지 판단해야 하는 부분
 						br = new BufferedReader(new InputStreamReader(client.getInputStream()));
 						String msg = br.readLine();
+						System.out.println("서버가 받은 메시지"+msg);
 						if(msg.equals("user")) {
-							AppUser user = new AppUser(client, userlist);
+							AppUser user = new AppUser(client, userlist, carlist);
 							user.start();
 						}else if(msg.equals("car")){
 							Car car = new Car(client, carlist);

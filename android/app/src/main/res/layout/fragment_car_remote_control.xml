@@ -22,9 +22,9 @@
                 android:id="@+id/powerOff"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:textOn=""
+                android:background="@drawable/poweroff"
                 android:textOff=""
-                android:background="@drawable/poweroff"/>
+                android:textOn="" />
 
         <TextView
             android:layout_width="match_parent"
