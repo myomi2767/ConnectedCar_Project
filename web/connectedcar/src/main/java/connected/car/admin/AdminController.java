@@ -26,7 +26,7 @@ public class AdminController {
 		return "admin/memberManage";
 	}
 	
-	//부품 추가, 삭제 관리자 페이지
+	
 	@RequestMapping(value = "/admin/expendable.do", method = RequestMethod.GET)
 	public String expendableView() {
 		return "admin/expendableManage";
