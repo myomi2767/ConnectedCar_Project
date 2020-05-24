@@ -4,7 +4,17 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="connected.car.expendable">
-	<select id="findExpendInfo" parameterType="Map" resultType="expendvo">
+	<select id="findExpendInfo" parameterType="Map" resultType="expendablevo">
 		select * from expendable where expend_code = #{expend_code} and expend_brand = #{expend_brand}
 	</select>
+	
+	<select id="findShopExpendList" parameterType="Map" resultType="shopexpendvo">
+		select s.shop_expend_date, s.shop_expend_count, e.* 
+		from shop_expendable s, expendable e
+		where s.expend_id = e.expend_id and s.shop_id = #{shop_id}
+	</select>
+	
+	<insert id="insertShopExpend" parameterType="Map">
+		insert into shop_expendable values(#{shop_id}, #{expend_id}, sysdate, #{shop_expend_count})
+	</insert>
 </mapper>

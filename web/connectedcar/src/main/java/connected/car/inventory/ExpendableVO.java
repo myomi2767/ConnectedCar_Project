@@ -13,6 +13,12 @@ public class ExpendableVO {
 		
 	}
 	
+	public ExpendableVO(String expend_code, String expend_brand) {
+		super();
+		this.expend_code = expend_code;
+		this.expend_brand = expend_brand;
+	}
+	
 	public ExpendableVO(String expend_code, String expend_type, String expend_name, String expend_price,
 			String expend_brand, String car_model_name) {
 		super();
