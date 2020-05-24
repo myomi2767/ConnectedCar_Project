@@ -21,17 +21,14 @@ import org.springframework.web.servlet.ModelAndView;
 import connected.car.inventory.ExpendableVO;
 import connected.car.shop.AddressVO;
 
+//admin의 전체 회원 정보확인 기능은 connected.car.owner패키지에 작성
+
 @Controller
 public class AdminController {
 	@Autowired
 	AdminService service;
 	
 	
-	//회원 확인, 삭제 관리자 페이지
-	@RequestMapping(value = "/admin/member.do", method = RequestMethod.GET)
-	public String memberView() {
-		return "admin/memberManage";
-	}
 	
 	//부품 관리, 삭제 관리자 페이지
 	@RequestMapping(value = "/admin/expendable.do", method = RequestMethod.GET)

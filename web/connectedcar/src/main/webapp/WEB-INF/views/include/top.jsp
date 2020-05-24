@@ -110,7 +110,7 @@ li {display:inline-block;}
 						data-toggle="dropdown">MANAGER <b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li><a href="/connectedcar/admin/expendable.do">부품추가 및 삭제</a></li>
-							<li><a href="/connectedcar/admin/member.do">회원 관리</a></li>
+							<li><a href="/connectedcar/admin/memberlist.do">회원 관리</a></li>
 						</ul></li> 
 				</ul>
 			</div>

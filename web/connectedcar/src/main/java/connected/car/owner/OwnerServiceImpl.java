@@ -31,6 +31,20 @@ public class OwnerServiceImpl implements OwnerService {
 		return dao.join(ownerjoin);
 	}
 
+	
+	//==================관리자의 회원관리==========================
+	@Override
+	public List<OwnerVO> admin_ownerlist() {
+		// TODO Auto-generated method stub
+		return dao.admin_ownerlist();
+	}
+
+	@Override
+	public int admin_ownerdelete(OwnerVO owner_id) {
+		// TODO Auto-generated method stub
+		return dao.admin_ownerdelete(owner_id);
+	}
+
 
 	
 	

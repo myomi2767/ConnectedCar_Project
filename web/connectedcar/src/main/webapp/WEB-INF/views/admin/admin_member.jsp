@@ -1,3 +1,5 @@
+<%@page import="connected.car.owner.OwnerVO"%>
+<%@page import="java.util.ArrayList"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="false"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -13,6 +15,10 @@
 </head>
 
 <body>
+<%
+		ArrayList<OwnerVO> ownerlist = (ArrayList<OwnerVO>) request.getAttribute("admin_ownerlist");
+	%>
+
 	<div class="container mtb">
 		<div class="row">
 			<div class="col-lg-8 col-lg-offset-1">
@@ -26,34 +32,33 @@
 				<table id="table_managementList" class="type01">
 					<thead>
 						<tr style="font-weight: bold;">
+							<th scope="col">아이디</th>
 							<th scope="col">이름</th>
 							<th scope="col">가입날짜</th>
+							<th scope="col">전화번호</th>
 							<th scope="col">정비소</th>
-							<th scope="col">이름</th>
-							<th scope="col">비고</th>
+							<th scope="col">관리</th>
 						</tr>
 					</thead>
 					<tbody>
+						<%
+							for (int i = 0; i < ownerlist.size(); i++) {
+								OwnerVO row = ownerlist.get(i);
+						%>
+					
 						<tr>
-							<td>김매니저</td>
-							<td>오늘</td>
-							<td>김정비소</td>
-							<td>성민재</td>
-							<td><a href="#">삭제</a></td>
+							<td><%=row.getOwner_id() %></td>
+							<td><%=row.getOwner_name() %></td>
+							<td><%=row.getOwner_regdate()%></td>
+							<td><%=row.getOwner_phone()%></td>
+							<td><%=row.getShop_id() %></td>
+							<td><a href="/connectedcar/admin/admin_ownerdelete.do?owner_id=<%=row.getOwner_id()%>" onclick="alert('삭제되었습니다.');">삭제</a></td>
 						</tr>
-						<%-- <%
-						for (int i = 0; i < list.size(); i++) {
-							BoardVO row = list.get(i);
-					%>
-					<tr>
-					<td><%=row.getMember_id()%></td>
-						<td><a href="/maeggiSeggi/board/read.do?askno=<%=row.getAskno()%>"><%=row.getAsk_title()%></a></td>
-						<td><%=row.getAsk_regdate()%></td>
-					</tr>
 					<%
-						}
-					%> --%>
+							}
+						%>
 					</tbody>
+					
 				</table>
 			</div>
 			<div class="col-sm-1"></div>

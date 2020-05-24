@@ -9,5 +9,8 @@ public interface OwnerDAO {
 	int join(OwnerVO ownerinfo);
 	boolean idCheck(String ownerid);
 	
+	List<OwnerVO> admin_ownerlist();
+	int admin_ownerdelete(OwnerVO owner_id);
+	
 	
 }

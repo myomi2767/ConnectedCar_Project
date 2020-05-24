@@ -27,6 +27,21 @@
 	<select id="idCheck" resultType="member" parameterType="String">
 		select * from member where member_id = #{member_id}
 	</select> -->
+	
+	
+	<!-- ==================관리자 컨트롤러 ============================ -->
+	<!-- 관리자가 회원 전체 보기 -->
+	<select id="admin_ownerlist" resultType="ownervo"
+		parameterType="ownervo">
+		select * from repair_shop_user where owner_id not in ('admin') order by owner_regdate desc
+
+	</select>
+	
+	
+	<delete id="admin_ownerdelete" parameterType="String">
+		delete from repair_shop_user where
+		owner_id= #{owner_id}
+	</delete>
 
 
 </mapper>
