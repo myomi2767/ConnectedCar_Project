@@ -3,14 +3,19 @@ package connected.car.inventory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class InventoryController {
 
 	//재고관리 리스트 페이지
 	@RequestMapping(value = "/inventory/manageList.do", method = RequestMethod.GET)
-	public String manageView() {
-		return "inventory/inventoryManagement";
+	public ModelAndView manageView() {
+		ModelAndView mav = new ModelAndView();
+		
+		
+		mav.setViewName("inventory/inventoryManagement");
+		return mav;
 	}
 
 	//재고관리 메인화면
@@ -40,7 +45,7 @@ public class InventoryController {
 	@RequestMapping(value = "/inventory/expendableAdd.do", method = RequestMethod.GET)
 	public String expendableAdd() {
 		return "inventory/expendableAdd";
-	}
+	}	
 		
 	
 }

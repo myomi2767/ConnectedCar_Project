@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="connected.car.expendable">
+	<select id="findExpendInfo" parameterType="Map" resultType="expendvo">
+		select * from expendable where expend_code = #{expend_code} and expend_brand = #{expend_brand}
+	</select>
+</mapper>
