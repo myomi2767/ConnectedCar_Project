@@ -2,6 +2,7 @@
 <%@ page session="false"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -46,11 +47,11 @@
 				<table id="table_managementList" class="type01">
 					<thead>
 						<tr style="font-weight: bold;">
-							<th scope="col">최근 입고일</th>
-							<th scope="col">부품코드</th>
+							<th scope="col">최근 수정일</th>
+							<th scope="col">부품 코드</th>
 							<th scope="col">종류</th>
 							<th scope="col">제조사</th>
-							<th scope="col">모델이름</th>
+							<th scope="col">모델 이름</th>
 							<th scope="col">개수</th>
 							<th scope="col">가격</th>
 							<th scope="col">관리</th>
@@ -58,15 +59,17 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td>오늘</td>
-							<td>AA001</td>
-							<td>브레이크 패드</td>
-							<td>현대</td>
-							<td>그랜져</td>
-							<td>5</td>
-							<td>15000</td>
+						<c:forEach items="${expendList}" var="expend">
+							<td>${expend.shop_expend_date}</td>
+							<td>${expend.expend_code}</td>
+							<td>${expend.expend_type}</td>
+							<td>${expend.expend_brand}</td>
+							<td>${expend.car_model_name}</td>
+							<td>${expend.shop_expend_count}</td>
+							<td>${expend.expend_price}</td>
 							<td><a
 								onclick="window.open('manageDetail.do', '_blank', 'width=800px,height=500px')">관리</a></td>
+						</c:forEach>
 						</tr>
 						<%-- <%
 						for (int i = 0; i < list.size(); i++) {

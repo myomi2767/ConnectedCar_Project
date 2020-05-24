@@ -11,6 +11,7 @@
 		<div class="col-lg-8 col-lg-offset-2">
 			<h4>부품 추가</h4>
 			<form role="form-horizontal">
+				<input type="text" name="expend_id" value="" style="display: none;"/>
 				<label for="">제조사 : </label>
 				<div class="btn-group btn-group-toggle" data-toggle="buttons" style="">
 					<label class="btn btn-secondary" for="model1">
@@ -44,7 +45,7 @@
 				</div>
 				<div class="form-group">
 				    <label for="InputSubject1">개수 :</label>
-				    <input type="number" class="form-control col-10" id="">
+				    <input name="shop_expend_count" type="number" class="form-control col-10" id="">
 				</div>
 				
 				<button type="submit" class="btn btn-theme">추가</button>
@@ -71,6 +72,7 @@
 					success: function(data) {
 						if(data.length == undefined) {
 							//alert(data.expend_type);
+							$("input[name=expend_id]").val(data.expend_id);
 							$("input[name=expend_name]").val(data.expend_name);
 							$("input[name=expend_type]").val(data.expend_type);
 							$("input[name=expend_price]").val(data.expend_price);
