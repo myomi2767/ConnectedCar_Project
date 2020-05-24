@@ -36,7 +36,7 @@ public class CarRemoteControl extends Fragment {
 
     OutputStream os;
     PrintWriter pw;
-
+    String id;
 
     public CarRemoteControl() {
         // Required empty public constructor
@@ -48,8 +48,7 @@ public class CarRemoteControl extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_car_remote_control, container, false);
-        asyncTaskPower = new AsyncTaskPower();
-        asyncTaskPower.execute();
+        id= "11111";
 
         powerOff = view.findViewById(R.id.powerOff);
         powerOff.setOnClickListener(new View.OnClickListener() {
@@ -64,6 +63,9 @@ public class CarRemoteControl extends Fragment {
                 }
             }
         });
+
+        asyncTaskPower = new AsyncTaskPower();
+        asyncTaskPower.execute();
         return view;
     }
     public void send_msg(final View view){
@@ -71,12 +73,10 @@ public class CarRemoteControl extends Fragment {
             String message = "";
             @Override
             public void run() {
-                //if(view.getBackground().getCurrent() == powerOff.getResources().getDrawable(R.drawable.poweron)){
-                    message = "user/car/engineStart";
-               // }else{
-                //    message = "user/car/engineStop";
-                //}
-                pw.println(message);
+                if(view.getId()==R.id.powerOff){
+                    message = "engineStart";
+                }
+                pw.println("job:"+message+":phone:"+id);
                 pw.flush();
             }
         }).start();
@@ -85,21 +85,30 @@ public class CarRemoteControl extends Fragment {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                socket = new Socket("70.12.227.61", 12345);
+                socket = new Socket("172.30.1.48", 12345);
                 if(socket != null){
                     ioWork();
                 }
-                pw.println("user");
-
                 Thread t1 = new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        String msg;
-                        try {
-                            msg = br.readLine();
-                            Log.d("remote", "서버로부터 수신된 메시지>>"+msg);
-                        } catch (IOException e) {
-                            e.printStackTrace();
+                        while(true) {
+                            String msg;
+                            try {
+                                msg = br.readLine();
+                                Log.d("remote", "서버로부터 수신된 메시지>>" + msg);
+                            } catch (IOException e) {
+                                try {
+                                    is.close();
+                                    isr.close();
+                                    br.close();
+                                    os.close();
+                                    socket.close();
+                                } catch (IOException ex) {
+                                    ex.printStackTrace();
+                                }
+                                break;
+                            }
                         }
                     }
                 });
@@ -118,6 +127,9 @@ public class CarRemoteControl extends Fragment {
 
                 os = socket.getOutputStream();
                 pw = new PrintWriter(os, true);
+                pw.println("phone:"+id);
+                pw.flush();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -128,7 +140,9 @@ public class CarRemoteControl extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         try {
-            socket.close();
+            if(socket!=null) {
+                socket.close();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

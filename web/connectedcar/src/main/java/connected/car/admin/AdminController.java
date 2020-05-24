@@ -8,32 +8,50 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.List;
 
 import org.json.simple.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import connected.car.inventory.ExpendableVO;
 import connected.car.shop.AddressVO;
 
 //admin의 전체 회원 정보확인 기능은 connected.car.owner패키지에 작성
 
 @Controller
 public class AdminController {
-
+	@Autowired
+	AdminService service;
 	
 	
 	
+	//부품 관리, 삭제 관리자 페이지
 	@RequestMapping(value = "/admin/expendable.do", method = RequestMethod.GET)
-	public String expendableView() {
-		return "admin/expendableManage";
+	public ModelAndView expendableView() {
+		ModelAndView mav = new ModelAndView();
+		List<ExpendableVO> list = service.listAll();
+		System.out.println("결과"+list);
+		mav.addObject("expendList", list);
+		mav.setViewName("admin/expendableManage");
+		return mav;
 	}
 	
-	//부품 추가, 삭제 관리자 페이지
+	//부품 추가
 	@RequestMapping(value = "/admin/adminexpendableAdd.do", method = RequestMethod.GET)
 	public String managerexpendableAdd() {
 		return "admin/adminexpendableAdd";
+	}
+	
+	//추가 버튼 클릭 시, 부품 추가
+	@RequestMapping(value = "/admin/adminexpendableAdd.do", method = RequestMethod.POST)
+	public void expendableAdd(ExpendableVO expendableVO) {
+		System.out.println("***컨트롤러 받은 값:"+expendableVO);
+		service.expendableAdd(expendableVO);
 	}
 	
 	//정비소 추가

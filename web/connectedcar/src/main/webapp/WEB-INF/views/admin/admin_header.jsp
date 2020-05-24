@@ -21,6 +21,7 @@
 <link href="/connectedcar/common/css/font-awesome.min.css" rel="stylesheet">
 
 <script src="/connectedcar/common/js/modernizr.js"></script>
+<script src="/connectedcar/common/js/jquery-3.2.1.min.js"></script>
 </head>
 <body>
 	<div class="container">
