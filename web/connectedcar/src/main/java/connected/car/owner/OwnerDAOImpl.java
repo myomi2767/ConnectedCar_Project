@@ -38,4 +38,20 @@ public class OwnerDAOImpl implements OwnerDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.insert("connected.car.ownerlogin.join",ownerjoin );
 	}
+
+
+
+	@Override
+	public List<OwnerVO> admin_ownerlist() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("connected.car.ownerlogin.admin_ownerlist");
+	}
+
+
+
+	@Override
+	public int admin_ownerdelete(OwnerVO owner_id) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("connected.car.ownerlogin.admin_ownerdelete",owner_id);
+	}
 }
