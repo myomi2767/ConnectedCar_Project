@@ -15,7 +15,7 @@
 </head>
 
 <body>
-<%
+	<%
 		ArrayList<OwnerVO> ownerlist = (ArrayList<OwnerVO>) request.getAttribute("admin_ownerlist");
 	%>
 
@@ -29,6 +29,8 @@
 			<div class="col-sm-1"></div>
 			<div id="management" class="col-sm-10"
 				style="padding-top: 10px; padding-left: 20px;">
+
+
 				<table id="table_managementList" class="type01">
 					<thead>
 						<tr style="font-weight: bold;">
@@ -41,28 +43,34 @@
 						</tr>
 					</thead>
 					<tbody>
+					
 						<%
 							for (int i = 0; i < ownerlist.size(); i++) {
 								OwnerVO row = ownerlist.get(i);
 						%>
-					
+						
+						
+						
 						<tr>
-							<td><%=row.getOwner_id() %></td>
-							<td><%=row.getOwner_name() %></td>
+							<td><%=row.getOwner_id()%></td>
+							<td><%=row.getOwner_name()%></td>
 							<td><%=row.getOwner_regdate()%></td>
 							<td><%=row.getOwner_phone()%></td>
-							<td><%=row.getShop_id() %></td>
-							<td><a href="/connectedcar/admin/admin_ownerdelete.do?owner_id=<%=row.getOwner_id()%>" onclick="alert('삭제되었습니다.');">삭제</a></td>
+							<td><%=row.getShop_id()%></td>
+							<td><a href="">삭제</a></td>
 						</tr>
-					<%
+					
+						<%
 							}
 						%>
 					</tbody>
-					
+
 				</table>
+
 			</div>
 			<div class="col-sm-1"></div>
 		</div>
 	</div>
 </body>
+
 </html>
