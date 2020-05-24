@@ -21,17 +21,20 @@
 	
 	<!--================ 정비소 업주의 회원가입 및 정비소 등록 시작 ==================-->
 	
-	<insert id="ownerjoin">
-		insert into repair_shop_user(owner_id, owner_name, owner_phone, owner_password, owner_regdate)
-		values(#{owner_id}, #{owner_name}, #{owner_phone}, #{owner_password},sysdate)
+	<insert id="shopjoin">
+	insert into repair_shop(shop_id, shop_name, shop_phone, shop_location)
+		values(shop_seq.nextval, #{shop_name}, #{shop_phone}, #{shop_location})
 	</insert>
 	
-	<insert id="shopjoin">
-	insert into repair_shop(shop_id, shop_name, shop_phone, owner_id, shop_location)
-		values(shop_seq.nextval, #{shop_name}, #{shop_phone}, #{owner_id},#{shop_location})
+	<insert id="ownerjoin">
+		insert into repair_shop_user(owner_id, owner_name, owner_phone, owner_password, owner_regdate, shop_id)
+		values(#{owner_id}, #{owner_name}, #{owner_phone}, #{owner_password},sysdate, shop_seq.currval)
 	</insert>
 	
 	<!--================ 정비소 업주의 회원가입 및 정비소 등록 끝 ==================-->
+
+
+
 
 	<select id="idCheck" resultType="ownervo" parameterType="String">
 		select * from repair_shop_user where owner_id = #{owner_id}

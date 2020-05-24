@@ -73,8 +73,8 @@ public class OwnerloginandjoinController {
 	public String join(OwnerVO owner, ShopinfoVO shopinfo) {
 		System.out.println("회원가입창에서 넘어온 정보(owner):" + owner);
 		System.out.println("회원가입창에서 넘어온 정보(shop):" + shopinfo);
-		service.join(owner);
 		service.joinshop(shopinfo);
+		service.join(owner);
 		return "redirect:/ownerlogin/login.do";
 	}
 
