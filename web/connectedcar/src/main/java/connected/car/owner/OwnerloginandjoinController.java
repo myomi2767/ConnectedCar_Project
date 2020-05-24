@@ -83,7 +83,7 @@ public class OwnerloginandjoinController {
 		boolean state = service.idCheck(owner_id);
 		String result = "";
 		if (state) {
-			result = "사용 불가능한 아이디";
+			result = "아이디 중복 : 사용 불가능한 아이디";
 		} else {
 			result = "사용 가능한 아이디";
 		}
