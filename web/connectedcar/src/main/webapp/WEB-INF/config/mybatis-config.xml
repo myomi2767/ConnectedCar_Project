@@ -11,11 +11,14 @@
  	<typeAliases>
 		<typeAlias type="connected.car.owner.OwnerVO" alias="ownervo" />
 		<typeAlias type="connected.car.expendable.ExpendableVO" alias="expendvo"/>
+		<typeAlias type="connected.car.inventory.ExpendableVO" alias="expendablevo"/>
+		<typeAlias type="connected.car.owner.ShopinfoVO" alias="shopinfovo" />
 		
 	</typeAliases>
 	<mappers>
 		<mapper resource="mapper/ownerloginjoin.xml" />	
 		<mapper resource="mapper/member.xml"/>
+		<mapper resource="mapper/admin.xml"/>
 		<mapper resource="mapper/expendable.xml"/>
 	</mappers>
 </configuration>

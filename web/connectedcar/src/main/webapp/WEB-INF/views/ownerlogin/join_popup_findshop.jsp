@@ -14,6 +14,21 @@
 .btn btn-default {
 	display: inline-block;
 }
+
+
+.join_form{
+	margin-bottom : 20px;
+	maring-top : 20px;
+}
+
+#submitfrompopup{
+	margin-bottom : 20px;
+	maring-top : 20px;
+	margin-left: auto;
+	margin-right: auto;
+
+}
+
 </style>
 
 </head>
@@ -90,33 +105,36 @@
 				</tr>
 
 			</table>
-
+			
+		
 
 <!-- 위에서 선택한 정보가, 밑에 적힌다.  -->
 <!-- 선택한 정보가 없을 경우, 직접 적어줘야 한다. -->
 
-			<div class="btn-group btn-group-toggle" data-toggle="buttons"
-				style="">
+			<div>
+			
+			<p> ** 찾는 정비소가 없는 경우, 직접 정비소 정보를 입력해주세요! ** <p>
 
-				<div class="address_find_form">
-					<input type="text" class="form-control" id="shop_address"
+				<div class="join_form">
+					<label for="pwd">정비소이름 :</label> <input type="text" class="form-control" id="shop_address"
 						name="address_do" placeholder="예)서울특별시 강남구 테헤란로">
 				</div>
 
-				<div class="address_find_form">
-					<input type="text" class="form-control" id="shop_name"
+				<div class="join_form">
+						<label for="pwd">정비소 위치 :</label>  <input type="text" class="form-control" id="shop_name"
 						name="address_si" placeholder="예)멀캠정비소">
 				</div>
 
-				<div class="address_find_form">
-					<input type="text" class="form-control" id="shop_phone"
+				<div class="join_form">
+					<label for="pwd">정비소 전화번호 :</label> <input type="text" class="form-control" id="shop_phone"
 						name="address_gu" placeholder="예)020001111">
 				</div>
 
 			</div>
+			<br>
 
 			<!-- 확인 버튼 누르면 팝업 닫히면 팝업 꺼지면서 회원가입 창에 정보가 적힌다.  -->
-			<button type="confirm" class="btn btn-default" id="search">확인</button>
+			<button type="confirm" class="btn btn-default" id="submitfrompopup">확인</button>
 
 			<br>
 

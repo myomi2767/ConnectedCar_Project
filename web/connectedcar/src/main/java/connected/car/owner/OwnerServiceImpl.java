@@ -25,11 +25,37 @@ public class OwnerServiceImpl implements OwnerService {
 		return dao.idCheck(ownerid);
 	}
 
+	
+	//==================회원가입======================
 	@Override
 	public int join(OwnerVO ownerjoin) {
 		// TODO Auto-generated method stub
 		return dao.join(ownerjoin);
 	}
+
+	@Override
+	public int joinshop(ShopinfoVO shopjoin) {
+		// TODO Auto-generated method stub
+		return dao.joinshop(shopjoin);
+	}
+
+	
+	
+	//==================관리자의 회원관리==========================
+	@Override
+	public List<OwnerVO> admin_ownerlist() {
+		// TODO Auto-generated method stub
+		return dao.admin_ownerlist();
+	}
+	
+
+
+	@Override
+	public int admin_ownerdelete(OwnerVO owner_id) {
+		// TODO Auto-generated method stub
+		return dao.admin_ownerdelete(owner_id);
+	}
+	
 
 
 	
