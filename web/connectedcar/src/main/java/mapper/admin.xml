@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="connected.car.admin">
+	<insert id="insertExpendable">
+		insert into expendable values(expend_seq.NEXTVAL, #{expend_code}, #{expend_type}, #{expend_name}, #{expend_price}, #{expend_brand}, #{car_model_name})
+	</insert>
+	
+	<select id="listAll" resultType="expendablevo">
+		select * from expendable
+	</select>
+</mapper>

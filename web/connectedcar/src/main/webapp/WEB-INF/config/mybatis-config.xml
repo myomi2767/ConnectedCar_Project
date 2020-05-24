@@ -10,10 +10,11 @@
 	</settings>
  	<typeAliases>
 		<typeAlias type="connected.car.owner.OwnerVO" alias="ownervo" />
-		
+		<typeAlias type="connected.car.inventory.ExpendableVO" alias="expendablevo"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mapper/ownerloginjoin.xml" />	
 		<mapper resource="mapper/member.xml"/>
+		<mapper resource="mapper/admin.xml"/>
 	</mappers>
 </configuration>
