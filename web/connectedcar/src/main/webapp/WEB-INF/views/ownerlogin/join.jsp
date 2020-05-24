@@ -183,10 +183,12 @@
 						onclick="window.open('joinshoppopup.do', '_blank', 'width=1000px,height=1000px')">내 정비소 찾기</button>
 				</div>
 				
+				<br>
+				
 				
 				<div class="join_form">
 					<label for="pwd">정비소이름 :</label> <input type="text"
-						class="form-control" id="expend_name" name="expend_name" placeholder="name">
+						class="form-control" id="shop_name" name="shop_name" placeholder="name">
 				</div>
 				
 				<div class="join_form">

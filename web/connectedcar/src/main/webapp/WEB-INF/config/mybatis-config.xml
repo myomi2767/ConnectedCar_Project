@@ -11,6 +11,8 @@
  	<typeAliases>
 		<typeAlias type="connected.car.owner.OwnerVO" alias="ownervo" />
 		
+		<typeAlias type="connected.car.owner.ShopinfoVO" alias="shopinfovo" />
+		
 	</typeAliases>
 	<mappers>
 		<mapper resource="mapper/ownerloginjoin.xml" />	

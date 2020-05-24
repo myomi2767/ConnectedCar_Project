@@ -7,6 +7,8 @@ public interface OwnerDAO {
 
 	OwnerVO login(OwnerVO ownerlogin);
 	int join(OwnerVO ownerinfo);
+	int joinshop(ShopinfoVO shopinfo);
+	
 	boolean idCheck(String ownerid);
 	
 	List<OwnerVO> admin_ownerlist();

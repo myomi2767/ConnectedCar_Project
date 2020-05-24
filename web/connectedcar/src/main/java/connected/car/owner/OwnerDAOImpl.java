@@ -36,7 +36,12 @@ public class OwnerDAOImpl implements OwnerDAO {
 	@Override
 	public int join(OwnerVO ownerjoin) {
 		// TODO Auto-generated method stub
-		return sqlSession.insert("connected.car.ownerlogin.join",ownerjoin );
+		return sqlSession.insert("connected.car.ownerlogin.ownerjoin",ownerjoin );
+	}
+	@Override
+	public int joinshop(ShopinfoVO shopinfojoin) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("connected.car.ownerlogin.shopjoin",shopinfojoin);
 	}
 
 
@@ -54,4 +59,8 @@ public class OwnerDAOImpl implements OwnerDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.delete("connected.car.ownerlogin.admin_ownerdelete",owner_id);
 	}
+
+
+
+
 }
