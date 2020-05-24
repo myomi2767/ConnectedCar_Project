@@ -36,7 +36,7 @@ public class JoinAsync extends AsyncTask<MemberVO, Void, Integer> {
         int result = 0;
 
         try {
-            URL url = new URL("http://192.168.43.175:8088/connectedcar/member/join.do");
+            URL url = new URL("http://172.30.1.6:8088/connectedcar/member/join.do");
             Gson gson = new Gson();
             String sVo = gson.toJson(vo[0]);
 
