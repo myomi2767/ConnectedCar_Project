@@ -74,8 +74,8 @@ public class OwnerloginandjoinController {
 	public String join(OwnerVO owner, ShopinfoVO shopinfo) {
 		System.out.println("회원가입창에서 넘어온 정보(owner):" + owner);
 		System.out.println("회원가입창에서 넘어온 정보(shop):" + shopinfo);
-		service.join(owner);
 		service.joinshop(shopinfo);
+		service.join(owner);
 		return "redirect:/ownerlogin/login.do";
 	}
 
@@ -84,7 +84,7 @@ public class OwnerloginandjoinController {
 		boolean state = service.idCheck(owner_id);
 		String result = "";
 		if (state) {
-			result = "사용 불가능한 아이디";
+			result = "아이디 중복 : 사용 불가능한 아이디";
 		} else {
 			result = "사용 가능한 아이디";
 		}

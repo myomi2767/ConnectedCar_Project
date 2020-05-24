@@ -36,7 +36,7 @@
 							<th scope="col">이름</th>
 							<th scope="col">가입날짜</th>
 							<th scope="col">전화번호</th>
-							<th scope="col">정비소</th>
+							<th scope="col">정비소 코드</th>
 							<th scope="col">관리</th>
 						</tr>
 					</thead>
