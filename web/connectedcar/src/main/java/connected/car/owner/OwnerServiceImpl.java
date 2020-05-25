@@ -55,6 +55,12 @@ public class OwnerServiceImpl implements OwnerService {
 		// TODO Auto-generated method stub
 		return dao.admin_ownerdelete(owner_id);
 	}
+
+	@Override
+	public ShopinfoVO admin_popupview(String shop_id) {
+		// TODO Auto-generated method stub
+		return dao.admin_popupview(shop_id);
+	}
 	
 
 

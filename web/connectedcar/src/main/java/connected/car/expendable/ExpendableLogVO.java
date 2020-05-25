@@ -5,7 +5,7 @@ public class ExpendableLogVO {
 	private String expend_id;
 	private String in_out_date;
 	private String in_out_code;
-	private String expend_count;
+	private int expend_count;
 	
 	public ExpendableLogVO() {
 		// TODO Auto-generated constructor stub
@@ -17,8 +17,16 @@ public class ExpendableLogVO {
 		this.expend_id = expend_id;
 	}
 
+	public ExpendableLogVO(String shop_id, String expend_id, String in_out_code, int expend_count) {
+		super();
+		this.shop_id = shop_id;
+		this.expend_id = expend_id;
+		this.in_out_code = in_out_code;
+		this.expend_count = expend_count;
+	}
+
 	public ExpendableLogVO(String shop_id, String expend_id, String in_out_date, String in_out_code,
-			String expend_count) {
+			int expend_count) {
 		super();
 		this.shop_id = shop_id;
 		this.expend_id = expend_id;
@@ -59,11 +67,11 @@ public class ExpendableLogVO {
 		this.in_out_code = in_out_code;
 	}
 
-	public String getExpend_count() {
+	public int getExpend_count() {
 		return expend_count;
 	}
 
-	public void setExpend_count(String expend_count) {
+	public void setExpend_count(int expend_count) {
 		this.expend_count = expend_count;
 	}
 
