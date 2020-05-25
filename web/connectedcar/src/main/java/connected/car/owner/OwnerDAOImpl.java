@@ -62,5 +62,13 @@ public class OwnerDAOImpl implements OwnerDAO {
 
 
 
+	@Override
+	public ShopinfoVO admin_popupview(String shop_id) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("connected.car.ownerlogin.admin_popupview",shop_id);
+	}
+
+
+
 
 }
