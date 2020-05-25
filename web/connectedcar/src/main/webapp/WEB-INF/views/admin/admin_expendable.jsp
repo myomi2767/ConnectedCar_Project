@@ -72,7 +72,12 @@
 							<td><%= eVo.getExpend_price() %></td>
 							<td><%= eVo.getExpend_brand() %></td>
 							<td><%= eVo.getCar_model_name() %></td>
-							<td><a href="#">삭제</a></td>
+							<td>
+								<form action="/connectedcar/admin/expendableDelete.do" method="POST">
+									<input type="hidden" name="expend_id" value="<%= eVo.getExpend_id()%>">
+									<button type="submit" id="submit_btn" class="btn btn-theme">삭제</button>
+								</form>
+							</td>
 						</tr>
 					<% } %>
 						<%-- <%

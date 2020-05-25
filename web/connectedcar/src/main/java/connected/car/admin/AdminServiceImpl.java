@@ -25,5 +25,10 @@ public class AdminServiceImpl implements AdminService {
 		return dao.listAll();
 	}
 
+	@Override
+	public int expendableDelete(String expend_id) {
+		return dao.expendableDelete(expend_id);
+	}
+
 
 }

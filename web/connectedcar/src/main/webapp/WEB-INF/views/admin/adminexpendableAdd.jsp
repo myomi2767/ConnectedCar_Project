@@ -44,7 +44,7 @@
 <script>
     $("#submit_btn").click(function(){
     	//팝업 닫으면서 부모창 reload하는 법
-    	//window.opener.
+	  	opener.parent.location.reload();
     	//팝업 닫기
     	self.close();
     });

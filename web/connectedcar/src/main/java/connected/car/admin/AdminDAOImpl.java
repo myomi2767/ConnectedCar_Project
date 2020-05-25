@@ -25,4 +25,10 @@ public class AdminDAOImpl implements AdminDAO {
 		return list;
 	}
 
+	@Override
+	public int expendableDelete(String expend_id) {
+		System.out.println("DAO:"+expend_id);
+		return sqlsession.delete("connected.car.admin.deleteExpendable", expend_id);
+	}
+
 }

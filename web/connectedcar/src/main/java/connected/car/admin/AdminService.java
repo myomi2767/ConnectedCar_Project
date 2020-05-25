@@ -7,4 +7,5 @@ import connected.car.inventory.ExpendableVO;
 public interface AdminService {
 	int expendableAdd(ExpendableVO expendableVO);
 	List<ExpendableVO> listAll();
+	int expendableDelete(String expend_id);
 }

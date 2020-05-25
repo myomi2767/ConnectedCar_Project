@@ -28,8 +28,6 @@ public class AdminController {
 	@Autowired
 	AdminService service;
 	
-	
-	
 	//부품 관리, 삭제 관리자 페이지
 	@RequestMapping(value = "/admin/expendable.do", method = RequestMethod.GET)
 	public ModelAndView expendableView() {
@@ -41,13 +39,21 @@ public class AdminController {
 		return mav;
 	}
 	
-	//부품 추가
+	//부품삭제 - 개별삭제
+	@RequestMapping(value="/admin/expendableDelete.do", method = RequestMethod.POST)
+	public String expendableDelte(String expend_id) {
+		System.out.println("들어온 id값:"+expend_id);
+		service.expendableDelete(expend_id);
+		return "redirect:/admin/expendable.do";
+	}
+	
+	//부품 추가 - 홈페이지 view 표현
 	@RequestMapping(value = "/admin/adminexpendableAdd.do", method = RequestMethod.GET)
 	public String managerexpendableAdd() {
 		return "admin/adminexpendableAdd";
 	}
 	
-	//추가 버튼 클릭 시, 부품 추가
+	//부품 추가 - DB insert
 	@RequestMapping(value = "/admin/adminexpendableAdd.do", method = RequestMethod.POST)
 	public void expendableAdd(ExpendableVO expendableVO) {
 		System.out.println("***컨트롤러 받은 값:"+expendableVO);
