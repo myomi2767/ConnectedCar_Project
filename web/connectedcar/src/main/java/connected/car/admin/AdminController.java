@@ -45,9 +45,9 @@ public class AdminController {
 			cntPerPage = "5";
 		}
 		pagination = new Pagination(listCnt, Integer.parseInt(curPage), Integer.parseInt(cntPerPage));
-		System.out.println(pagination);
+		//System.out.println(pagination);
 		List<ExpendableVO> list = service.listAll(pagination);
-		System.out.println("결과"+list);
+		//System.out.println("결과"+list);
 		mav.addObject("paging", pagination);
 		mav.addObject("expendList", list);
 		mav.setViewName("admin/expendableManage");
@@ -57,7 +57,7 @@ public class AdminController {
 	//부품삭제 - 개별삭제
 	@RequestMapping(value="/admin/expendableDelete.do", method = RequestMethod.POST)
 	public String expendableDelte(String expend_id) {
-		System.out.println("들어온 id값:"+expend_id);
+		//System.out.println("들어온 id값:"+expend_id);
 		service.expendableDelete(expend_id);
 		return "redirect:/admin/expendable.do";
 	}
@@ -71,7 +71,7 @@ public class AdminController {
 	//부품 추가 - DB insert
 	@RequestMapping(value = "/admin/adminexpendableAdd.do", method = RequestMethod.POST)
 	public void expendableAdd(ExpendableVO expendableVO) {
-		System.out.println("***컨트롤러 받은 값:"+expendableVO);
+		//System.out.println("***컨트롤러 받은 값:"+expendableVO);
 		service.expendableAdd(expendableVO);
 	}
 	
