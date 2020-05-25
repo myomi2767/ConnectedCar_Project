@@ -54,13 +54,12 @@
 		</div>
 	</div>
 	<script type="text/javascript">
+		$("#btn_submit").on("click", function() {
+			$("#shop_expend_form").submit();
+			opener.parent.location.reload();
+			self.close();
+		});
 		$(document).ready(function() {
-			$("#btn_submit").on("click", function() {
-				$("#shop_expend_form").submit();
-				opener.parent.location.reload();
-				self.close();
-			});
-			
 			setExpendDetail();
 		});
 		
