@@ -1,6 +1,6 @@
-package connected.car.inventory;
+package connected.car.expendable;
 
-public class ExpendableVO {
+public class ShopExpendableVO {
 	private String expend_id;
 	private String expend_code;
 	private String expend_type;
@@ -8,30 +8,15 @@ public class ExpendableVO {
 	private String expend_price;
 	private String expend_brand;
 	private String car_model_name;
+	private String shop_expend_date;
+	private	int	shop_expend_count;
 	
-	public ExpendableVO() {
-		
+	public ShopExpendableVO() {
+		// TODO Auto-generated constructor stub
 	}
 	
-	public ExpendableVO(String expend_code, String expend_brand) {
-		super();
-		this.expend_code = expend_code;
-		this.expend_brand = expend_brand;
-	}
-	
-	public ExpendableVO(String expend_code, String expend_type, String expend_name, String expend_price,
-			String expend_brand, String car_model_name) {
-		super();
-		this.expend_code = expend_code;
-		this.expend_type = expend_type;
-		this.expend_name = expend_name;
-		this.expend_price = expend_price;
-		this.expend_brand = expend_brand;
-		this.car_model_name = car_model_name;
-	}
-	
-	public ExpendableVO(String expend_id, String expend_code, String expend_type, String expend_name,
-			String expend_price, String expend_brand, String car_model_name) {
+	public ShopExpendableVO(String expend_id, String expend_code, String expend_type, String expend_name,
+			String expend_price, String expend_brand, String car_model_name, int shop_expend_count) {
 		super();
 		this.expend_id = expend_id;
 		this.expend_code = expend_code;
@@ -40,13 +25,22 @@ public class ExpendableVO {
 		this.expend_price = expend_price;
 		this.expend_brand = expend_brand;
 		this.car_model_name = car_model_name;
+		this.shop_expend_count = shop_expend_count;
 	}
 
-	@Override
-	public String toString() {
-		return "ExpendableVO [expend_id=" + expend_id + ", expend_code=" + expend_code + ", expend_type=" + expend_type
-				+ ", expend_name=" + expend_name + ", expend_price=" + expend_price + ", expend_brand=" + expend_brand
-				+ ", car_model_name=" + car_model_name + "]";
+	public ShopExpendableVO(String expend_id, String expend_code, String expend_type, String expend_name,
+			String expend_price, String expend_brand, String car_model_name, String shop_expend_date,
+			int shop_expend_count) {
+		super();
+		this.expend_id = expend_id;
+		this.expend_code = expend_code;
+		this.expend_type = expend_type;
+		this.expend_name = expend_name;
+		this.expend_price = expend_price;
+		this.expend_brand = expend_brand;
+		this.car_model_name = car_model_name;
+		this.shop_expend_date = shop_expend_date;
+		this.shop_expend_count = shop_expend_count;
 	}
 
 	public String getExpend_id() {
@@ -104,7 +98,31 @@ public class ExpendableVO {
 	public void setCar_model_name(String car_model_name) {
 		this.car_model_name = car_model_name;
 	}
-	
+
+	public String getShop_expend_date() {
+		return shop_expend_date;
+	}
+
+	public void setShop_expend_date(String shop_expend_date) {
+		this.shop_expend_date = shop_expend_date;
+	}
+
+	public int getShop_expend_count() {
+		return shop_expend_count;
+	}
+
+	public void setShop_expend_count(int shop_expend_count) {
+		this.shop_expend_count = shop_expend_count;
+	}
+
+	@Override
+	public String toString() {
+		return "ShopExpendableVO [expend_id=" + expend_id + ", expend_code=" + expend_code + ", expend_type="
+				+ expend_type + ", expend_name=" + expend_name + ", expend_price=" + expend_price + ", expend_brand="
+				+ expend_brand + ", car_model_name=" + car_model_name + ", shop_expend_date=" + shop_expend_date
+				+ ", shop_expend_count=" + shop_expend_count + "]";
+	}
+
 	
 	
 }

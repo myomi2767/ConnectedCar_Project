@@ -100,7 +100,7 @@ li {display:inline-block;}
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="index.html">Carnect</a>
+				<a class="navbar-brand" href="/connectedcar/inventory/inventorymain.do">Carnect</a>
 			</div>
 			<div class="navbar-collapse collapse navbar-right" style="margin-top: 12px;">
 				<ul class="nav navbar-nav">

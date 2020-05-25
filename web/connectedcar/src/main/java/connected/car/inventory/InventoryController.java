@@ -1,16 +1,38 @@
 package connected.car.inventory;
 
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import connected.car.expendable.ExpendableLogVO;
+import connected.car.expendable.ExpendableService;
+import connected.car.expendable.ShopExpendableVO;
+import connected.car.owner.OwnerVO;
 
 @Controller
 public class InventoryController {
+	@Autowired
+	ExpendableService service;
 
 	//재고관리 리스트 페이지
 	@RequestMapping(value = "/inventory/manageList.do", method = RequestMethod.GET)
-	public String manageView() {
-		return "inventory/inventoryManagement";
+	public ModelAndView manageView(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		OwnerVO owner = (OwnerVO)session.getAttribute("loginuser");
+		String shop_id = owner.getShop_id();
+		ArrayList<ShopExpendableVO> list = (ArrayList<ShopExpendableVO>)service.findShopExpendableList(shop_id);
+		System.out.println(list.toString());
+		
+		mav.addObject("expendList", list);
+		
+		mav.setViewName("inventory/inventoryManagement");
+		return mav;
 	}
 
 	//재고관리 메인화면
@@ -20,8 +42,17 @@ public class InventoryController {
 	}
 	//재고관리 상세 페이지
 	@RequestMapping(value = "/inventory/manageDetail.do", method = RequestMethod.GET)
-	public String manageDetailView() {
-		return "inventory/inventoryManagementDetail";
+	public ModelAndView manageDetailView(String expend_id, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		OwnerVO owner = (OwnerVO)session.getAttribute("loginuser");
+		String shop_id = owner.getShop_id();
+		
+		ArrayList<ExpendableLogVO> logList = (ArrayList<ExpendableLogVO>)service.findExpendableLogList(shop_id, expend_id);
+		System.out.println(logList.toString());
+		mav.addObject("logList", logList);
+		
+		mav.setViewName("inventory/inventoryManagementDetail");
+		return mav;
 	}
 
 	//입고 팝업
@@ -40,7 +71,7 @@ public class InventoryController {
 	@RequestMapping(value = "/inventory/expendableAdd.do", method = RequestMethod.GET)
 	public String expendableAdd() {
 		return "inventory/expendableAdd";
-	}
+	}	
 		
 	
 }

@@ -2,6 +2,7 @@
 <%@ page session="false"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -46,28 +47,33 @@
 				<table id="table_managementList" class="type01">
 					<thead>
 						<tr style="font-weight: bold;">
-							<th scope="col">최근 입고일</th>
-							<th scope="col">부품코드</th>
+							<th scope="col">최근 수정일</th>
+							<th scope="col">부품 코드</th>
 							<th scope="col">종류</th>
 							<th scope="col">제조사</th>
-							<th scope="col">모델이름</th>
+							<th scope="col">모델 이름</th>
 							<th scope="col">개수</th>
 							<th scope="col">가격</th>
 							<th scope="col">관리</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>오늘</td>
-							<td>AA001</td>
-							<td>브레이크 패드</td>
-							<td>현대</td>
-							<td>그랜져</td>
-							<td>5</td>
-							<td>15000</td>
-							<td><a
-								onclick="window.open('manageDetail.do', '_blank', 'width=800px,height=500px')">관리</a></td>
-						</tr>
+						
+						<c:forEach items="${expendList}" var="expend">
+							<tr>
+								<td>${expend.shop_expend_date}</td>
+								<td>${expend.expend_code}</td>
+								<td>${expend.expend_type}</td>
+								<td>${expend.expend_brand}</td>
+								<td>${expend.car_model_name}</td>
+								<td>${expend.shop_expend_count}</td>
+								<td>${expend.expend_price}</td>
+								<td>
+									<a id='${expend.expend_id}' onclick='window.open("manageDetail.do?expend_id=" + $(this).attr("id"), "_blank", "width=800px,height=500px");'>관리</a>
+								</td>
+							</tr>
+						</c:forEach>
+						
 						<%-- <%
 						for (int i = 0; i < list.size(); i++) {
 							BoardVO row = list.get(i);
@@ -87,5 +93,7 @@
 		</div>
 		<!-- management area END -->
 	</div>
+	<script type="text/javascript">
+	</script>
 </body>
 </html>

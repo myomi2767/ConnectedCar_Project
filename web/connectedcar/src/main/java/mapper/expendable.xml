@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="connected.car.expendable">
+	<select id="findExpendInfo" parameterType="Map" resultType="expendablevo">
+		select * from expendable where expend_code = #{expend_code} and expend_brand = #{expend_brand}
+	</select>
+	
+	<select id="findShopExpendList" parameterType="Map" resultType="shopexpendvo">
+		select s.shop_expend_date, s.shop_expend_count, e.* 
+		from shop_expendable s, expendable e
+		where s.expend_id = e.expend_id and s.shop_id = #{shop_id}
+	</select>
+	
+	<insert id="insertShopExpend" parameterType="Map">
+		insert into shop_expendable values(#{shop_id}, #{expend_id}, sysdate, #{shop_expend_count})
+	</insert>
+	
+	<insert id="insertExpendLog" parameterType="Map">
+		insert into expendable_log values(#{shop_id}, #{expend_id}, sysdate, #{in_out_code}, #{shop_expend_count})
+	</insert>
+	
+	<select id="findExpendLog" parameterType="Map" resultType="expendlogvo">
+		select * from expendable_log where shop_id = #{shop_id} and expend_id = #{expend_id}
+	</select>
+</mapper>

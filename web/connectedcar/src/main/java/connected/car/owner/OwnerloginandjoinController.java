@@ -68,10 +68,12 @@ public class OwnerloginandjoinController {
 		return "ownerlogin/joinshoppopup";
 	}
 
-	// 회원가입하기
+	// 회원가입하기 - owner회원가입 되고, owner가등록한 shop도 동시에 insert되어야 하므로 service를 두 번 사용하였다. 
 	@RequestMapping(value = "/ownerlogin/join.do", method = RequestMethod.POST)
-	public String join(OwnerVO owner) {
-		System.out.println("회원가입창에서 넘어온 정보:" + owner);
+	public String join(OwnerVO owner, ShopinfoVO shopinfo) {
+		System.out.println("회원가입창에서 넘어온 정보(owner):" + owner);
+		System.out.println("회원가입창에서 넘어온 정보(shop):" + shopinfo);
+		service.joinshop(shopinfo);
 		service.join(owner);
 		return "redirect:/ownerlogin/login.do";
 	}
@@ -81,7 +83,7 @@ public class OwnerloginandjoinController {
 		boolean state = service.idCheck(owner_id);
 		String result = "";
 		if (state) {
-			result = "사용 불가능한 아이디";
+			result = "아이디 중복 : 사용 불가능한 아이디";
 		} else {
 			result = "사용 가능한 아이디";
 		}
