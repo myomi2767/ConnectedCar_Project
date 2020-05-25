@@ -21,14 +21,20 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<ExpendableVO> listAll() {
-		return dao.listAll();
+	public List<ExpendableVO> listAll(Pagination pagination) {
+		return dao.listAll(pagination);
+	}
+	
+	@Override
+	public int listAllCnt() {
+		return dao.listAllCnt();
 	}
 
 	@Override
 	public int expendableDelete(String expend_id) {
 		return dao.expendableDelete(expend_id);
 	}
+
 
 
 }
