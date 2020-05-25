@@ -11,7 +11,7 @@
 <!-- 테이블 용 css -->
 <link rel="stylesheet" type="text/css"	href="/connectedcar/common/css/minjae/table.css">
 </head>
-<body>
+<body onbeforeunload="opener.parent.location.reload();">
 	<div class="container">
 		<div class="row">
 			<div id="code" class="col-sm-4">부품코드 :</div>
@@ -69,7 +69,7 @@
 		$("#code").html(opener.parent.$("a[id="+id+"]").closest("tr").children("td").eq(1).html());
 		$("#model").html(opener.parent.$("a[id="+id+"]").closest("tr").children("td").eq(4).html());
 		
-		//opener.parent.location.reload();
+		
 	});
 	</script>
 </body>
