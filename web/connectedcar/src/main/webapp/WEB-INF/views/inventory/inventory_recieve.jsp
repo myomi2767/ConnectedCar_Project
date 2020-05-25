@@ -16,9 +16,18 @@
 	</div>
 	<div class="row">
 		<div class="col-sm-3"></div>
-		<div class="col-sm-3" style="padding-top: 10px"><input type="submit" value="확인" onclick="self.close()"></div>
+		<div class="col-sm-3" style="padding-top: 10px"><input id="btn_in" type="submit" value="확인" onclick=""></div>
 		<div class="col-sm-3"></div>
 	</div>
 </div>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#btn_in").on("click", function() {
+			
+			//opener.parent.$("#code").html()
+			self.close();
+		});
+	})
+</script>
 </body>
 </html>

@@ -58,19 +58,22 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
+						
 						<c:forEach items="${expendList}" var="expend">
-							<td>${expend.shop_expend_date}</td>
-							<td>${expend.expend_code}</td>
-							<td>${expend.expend_type}</td>
-							<td>${expend.expend_brand}</td>
-							<td>${expend.car_model_name}</td>
-							<td>${expend.shop_expend_count}</td>
-							<td>${expend.expend_price}</td>
-							<td><a
-								onclick="window.open('manageDetail.do', '_blank', 'width=800px,height=500px')">관리</a></td>
+							<tr>
+								<td>${expend.shop_expend_date}</td>
+								<td>${expend.expend_code}</td>
+								<td>${expend.expend_type}</td>
+								<td>${expend.expend_brand}</td>
+								<td>${expend.car_model_name}</td>
+								<td>${expend.shop_expend_count}</td>
+								<td>${expend.expend_price}</td>
+								<td>
+									<a id='${expend.expend_id}' onclick='window.open("manageDetail.do?expend_id=" + $(this).attr("id"), "_blank", "width=800px,height=500px");'>관리</a>
+								</td>
+							</tr>
 						</c:forEach>
-						</tr>
+						
 						<%-- <%
 						for (int i = 0; i < list.size(); i++) {
 							BoardVO row = list.get(i);
@@ -90,5 +93,7 @@
 		</div>
 		<!-- management area END -->
 	</div>
+	<script type="text/javascript">
+	</script>
 </body>
 </html>

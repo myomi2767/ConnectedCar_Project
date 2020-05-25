@@ -38,7 +38,6 @@ public class OwnerloginandjoinController {
 			HttpSession ses = request.getSession();
 			// 2. 세션에 데이터 공유
 			ses.setAttribute("loginuser", loginuser);
-			ses.setAttribute("shop_id", "1000000");
 			viewName = "inventory/inventorymain";
 		} else {
 			// 로그인 실패시 로그인 페이지 보여준다는 의미

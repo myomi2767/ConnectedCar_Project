@@ -35,8 +35,21 @@ public class ExpendableDAOImpl implements ExpendableDAO {
 		mInsertData.put("shop_id", shop_id);
 		mInsertData.put("expend_id", vo.getExpend_id());
 		mInsertData.put("shop_expend_count", vo.getShop_expend_count());
+		int shop_expend_result = sqlSession.insert("connected.car.expendable.insertShopExpend", mInsertData);
 		
-		return sqlSession.insert("connected.car.expendable.insertShopExpend", mInsertData);
+		mInsertData.put("in_out_code", "입고");
+		int log_expend_result = sqlSession.insert("connected.car.expendable.insertExpendLog", mInsertData);
+		
+		return shop_expend_result + log_expend_result;
+	}
+	
+	@Override
+	public List<ExpendableLogVO> findExpendableLogList(String shop_id, String expend_id) {
+		Map<String, Object> mFindData = new HashMap<String, Object>();
+		mFindData.put("shop_id", shop_id);
+		mFindData.put("expend_id", expend_id);
+		
+		return sqlSession.selectList("connected.car.expendable.findExpendLog", mFindData);
 	}
 
 }

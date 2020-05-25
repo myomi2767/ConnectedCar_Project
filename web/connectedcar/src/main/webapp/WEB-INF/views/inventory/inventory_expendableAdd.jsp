@@ -10,7 +10,7 @@
 	<div class="container">
 		<div class="col-lg-8 col-lg-offset-2">
 			<h4>부품 추가</h4>
-			<form role="form-horizontal">
+			<form id="shop_expend_form" role="form-horizontal" action="/connectedcar/expendable/insertExpend.do" method="post">
 				<input type="text" name="expend_id" value="" style="display: none;"/>
 				<label for="">제조사 : </label>
 				<div class="btn-group btn-group-toggle" data-toggle="buttons" style="">
@@ -48,15 +48,21 @@
 				    <input name="shop_expend_count" type="number" class="form-control col-10" id="">
 				</div>
 				
-				<button type="submit" class="btn btn-theme">추가</button>
-				<button type="reset" class="btn btn-theme">취소</button>
+				<button id="btn_submit" type="submit" class="btn btn-theme" onclick="">추가</button>
+				<button type="reset" class="btn btn-theme" onclick="window.close();">취소</button>
 			</form>
 		</div>
 	</div>
 	<script type="text/javascript">
 		$(document).ready(function() {
+			$("#btn_submit").on("click", function() {
+				$("#shop_expend_form").submit();
+				window.opener.parent.location.reload();
+				window.close();
+			});
+			
 			setExpendDetail();
-		})
+		});
 		
 		function setExpendDetail() {
 			$("#findExpend").keyup(function() {

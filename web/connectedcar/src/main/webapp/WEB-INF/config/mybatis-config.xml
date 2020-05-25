@@ -11,6 +11,7 @@
  	<typeAliases>
 		<typeAlias type="connected.car.owner.OwnerVO" alias="ownervo" />
 		<typeAlias type="connected.car.expendable.ShopExpendableVO" alias="shopexpendvo"/>
+		<typeAlias type="connected.car.expendable.ExpendableLogVO" alias="expendlogvo"/>
 		<typeAlias type="connected.car.inventory.ExpendableVO" alias="expendablevo"/>
 		<typeAlias type="connected.car.owner.ShopinfoVO" alias="shopinfovo" />
 		

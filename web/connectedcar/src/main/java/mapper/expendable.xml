@@ -17,4 +17,12 @@
 	<insert id="insertShopExpend" parameterType="Map">
 		insert into shop_expendable values(#{shop_id}, #{expend_id}, sysdate, #{shop_expend_count})
 	</insert>
+	
+	<insert id="insertExpendLog" parameterType="Map">
+		insert into expendable_log values(#{shop_id}, #{expend_id}, sysdate, #{in_out_code}, #{shop_expend_count})
+	</insert>
+	
+	<select id="findExpendLog" parameterType="Map" resultType="expendlogvo">
+		select * from expendable_log where shop_id = #{shop_id} and expend_id = #{expend_id}
+	</select>
 </mapper>

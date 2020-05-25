@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import connected.car.expendable.ExpendableLogVO;
 import connected.car.expendable.ExpendableService;
 import connected.car.expendable.ShopExpendableVO;
+import connected.car.owner.OwnerVO;
 
 @Controller
 public class InventoryController {
@@ -22,8 +24,8 @@ public class InventoryController {
 	@RequestMapping(value = "/inventory/manageList.do", method = RequestMethod.GET)
 	public ModelAndView manageView(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		
-		String shop_id = (String)session.getAttribute("shop_id");
+		OwnerVO owner = (OwnerVO)session.getAttribute("loginuser");
+		String shop_id = owner.getShop_id();
 		ArrayList<ShopExpendableVO> list = (ArrayList<ShopExpendableVO>)service.findShopExpendableList(shop_id);
 		System.out.println(list.toString());
 		
@@ -40,8 +42,17 @@ public class InventoryController {
 	}
 	//재고관리 상세 페이지
 	@RequestMapping(value = "/inventory/manageDetail.do", method = RequestMethod.GET)
-	public String manageDetailView() {
-		return "inventory/inventoryManagementDetail";
+	public ModelAndView manageDetailView(String expend_id, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		OwnerVO owner = (OwnerVO)session.getAttribute("loginuser");
+		String shop_id = owner.getShop_id();
+		
+		ArrayList<ExpendableLogVO> logList = (ArrayList<ExpendableLogVO>)service.findExpendableLogList(shop_id, expend_id);
+		System.out.println(logList.toString());
+		mav.addObject("logList", logList);
+		
+		mav.setViewName("inventory/inventoryManagementDetail");
+		return mav;
 	}
 
 	//입고 팝업
