@@ -41,9 +41,9 @@ public class ExpendableController {
 	//로그 추가하기
 	@RequestMapping(value="/expendable/insertLog.do", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
 	public @ResponseBody String insertNewLog(ExpendableLogVO log) {
-		System.out.println(log.toString());
+		//System.out.println(log.toString());
 		int result = service.insertExpendableLog(log);
-		System.out.println(result);
+		//System.out.println(result);
 		JSONObject obj = new JSONObject();
 		obj.put("result", result);
 		
