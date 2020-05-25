@@ -12,7 +12,7 @@
 		<put-attribute name="content" value="/WEB-INF/views/ownerlogin/join.jsp"/>
 	</definition>
 	
-	<definition name="ownerlogin/joinshoppopup" extends="mycarTemplate">
+	<definition name="ownerlogin/joinshoppopup" extends="popupTemplate">
 		<put-attribute name="content" value="/WEB-INF/views/ownerlogin/join_popup_findshop.jsp"/>
 	</definition>
 	
