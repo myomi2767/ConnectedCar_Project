@@ -36,7 +36,12 @@
 		<div class="row">
 			<div class="col-lg-8 col-lg-offset-1">
 				<h3>부품관리</h3>
-				<div class="h-line"></div>
+				
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-10 col-lg-offset-1">
+				<hr>				
 			</div>
 		</div>
 		<div class="row">
