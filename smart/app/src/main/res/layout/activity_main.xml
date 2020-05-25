@@ -62,13 +62,17 @@
             android:text="10M"
             android:textSize="50sp"
             />
-        <ImageButton
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
+        <ToggleButton
+            android:id="@+id/power"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_gravity="center"
             android:layout_marginBottom="10dp"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
-            android:src="@android:drawable/ic_lock_power_off" />
+            android:textOn=""
+            android:textOff=""
+            android:background="@drawable/switchon"
+            android:scaleType="centerCrop"
+            />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"

@@ -21,6 +21,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -31,12 +32,14 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.skt.Tmap.TMapCircle;
@@ -49,6 +52,8 @@ import com.skt.Tmap.TMapPolyLine;
 import com.skt.Tmap.TMapTapi;
 import com.skt.Tmap.TMapView;
 
+import java.io.BufferedReader;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -60,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Gauge speedometer;
     TMapView tmapview;
     LinearLayout linearLayoutTmap;
+    ToggleButton power;
     Bitmap carImg;
     AlertDialog alert;
     int speed = 0;
@@ -88,6 +94,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         speedometer = findViewById(R.id.myGauge);
+        power = findViewById(R.id.power);
         up = findViewById(R.id.btnUp);
         up.setOnClickListener(this);
         down = findViewById(R.id.btnDown);
@@ -104,6 +111,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         linearLayoutTmap = findViewById(R.id.layoutMapView);
         loading = findViewById(R.id.loading);
         mapViewTotal = findViewById(R.id.mapViewTotal);
+        //power -setting
+        btn30.setEnabled(false);
+        btn60.setEnabled(false);
+        btn90.setEnabled(false);
+        up.setEnabled(false);
+        down.setEnabled(false);
+        power.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    power.setBackgroundDrawable(getResources().getDrawable(R.drawable.switchoff));
+                    Toast.makeText(MainActivity.this,"주행 보조 시스템이 켜졌습니다.",Toast.LENGTH_SHORT).show();
+                    btn30.setEnabled(true);
+                    btn60.setEnabled(true);
+                    btn90.setEnabled(true);
+                    up.setEnabled(true);
+                    down.setEnabled(true);
+                }else{
+                    power.setBackgroundDrawable(getResources().getDrawable(R.drawable.switchon));
+                    Toast.makeText(MainActivity.this,"주행 보조 시스템이 꺼졌습니다.",Toast.LENGTH_SHORT).show();
+                    btn30.setEnabled(false);
+                    btn60.setEnabled(false);
+                    btn90.setEnabled(false);
+                    up.setEnabled(false);
+                    down.setEnabled(false);
+                }
+            }
+        });
         //네비 목적지 검색
         naviSearchView = findViewById(R.id.naviSearchView);
         fabMsg = findViewById(R.id.fabMsg);
@@ -174,7 +209,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else {
             init();
         }
+
     }
+
     private void searchPOI() {
         TMapData data = new TMapData();
         String keyword = destiName.getText().toString();
