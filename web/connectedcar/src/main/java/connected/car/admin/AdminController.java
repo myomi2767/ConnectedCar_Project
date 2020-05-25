@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -28,26 +29,46 @@ public class AdminController {
 	@Autowired
 	AdminService service;
 	
-	
-	
 	//부품 관리, 삭제 관리자 페이지
 	@RequestMapping(value = "/admin/expendable.do", method = RequestMethod.GET)
-	public ModelAndView expendableView() {
+	public ModelAndView expendableView(Pagination pagination, 
+			@RequestParam(value="curPage", required=false)String curPage,
+			@RequestParam(value="cntPerPage", required=false)String cntPerPage) {
 		ModelAndView mav = new ModelAndView();
-		List<ExpendableVO> list = service.listAll();
+		int listCnt = service.listAllCnt();
+		if(curPage==null && cntPerPage==null) {
+			curPage = "1";
+			cntPerPage = "5";
+		}else if(curPage==null) {
+			curPage = "1";
+		}else if(cntPerPage==null) {
+			cntPerPage = "5";
+		}
+		pagination = new Pagination(listCnt, Integer.parseInt(curPage), Integer.parseInt(cntPerPage));
+		System.out.println(pagination);
+		List<ExpendableVO> list = service.listAll(pagination);
 		System.out.println("결과"+list);
+		mav.addObject("paging", pagination);
 		mav.addObject("expendList", list);
 		mav.setViewName("admin/expendableManage");
 		return mav;
 	}
 	
-	//부품 추가
+	//부품삭제 - 개별삭제
+	@RequestMapping(value="/admin/expendableDelete.do", method = RequestMethod.POST)
+	public String expendableDelte(String expend_id) {
+		System.out.println("들어온 id값:"+expend_id);
+		service.expendableDelete(expend_id);
+		return "redirect:/admin/expendable.do";
+	}
+	
+	//부품 추가 - 홈페이지 view 표현
 	@RequestMapping(value = "/admin/adminexpendableAdd.do", method = RequestMethod.GET)
 	public String managerexpendableAdd() {
 		return "admin/adminexpendableAdd";
 	}
 	
-	//추가 버튼 클릭 시, 부품 추가
+	//부품 추가 - DB insert
 	@RequestMapping(value = "/admin/adminexpendableAdd.do", method = RequestMethod.POST)
 	public void expendableAdd(ExpendableVO expendableVO) {
 		System.out.println("***컨트롤러 받은 값:"+expendableVO);

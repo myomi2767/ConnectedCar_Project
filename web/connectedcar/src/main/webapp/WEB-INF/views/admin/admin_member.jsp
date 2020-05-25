@@ -43,23 +43,27 @@
 						</tr>
 					</thead>
 					<tbody>
-					
+
 						<%
 							for (int i = 0; i < ownerlist.size(); i++) {
 								OwnerVO row = ownerlist.get(i);
 						%>
-						
-						
-						
+
+
+
 						<tr>
 							<td><%=row.getOwner_id()%></td>
 							<td><%=row.getOwner_name()%></td>
 							<td><%=row.getOwner_regdate()%></td>
 							<td><%=row.getOwner_phone()%></td>
-							<td><%=row.getShop_id()%></td>
-							<td><a href="">삭제</a></td>
+							<td><span
+								onclick="window.open('/connectedcar/admin/shop_popup_view.do?shop_id=32',
+									'_blank','width=800px,height=800px');"><%=row.getShop_id()%></span></td>
+							<td><a
+								href="/connectedcar/admin/admin_ownerdelete.do?owner_id=<%=row.getOwner_id()%>"
+								onclick="alert('삭제되었습니다.');">삭제</a></td>
 						</tr>
-					
+
 						<%
 							}
 						%>
@@ -72,5 +76,12 @@
 		</div>
 	</div>
 </body>
+<script type="text/javascript">
+	//정비소 찾기 팝업 열어주는 함수.
+	function newPop() {
+		window.open('/connectedcar/admin/admin_ownerdelete.do?owner_id=',
+				'_blank', 'width=1000px,height=1000px');
+	}
+</script>
 
 </html>

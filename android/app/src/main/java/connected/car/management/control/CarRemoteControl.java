@@ -120,6 +120,7 @@ public class CarRemoteControl extends Fragment {
             return null;
         }
         void ioWork(){
+            //최초접속할 때 서버네게 접속한 아이디에 정보를 보내기
             try {
                 is = socket.getInputStream();
                 isr = new InputStreamReader(is);

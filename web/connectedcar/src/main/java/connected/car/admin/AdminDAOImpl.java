@@ -19,10 +19,22 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override
-	public List<ExpendableVO> listAll() {
-		List<ExpendableVO> list = sqlsession.selectList("connected.car.admin.listAll");
+	public List<ExpendableVO> listAll(Pagination pagination) {
+		System.out.println(pagination);
+		List<ExpendableVO> list = sqlsession.selectList("connected.car.admin.listAll", pagination);
 		System.out.println(list);
 		return list;
+	}
+	
+	@Override
+	public int listAllCnt() {
+		return sqlsession.selectOne("connected.car.admin.listAllCnt");
+	}
+	
+	@Override
+	public int expendableDelete(String expend_id) {
+		System.out.println("DAO:"+expend_id);
+		return sqlsession.delete("connected.car.admin.deleteExpendable", expend_id);
 	}
 
 }

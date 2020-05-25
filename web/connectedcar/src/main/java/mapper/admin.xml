@@ -4,11 +4,31 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="connected.car.admin">
-	<insert id="insertExpendable">
+	<insert id="insertExpendable" parameterType="expendablevo">
 		insert into expendable values(expend_seq.NEXTVAL, #{expend_code}, #{expend_type}, #{expend_name}, #{expend_price}, #{expend_brand}, #{car_model_name})
 	</insert>
 	
-	<select id="listAll" resultType="expendablevo">
-		select * from expendable
+	<select id="listAll" resultType="expendablevo" parameterType="paging">
+		SELECT * FROM (SELECT A.*, ROWNUM AS rnum FROM expendable A) WHERE rnum BETWEEN #{start} AND #{end}
+
 	</select>
+	<!-- 
+		SELECT b.*
+			FROM (
+				SELECT a.* , rownum rnum
+					FROM(
+						SELECT no, name, price, image, description 
+						FROM product 
+						ORDER BY no DESC
+						) a
+			) b
+		WEHRE b.rnum BETWEEN 1 and 10; 
+	 -->
+	<select id="listAllCnt" resultType="int">
+		select count(*) from expendable
+	</select>
+	
+	<delete id="deleteExpendable" parameterType="String">
+		delete from expendable where expend_id = #{expend_id}
+	</delete>
 </mapper>

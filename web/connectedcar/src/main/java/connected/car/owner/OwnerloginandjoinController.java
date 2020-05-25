@@ -111,4 +111,23 @@ public class OwnerloginandjoinController {
 		
 			return "redirect:/admin/memberlist.do";
 		}
+		
+		
+		// 회원의 정비소코드를 누르면 자세히보기 팝업을 불러온다. 
+		@RequestMapping(value = "/admin/shop_popup_view.do", method = RequestMethod.GET)
+		public ModelAndView shop_popup_view(String shop_id) {
+			ModelAndView mav = new ModelAndView();
+			System.out.println(shop_id);
+			ShopinfoVO shopinfo = service.admin_popupview(shop_id);
+			
+			String viewName = "";
+			mav.addObject("shopinfo", shopinfo);
+			mav.setViewName("admin/shopinfoPopup");
+			
+			System.out.println("mav에 들어간 shopinfo"+shopinfo.toString());
+			
+			return mav;
+		}
+		
+		//====================ADMIN 기능 : 회원 관리 끝!@@@@@@@@@@@@@@@@@@@@@@@@@ ===========================================================
 }

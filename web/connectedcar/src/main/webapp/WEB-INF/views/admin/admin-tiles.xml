@@ -16,4 +16,9 @@
 		<put-attribute name="header" value="/WEB-INF/views/admin/admin_header.jsp"/>
 		<put-attribute name="content" value="/WEB-INF/views/admin/adminexpendableAdd.jsp"/>
 	</definition>
+	
+	<definition name="admin/shopinfoPopup" extends="popupTemplate">
+		<put-attribute name="header" value="/WEB-INF/views/admin/admin_header.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/views/admin/shop_info_popup.jsp"/>
+	</definition>
 </tiles-definitions>   

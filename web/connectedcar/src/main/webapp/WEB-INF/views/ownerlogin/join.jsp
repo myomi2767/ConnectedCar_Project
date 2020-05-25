@@ -188,19 +188,19 @@
 				<div class="join_form">
 					<label for="pwd">정비소이름 :</label> <input type="text"
 						class="form-control" id="shop_name" name="shop_name"
-						placeholder="name">
+						placeholder="정비소 찾기 창을 이용해주세요." readonly >
 				</div>
 
 				<div class="join_form">
 					<label for="pwd">정비소 위치 :</label> <input type="text"
 						class="form-control" id="shop_location" name="shop_location"
-						placeholder="name">
+						placeholder="정비소 찾기 창을 이용해주세요." readonly>
 				</div>
 
 				<div class="join_form">
 					<label for="pwd">정비소 전화번호 :</label> <input type="text"
 						class="form-control" id="shop_phone" name="shop_phone"
-						placeholder="name">
+						placeholder="정비소 찾기 창을 이용해주세요." readonly>
 				</div>
 
 

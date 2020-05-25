@@ -13,6 +13,6 @@ public interface OwnerDAO {
 	
 	List<OwnerVO> admin_ownerlist();
 	int admin_ownerdelete(OwnerVO owner_id);
-	
+	ShopinfoVO admin_popupview(String shop_id);
 	
 }

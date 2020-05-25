@@ -11,5 +11,7 @@ public interface OwnerService {
 	
 	List<OwnerVO> admin_ownerlist();//관리자가 회원 전체보기
 	int admin_ownerdelete(OwnerVO owner_id);//관리자가 회원 삭제
+	
+	ShopinfoVO admin_popupview(String shop_id);
 
 }
