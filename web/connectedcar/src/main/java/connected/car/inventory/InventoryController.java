@@ -27,7 +27,7 @@ public class InventoryController {
 		OwnerVO owner = (OwnerVO)session.getAttribute("loginuser");
 		String shop_id = owner.getShop_id();
 		ArrayList<ShopExpendableVO> list = (ArrayList<ShopExpendableVO>)service.findShopExpendableList(shop_id);
-		System.out.println(list.toString());
+		//System.out.println(list.toString());
 		
 		mav.addObject("expendList", list);
 		
@@ -48,8 +48,9 @@ public class InventoryController {
 		String shop_id = owner.getShop_id();
 		
 		ArrayList<ExpendableLogVO> logList = (ArrayList<ExpendableLogVO>)service.findExpendableLogList(shop_id, expend_id);
-		System.out.println(logList.toString());
+		//System.out.println(logList.toString());
 		mav.addObject("logList", logList);
+		mav.addObject("shop_id", shop_id);
 		
 		mav.setViewName("inventory/inventoryManagementDetail");
 		return mav;
@@ -57,14 +58,26 @@ public class InventoryController {
 
 	//입고 팝업
 	@RequestMapping(value = "/inventory/recieve.do", method = RequestMethod.GET)
-	public String recieveView() {
-		return "inventory/inventoryRecieve";
+	public ModelAndView recieveView(String shop_id, String expend_id) {
+		ModelAndView mav = new ModelAndView();
+
+		mav.addObject("shop_id", shop_id);
+		mav.addObject("expend_id", expend_id);
+		
+		mav.setViewName("inventory/inventoryRecieve");
+		return mav;
 	}
 
 	//출고 팝업
 	@RequestMapping(value = "/inventory/release.do", method = RequestMethod.GET)
-	public String releaseView() {
-		return "inventory/inventoryRelease";
+	public ModelAndView releaseView(String shop_id, String expend_id) {
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("shop_id", shop_id);
+		mav.addObject("expend_id", expend_id);
+		
+		mav.setViewName("inventory/inventoryRelease");
+		return mav;
 	}
 	
 	//부품 추가, 삭제 정비소업주 페이지

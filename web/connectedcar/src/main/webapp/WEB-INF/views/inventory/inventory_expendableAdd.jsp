@@ -49,7 +49,7 @@
 				</div>
 				
 				<button id="btn_submit" type="submit" class="btn btn-theme" onclick="">추가</button>
-				<button type="reset" class="btn btn-theme" onclick="window.close();">취소</button>
+				<button type="reset" class="btn btn-theme" onclick="self.close();">취소</button>
 			</form>
 		</div>
 	</div>
@@ -57,8 +57,8 @@
 		$(document).ready(function() {
 			$("#btn_submit").on("click", function() {
 				$("#shop_expend_form").submit();
-				window.opener.parent.location.reload();
-				window.close();
+				opener.parent.location.reload();
+				self.close();
 			});
 			
 			setExpendDetail();

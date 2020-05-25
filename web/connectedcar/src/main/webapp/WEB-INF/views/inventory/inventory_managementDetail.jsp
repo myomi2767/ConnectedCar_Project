@@ -19,9 +19,9 @@
 			<div class="col-sm-4">
 				<div class="row">
 					<button id="Recieve_btn" class="btn btn-primary" style="width: 45%; margin-right: 5px"
-						onclick="window.open('recieve.do', '_blank', 'width=300px,height=300px')">입고</button>
+						onclick="window.open('recieve.do?shop_id=' + ${shop_id} + '&expend_id=' + $('#expend_id').html(), '_blank', 'width=300px,height=300px')">입고</button>
 					<button id="Release_btn" class="btn btn-primary" style="width: 45%"
-						onclick="window.open('release.do', '_blank', 'width=300px,height=300px')">출고</button>
+						onclick="window.open('release.do?shop_id=' + ${shop_id} + '&expend_id=' + $('#expend_id').html(), '_blank', 'width=300px,height=300px')">출고</button>
 				</div>
 			</div>
 		</div>
@@ -44,6 +44,7 @@
 						</tr>
 					</c:forEach>
 					<div id="expend_id" style="display: none;">${logList.get(0).expend_id}</div>
+					
 						<%-- <%
 								for (int i = 0; i < list.size(); i++) {
 									BoardVO row = list.get(i);
@@ -68,9 +69,7 @@
 		$("#code").html(opener.parent.$("a[id="+id+"]").closest("tr").children("td").eq(1).html());
 		$("#model").html(opener.parent.$("a[id="+id+"]").closest("tr").children("td").eq(4).html());
 		
-		/* $.ajax({
-			url: "/connectedcar/"
-		}); */
+		//opener.parent.location.reload();
 	});
 	</script>
 </body>

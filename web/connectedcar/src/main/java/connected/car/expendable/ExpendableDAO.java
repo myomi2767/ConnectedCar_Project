@@ -9,4 +9,5 @@ public interface ExpendableDAO {
 	public List<ShopExpendableVO> findShopExpendableList(String shop_id);
 	public int insertShopExpendable(String shop_id, ShopExpendableVO vo);
 	public List<ExpendableLogVO> findExpendableLogList(String shop_id, String expend_id);
+	public int insertExpendableLog(ExpendableLogVO log);
 }

@@ -33,4 +33,9 @@ public class ExpendableServiceImpl implements ExpendableService {
 	public List<ExpendableLogVO> findExpendableLogList(String shop_id, String expend_id) {
 		return dao.findExpendableLogList(shop_id, expend_id);
 	}
+	
+	@Override
+	public int insertExpendableLog(ExpendableLogVO log) {
+		return dao.insertExpendableLog(log);
+	}
 }

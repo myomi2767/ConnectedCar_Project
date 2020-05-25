@@ -25,4 +25,12 @@
 	<select id="findExpendLog" parameterType="Map" resultType="expendlogvo">
 		select * from expendable_log where shop_id = #{shop_id} and expend_id = #{expend_id}
 	</select>
+	
+	<insert id="insertLog" parameterType="expendlogvo">
+		insert into expendable_log values(#{shop_id}, #{expend_id}, sysdate, #{in_out_code}, #{expend_count})
+	</insert>
+	
+	<update id="updateShopExpendCount" parameterType="expendlogvo">
+		update shop_expendable set shop_expend_count = (shop_expend_count + #{expend_count}) where shop_id = #{shop_id} and expend_id = #{expend_id}
+	</update>
 </mapper>

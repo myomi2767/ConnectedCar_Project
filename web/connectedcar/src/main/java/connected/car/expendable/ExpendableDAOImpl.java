@@ -51,5 +51,15 @@ public class ExpendableDAOImpl implements ExpendableDAO {
 		
 		return sqlSession.selectList("connected.car.expendable.findExpendLog", mFindData);
 	}
+	
+	@Override
+	public int insertExpendableLog(ExpendableLogVO log) {
+		if(log.getIn_out_code().equals("출고")) {
+			log.setExpend_count(log.getExpend_count() * -1);
+		} 
+		System.out.println(log.toString());
+		sqlSession.update("connected.car.expendable.updateShopExpendCount", log);
+		return sqlSession.insert("connected.car.expendable.insertLog", log);
+	}
 
 }
