@@ -7,6 +7,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+
+
 @Repository("OwnerDAO")
 public class OwnerDAOImpl implements OwnerDAO {
 	@Autowired
@@ -15,7 +17,7 @@ public class OwnerDAOImpl implements OwnerDAO {
 	@Override
 	public OwnerVO login(OwnerVO owner) {
 		// TODO Auto-generated method stub
-		System.out.println("service"+owner);
+		//System.out.println("service"+owner);
 		OwnerVO data = sqlSession.selectOne("connected.car.ownerlogin.login", owner);
 		System.out.println(data);
 		return data;
@@ -69,6 +71,11 @@ public class OwnerDAOImpl implements OwnerDAO {
 	}
 
 
+	@Override
+	public List<ShopinfoVO> shoplist(AddressVO addressinfo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("connected.car.ownerlogin.shoplist",addressinfo);
+	}
 
 
 }

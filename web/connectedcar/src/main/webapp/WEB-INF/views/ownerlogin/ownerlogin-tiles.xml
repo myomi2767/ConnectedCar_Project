@@ -13,7 +13,13 @@
 	</definition>
 	
 	<definition name="ownerlogin/joinshoppopup" extends="popupTemplate">
+		<put-attribute name="header"  value="/WEB-INF/views/ownerlogin/findshop_header.jsp"/>
 		<put-attribute name="content" value="/WEB-INF/views/ownerlogin/join_popup_findshop.jsp"/>
+	</definition>
+	
+	<definition name="ownerlogin/addshoppopup" extends="popupTemplate">
+		<put-attribute name="header"  value="/WEB-INF/views/ownerlogin/newshop_header.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/views/ownerlogin/join_popup_add_new_shop.jsp"/>
 	</definition>
 	
 </tiles-definitions>   

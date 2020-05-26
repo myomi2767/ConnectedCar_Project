@@ -1,4 +1,4 @@
-package connected.car.shop;
+package connected.car.owner;
 
 public class AddressVO {
 	private String address_do;

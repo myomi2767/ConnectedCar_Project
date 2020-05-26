@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+
 @Service
 public class OwnerServiceImpl implements OwnerService {
 	@Autowired
@@ -15,7 +16,7 @@ public class OwnerServiceImpl implements OwnerService {
 
 	@Override
 	public OwnerVO login(OwnerVO ownerlogin) {
-		System.out.println("service"+ownerlogin);
+		//System.out.println("service"+ownerlogin);
 		return dao.login(ownerlogin);
 	}
 
@@ -63,7 +64,11 @@ public class OwnerServiceImpl implements OwnerService {
 	}
 	
 
-
+	@Override
+	public List<ShopinfoVO> shoplist(AddressVO addressinfo) {
+		// TODO Auto-generated method stub
+		return dao.shoplist(addressinfo);
+	}
 	
 	
 	
