@@ -5,7 +5,10 @@
 
 <mapper namespace="connected.car.expendable">
 	<select id="findExpendInfo" parameterType="Map" resultType="expendablevo">
-		select * from expendable where expend_code = #{expend_code} and expend_brand = #{expend_brand}
+		select expend_id, expend_code, expend_type, expend_name, expend_price, expend_brand, car_model_name
+		from expendable 
+		where expend_code = #{expend_code} and expend_brand = #{expend_brand} and expend_id in
+		(select min(expend_id) from expendable group by expend_code)
 	</select>
 	
 	<select id="findShopExpendList" parameterType="Map" resultType="shopexpendvo">
