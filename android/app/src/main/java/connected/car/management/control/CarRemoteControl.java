@@ -37,6 +37,7 @@ public class CarRemoteControl extends Fragment {
     OutputStream os;
     PrintWriter pw;
     String id;
+    String carId;
 
     public CarRemoteControl() {
         // Required empty public constructor
@@ -85,7 +86,7 @@ public class CarRemoteControl extends Fragment {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                socket = new Socket("172.30.1.48", 12345);
+                socket = new Socket("70.12.227.61", 12345);
                 if(socket != null){
                     ioWork();
                 }
@@ -120,7 +121,7 @@ public class CarRemoteControl extends Fragment {
             return null;
         }
         void ioWork(){
-            //최초접속할 때 서버네게 접속한 아이디에 정보를 보내기
+            //최초접속할 때 서버에게 접속한 아이디에 정보를 보내기
             try {
                 is = socket.getInputStream();
                 isr = new InputStreamReader(is);
@@ -128,7 +129,8 @@ public class CarRemoteControl extends Fragment {
 
                 os = socket.getOutputStream();
                 pw = new PrintWriter(os, true);
-                pw.println("phone:"+id);
+                //DB에 있는 id와 차량번호를 넘긴다.
+                pw.println("phone:"+id+carId);
                 pw.flush();
 
             } catch (IOException e) {
