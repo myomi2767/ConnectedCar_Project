@@ -55,11 +55,11 @@
             android:textSize="30sp"
             />
         <TextView
+            android:id="@+id/distance"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="10M"
             android:textSize="50sp"
             />
         <ToggleButton
