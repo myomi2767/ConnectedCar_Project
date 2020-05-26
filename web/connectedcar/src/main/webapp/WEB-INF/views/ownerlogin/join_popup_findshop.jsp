@@ -27,6 +27,7 @@
 	margin-right: auto;
 }
 </style>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
 </head>
 <body>
@@ -111,9 +112,12 @@
 
 			<div>
 
-				<p>** 찾는 정비소가 없는 경우, 직접 정비소 정보를 입력해주세요! **</p>
+			
+				<p>**정비소가 검색되지 않는 경우, 아래 버튼을 통해 정비소를 새로 등록해주세요.**</p>
+				<span id="add_new_shop_btn" class="btn btn-default"
+					onclick="addShopPop()">정비소 추가하기</span>
 
-				<form name="sendtxt">
+				<!--  <form name="sendtxt">
 
 					<div class="join_form">
 						<label for="pwd">정비소이름 :</label> <input type="text"
@@ -133,8 +137,9 @@
 							placeholder="예)020001111">
 					</div>
 					<br>
-				</form>
+				</form> -->
 				<!-- 확인 버튼 누르면 팝업 닫히면 팝업 꺼지면서 회원가입 창에 정보가 적힌다.  -->
+				<br>
 				<button type="confirm" class="btn btn-default" id="submitfrompopup"
 					onclick="sendTxt()">확인</button>
 
@@ -160,6 +165,14 @@
 
 		self.close();
 	}
+	
+	
+	
+	//정비소 추가하기 팝업 열어주는 함수.
+	function addShopPop() {
+		window.open('addnewshoppopup.do', '_blank', 'width=1000px,height=1000px');
+	}
+
 </script>
 
 

@@ -28,7 +28,7 @@
 	
 	<insert id="ownerjoin">
 		insert into repair_shop_user(owner_id, owner_name, owner_phone, owner_password, owner_regdate, shop_id)
-		values(#{owner_id}, #{owner_name}, #{owner_phone}, #{owner_password},sysdate, shop_seq.currval)
+		values(#{owner_id}, #{owner_name}, #{owner_phone}, #{owner_password},sysdate, #{shop_id})
 	</insert>
 	
 	<!--================ 정비소 업주의 회원가입 및 정비소 등록 끝 ==================-->

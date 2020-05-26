@@ -67,16 +67,29 @@ public class OwnerloginandjoinController {
 	public String joinPopupView() {
 		return "ownerlogin/joinshoppopup";
 	}
+	
+	// 정비소찾기 팝업에서 정비소추가팝업으로 가기
+		@RequestMapping(value = "/ownerlogin/addnewshoppopup.do", method = RequestMethod.GET)
+		public String joinAddNewShopPopupView() {
+			return "ownerlogin/addshoppopup";
+		}
 
-	// 회원가입하기 - owner회원가입 되고, owner가등록한 shop도 동시에 insert되어야 하므로 service를 두 번 사용하였다. 
+	// 회원가입하기 - owner회원가입
 	@RequestMapping(value = "/ownerlogin/join.do", method = RequestMethod.POST)
 	public String join(OwnerVO owner, ShopinfoVO shopinfo) {
-		System.out.println("회원가입창에서 넘어온 정보(owner):" + owner);
-		System.out.println("회원가입창에서 넘어온 정보(shop):" + shopinfo);
+		//System.out.println("회원가입창에서 넘어온 정보(owner):" + owner);
+		//System.out.println("회원가입창에서 넘어온 정보(shop):" + shopinfo);
 		service.joinshop(shopinfo);
 		service.join(owner);
 		return "redirect:/ownerlogin/login.do";
 	}
+	
+	// 회원가입하기 - 찾는 정비소가 없을 경우, 정비소를 등록한다. 
+		@RequestMapping(value = "/ownerlogin/addnewshoppopup.do", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+		public @ResponseBody void join(ShopinfoVO shopinfo) {
+			System.out.println("넘어온 정보 : "+shopinfo);
+			service.joinshop(shopinfo);
+		}
 
 	@RequestMapping(value = "/ownerlogin/idCheck.do", method = RequestMethod.GET, produces = "application/text;charset=utf-8")
 	public @ResponseBody String idCheck(String owner_id) {

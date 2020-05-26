@@ -187,21 +187,28 @@
 
 				<div class="join_form">
 					<label for="pwd">정비소이름 :</label> <input type="text"
-						class="form-control" id="shop_name" name="shop_name"
+						class="form-control" id="shop_name" 
 						placeholder="정비소 찾기 창을 이용해주세요." readonly >
 				</div>
 
 				<div class="join_form">
 					<label for="pwd">정비소 위치 :</label> <input type="text"
-						class="form-control" id="shop_location" name="shop_location"
+						class="form-control" id="shop_location"
 						placeholder="정비소 찾기 창을 이용해주세요." readonly>
 				</div>
 
 				<div class="join_form">
 					<label for="pwd">정비소 전화번호 :</label> <input type="text"
-						class="form-control" id="shop_phone" name="shop_phone"
+						class="form-control" id="shop_phone" 
 						placeholder="정비소 찾기 창을 이용해주세요." readonly>
 				</div>
+				
+				<div class="join_form">
+					<label for="pwd">정비소 전화번호 :</label> <input type="hidden"
+						class="form-control" id="shop_phone" name="shop_id"
+						placeholder="정비소 찾기 창을 이용해주세요." readonly>
+				</div>
+				
 
 
 

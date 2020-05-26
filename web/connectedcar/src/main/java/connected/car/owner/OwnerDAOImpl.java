@@ -15,7 +15,7 @@ public class OwnerDAOImpl implements OwnerDAO {
 	@Override
 	public OwnerVO login(OwnerVO owner) {
 		// TODO Auto-generated method stub
-		System.out.println("service"+owner);
+		//System.out.println("service"+owner);
 		OwnerVO data = sqlSession.selectOne("connected.car.ownerlogin.login", owner);
 		System.out.println(data);
 		return data;

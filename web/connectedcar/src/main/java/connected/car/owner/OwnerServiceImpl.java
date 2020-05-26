@@ -15,7 +15,7 @@ public class OwnerServiceImpl implements OwnerService {
 
 	@Override
 	public OwnerVO login(OwnerVO ownerlogin) {
-		System.out.println("service"+ownerlogin);
+		//System.out.println("service"+ownerlogin);
 		return dao.login(ownerlogin);
 	}
 
