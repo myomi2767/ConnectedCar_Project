@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     up.setEnabled(true);
                     down.setEnabled(true);
                     new Thread(new Runnable() {
-                        String message = "";m
+                        String message = "";
                         @Override
                         public void run() {
                             message = "auto_on";
