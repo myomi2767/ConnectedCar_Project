@@ -7,6 +7,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+
+
 @Repository("OwnerDAO")
 public class OwnerDAOImpl implements OwnerDAO {
 	@Autowired
@@ -15,7 +17,7 @@ public class OwnerDAOImpl implements OwnerDAO {
 	@Override
 	public OwnerVO login(OwnerVO owner) {
 		// TODO Auto-generated method stub
-		System.out.println("service"+owner);
+		//System.out.println("service"+owner);
 		OwnerVO data = sqlSession.selectOne("connected.car.ownerlogin.login", owner);
 		System.out.println(data);
 		return data;
@@ -36,6 +38,44 @@ public class OwnerDAOImpl implements OwnerDAO {
 	@Override
 	public int join(OwnerVO ownerjoin) {
 		// TODO Auto-generated method stub
-		return sqlSession.insert("connected.car.ownerlogin.join",ownerjoin );
+		return sqlSession.insert("connected.car.ownerlogin.ownerjoin",ownerjoin );
 	}
+	@Override
+	public int joinshop(ShopinfoVO shopinfojoin) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("connected.car.ownerlogin.shopjoin",shopinfojoin);
+	}
+
+
+
+	@Override
+	public List<OwnerVO> admin_ownerlist() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("connected.car.ownerlogin.admin_ownerlist");
+	}
+
+
+
+	@Override
+	public int admin_ownerdelete(OwnerVO owner_id) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("connected.car.ownerlogin.admin_ownerdelete",owner_id);
+	}
+
+
+
+	@Override
+	public ShopinfoVO admin_popupview(String shop_id) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("connected.car.ownerlogin.admin_popupview",shop_id);
+	}
+
+
+	@Override
+	public List<ShopinfoVO> shoplist(AddressVO addressinfo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("connected.car.ownerlogin.shoplist",addressinfo);
+	}
+
+
 }

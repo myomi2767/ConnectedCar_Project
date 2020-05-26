@@ -100,18 +100,21 @@ li {display:inline-block;}
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="index.html">Carnect</a>
+				<a class="navbar-brand" href="/connectedcar/inventory/inventorymain.do">Carnect</a>
 			</div>
 			<div class="navbar-collapse collapse navbar-right" style="margin-top: 12px;">
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="/connectedcar/inventory/inventorymain.do">MAIN</a></li>
 					<li><a href="/connectedcar/inventory/manageList.do">재고관리</a></li>	
+					
+					 <c:if test= "${loginuser.owner_id == 'admin'}">
 					 <li class="dropdown"><a href="/connectedcar/admin/expendable.do" class="dropdown-toggle"
 						data-toggle="dropdown">MANAGER <b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li><a href="/connectedcar/admin/expendable.do">부품추가 및 삭제</a></li>
-							<li><a href="/connectedcar/admin/member.do">회원 관리</a></li>
+							<li><a href="/connectedcar/admin/memberlist.do">회원 관리</a></li>
 						</ul></li> 
+						</c:if>
 				</ul>
 			</div>
 			<!--/.nav-collapse -->

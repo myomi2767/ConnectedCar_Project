@@ -7,6 +7,7 @@ public class OwnerVO {
 	private String shop_id;
 	private String owner_name;
 	private String owner_phone;
+	private String owner_regdate;
 	
 	public OwnerVO() {
 		super();
@@ -26,6 +27,19 @@ public class OwnerVO {
 		this.shop_id = shop_id;
 		this.owner_name = owner_name;
 		this.owner_phone = owner_phone;
+	}
+	
+	
+
+	public OwnerVO(String owner_id, String owner_password, String shop_id, String owner_name, String owner_phone,
+			String owner_regdate) {
+		super();
+		this.owner_id = owner_id;
+		this.owner_password = owner_password;
+		this.shop_id = shop_id;
+		this.owner_name = owner_name;
+		this.owner_phone = owner_phone;
+		this.owner_regdate = owner_regdate;
 	}
 
 	public String getOwner_id() {
@@ -68,12 +82,22 @@ public class OwnerVO {
 		this.owner_phone = owner_phone;
 	}
 
+	public String getOwner_regdate() {
+		return owner_regdate;
+	}
+
+	public void setOwner_regdate(String owner_regdate) {
+		this.owner_regdate = owner_regdate;
+	}
+
 	@Override
 	public String toString() {
-		return "ownerVO [owner_id=" + owner_id + ", owner_password=" + owner_password + ", shop_id=" + shop_id
-				+ ", owner_name=" + owner_name + ", owner_phone=" + owner_phone + "]";
+		return "OwnerVO [owner_id=" + owner_id + ", owner_password=" + owner_password + ", shop_id=" + shop_id
+				+ ", owner_name=" + owner_name + ", owner_phone=" + owner_phone + ", owner_regdate=" + owner_regdate
+				+ "]";
 	}
-	
+
+
 	
 
 }

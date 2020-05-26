@@ -1,6 +1,7 @@
 package connected.car.management.member;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import connected.car.management.control.MainActivity;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -36,7 +38,7 @@ public class JoinAsync extends AsyncTask<MemberVO, Void, Integer> {
         int result = 0;
 
         try {
-            URL url = new URL("http://192.168.43.175:8088/connectedcar/member/join.do");
+            URL url = new URL("http://172.20.10.4:8088/connectedcar/member/join.do");
             Gson gson = new Gson();
             String sVo = gson.toJson(vo[0]);
 
@@ -49,7 +51,7 @@ public class JoinAsync extends AsyncTask<MemberVO, Void, Integer> {
 
             Response response = client.newCall(request).execute();
             JSONObject json = new JSONObject(response.body().string());
-            Log.d("test", response.body().string());
+            Log.d("test", json.toString());
             result = json.getInt("resultNum");
 
         } catch (MalformedURLException e) {
@@ -66,8 +68,10 @@ public class JoinAsync extends AsyncTask<MemberVO, Void, Integer> {
     @Override
     protected void onPostExecute(Integer value) {
         super.onPostExecute(value);
-        if(value == 1)
-            Toast.makeText(context, "회원가입에 성공했습니다.", Toast.LENGTH_SHORT).show();
+        if(value == 1) {
+            Intent intent = new Intent(context, LoginActivity.class);
+            context.startActivity(intent);
+        }
         else if(value == 0)
             Toast.makeText(context, "회원가입에 실패했습니다.", Toast.LENGTH_SHORT).show();
     }

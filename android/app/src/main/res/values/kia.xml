@@ -34,7 +34,7 @@
     </string-array>
     
     <string-array name="kia_sportage">
-        <item>스포티지 더 볼트</item>
+        <item>스포티지 더 볼드</item>
         <item>The SUV 스포티지</item>
         <item>더 뉴 스포티지 R</item>
         <item>스포티지 R</item>
@@ -89,6 +89,12 @@
     <string-array name="kia_seltos">
         <item>셀토스</item>
     </string-array>
+
+    <string-array name="kia_forte">
+        <item>포르테 해치백</item>
+        <item>포르테 쿱</item>
+        <item>포르테</item>
+    </string-array>
     
     <string-array name="kia_pride">
         <item>더 뉴 프라이드</item>
@@ -97,12 +103,7 @@
         <item>프라이드</item>
     </string-array>
     
-    <string-array name="kia_forte">
-        <item>포르테 해치백</item>
-        <item>포르테 쿱</item>
-        <item>포르테</item>
-    </string-array>
-    
+
     <string-array name="kia_mohave">
         <item>모하비 더 마스터</item>
         <item>더 뉴 모하비</item>

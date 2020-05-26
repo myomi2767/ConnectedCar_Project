@@ -1,6 +1,9 @@
 package connected.car.management.member;
 
-public class MemberVO {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class MemberVO implements Parcelable {
     String user_id;
     String car_id;
     String user_password;
@@ -8,6 +11,11 @@ public class MemberVO {
     String user_birthdate;
     String user_gender;
     String driver_license;
+
+    public MemberVO(String user_id, String user_password) {
+        this.user_id = user_id;
+        this.user_password = user_password;
+    }
 
     public MemberVO(String user_id, String car_id, String user_password, String user_name, String user_birthdate, String user_gender, String driver_license) {
         this.user_id = user_id;
@@ -18,6 +26,28 @@ public class MemberVO {
         this.user_gender = user_gender;
         this.driver_license = driver_license;
     }
+
+    public MemberVO(Parcel in) {
+        user_id = in.readString();
+        car_id = in.readString();
+        user_password = in.readString();
+        user_name = in. readString();
+        user_birthdate = in.readString();
+        user_gender = in.readString();
+        driver_license = in.readString();
+    }
+
+    public static final Creator<MemberVO> CREATOR = new Creator<MemberVO>() {
+        @Override
+        public MemberVO createFromParcel(Parcel in) {
+            return new MemberVO(in);
+        }
+
+        @Override
+        public MemberVO[] newArray(int size) {
+            return new MemberVO[size];
+        }
+    };
 
     @Override
     public String toString() {
@@ -31,4 +61,21 @@ public class MemberVO {
                 ", driver_license='" + driver_license + '\'' +
                 '}';
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        user_id = dest.readString();
+        car_id = dest.readString();
+        user_password = dest.readString();
+        user_name = dest.readString();
+        user_birthdate = dest.readString();
+        user_gender = dest.readString();
+        driver_license = dest.readString();
+    }
+
 }

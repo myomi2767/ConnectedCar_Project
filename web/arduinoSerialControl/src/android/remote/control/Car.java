@@ -32,6 +32,7 @@ public class Car extends Thread{
 		super();
 		this.client = client;
 		this.carlist = carlist;
+		ioWork();
 	}
 	
 	public void ioWork() {
@@ -47,7 +48,7 @@ public class Car extends Thread{
 			/*message = br.readLine();
 			System.out.println("서버가 받은 메시지: "+message);
 			sendMsg("car/"+message);*/
-			
+			System.out.println("Car로 들어옴!");
 			//carlist에 현재 접속한 사람 추가
 			carlist.add(this);
 		} catch (IOException e) {
@@ -65,14 +66,18 @@ public class Car extends Thread{
 		st = new StringTokenizer(msg, "/");
 		String protocol = st.nextToken();
 		//app에게 받은 메시지 수행!!
+		if(protocol.equals("car")) {
+			sendMsg(msg);
+		}
 	}
 	
 	public void run() {
 		while(true) {
 			try {
 				String msg = br.readLine();
-				System.out.println("차에서 받은 메시지:"+msg);
+				System.out.println("차로 보낼 메시지:"+msg);
 				filteringMsg(msg);
+				
 			} catch (IOException e) {
 				System.out.println("차와의 연결이 불가");
 				// TODO Auto-generated catch block

@@ -73,8 +73,8 @@
 						<!-- <div id="joinlist">
 							<a href="/maeggiSeggi/loginandcustomer/join.do">[회원가입]</a>
 						</div> -->
-						<div id="joinlist">
-							<a href="/connectedcar/ownerlogin/join.do">[회원가입]</a>
+						<div id="joinlist" >
+							<a href="/connectedcar/ownerlogin/join.do" class = "btn btn-default">회원가입</a>
 						</div>
 
 					</div>

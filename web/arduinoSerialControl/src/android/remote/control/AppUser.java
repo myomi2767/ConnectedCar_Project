@@ -10,8 +10,6 @@ import java.net.Socket;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
-import sun.util.locale.StringTokenIterator;
-
 public class AppUser extends Thread{
 	Socket client;
 	
@@ -24,16 +22,19 @@ public class AppUser extends Thread{
 	
 	String message;
 	Vector<AppUser> userlist;
+	Vector<Car> carlist;
 	
 	StringTokenizer st;
 	public AppUser() {
 		
 	}
 	
-	public AppUser(Socket client, Vector<AppUser> userlist) {
+	public AppUser(Socket client, Vector<AppUser> userlist, Vector<Car> carlist) {
 		super();
 		this.client = client;
 		this.userlist = userlist;
+		this.carlist = carlist;
+		ioWork();
 	}
 
 	public void ioWork() {
@@ -47,9 +48,9 @@ public class AppUser extends Thread{
 			
 			//차에게 메시지를 보내 내가 가진 차량과 같은지 확인해야 하는 과정
 			/*message = br.readLine();
-			System.out.println("서버가 받은 메시지: "+message);
-			sendMsg("car/"+message);*/
-			
+			System.out.println("서버가 받은 메시지: "+message);*/
+			//sendMsg("*********"+message);
+			System.out.println("AppUser에 들어옴");
 			//userlist에 현재 접속한 사람 추가
 			userlist.add(this);
 		} catch (IOException e) {
@@ -67,6 +68,16 @@ public class AppUser extends Thread{
 		st = new StringTokenizer(msg, "/");
 		String protocol = st.nextToken();
 		//차에게 받은 메시지 수행!!
+		if(protocol.equals("user")) {
+			String receive = st.nextToken();
+			if(receive.equals("car")) {
+				String message = st.nextToken();
+				Car car = carlist.get(0);
+				car.sendMsg(receive+"/"+message);
+			}
+		}else {
+			
+		}
 	}
 	
 	public void run() {
