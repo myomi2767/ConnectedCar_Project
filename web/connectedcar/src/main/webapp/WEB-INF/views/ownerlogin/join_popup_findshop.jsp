@@ -100,11 +100,11 @@
 
 
 					<tr>
-						<td ><%=row.getShop_id()%></td>
-						<td ><%=row.getShop_name()%></td>
+						<td><%=row.getShop_id()%></td>
+						<td><%=row.getShop_name()%></td>
 						<td><%=row.getShop_location()%></td>
 						<td><%=row.getShop_phone()%></td>
-						<td><button>선택</button></td>
+						<td id="selec"><button>선택</button></td>
 					</tr>
 
 					<%
@@ -132,14 +132,21 @@
 					<br> <br>
 					<h4 style="font-weight: bold">선택된 정비소 정보</h4>
 					<div class="join_form">
+						<label for="pwd">정비소코드 :</label> <input type="text"
+							class="form-control" id="shop_id" name="shop_id"
+							readonly>
+					</div>
+					
+					
+					<div class="join_form">
 						<label for="pwd">정비소이름 :</label> <input type="text"
-							class="form-control" id="shop_location" name="shop_location"
+							class="form-control" id="shop_name" name="shop_name"
 							readonly>
 					</div>
 
 					<div class="join_form">
 						<label for="pwd">정비소 위치 :</label> <input type="text"
-							class="form-control" id="shop_name" name="shop_name" readonly>
+							class="form-control" id="shop_location" name="shop_location" readonly>
 					</div>
 
 					<div class="join_form">
@@ -167,6 +174,7 @@
 <!-- 정비소  -->
 <script type="text/javascript">
 	function sendTxt() {
+		window.opener.document.userInfo.shop_id.value = document.sendtxt.shop_id.value;
 		window.opener.document.userInfo.shop_location.value = document.sendtxt.shop_location.value;
 		window.opener.document.userInfo.shop_name.value = document.sendtxt.shop_name.value;
 		window.opener.document.userInfo.shop_phone.value = document.sendtxt.shop_phone.value;
@@ -179,6 +187,21 @@
 		window.open('addnewshoppopup.do', '_blank',
 				'width=1000px,height=1000px');
 	}
+	
+	$(document).ready(function(){
+		$("#selec button").on("click", function() {
+			var currentRow=$(this).closest("tr");
+			var id = currentRow.find('td:eq(0)').text();
+			var name = currentRow.find('td:eq(1)').text();
+			var location = currentRow.find('td:eq(2)').text();
+			var tel = currentRow.find('td:eq(3)').text();
+			
+			$("#shop_id").val(id);
+			$("#shop_name").val(name);
+			$("#shop_location").val(location);
+			$("#shop_phone").val(tel);
+		});
+	});
 </script>
 
 
