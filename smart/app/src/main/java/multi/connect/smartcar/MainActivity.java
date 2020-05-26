@@ -1,25 +1,21 @@
 package multi.connect.smartcar;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -30,38 +26,58 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.skt.Tmap.TMapCircle;
 import com.skt.Tmap.TMapData;
 import com.skt.Tmap.TMapGpsManager;
-import com.skt.Tmap.TMapMarkerItem;
 import com.skt.Tmap.TMapPOIItem;
 import com.skt.Tmap.TMapPoint;
 import com.skt.Tmap.TMapPolyLine;
 import com.skt.Tmap.TMapTapi;
 import com.skt.Tmap.TMapView;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import de.nitri.gauge.Gauge;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    AsyncTaskSerial asyncTaskSerial;
+    InputStream is;
+    InputStreamReader isr;
+    BufferedReader br;
+    Socket socket;
+    OutputStream os;
+    PrintWriter pw;
     Button btn30, btn60, btn90;
     ImageButton up, down;
     Gauge speedometer;
     TMapView tmapview;
     LinearLayout linearLayoutTmap;
+    ToggleButton power;
     Bitmap carImg;
+    Bitmap startImg;
+    Bitmap endImg;
     AlertDialog alert;
+    TextView distance;
     int speed = 0;
     String[] permission_list = {
             Manifest.permission.ACCESS_COARSE_LOCATION,
@@ -87,17 +103,68 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //Serial 통신
+        asyncTaskSerial = new AsyncTaskSerial();
+        asyncTaskSerial.execute(10,20);
+        distance = findViewById(R.id.distance);
+        //power -setting
+        power = findViewById(R.id.power);
+        /*btn30.setEnabled(false);
+        btn60.setEnabled(false);
+        btn90.setEnabled(false);
+        up.setEnabled(false);
+        down.setEnabled(false);*/
+
+        power.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+
+                    power.setBackgroundDrawable(getResources().getDrawable(R.drawable.switchoff));
+                    Toast.makeText(MainActivity.this,"주행 보조 시스템이 켜졌습니다.",Toast.LENGTH_SHORT).show();
+                    btn30.setEnabled(true);
+                    btn60.setEnabled(true);
+                    btn90.setEnabled(true);
+                    up.setEnabled(true);
+                    down.setEnabled(true);
+                    new Thread(new Runnable() {
+                        String message = "";m
+                        @Override
+                        public void run() {
+                            message = "auto_on";
+                            pw.println(message);
+                            pw.flush();
+                        }
+                    }).start();
+                }else{
+                    power.setBackgroundDrawable(getResources().getDrawable(R.drawable.switchon));
+                    Toast.makeText(MainActivity.this,"주행 보조 시스템이 꺼졌습니다.",Toast.LENGTH_SHORT).show();
+                    btn30.setEnabled(false);
+                    btn60.setEnabled(false);
+                    btn90.setEnabled(false);
+                    up.setEnabled(false);
+                    down.setEnabled(false);
+                    new Thread(new Runnable() {
+                        String message = "";
+                        @Override
+                        public void run() {
+                            message = "auto_off";
+                            pw.println(message);
+                            pw.flush();
+                        }
+                    }).start();
+                }
+            }
+        });
+
+        //속도 제어
         speedometer = findViewById(R.id.myGauge);
-        up = findViewById(R.id.btnUp);
-        up.setOnClickListener(this);
-        down = findViewById(R.id.btnDown);
-        down.setOnClickListener(this);
-        btn30 = findViewById(R.id.btn30);
-        btn30.setOnClickListener(this);
-        btn60 = findViewById(R.id.btn60);
-        btn60.setOnClickListener(this);
-        btn90 = findViewById(R.id.btn90);
-        btn90.setOnClickListener(this);
+        up = findViewById(R.id.btnUp);  up.setOnClickListener(this);
+        down = findViewById(R.id.btnDown);  down.setOnClickListener(this);
+        btn30 = findViewById(R.id.btn30);  btn30.setOnClickListener(this);
+        btn60 = findViewById(R.id.btn60);  btn60.setOnClickListener(this);
+        btn90 = findViewById(R.id.btn90);  btn90.setOnClickListener(this);
+
         btnBack = findViewById(R.id.btnBack);
         btnBack.setOnClickListener(this);
         speedometer.setLowerText("0");
@@ -175,6 +242,71 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             init();
         }
     }
+    //서버 연결
+    class AsyncTaskSerial extends AsyncTask<Integer,String,String> {
+
+        @Override
+        protected String doInBackground(Integer... integers) {
+            try {
+                socket = new Socket("70.12.226.101", 12345);
+                if (socket != null) {
+                    ioWork();
+                }
+                Thread t1 = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        while (true) {
+                            String msg;
+                            try {
+                                msg = br.readLine();
+                                if(msg.length() > 0) {
+                                    Log.d("test", "서버로 부터 수신된 메시지>>"
+                                            + msg);
+                                    publishProgress(msg);
+                                }
+                            } catch (IOException e) {
+                            }
+                        }
+                    }
+                });
+                t1.start();
+            } catch (UnknownHostException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return "";
+        }
+
+        @Override
+        protected void onProgressUpdate(String... values) {
+            super.onProgressUpdate(values);
+            distance.setText(values[0]);
+
+        }
+    }
+        void ioWork(){
+            try {
+                is = socket.getInputStream();
+                isr = new InputStreamReader(is);
+                br = new BufferedReader(isr);
+
+                os = socket.getOutputStream();
+                pw = new PrintWriter(os,true);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        protected void onDestroy() {
+            super.onDestroy();
+            try {
+                socket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     private void searchPOI() {
         TMapData data = new TMapData();
         String keyword = destiName.getText().toString();
@@ -198,20 +330,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void moveMap(double lat,double lng){
-        tmapview.setCenterPoint(lng,lat);
-    }
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        for (int result : grantResults) {
-            if (result == PackageManager.PERMISSION_DENIED) {
-                return;
-            }
+   private void moveMap(double lat,double lng){
+            tmapview.setCenterPoint(lng,lat);
         }
-        init();
-        setGps();
+        @Override
+        public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+        @NonNull int[] grantResults) {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+            for (int result : grantResults) {
+                if (result == PackageManager.PERMISSION_DENIED) {
+                    return;
+                }
+            }
+            init();
+            setGps();
     }
 
     public void init() {
@@ -219,8 +351,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tmapview.setSKTMapApiKey("l7xx69415d661c8445a8b35bd80789e07ebf");
         tmapview.setZoomLevel(19);
         //아이콘 표시
-        carImg = BitmapFactory.decodeResource(this.getResources(), R.drawable.carimoticon);
-        Bitmap carIcon = Bitmap.createScaledBitmap(carImg, 30, 50, true);
+        carImg = BitmapFactory.decodeResource(this.getResources(), R.drawable.pickupcar);
+        startImg = BitmapFactory.decodeResource(this.getResources(),R.drawable.pin);
+        endImg =BitmapFactory.decodeResource(this.getResources(),R.drawable.endpin);
+        Bitmap carIcon = Bitmap.createScaledBitmap(carImg, 40, 60, true);
+
+
         tmapview.setIcon(carIcon);
         tmapview.setIconVisibility(true);
 
@@ -245,17 +381,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
         tmapview.setLocationPoint(location.getLongitude(),location.getLatitude());
-        //차 반경 10m 원 표시
-        /*tMapPoint = new TMapPoint(location.getLatitude(),location.getLongitude());
-        tMapCircle = new TMapCircle();
-        tMapCircle.setCenterPoint(tMapPoint);
-        tMapCircle.setRadius(10);
-        tMapCircle.setCircleWidth(2);
-        tMapCircle.setLineColor(Color.BLUE);
-        tMapCircle.setAreaColor(Color.GRAY);
-        tMapCircle.setAreaAlpha(100);
-        tmapview.addTMapCircle("circle1", tMapCircle);*/
-
         linearLayoutTmap.addView(tmapview);
 
         /*//지도에 마커찍기
@@ -273,21 +398,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //지도에 마커 추가
             tmapview.addMarkerItem("markerItem"+i, markerItem1);
         }*/
-        /*public void addMarker(TMapPOIItem poi) {
-            TMapMarkerItem item = new TMapMarkerItem();
-            item.setTMapPoint(poi.getPOIPoint());
-            Bitmap icon = ((BitmapDrawable) ContextCompat.getDrawable(this, android.R.drawable.ic_input_add)).getBitmap();
-            item.setIcon(icon);
-            item.setPosition(0.5f, 1);
-            item.setCalloutTitle(poi.getPOIName());
-            item.setCalloutSubTitle(poi.getPOIContent());
-            Bitmap left = ((BitmapDrawable) ContextCompat.getDrawable(this, android.R.drawable.ic_dialog_alert)).getBitmap();
-            item.setCalloutLeftImage(left);
-            Bitmap right = ((BitmapDrawable) ContextCompat.getDrawable(this, android.R.drawable.ic_input_get)).getBitmap();
-            item.setCalloutRightButtonImage(right);
-            item.setCanShowCallout(true);
-            tmapview.addMarkerItem(poi.getPOIID(), item);
-        }*/
+
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -306,31 +417,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 double longitude = location.getLongitude();
                 tmapview.setLocationPoint(longitude, latitude);
                 tmapview.setCenterPoint(longitude, latitude);
-
-                //차량 주변 원 따라다니기
-                /*zoomLev = tmapview.getZoomLevel();
-                tmapview.removeTMapCircle("circle1");
-                tMapPoint = new TMapPoint(location.getLatitude(),location.getLongitude());
-                tMapCircle = new TMapCircle();
-                tMapCircle.setCenterPoint(tMapPoint);
-                switch (zoomLev){
-                    case 19:
-                        tMapCircle.setRadius(50);
-                        break;
-                    case 18:
-                        tMapCircle.setRadius(170);
-                        break;
-                    case 17:
-                        tMapCircle.setRadius(290);
-                        break;
-                    case 16:
-                        tMapCircle.setRadius(420);
-                }
-                tMapCircle.setCircleWidth(2);
-                tMapCircle.setLineColor(Color.BLUE);
-                tMapCircle.setAreaColor(Color.GRAY);
-                tMapCircle.setAreaAlpha(100);
-                tmapview.addTMapCircle("circle1", tMapCircle);*/
 
                 if (tMapGpsManager.getLocation().equals(endpoint)){
                     tmapview.removeTMapPath();
@@ -380,12 +466,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        Bitmap startIcon = Bitmap.createScaledBitmap(startImg, 40, 50, true);
+                        Bitmap endIcon = Bitmap.createScaledBitmap(endImg, 40, 50, true);
                         path.setLineWidth(5);
                         path.setLineColor(Color.RED);
                         tmapview.addTMapPath(path);
-                        Bitmap s = ((BitmapDrawable)ContextCompat.getDrawable(MainActivity.this,R.drawable.startpoint)).getBitmap();
-                        Bitmap e = ((BitmapDrawable)ContextCompat.getDrawable(MainActivity.this,R.drawable.endpoint)).getBitmap();
-                        tmapview.setTMapPathIcon(s,e);
+                        tmapview.setTMapPathIcon(startIcon,endIcon);
                     }
                 });
             }
