@@ -109,11 +109,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         distance = findViewById(R.id.distance);
         //power -setting
         power = findViewById(R.id.power);
-        /*btn30.setEnabled(false);
-        btn60.setEnabled(false);
-        btn90.setEnabled(false);
-        up.setEnabled(false);
-        down.setEnabled(false);*/
 
         power.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -177,28 +172,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn90.setEnabled(false);
         up.setEnabled(false);
         down.setEnabled(false);
-        power.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    power.setBackgroundDrawable(getResources().getDrawable(R.drawable.switchoff));
-                    Toast.makeText(MainActivity.this,"주행 보조 시스템이 켜졌습니다.",Toast.LENGTH_SHORT).show();
-                    btn30.setEnabled(true);
-                    btn60.setEnabled(true);
-                    btn90.setEnabled(true);
-                    up.setEnabled(true);
-                    down.setEnabled(true);
-                }else{
-                    power.setBackgroundDrawable(getResources().getDrawable(R.drawable.switchon));
-                    Toast.makeText(MainActivity.this,"주행 보조 시스템이 꺼졌습니다.",Toast.LENGTH_SHORT).show();
-                    btn30.setEnabled(false);
-                    btn60.setEnabled(false);
-                    btn90.setEnabled(false);
-                    up.setEnabled(false);
-                    down.setEnabled(false);
-                }
-            }
-        });
+
         //네비 목적지 검색
         naviSearchView = findViewById(R.id.naviSearchView);
         fabMsg = findViewById(R.id.fabMsg);
@@ -310,32 +284,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         protected void onProgressUpdate(String... values) {
             super.onProgressUpdate(values);
-            distance.setText(values[0]);
-
+            if(power.isChecked()){
+                distance.setText(values[0]);
+            }else{
+                distance.setText("");
+            }
         }
     }
-        void ioWork(){
-            try {
-                is = socket.getInputStream();
-                isr = new InputStreamReader(is);
-                br = new BufferedReader(isr);
+    void ioWork(){
+        try {
+            is = socket.getInputStream();
+            isr = new InputStreamReader(is);
+            br = new BufferedReader(isr);
 
-                os = socket.getOutputStream();
-                pw = new PrintWriter(os,true);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            os = socket.getOutputStream();
+            pw = new PrintWriter(os,true);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+    }
 
-        @Override
-        protected void onDestroy() {
-            super.onDestroy();
-            try {
-                socket.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        try {
+            socket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+    }
     private void searchPOI() {
         TMapData data = new TMapData();
         String keyword = destiName.getText().toString();
@@ -517,6 +494,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             speedometer.moveToValue(speed);
             speedometer.setLowerText(Integer.toString(speed));
+/*            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    pw.println("speed_up");
+                    pw.flush();
+                }
+            }).start();*/
+
         }else if(v.getId()==R.id.btnDown){
             if(speed>=3) {
                 speed = speed - 3;
