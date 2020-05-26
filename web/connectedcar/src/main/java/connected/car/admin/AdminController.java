@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import connected.car.inventory.ExpendableVO;
-import connected.car.shop.AddressVO;
+import connected.car.owner.AddressVO;
 
 //admin의 전체 회원 정보확인 기능은 connected.car.owner패키지에 작성
 

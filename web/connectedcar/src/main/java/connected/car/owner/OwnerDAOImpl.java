@@ -7,6 +7,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+
+
 @Repository("OwnerDAO")
 public class OwnerDAOImpl implements OwnerDAO {
 	@Autowired
@@ -69,6 +71,11 @@ public class OwnerDAOImpl implements OwnerDAO {
 	}
 
 
+	@Override
+	public List<ShopinfoVO> shoplist(AddressVO addressinfo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("connected.car.ownerlogin.shoplist",addressinfo);
+	}
 
 
 }

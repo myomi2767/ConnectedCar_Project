@@ -26,6 +26,11 @@
 		values(shop_seq.nextval, #{shop_name}, #{shop_phone}, #{shop_location})
 	</insert>
 	
+	<!-- 정비소 검색 -->
+	<select id="shoplist" resultType="shopinfovo" parameterType="addressvo">
+	select * from repair_shop where shop_location like '%'||#{address_do}||'%'||#{address_si}||'%'||#{address_gu}||'%'
+	</select>
+	
 	<insert id="ownerjoin">
 		insert into repair_shop_user(owner_id, owner_name, owner_phone, owner_password, owner_regdate, shop_id)
 		values(#{owner_id}, #{owner_name}, #{owner_phone}, #{owner_password},sysdate, #{shop_id})
