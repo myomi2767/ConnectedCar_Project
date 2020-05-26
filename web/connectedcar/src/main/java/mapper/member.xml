@@ -4,7 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="connected.car.member">
-	<insert id="insertMember">
+	<insert id="insertMember" parameterType="membervo">
 		insert into carnect_user values(#{user_id}, #{car_id}, #{user_password}, #{user_name}, #{user_birthdate}, #{user_gender}, #{driver_license})
 	</insert>
+	<select id="selectMember" parameterType="Map" resultType="membervo">
+		select * from carnect_user where user_id = #{user_id} and user_password = #{user_password}
+	</select>
 </mapper>

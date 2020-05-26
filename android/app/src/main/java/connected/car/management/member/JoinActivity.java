@@ -4,17 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import java.security.Key;
 import java.util.regex.Pattern;
 
 import connected.car.management.R;
@@ -41,7 +38,7 @@ public class JoinActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void setViews() {
-        editTextId = findViewById(R.id.edit_id);
+        editTextId = findViewById(R.id.edit_password);
         editTextCarId = findViewById(R.id.edit_carNum);
         editTextPassword = findViewById(R.id.edit_password);
         editTextName = findViewById(R.id.edit_name);

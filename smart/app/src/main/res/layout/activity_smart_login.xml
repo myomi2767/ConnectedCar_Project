@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_vertical"
+    android:layout_gravity="center"
+    tools:context=".login.SmartLogin">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal">
+
+
+
+        <LinearLayout
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/idArea"
+                android:gravity="right"
+                android:layout_width="400dp"
+                android:layout_height="match_parent"
+                android:text="ID : "
+                android:layout_marginTop="15dp"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white" />
+            <EditText
+                android:id="@+id/carId"
+                android:layout_width="500dp"
+                android:layout_height="100dp"
+
+                android:background="@android:color/white"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:orientation="horizontal">
+            <TextView
+                android:gravity="right"
+                android:id="@+id/passArea"
+                android:text="PASS : "
+                android:layout_marginTop="15dp"
+                android:textSize="40sp"
+                android:layout_width="400dp"
+                android:layout_height="match_parent"
+                android:textStyle="bold"
+                android:textColor="@android:color/white" />
+
+            <EditText
+                android:id="@+id/carPass"
+                android:layout_width="500dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        </LinearLayout>
+
+    </LinearLayout>
+    <Button
+        android:id="@+id/login"
+        android:layout_width="250dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:background="#FFE8A2"
+        android:layout_marginTop="10dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:text="로그인"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"/>
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Remember login"
+        android:layout_gravity="center"
+        android:id="@+id/autoCheck"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/login"
+        android:layout_centerHorizontal="true" />
+
+
+
+
+
+
+</LinearLayout>
