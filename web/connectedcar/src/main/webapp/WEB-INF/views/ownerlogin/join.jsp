@@ -176,32 +176,36 @@
 
 				<!-- =================================정비소 정보 입력 시작 =============================================-->
 
-				<h4>정비소 정보 입력</h4>
-
-
-				<span id="add_shop_info_btn" class="btn btn-default"
-					onclick="newPop()">내 정비소 찾기</span>
-
+				<span id="inputshoptxt" style="font-weight: bold;">정비소 정보 입력
+					: </span> <span id="add_shop_info_btn" class="btn btn-default"
+					onclick="newPop()">내 정비소 찾기</span> <br> <br>
 				<br>
 
-
+				<div class="join_form">
+					<label for="pwd">정비소코드 :</label> <input type="text"
+						class="form-control" id="shop_id" name="shop_id"
+						placeholder="정비소 찾기 창을 이용해주세요." readonly>
+				</div>
 				<div class="join_form">
 					<label for="pwd">정비소이름 :</label> <input type="text"
-						class="form-control" id="shop_name" name="shop_name"
-						placeholder="정비소 찾기 창을 이용해주세요." readonly >
+						class="form-control" id="shop_name"
+						placeholder="정비소 찾기 창을 이용해주세요." readonly>
 				</div>
 
 				<div class="join_form">
 					<label for="pwd">정비소 위치 :</label> <input type="text"
-						class="form-control" id="shop_location" name="shop_location"
+						class="form-control" id="shop_location"
 						placeholder="정비소 찾기 창을 이용해주세요." readonly>
 				</div>
 
 				<div class="join_form">
 					<label for="pwd">정비소 전화번호 :</label> <input type="text"
-						class="form-control" id="shop_phone" name="shop_phone"
+						class="form-control" id="shop_phone"
 						placeholder="정비소 찾기 창을 이용해주세요." readonly>
 				</div>
+
+
+
 
 
 
@@ -218,7 +222,7 @@
 <script type="text/javascript">
 	//정비소 찾기 팝업 열어주는 함수.
 	function newPop() {
-		window.open('joinshoppopup.do', '_blank', 'width=1000px,height=1000px');
+		window.open('joinshoppopup.do', '_blank', 'width=1000px,height=700px');
 	}
 </script>
 
