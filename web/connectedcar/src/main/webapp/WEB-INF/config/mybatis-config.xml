@@ -9,6 +9,7 @@
 		<setting name="jdbcTypeForNull" value="NULL" />
 	</settings>
  	<typeAliases>
+ 		<typeAlias type="connected.car.member.MemberVO" alias="membervo"/>
 		<typeAlias type="connected.car.owner.OwnerVO" alias="ownervo" />
 		<typeAlias type="connected.car.expendable.ShopExpendableVO" alias="shopexpendvo"/>
 		<typeAlias type="connected.car.expendable.ExpendableLogVO" alias="expendlogvo"/>

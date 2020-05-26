@@ -17,22 +17,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".control.MyCarInfo"></activity>
-        <activity android:name=".control.CarInfo" />
-        <activity android:name=".member.UserCarActivity" />
-        <activity android:name=".control.MainActivity">
+        <activity android:name=".member.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".control.MyCarInfo" />
+        <activity android:name=".control.CarInfo" />
+        <activity android:name=".member.UserCarActivity" />
+        <activity android:name=".control.MainActivity">
+        </activity>
         <activity android:name=".member.JoinActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
