@@ -73,7 +73,7 @@
                             android:layout_height="80dp"
                             android:scaleType="centerCrop"
                             android:background="@android:color/transparent"
-                            android:src="@drawable/switch"
+                            android:src="@drawable/switchh"
                             android:layout_marginTop="30dp"
 
                             />
