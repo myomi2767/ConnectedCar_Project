@@ -56,6 +56,10 @@
         <item>쎄라토</item>
     </string-array>
 
+    <string-array name="genesis">
+        <item>G</item>
+    </string-array>
+
     <string-array name="car_year">
         <item>2020년</item>
         <item>2019년</item>
