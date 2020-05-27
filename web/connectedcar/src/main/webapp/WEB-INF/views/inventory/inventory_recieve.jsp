@@ -14,7 +14,7 @@
 	<h4 id="code">입고</h4>
 	<div class="row">
 		<div class="col-sm-4"></div>
-		<div class="col-sm-4"><input id="count" type="number" required="required"></div><!-- 숫자가 있을 때만 등록가능 => required속성 -->
+		<div class="col-sm-4"><input id="count" type="number" required="required" min="1"></div><!-- 숫자가 있을 때만 등록가능 => required속성 -->
 		<div class="col-sm-4"></div>
 	</div>
 	<div class="row">

@@ -100,11 +100,13 @@ li {display:inline-block;}
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="/connectedcar/inventory/inventorymain.do">Carnect</a>
+				<form action="/connectedcar/sales/loadData.do" method="post">
+					<Input type="submit" class="navbar-brand" value="Carnect" style="border: 0; outline: 0; background-color: transparent;"/>
+				</form>
 			</div>
 			<div class="navbar-collapse collapse navbar-right" style="margin-top: 12px;">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="/connectedcar/inventory/inventorymain.do">MAIN</a></li>
+					<li class="active"><a href="/connectedcar/sales/loadData.do">MAIN</a></li>
 					<li><a href="/connectedcar/inventory/manageList.do">재고관리</a></li>	
 					
 					 <c:if test= "${loginuser.owner_id == 'admin'}">

@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import connected.car.admin.Pagination;
 import connected.car.inventory.ExpendableVO;
 
 @Repository("expendableDao")
@@ -25,8 +26,12 @@ public class ExpendableDAOImpl implements ExpendableDAO {
 	}
 	
 	@Override
-	public List<ShopExpendableVO> findShopExpendableList(String shop_id) {		
-		return sqlSession.selectList("connected.car.expendable.findShopExpendList", shop_id);
+	public List<ShopExpendableVO> findShopExpendableList(String shop_id, Pagination pagination) {
+		Map<String, Object> mFindData = new HashMap<String, Object>();
+		mFindData.put("shop_id", shop_id);
+		mFindData.put("start", pagination.getStart());
+		mFindData.put("end", pagination.getEnd());
+		return sqlSession.selectList("connected.car.expendable.findShopExpendList", mFindData);
 	}
 	
 	@Override
@@ -60,6 +65,11 @@ public class ExpendableDAOImpl implements ExpendableDAO {
 		System.out.println(log.toString());
 		sqlSession.update("connected.car.expendable.updateShopExpendCount", log);
 		return sqlSession.insert("connected.car.expendable.insertLog", log);
+	}
+	
+	@Override
+	public int getAllCnt(String shop_id) {
+		return sqlSession.selectOne("connected.car.expendable.getAllCnt", shop_id);
 	}
 
 }
