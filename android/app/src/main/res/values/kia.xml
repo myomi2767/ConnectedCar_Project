@@ -1,26 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="kia_k5">
-        <item>신형 K5(DL3) 하이브리드</item>
-        <item>신형 K5(DL3)</item>
-        <item>더 뉴 K5(JF) 하이브리드</item>
-        <item>더 뉴 Kt(JF)</item>
-        <item>K5 2세대</item>
-        <item>K5 플러그인 하이브리드</item>
-        <item>K5(JF) 하이브리드</item>
-        <item>올 뉴 K5(JF)</item>
-        <item>더 뉴 K5</item>
-        <item>K5 하이브리드</item>
-        <item>K5</item>
+        <item>K5 하이브리드 20</item>
+        <item>K5 20</item>
+        <item>K5 하이브리드 18</item>
+        <item>K5 18</item>
+        <item>K5 하이브리드 16</item>
+        <item>K5 16</item>
+        <item>K5 하이브리드 14</item>
+        <item>K5 14</item>
+        <item>K5 하이브리드 11</item>
+        <item>K5 11</item>
+    </string-array>
+    <string-array name="kia_k7">
+        <item>K7 하이브리드 19</item>
+        <item>K7 19</item>
+        <item>K7 하이브리드 17</item>
+        <item>K7 16</item>
+        <item>K7 하이브리드 14</item>
+        <item>K7 13</item>
+        <item>K7 08</item>
+    </string-array>
+    <string-array name="kia_k9">
+        <item>K9 18</item>
+        <item>K9 15</item>
+        <item>K9 11</item>
+    </string-array>
+
+    <string-array name="kia_k3">
+        <item>K3 18</item>
+        <item>K3 16</item>
+        <item>K3 12</item>
     </string-array>
 
     <string-array name="kia_morning">
-        <item>올 뉴 모닝(JA)</item>
-        <item>더 뉴 모닝</item>
-        <item>올 뉴 모닝</item>
-        <item>뉴모닝</item>
-        <item>모닝</item>
+        <item>모닝 20</item>
+        <item>모닝 17</item>
+        <item>모닝 15</item>
+        <item>모닝 11</item>
+        <item>모닝 08</item>
+        <item>모닝 04: SEP.2006-</item>
+        <item>모닝 04: -SEP.2006</item>
     </string-array>
+
+    <string-array name="kia_serato">
+        <item>세라토 SX 06</item>
+        <item>세라토 06: SEP.2006-</item>
+        <item>세라토 06: -SEP.2006</item>
+        <item>세라토 03</item>
+    </string-array>
+
+    <string-array name="kia_forte">
+        <item>포르테 해치백</item>
+        <item>포르테 쿱</item>
+        <item>포르테/포르테 쿱 08</item>
+    </string-array>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <string-array name="kia_sorento">
         <item>쏘렌토 하이브리드(MQ4)</item>
@@ -42,25 +97,9 @@
         <item>스포티지</item>
     </string-array>
 
-    <string-array name="kia_k3">
-        <item>K3 GT</item>
-        <item>올 뉴 K3</item>
-        <item>K3 유로</item>
-        <item>더 뉴 K3</item>
-        <item>K3 쿱</item>
-        <item>K3</item>
-    </string-array>
 
-    <string-array name="kia_k7">
-        <item>K7 프리미어 하이브리드</item>
-        <item>K7 프리미어</item>
-        <item>올 뉴 K7 하이브리드</item>
-        <item>올 뉴 K7</item>
-        <item>K7 하이브리드</item>
-        <item>더 뉴 K7</item>
-        <item>더 프레스티지 K7</item>
-        <item>K7</item>
-    </string-array>
+
+
 
     <string-array name="kia_carnival">
         <item>더 뉴 카니발</item>
@@ -90,12 +129,7 @@
         <item>셀토스</item>
     </string-array>
 
-    <string-array name="kia_forte">
-        <item>포르테 해치백</item>
-        <item>포르테 쿱</item>
-        <item>포르테</item>
-    </string-array>
-    
+
     <string-array name="kia_pride">
         <item>더 뉴 프라이드</item>
         <item>올 뉴 프라이드</item>
@@ -139,16 +173,7 @@
         <item>스토닉</item>
     </string-array>
 
-    <string-array name="kia_k9">
-        <item>더 K9</item>
-        <item>더 뉴 K9</item>
-        <item>K9</item>
-    </string-array>
 
-    <string-array name="kia_serato">
-        <item>뉴쎄라토</item>
-        <item>쎄라토</item>
-    </string-array>
+
+
 </resources>
-
-
