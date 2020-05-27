@@ -92,7 +92,7 @@ public class User extends Thread{
 		if(protocol.equals("job")) {
 			String message = st.nextToken();
 			String category = st.nextToken();
-			String id = st.nextToken();
+			String id = st.nextToken().trim();
 			System.out.println("job의 내용:"+message+":"+category+":"+id);
 			User userClient = null;
 			
@@ -106,7 +106,7 @@ public class User extends Thread{
 				System.out.println("카가 메시지보냄"+id);
 				userClient = userlist.get(id);
 			}
-			
+			//null인 부분
 			System.out.println(userClient);
 			if(userClient!=null) {
 				userClient.sendMsg("job:"+message+":"+category+":"+id);

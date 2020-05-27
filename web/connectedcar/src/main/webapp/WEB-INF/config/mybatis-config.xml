@@ -17,6 +17,7 @@
 		<typeAlias type="connected.car.admin.Pagination" alias="paging"/>
 		<typeAlias type="connected.car.owner.ShopinfoVO" alias="shopinfovo" />
 		<typeAlias type="connected.car.owner.AddressVO" alias="addressvo"/>
+		<typeAlias type="connected.car.sales.SalesVO" alias="salesvo"/>
 		
 	</typeAliases>
 	<mappers>
@@ -24,5 +25,6 @@
 		<mapper resource="mapper/member.xml"/>
 		<mapper resource="mapper/admin.xml"/>
 		<mapper resource="mapper/expendable.xml"/>
+		<mapper resource="mapper/sales.xml"/>
 	</mappers>
 </configuration>
