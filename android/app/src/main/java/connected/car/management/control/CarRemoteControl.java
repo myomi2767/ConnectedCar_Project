@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ToggleButton;
 
 import androidx.fragment.app.Fragment;
@@ -25,8 +26,9 @@ import connected.car.management.R;
  * A simple {@link Fragment} subclass.
  */
 public class CarRemoteControl extends Fragment {
-    ToggleButton powerOff;
 
+    ImageButton powerOn;
+    ImageButton airControl;
     AsyncTaskPower asyncTaskPower;
     Socket socket;
 
@@ -51,17 +53,12 @@ public class CarRemoteControl extends Fragment {
         View view = inflater.inflate(R.layout.fragment_car_remote_control, container, false);
         id= "11111";
 
-        powerOff = view.findViewById(R.id.powerOff);
-        powerOff.setOnClickListener(new View.OnClickListener() {
+        powerOn = view.findViewById(R.id.powerOn);
+        airControl = view.findViewById(R.id.airControl);
+        powerOn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(powerOff.isChecked()){
-                    powerOff.setBackgroundDrawable(getResources().getDrawable(R.drawable.poweron));
                     send_msg(v);
-                }else{
-                    powerOff.setBackgroundDrawable(getResources().getDrawable(R.drawable.poweroff));
-                    send_msg(v);
-                }
             }
         });
 
@@ -74,7 +71,7 @@ public class CarRemoteControl extends Fragment {
             String message = "";
             @Override
             public void run() {
-                if(view.getId()==R.id.powerOff){
+                if(view.getId()==R.id.powerOn){
                     message = "engineStart";
                 }
                 pw.println("job:"+message+":phone:"+id);
