@@ -494,14 +494,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             speedometer.moveToValue(speed);
             speedometer.setLowerText(Integer.toString(speed));
-/*            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    pw.println("speed_up");
-                    pw.flush();
-                }
-            }).start();*/
-
         }else if(v.getId()==R.id.btnDown){
             if(speed>=3) {
                 speed = speed - 3;
@@ -514,14 +506,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             speed = 30;
             speedometer.moveToValue(speed);
             speedometer.setLowerText(Integer.toString(speed));
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    pw.println("speed_30");
+                    pw.flush();
+                }
+            }).start();
         }else if(v.getId()==R.id.btn60){
             speed = 60;
             speedometer.moveToValue(speed);
             speedometer.setLowerText(Integer.toString(speed));
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    pw.println("speed_60");
+                    pw.flush();
+                }
+            }).start();
         }else if(v.getId()==R.id.btn90){
             speed = 90;
             speedometer.moveToValue(speed);
             speedometer.setLowerText(Integer.toString(speed));
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    pw.println("speed_90");
+                    pw.flush();
+                }
+            }).start();
         }else if(v.getId()==R.id.btnBack){
             destiName.setText("");
             naviSearchView.setVisibility(View.INVISIBLE);
