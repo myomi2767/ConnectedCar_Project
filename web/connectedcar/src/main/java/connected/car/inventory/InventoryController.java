@@ -25,11 +25,23 @@ public class InventoryController {
 
 	//재고관리 메인화면
 	@RequestMapping(value = "/inventory/inventorymain.do", method = RequestMethod.GET)
-	public ModelAndView mainView(HttpSession session) {
+	public ModelAndView mainView(HttpSession session, Pagination pagination, @RequestParam(value="curPage", required=false)String curPage,
+																				@RequestParam(value="cntPerPage", required=false)String cntPerPage) {
 		ModelAndView mav = new ModelAndView();
 		OwnerVO owner = (OwnerVO)session.getAttribute("loginuser");
 		String shop_id = owner.getShop_id();
-		ArrayList<ShopExpendableVO> list = (ArrayList<ShopExpendableVO>)service.findShopExpendableList(shop_id);
+		int listCnt = service.getAllCnt(shop_id);
+		if(curPage==null && cntPerPage==null) {
+			curPage = "1";
+			cntPerPage = "5";
+		}else if(curPage==null) {
+			curPage = "1";
+		}else if(cntPerPage==null) {
+			cntPerPage = "5";
+		}
+		pagination = new Pagination(listCnt, Integer.parseInt(curPage), Integer.parseInt(cntPerPage));
+		ArrayList<ShopExpendableVO> list = (ArrayList<ShopExpendableVO>)service.findShopExpendableList(shop_id, pagination);
+		mav.addObject("paging", pagination);
 		mav.addObject("expendList", list);
 		mav.setViewName("inventory/inventorymain");
 		return mav;
