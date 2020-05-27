@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Carnect</string>
+
+    <string name="myip">192.168.43.172</string>
     <string-array name="gender">
         <item>남자</item>
         <item>여자</item>

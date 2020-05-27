@@ -31,7 +31,7 @@
 	</insert>
 	
 	<select id="findExpendLog" parameterType="Map" resultType="expendlogvo">
-		select * from expendable_log where shop_id = #{shop_id} and expend_id = #{expend_id}
+		select * from expendable_log where shop_id = #{shop_id} and expend_id = #{expend_id} order by in_out_date desc
 	</select>
 	
 	<insert id="insertLog" parameterType="expendlogvo">

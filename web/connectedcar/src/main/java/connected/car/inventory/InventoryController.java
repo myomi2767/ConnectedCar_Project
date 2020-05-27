@@ -22,6 +22,20 @@ public class InventoryController {
 	@Autowired
 	ExpendableService service;
 
+
+	//재고관리 메인화면
+	@RequestMapping(value = "/inventory/inventorymain.do", method = RequestMethod.GET)
+	public ModelAndView mainView(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		OwnerVO owner = (OwnerVO)session.getAttribute("loginuser");
+		String shop_id = owner.getShop_id();
+		ArrayList<ShopExpendableVO> list = (ArrayList<ShopExpendableVO>)service.findShopExpendableList(shop_id);
+		mav.addObject("expendList", list);
+		mav.setViewName("inventory/inventorymain");
+		return mav;
+	}
+	
+	
 	//재고관리 리스트 페이지
 	@RequestMapping(value = "/inventory/manageList.do", method = RequestMethod.GET)
 	public ModelAndView manageView(HttpSession session, Pagination pagination, @RequestParam(value="curPage", required=false)String curPage,
@@ -52,11 +66,6 @@ public class InventoryController {
 		return mav;
 	}
 
-	//재고관리 메인화면
-	@RequestMapping(value = "/inventory/inventorymain.do", method = RequestMethod.GET)
-	public String insertView() {
-		return "inventory/inventorymain";
-	}
 	//재고관리 상세 페이지
 	@RequestMapping(value = "/inventory/manageDetail.do", method = RequestMethod.GET)
 	public ModelAndView manageDetailView(String expend_id, HttpSession session) {
