@@ -17,6 +17,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.StringTokenizer;
 
 import connected.car.management.R;
 
@@ -36,9 +37,10 @@ public class CarRemoteControl extends Fragment {
 
     OutputStream os;
     PrintWriter pw;
-    String id;
+    //String id;
     String carId;
 
+    StringTokenizer st;
     public CarRemoteControl() {
         // Required empty public constructor
     }
@@ -49,7 +51,7 @@ public class CarRemoteControl extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_car_remote_control, container, false);
-        id= "11111";
+        carId= "11111";
 
         powerOff = view.findViewById(R.id.powerOff);
         powerOff.setOnClickListener(new View.OnClickListener() {
@@ -77,7 +79,7 @@ public class CarRemoteControl extends Fragment {
                 if(view.getId()==R.id.powerOff){
                     message = "engineStart";
                 }
-                pw.println("job:"+message+":phone:"+id);
+                pw.println("job:"+message+":phone:"+carId);
                 pw.flush();
             }
         }).start();
@@ -86,7 +88,7 @@ public class CarRemoteControl extends Fragment {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                socket = new Socket("70.12.227.61", 12345);
+                socket = new Socket("70.12.116.67", 12345);
                 if(socket != null){
                     ioWork();
                 }
@@ -98,6 +100,7 @@ public class CarRemoteControl extends Fragment {
                             try {
                                 msg = br.readLine();
                                 Log.d("remote", "서버로부터 수신된 메시지>>" + msg);
+                                filteringMsg(msg);
                             } catch (IOException e) {
                                 try {
                                     is.close();
@@ -120,6 +123,19 @@ public class CarRemoteControl extends Fragment {
 
             return null;
         }
+        private void filteringMsg(String msg){
+            st = new StringTokenizer(msg, ":");
+            String protocol = st.nextToken();
+            System.out.println("protocol:"+protocol);
+            if(protocol.equals("job")) {
+                String message = st.nextToken();
+                String category = st.nextToken();
+                String id = st.nextToken();
+                if(message.equals("success")){
+                    Log.d("remote", "제어성공");
+                }
+            }
+        }
         void ioWork(){
             //최초접속할 때 서버에게 접속한 아이디에 정보를 보내기
             try {
@@ -130,7 +146,7 @@ public class CarRemoteControl extends Fragment {
                 os = socket.getOutputStream();
                 pw = new PrintWriter(os, true);
                 //DB에 있는 id와 차량번호를 넘긴다.
-                pw.println("phone:"+id+carId);
+                pw.println("phone:"+carId);
                 pw.flush();
 
             } catch (IOException e) {

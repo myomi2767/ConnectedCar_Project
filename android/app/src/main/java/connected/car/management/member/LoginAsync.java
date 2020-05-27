@@ -34,7 +34,7 @@ public class LoginAsync extends AsyncTask<MemberVO, Void, MemberVO> {
         MemberVO resultVo = null;
 
         try {
-            URL url = new URL("http://172.20.10.4:8088/connectedcar/member/login.do");
+            URL url = new URL("http://70.12.116.67:8088/connectedcar/member/login.do");
             JSONObject obj = new JSONObject();
             obj.put("user_id", memberVos[0].user_id);
             obj.put("user_password", memberVos[0].user_password);
