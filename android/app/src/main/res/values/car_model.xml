@@ -1,59 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="hyundai">
+    <string-array name="hyundai_model">
         <item>아반떼</item>
         <item>쏘나타</item>
         <item>그랜저</item>
-        <item>싼타페</item>
-        <item>투싼</item>
-        <item>코나</item>
         <item>i30</item>
-        <item>팰리세이드</item>
-        <item>제네시스</item>
-        <item>스타렉스</item>
-        <item>포터</item>
-        <item>벨로스터</item>
+        <item>i40</item>
+        <item>구 제네시스, 현 G 시리즈</item>
+        <item>에쿠스</item>
+        <item>아이오닉</item>
         <item>엑센트</item>
+        <item>코나</item>
+        <item>포터</item>
+        <item>클릭</item>
+        <item>벨로스터</item>
+        <item>베르나</item>
+        <item>넥쏘</item>
+        <item>아슬란</item>
+        <item>투싼</item>
+        <item>블루 온</item>
+        <item>아토스</item>
+
+        <!--
+        현재 db 부품목록에 없는 차종들
+        <item>싼타페</item>
+        <item>팰리세이드</item>
+        <item>스타렉스</item>
         <item>맥스크루즈</item>
         <item>베뉴</item>
         <item>베라크루즈</item>
-        <item>아이오닉</item>
-        <item>i40</item>
-        <item>에쿠스</item>
         <item>트라제XG</item>
-        <item>넥쏘</item>
-        <item>베르나</item>
-        <item>아슬란</item>
         <item>마이티</item>
         <item>투스카니</item>
         <item>테라칸</item>
         <item>메가트럭</item>
         <item>트라고 엑시언트</item>
-        <item>클릭</item>
         <item>카운티</item>
+
+        -->
     </string-array>
 
-    <string-array name="kia">
-        <item>K5</item>
-        <item>모닝</item>
-        <item>쏘렌토</item>
-        <item>스포티지</item>
+    <string-array name="kia_model">
         <item>K3</item>
+        <item>K5</item>
         <item>K7</item>
         <item>K9</item>
-        <item>카니발</item>
-        <item>니로</item>
-        <item>레이</item>
-        <item>셀토스</item>
-        <item>프라이드</item>
+        <item>모닝</item>
+        <item>세라토</item>
         <item>포르테</item>
-        <item>모하비</item>
         <item>스팅어</item>
+        <item>프라이드</item>
+        <item>쏘울</item>
+        <item>레이</item>
+        <item>오피러스</item>
+        <item>모하비</item>
+        <item>니로</item>
+        <item>로체</item>
+        <item>비스토</item>
+        <item>스펙트라</item>
+        <item>쏘렌토</item>
+        <item>엔터프라이즈</item>
+        <item>세피아</item>
+        <item>리갈/옵티마</item>
+        <item>크레도스</item>
+        <item>포텐샤</item>
+        <item>리오</item>
+        <item>봉고</item>
+
+        <!--
+                현재 db 부품목록에 없는 차종들
+        <item>스포티지</item>
+        <item>카니발</item>
+        <item>셀토스</item>
         <item>카렌스</item>
         <item>스토닉</item>
-        <item>쏘울</item>
-        <item>봉고</item>
-        <item>쎄라토</item>
+                -->
+
     </string-array>
 
     <string-array name="genesis">
@@ -82,6 +104,12 @@
         <item>2002년</item>
         <item>2001년</item>
         <item>2000년</item>
+        <item>1999년</item>
+        <item>1999년</item>
+        <item>1998년</item>
+        <item>1997년</item>
+
+
     </string-array>
 </resources>
 

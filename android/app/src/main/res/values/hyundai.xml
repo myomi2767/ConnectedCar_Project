@@ -66,6 +66,11 @@
         <item>제네시스 쿠페 12</item>
         <item>제네시스 07</item>
         <item>제네시스 쿠페 08</item>
+        <item>G80 20</item>
+        <item>G90 19</item>
+        <item>G70 17</item>
+        <item>G80 16</item>
+        <item>EQ900 16</item>
     </string-array>
 
     <string-array name="hyundai_equus">

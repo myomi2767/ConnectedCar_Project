@@ -5,17 +5,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".member.UserCarActivity">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:text="차량등록번호"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+    tools:context=".car.RegisterCarActivity">
 
     <LinearLayout
         android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/button_round"
+        android:backgroundTint="#d6cdc0"
+        android:orientation="horizontal">
+        <TextView
+            android:paddingLeft="5dp"
+            android:gravity="center_vertical"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:textColor="#FFFFFF"
+            android:text="차량등록번호 :"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        <TextView
+            android:id="@+id/text_carNum"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="#FFFFFF"
+            android:text="34가 6773"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
@@ -26,14 +48,19 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:gravity="center_vertical"
             android:text="브랜드 :"/>
-        <Button
-            android:layout_width="match_parent"
+        <Spinner
+            android:id="@+id/spinner_brand"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:hint="제조사 선택"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+            android:defaultFocusHighlightEnabled="true">
+        </Spinner>
     </LinearLayout>
     <LinearLayout
-        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
@@ -44,14 +71,42 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:gravity="center_vertical"
             android:text="모델명 :"/>
-        <Button
-            android:layout_width="match_parent"
+        <Spinner
+            android:id="@+id/spinner_model"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:hint="모델 선태"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+            android:defaultFocusHighlightEnabled="true">
+        </Spinner>
     </LinearLayout>
     <LinearLayout
-        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+        <TextView
+            android:layout_width="130dp"
+            android:layout_height="match_parent"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:gravity="center_vertical"
+            android:text="세부 모델명 :"/>
+        <Spinner
+            android:id="@+id/spinner_detail_model"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:defaultFocusHighlightEnabled="true">
+        </Spinner>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
@@ -62,14 +117,19 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:gravity="center_vertical"
             android:text="연료 종류 :"/>
-        <Button
-            android:layout_width="match_parent"
+        <Spinner
+            android:id="@+id/spinner_fuel"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:hint="연료 선택"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+            android:defaultFocusHighlightEnabled="true">
+        </Spinner>
     </LinearLayout>
     <LinearLayout
-        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
@@ -80,17 +140,19 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:gravity="center_vertical"
             android:text="연식 :"/>
-
-        <EditText
-            android:layout_width="match_parent"
+        <Spinner
+            android:id="@+id/spinner_year"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:inputType="number"
-            android:maxLength="8"
-            android:hint="yyyyMMdd"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+            android:defaultFocusHighlightEnabled="true">
+        </Spinner>
     </LinearLayout>
     <LinearLayout
-        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
@@ -103,6 +165,7 @@
             android:text="배기량 :"/>
 
         <EditText
+            android:id="@+id/car_cc"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="number"
@@ -111,7 +174,10 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
     </LinearLayout>
     <LinearLayout
-        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
@@ -124,6 +190,7 @@
             android:text="주행거리 :"/>
 
         <EditText
+            android:id="@+id/car_km"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="number"
@@ -132,7 +199,10 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
     </LinearLayout>
     <LinearLayout
-        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
@@ -144,6 +214,7 @@
             android:gravity="center_vertical"
             android:text="차량종류 :"/>
         <RadioGroup
+            android:id="@+id/car_radio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -159,4 +230,17 @@
                 android:text="특수차량(경찰차,소방차등)"/>
         </RadioGroup>
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_submit"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_round"
+        android:backgroundTint="#384452"
+        android:textColor="#FFFFFF"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:text="차량 등록" />
 </LinearLayout>

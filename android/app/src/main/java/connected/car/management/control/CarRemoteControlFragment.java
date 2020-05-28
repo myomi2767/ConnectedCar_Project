@@ -1,6 +1,5 @@
 package connected.car.management.control;
 
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,7 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.ImageButton;
+import android.widget.ToggleButton;
 
 import androidx.fragment.app.Fragment;
 
@@ -27,8 +27,16 @@ import connected.car.management.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CarRemoteStatus extends Fragment {
-    AsyncTaskStatus asyncTaskStatus;
+public class CarRemoteControlFragment extends Fragment {
+
+    ImageButton powerOn;
+    ImageButton airControl;
+    ImageButton engineOff;
+
+    Button btnEmerOn;
+    Button btnEmerOff;
+
+    AsyncTaskPower asyncTaskPower;
     Socket socket;
 
     InputStream is;
@@ -37,28 +45,11 @@ public class CarRemoteStatus extends Fragment {
 
     OutputStream os;
     PrintWriter pw;
+    //String id;
     String carId;
 
     StringTokenizer st;
-
-    Button refresh;
-
-    TextView engineText;
-    TextView engineText2;
-
-    TextView doorText;
-    TextView doorText2;
-    TextView doorText3;
-
-    TextView airText;
-    TextView airText2;
-
-    boolean engineStatus;
-    boolean doorStatus;
-    boolean airconditionStatus;
-    boolean emergencyStatus;
-
-    public CarRemoteStatus() {
+    public CarRemoteControlFragment() {
         // Required empty public constructor
     }
 
@@ -66,48 +57,65 @@ public class CarRemoteStatus extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view =inflater.inflate(R.layout.fragment_car_remote_status, container, false);
 
-        refresh = view.findViewById(R.id.btnRefresh);
-        engineText = view.findViewById(R.id.engineText);
-        engineText2 = view.findViewById(R.id.engineText2);
+        View view = inflater.inflate(R.layout.fragment_car_remote_control, container, false);
+        carId= "11111";
 
-        doorText = view.findViewById(R.id.doorText);
-        doorText2 = view.findViewById(R.id.doorText2);
-        doorText3 = view.findViewById(R.id.doorText3);
+        powerOn = view.findViewById(R.id.powerOn);
+        engineOff = view.findViewById(R.id.engineOff);
+        airControl = view.findViewById(R.id.airControl);
+        btnEmerOn = view.findViewById(R.id.btnEmerLightOn);
+        btnEmerOff = view.findViewById(R.id.btnEmerLightOnSiren);
 
-        airText = view.findViewById(R.id.airText);
-        airText2 = view.findViewById(R.id.airText2);
-
-        carId = "11111";
-
-        asyncTaskStatus = new AsyncTaskStatus();
-        asyncTaskStatus.execute();
-
-        refresh.setOnClickListener(new View.OnClickListener() {
+        powerOn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 send_msg(v);
             }
         });
+        engineOff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                send_msg(v);
+            }
+        });
+        btnEmerOn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                send_msg(v);
+            }
+        });
+        btnEmerOff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                send_msg(v);
+            }
+        });
+
+        asyncTaskPower = new AsyncTaskPower();
+        asyncTaskPower.execute();
         return view;
     }
-
     public void send_msg(final View view){
         new Thread(new Runnable() {
             String message = "";
             @Override
             public void run() {
-                if(view.getId()==R.id.btnRefresh){
-                    message="status";
+                if(view.getId()==R.id.powerOn){
+                    message = "engineStart";
+                }else if(view.getId()==R.id.engineOff){
+                    message = "engineStop";
+                }else if(view.getId()==R.id.btnEmerLightOn){
+                    message = "emergencyOn";
+                }else if(view.getId()==R.id.btnEmerLightOnSiren){
+                    message = "emergencyAndSiren";
                 }
                 pw.println("job:"+message+":phone:"+carId);
                 pw.flush();
             }
         }).start();
     }
-
-    class AsyncTaskStatus extends AsyncTask<Void, Void, Void> {
+    class AsyncTaskPower extends AsyncTask<Void, Void, Void>{
         @Override
         protected Void doInBackground(Void... voids) {
             try {
@@ -149,12 +157,15 @@ public class CarRemoteStatus extends Fragment {
         private void filteringMsg(String msg){
             st = new StringTokenizer(msg, ":");
             String protocol = st.nextToken();
-            System.out.println("protocol:"+protocol);
             if(protocol.equals("job")) {
                 String message = st.nextToken();
-                /*String category = st.nextToken();
-                String id = st.nextToken();*/
-                setStatus(message);
+                String category = st.nextToken();
+                String id = st.nextToken();
+                if(message.equals("success")){
+                    Log.d("remote", "제어성공");
+                }else if(message.equals("fail")){
+                    Log.d("remote", "제어실패");
+                }
             }
         }
         void ioWork(){
@@ -185,57 +196,6 @@ public class CarRemoteStatus extends Fragment {
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }
-    }
-
-    public void setStatus(String result){
-        char[] status = result.toCharArray();
-        if(status[0]=='0'){
-            engineStatus = false;
-        }else if (status[0]=='1'){
-            engineStatus = true;
-        }
-
-        if(status[1]=='0'){
-            doorStatus = false;
-        }else if (status[1]=='1'){
-            doorStatus = true;
-        }
-
-        if(status[2]=='0'){
-            airconditionStatus = false;
-        }else if (status[2]=='1'){
-            airconditionStatus = true;
-        }
-
-        if(status[0]=='0'){
-            emergencyStatus = false;
-        }else if (status[0]=='1'){
-            emergencyStatus = true;
-        }
-
-        setView();
-    }
-
-    public void setView(){
-        if(engineStatus){
-            engineText.setText("켜짐");
-            engineText.setTextColor(Color.BLUE);
-            engineText2.setText("켜짐");
-            engineText2.setTextColor(Color.BLUE);
-        }
-        if (doorStatus){
-            doorText.setText("열림");
-            doorText.setTextColor(Color.BLUE);
-            doorText2.setText("열림");
-            doorText2.setTextColor(Color.BLUE);
-            doorText3.setText("모두 열림");
-        }
-        if (airconditionStatus){
-            airText.setText("켜짐");
-            airText.setTextColor(Color.BLUE);
-            airText2.setText("켜짐");
-            airText2.setTextColor(Color.BLUE);
         }
     }
 }
