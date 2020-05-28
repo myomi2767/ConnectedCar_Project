@@ -32,6 +32,7 @@ public class CarRemoteControlFragment extends Fragment {
     ImageButton powerOn;
     ImageButton airControl;
     ImageButton engineOff;
+
     Button btnEmerOn;
     Button btnEmerOff;
 
@@ -66,28 +67,24 @@ public class CarRemoteControlFragment extends Fragment {
         btnEmerOn = view.findViewById(R.id.btnEmerLightOn);
         btnEmerOff = view.findViewById(R.id.btnEmerLightOnSiren);
 
-
         powerOn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 send_msg(v);
             }
         });
-
         engineOff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 send_msg(v);
             }
         });
-
         btnEmerOn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 send_msg(v);
             }
         });
-
         btnEmerOff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -160,13 +157,14 @@ public class CarRemoteControlFragment extends Fragment {
         private void filteringMsg(String msg){
             st = new StringTokenizer(msg, ":");
             String protocol = st.nextToken();
-            System.out.println("protocol:"+protocol);
             if(protocol.equals("job")) {
                 String message = st.nextToken();
                 String category = st.nextToken();
                 String id = st.nextToken();
                 if(message.equals("success")){
                     Log.d("remote", "제어성공");
+                }else if(message.equals("fail")){
+                    Log.d("remote", "제어실패");
                 }
             }
         }
