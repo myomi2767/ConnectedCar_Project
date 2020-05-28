@@ -135,6 +135,12 @@ a:hover, a:focus {
 	background-color: transparent;
 }
 
+.navbar-default .navbar-nav>.active>input[type='submit'], .navbar-default .navbar-nav>.active>input[type='submit']:hover,
+	.navbar-default .navbar-nav>.active>input[type='submit']:focus {
+	color: #FEE2E1;
+	background-color: transparent;
+}
+
 .navbar-default {
 	background-color: #314589;
 	border-color: transparent;

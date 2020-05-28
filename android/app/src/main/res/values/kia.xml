@@ -51,126 +51,89 @@
     </string-array>
 
     <string-array name="kia_forte">
-        <item>포르테 해치백</item>
-        <item>포르테 쿱</item>
+        <item>포르테 하이브리드 09</item>
         <item>포르테/포르테 쿱 08</item>
     </string-array>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <string-array name="kia_sorento">
-        <item>쏘렌토 하이브리드(MQ4)</item>
-        <item>쏘렌토(MQ4)</item>
-        <item>더 뉴 쏘렌토</item>
-        <item>올 뉴 쏘렌토</item>
-        <item>뉴 쏘렌토 R</item>
-        <item>쏘렌토 R</item>
-        <item>뉴쏘렌토</item>
-        <item>쏘렌토</item>
+    <string-array name="kia_stinger">
+        <item>스팅어 17</item>
     </string-array>
-    
-    <string-array name="kia_sportage">
-        <item>스포티지 더 볼드</item>
-        <item>The SUV 스포티지</item>
-        <item>더 뉴 스포티지 R</item>
-        <item>스포티지 R</item>
-        <item>New 스포티지</item>
-        <item>스포티지</item>
-    </string-array>
-
-
-
-
-
-    <string-array name="kia_carnival">
-        <item>더 뉴 카니발</item>
-        <item>올 뉴 카니발</item>
-        <item>카니발 R</item>
-        <item>뉴카니발</item>
-        <item>그랜드 카니발</item>
-        <item>카니발 II</item>
-        <item>카니발</item>
-    </string-array>
-
-    <string-array name="kia_niro">
-        <item>더 뉴 니로 PHEV</item>
-        <item>더 뉴 니로</item>
-        <item>니로 EV</item>
-        <item>니로 플러그인 하이브리드</item>
-        <item>니로</item>
-    </string-array>
-    
-    <string-array name="kia_ray">
-        <item>더 뉴 레이</item>
-        <item>레이</item>
-        <item>레이 EV</item>
-    </string-array>
-    
-    <string-array name="kia_seltos">
-        <item>셀토스</item>
-    </string-array>
-
 
     <string-array name="kia_pride">
-        <item>더 뉴 프라이드</item>
-        <item>올 뉴 프라이드</item>
-        <item>프라이드(신형)</item>
-        <item>프라이드</item>
+        <item>프라이드 05: SEP.2006-</item>
+        <item>프라이드 05: -SEP.2006</item>
     </string-array>
-    
-
-    <string-array name="kia_mohave">
-        <item>모하비 더 마스터</item>
-        <item>더 뉴 모하비</item>
-        <item>모하비</item>
-    </string-array>
-    
-    <string-array name="kia_stinger">
-        <item>스팅어</item>
-    </string-array>
-    
-    <string-array name="kia_carens">
-        <item>더 뉴 카렌스</item>
-        <item>올 뉴 카렌스</item>
-        <item>뉴카렌스</item>
-        <item>카렌스 II</item>
-        <item>카렌스</item>
-    </string-array>
-
     <string-array name="kia_soul">
-        <item>쏘울 부스터 EV</item>
-        <item>쏘울 부스터</item>
-        <item>더 뉴 쏘울</item>
-        <item>쏘울 EV</item>
-        <item>올 뉴 쏘울</item>
-        <item>쏘울</item>
+        <item>쏘울 전기차 19</item>
+        <item>쏘울 전기차 14</item>
+    </string-array>
+
+    <string-array name="kia_ray">
+        <item>레이 전기차 13</item>
+    </string-array>
+
+    <string-array name="kia_opirus">
+        <item>오피러스 06: NOV.2006-</item>
+        <item>오피러스 06: -OCT.2006</item>
+        <item>오피러스 03</item>
+    </string-array>
+    <string-array name="kia_mohave">
+        <item>모하비 20</item>
+    </string-array>
+    
+    <string-array name="kia_niro">
+        <item>니로 하이브리드 16</item>
+        <item>니로 하이브리드 19</item>
+        <item>니로 전기차 19</item>
+    </string-array>
+
+    <string-array name="kia_lotze">
+        <item>로체 05: -SEP.2006</item>
+        <item>로체 05: SEP.2006-</item>
+        <item>로체 09</item>
+    </string-array>
+
+    <string-array name="kia_visto">
+        <item>비스토 99</item>
+        <item>비스토 01</item>
+    </string-array>
+
+    <string-array name="kia_spectra">
+        <item>스펙트라윙/슈마 98</item>
+        <item>스펙트라 00</item>
+    </string-array>
+
+    <string-array name="kia_sorento">
+        <item>쏘렌토 하이브리드 20</item>
+    </string-array>
+
+    <string-array name="kia_enterprise">
+        <item>엔터프라이즈 97</item>
+    </string-array>
+
+    <string-array name="kia_sepia">
+        <item>세피아 II 97</item>
+    </string-array>
+
+    <string-array name="kia_optima_rigal">
+        <item>리갈 02</item>
+        <item>옵티마 00</item>
+    </string-array>
+
+    <string-array name="kia_credos">
+        <item>크레도스 II 97</item>
+    </string-array>
+
+    <string-array name="kia_potentia">
+        <item>포텐샤 97</item>
+    </string-array>
+
+    <string-array name="kia_rio">
+        <item>리오 99</item>
     </string-array>
 
     <string-array name="kia_bongo">
-        <item>봉고3 트럭</item>
-    </string-array>
-
-    <string-array name="kia_stonic">
-        <item>스토닉</item>
+        <item>봉고 III 전기차 20</item>
+        <item>봉고 III 20</item>
     </string-array>
 
 
