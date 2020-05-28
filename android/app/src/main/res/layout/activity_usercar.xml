@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".car.UserCarActivity">
+    tools:context=".car.RegisterCarActivity">
 
     <LinearLayout
         android:layout_margin="10dp"

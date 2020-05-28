@@ -1,6 +1,5 @@
 package connected.car.management.control;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -9,7 +8,6 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -22,9 +20,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     BottomAppBar bottomAppBar;
     Toolbar toolbar;
     FloatingActionButton fab;
-    CarControl condition;
-    CarExpendable car_part;
-    CarInfo car_info;
+    CarControlFragment condition;
+    CarExpendableFragment car_part;
+    CarInfoFragment car_info;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +42,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });*/
 
         //car_info = new CarInfo();
-        car_part = new CarExpendable();
-        condition = new CarControl();
+        car_part = new CarExpendableFragment();
+        condition = new CarControlFragment();
 
         bottomAppBar.setFabAlignmentMode(BottomAppBar.FAB_ALIGNMENT_MODE_CENTER);
         //bottomAppBar의 floating action을 가운데로 맞춰준다.

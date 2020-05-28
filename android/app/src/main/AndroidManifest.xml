@@ -26,8 +26,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".control.MyCarInfo" />
-        <activity android:name=".control.CarInfo" />
-        <activity android:name=".car.UserCarActivity">
+        <activity android:name=".control.CarInfoFragment" />
+        <activity android:name=".car.RegisterCarActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

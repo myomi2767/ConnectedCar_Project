@@ -22,15 +22,15 @@ import connected.car.management.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CarControl extends Fragment {
+public class CarControlFragment extends Fragment {
     TabLayout tabLayout;
     ViewPager viewPager;
     ArrayList<Fragment> fragmentArrayList = new ArrayList<Fragment>();
     String[] titleList = {"원격제어","차량상태"};
-    CarRemoteControl control = new CarRemoteControl();
-    CarRemoteStatus status = new CarRemoteStatus();
+    CarRemoteControlFragment control = new CarRemoteControlFragment();
+    CarRemoteStatusFragment status = new CarRemoteStatusFragment();
 
-    public CarControl() {
+    public CarControlFragment() {
         // Required empty public constructor
     }
 

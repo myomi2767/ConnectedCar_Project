@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ToggleButton;
 
 import androidx.fragment.app.Fragment;
 
@@ -25,8 +27,15 @@ import connected.car.management.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CarRemoteStatus extends Fragment {
-    AsyncTaskStatus asyncTaskStatus;
+public class CarRemoteControlFragment extends Fragment {
+
+    ImageButton powerOn;
+    ImageButton airControl;
+    ImageButton engineOff;
+    Button btnEmerOn;
+    Button btnEmerOff;
+
+    AsyncTaskPower asyncTaskPower;
     Socket socket;
 
     InputStream is;
@@ -35,12 +44,11 @@ public class CarRemoteStatus extends Fragment {
 
     OutputStream os;
     PrintWriter pw;
+    //String id;
     String carId;
 
     StringTokenizer st;
-
-    Button refresh;
-    public CarRemoteStatus() {
+    public CarRemoteControlFragment() {
         // Required empty public constructor
     }
 
@@ -48,38 +56,69 @@ public class CarRemoteStatus extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view =inflater.inflate(R.layout.fragment_car_remote_status, container, false);
 
-        refresh = view.findViewById(R.id.btnRefresh);
-        carId = "11111";
+        View view = inflater.inflate(R.layout.fragment_car_remote_control, container, false);
+        carId= "11111";
 
-        asyncTaskStatus = new AsyncTaskStatus();
-        asyncTaskStatus.execute();
+        powerOn = view.findViewById(R.id.powerOn);
+        engineOff = view.findViewById(R.id.engineOff);
+        airControl = view.findViewById(R.id.airControl);
+        btnEmerOn = view.findViewById(R.id.btnEmerLightOn);
+        btnEmerOff = view.findViewById(R.id.btnEmerLightOnSiren);
 
-        refresh.setOnClickListener(new View.OnClickListener() {
+
+        powerOn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 send_msg(v);
             }
         });
+
+        engineOff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                send_msg(v);
+            }
+        });
+
+        btnEmerOn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                send_msg(v);
+            }
+        });
+
+        btnEmerOff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                send_msg(v);
+            }
+        });
+
+        asyncTaskPower = new AsyncTaskPower();
+        asyncTaskPower.execute();
         return view;
     }
-
     public void send_msg(final View view){
         new Thread(new Runnable() {
             String message = "";
             @Override
             public void run() {
-                if(view.getId()==R.id.btnRefresh){
-                    message="status";
+                if(view.getId()==R.id.powerOn){
+                    message = "engineStart";
+                }else if(view.getId()==R.id.engineOff){
+                    message = "engineStop";
+                }else if(view.getId()==R.id.btnEmerLightOn){
+                    message = "emergencyOn";
+                }else if(view.getId()==R.id.btnEmerLightOnSiren){
+                    message = "emergencyAndSiren";
                 }
                 pw.println("job:"+message+":phone:"+carId);
                 pw.flush();
             }
         }).start();
     }
-
-    class AsyncTaskStatus extends AsyncTask<Void, Void, Void> {
+    class AsyncTaskPower extends AsyncTask<Void, Void, Void>{
         @Override
         protected Void doInBackground(Void... voids) {
             try {
@@ -126,8 +165,8 @@ public class CarRemoteStatus extends Fragment {
                 String message = st.nextToken();
                 String category = st.nextToken();
                 String id = st.nextToken();
-                if(message.equals("status")){
-
+                if(message.equals("success")){
+                    Log.d("remote", "제어성공");
                 }
             }
         }
