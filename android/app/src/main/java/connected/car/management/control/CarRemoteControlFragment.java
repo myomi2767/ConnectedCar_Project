@@ -87,7 +87,10 @@ public class CarRemoteControlFragment extends Fragment {
         powerOn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                send_msg(v);
+                Intent intent = new Intent(getActivity(), CarAirConditionSettingActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+                //send_msg(v);
             }
         });
         engineOff.setOnClickListener(new View.OnClickListener() {
