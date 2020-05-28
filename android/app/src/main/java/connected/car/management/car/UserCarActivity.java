@@ -9,17 +9,20 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import connected.car.management.R;
 
 public class UserCarActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+    TextView textCarNum;
     Spinner brandSpinner;
     Spinner modelSpinner;
     Spinner detailModelSpinner;
     Spinner fuelSpinner;
-    EditText editCarYear;
+    Spinner carYearSpinner;
     EditText editCarCC;
     EditText editCarKm;
     RadioGroup radioCar;
@@ -39,11 +42,13 @@ public class UserCarActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     public void setViews() {
+        textCarNum = findViewById(R.id.text_carNum);
+
         brandSpinner = findViewById(R.id.spinner_brand);
         modelSpinner = findViewById(R.id.spinner_model);
         detailModelSpinner = findViewById(R.id.spinner_detail_model);
         fuelSpinner = findViewById(R.id.spinner_fuel);
-        editCarYear = findViewById(R.id.car_year);
+        carYearSpinner = findViewById(R.id.spinner_year);
         editCarCC = findViewById(R.id.car_cc);
         editCarKm = findViewById(R.id.car_km);
         radioCar = findViewById(R.id.car_radio);
@@ -66,6 +71,9 @@ public class UserCarActivity extends AppCompatActivity implements View.OnClickLi
 
         ArrayAdapter adapterFuel = ArrayAdapter.createFromResource(this, R.array.fuel, android.R.layout.simple_spinner_dropdown_item);
         fuelSpinner.setAdapter(adapterFuel);
+
+        ArrayAdapter adapterYear = ArrayAdapter.createFromResource(this, R.array.car_year, android.R.layout.simple_spinner_dropdown_item);
+        carYearSpinner.setAdapter(adapterYear);
     }
 
     @Override
@@ -73,14 +81,24 @@ public class UserCarActivity extends AppCompatActivity implements View.OnClickLi
         int id = v.getId();
         switch (id) {
             case R.id.btn_submit:
+                CarVO vo = new CarVO(textCarNum.getText().toString(),
+                        brandSpinner.getSelectedItem().toString(),
+                        modelSpinner.getSelectedItem().toString(),
+                        fuelSpinner.getSelectedItem().toString(),
+                        carYearSpinner.getSelectedItem().toString(),
+                        editCarCC.getText().toString(),
+                        0,0,0,
+                        ((RadioButton)findViewById(radioCar.getCheckedRadioButtonId())).getText().toString(),
+                        0);
+                new CarAsync(this).execute(vo);
                 break;
         }
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        int rId = view.getId();
-        switch (rId) {
+        int sId = parent.getId();
+        switch (sId) {
             case R.id.spinner_brand:
                 if (parent.getAdapter().getItem(position).equals("현대")) {
                     modelSpinner.setAdapter(adapterH);
@@ -230,7 +248,8 @@ public class UserCarActivity extends AppCompatActivity implements View.OnClickLi
                 adapterDetail = ArrayAdapter.createFromResource(this, R.array.kia_bongo, android.R.layout.simple_spinner_dropdown_item);
                 break;
         }
-        adapterDetail.notifyDataSetChanged();
+
+        detailModelSpinner.setAdapter(adapterDetail);
     }
 
     @Override

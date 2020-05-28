@@ -41,10 +41,10 @@
     </string-array>
 
     <string-array name="kia_model">
+        <item>K3</item>
         <item>K5</item>
         <item>K7</item>
         <item>K9</item>
-        <item>K3</item>
         <item>모닝</item>
         <item>세라토</item>
         <item>포르테</item>

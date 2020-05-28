@@ -7,15 +7,37 @@
     android:orientation="vertical"
     tools:context=".car.UserCarActivity">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:text="차량등록번호"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
     <LinearLayout
         android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/button_round"
+        android:backgroundTint="#d6cdc0"
+        android:orientation="horizontal">
+        <TextView
+            android:paddingLeft="5dp"
+            android:gravity="center_vertical"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:textColor="#FFFFFF"
+            android:text="차량등록번호 :"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        <TextView
+            android:id="@+id/text_carNum"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="#FFFFFF"
+            android:text="34가 6773"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
@@ -35,7 +57,10 @@
         </Spinner>
     </LinearLayout>
     <LinearLayout
-        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
@@ -55,7 +80,10 @@
         </Spinner>
     </LinearLayout>
     <LinearLayout
-        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
@@ -75,7 +103,10 @@
         </Spinner>
     </LinearLayout>
     <LinearLayout
-        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
@@ -95,7 +126,10 @@
         </Spinner>
     </LinearLayout>
     <LinearLayout
-        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
@@ -106,18 +140,19 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:gravity="center_vertical"
             android:text="연식 :"/>
-
-        <EditText
-            android:id="@+id/car_year"
-            android:layout_width="match_parent"
+        <Spinner
+            android:id="@+id/spinner_year"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:inputType="number"
-            android:maxLength="8"
-            android:hint="yyyyMMdd"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+            android:defaultFocusHighlightEnabled="true">
+        </Spinner>
     </LinearLayout>
     <LinearLayout
-        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
@@ -139,7 +174,10 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
     </LinearLayout>
     <LinearLayout
-        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
@@ -161,7 +199,10 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
     </LinearLayout>
     <LinearLayout
-        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
