@@ -17,11 +17,15 @@
         app:tabIndicatorColor="#FFCADC"
         />
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    </androidx.viewpager.widget.ViewPager>
-
+            </androidx.viewpager.widget.ViewPager>
+        </LinearLayout>
 </LinearLayout>
