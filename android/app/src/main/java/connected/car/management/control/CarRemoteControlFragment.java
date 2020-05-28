@@ -138,7 +138,7 @@ public class CarRemoteControlFragment extends Fragment {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                socket = new Socket("192.168.200.180", 12345);
+                socket = new Socket("172.20.10.11", 12345);
 
                 if(socket != null){
                     ioWork();

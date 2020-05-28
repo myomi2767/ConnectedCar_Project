@@ -9,7 +9,7 @@
 <!-- *****************************************************************************************************************
 	 FOOTER
 	 ***************************************************************************************************************** -->
-	<div id="footerwrap" style="position: relative; top: 100px; width:100%; height:210px;">
+	<div id="footerwrap" style="position: relative; top: 150px; width:100%; height:220px;">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-4">

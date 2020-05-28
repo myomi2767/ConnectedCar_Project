@@ -69,6 +69,7 @@ public class LoginAsync extends AsyncTask<MemberVO, Void, MemberVO> {
             //로그인 성공
             Intent intent = new Intent(context, MainActivity.class);
             intent.putExtra("userInfo", vo);
+
             context.startActivity(intent);
         } else {
             //로그인 실패
