@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ToggleButton;
 
@@ -30,6 +31,10 @@ public class CarRemoteControl extends Fragment {
 
     ImageButton powerOn;
     ImageButton airControl;
+    ImageButton engineOff;
+    Button btnEmerOn;
+    Button btnEmerOff;
+
     AsyncTaskPower asyncTaskPower;
     Socket socket;
 
@@ -56,11 +61,37 @@ public class CarRemoteControl extends Fragment {
         carId= "11111";
 
         powerOn = view.findViewById(R.id.powerOn);
+        engineOff = view.findViewById(R.id.engineOff);
         airControl = view.findViewById(R.id.airControl);
+        btnEmerOn = view.findViewById(R.id.btnEmerLightOn);
+        btnEmerOff = view.findViewById(R.id.btnEmerLightOnSiren);
+
+
         powerOn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    send_msg(v);
+                send_msg(v);
+            }
+        });
+
+        engineOff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                send_msg(v);
+            }
+        });
+
+        btnEmerOn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                send_msg(v);
+            }
+        });
+
+        btnEmerOff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                send_msg(v);
             }
         });
 
@@ -75,6 +106,12 @@ public class CarRemoteControl extends Fragment {
             public void run() {
                 if(view.getId()==R.id.powerOn){
                     message = "engineStart";
+                }else if(view.getId()==R.id.engineOff){
+                    message = "engineStop";
+                }else if(view.getId()==R.id.btnEmerLightOn){
+                    message = "emergencyOn";
+                }else if(view.getId()==R.id.btnEmerLightOnSiren){
+                    message = "emergencyAndSiren";
                 }
                 pw.println("job:"+message+":phone:"+carId);
                 pw.flush();
