@@ -62,6 +62,7 @@ public class UserCarActivity extends AppCompatActivity implements View.OnClickLi
         adapterK = ArrayAdapter.createFromResource(this, R.array.kia_model, android.R.layout.simple_spinner_dropdown_item);
 
         adapterDetail = ArrayAdapter.createFromResource(this, R.array.hyundai_avante, android.R.layout.simple_spinner_dropdown_item);
+        detailModelSpinner.setAdapter(adapterDetail);
 
         ArrayAdapter adapterFuel = ArrayAdapter.createFromResource(this, R.array.fuel, android.R.layout.simple_spinner_dropdown_item);
         fuelSpinner.setAdapter(adapterFuel);
@@ -104,113 +105,132 @@ public class UserCarActivity extends AppCompatActivity implements View.OnClickLi
             case "그랜저":
                 adapterDetail = ArrayAdapter.createFromResource(this, R.array.hyundai_grandeur, android.R.layout.simple_spinner_dropdown_item);
                 break;
-            case "싼타페":
-                adapterDetail = ArrayAdapter.createFromResource(this, R.array.hyundai_santafe, android.R.layout.simple_spinner_dropdown_item);
-                break;
-            case "투싼":
-                adapterDetail = ArrayAdapter.createFromResource(this, R.array.hyundai_tucson, android.R.layout.simple_spinner_dropdown_item);
-                break;
-            case "코나":
-                adapterDetail = ArrayAdapter.createFromResource(this, R.array.hyundai_kona, android.R.layout.simple_spinner_dropdown_item);
-                break;
             case "i30":
                 adapterDetail = ArrayAdapter.createFromResource(this, R.array.hyundai_i30, android.R.layout.simple_spinner_dropdown_item);
                 break;
-            case "팰리세이드":
-                adapterDetail = ArrayAdapter.createFromResource(this, R.array.hyundai_palisade, android.R.layout.simple_spinner_dropdown_item);
+            case "i40":
+                adapterDetail = ArrayAdapter.createFromResource(this, R.array.hyundai_i40, android.R.layout.simple_spinner_dropdown_item);
                 break;
             case "구 제네시스, 현 G 시리즈":
                 adapterDetail = ArrayAdapter.createFromResource(this, R.array.hyundai_genesis, android.R.layout.simple_spinner_dropdown_item);
                 break;
-            case "스타렉스":
-                adapterDetail = ArrayAdapter.createFromResource(this, R.array.hyundai_starex, android.R.layout.simple_spinner_dropdown_item);
+            case "에쿠스":
+                adapterDetail = ArrayAdapter.createFromResource(this, R.array.hyundai_equus, android.R.layout.simple_spinner_dropdown_item);
                 break;
-            case "포터":
-                adapterDetail = ArrayAdapter.createFromResource(this, R.array.hyundai_porter, android.R.layout.simple_spinner_dropdown_item);
-                break;
-            case "벨로스터":
-                adapterDetail = ArrayAdapter.createFromResource(this, R.array.hyundai_veloster, android.R.layout.simple_spinner_dropdown_item);
+            case "아이오닉":
+                adapterDetail = ArrayAdapter.createFromResource(this, R.array.hyundai_ioniq, android.R.layout.simple_spinner_dropdown_item);
                 break;
             case "엑센트":
                 adapterDetail = ArrayAdapter.createFromResource(this, R.array.hyundai_accent, android.R.layout.simple_spinner_dropdown_item);
                 break;
-            case "맥스크루즈":
-                adapterDetail = ArrayAdapter.createFromResource(this, R.array.hyundai_maxcruz, android.R.layout.simple_spinner_dropdown_item);
+            case "코나":
+                adapterDetail = ArrayAdapter.createFromResource(this, R.array.hyundai_kona, android.R.layout.simple_spinner_dropdown_item);
                 break;
-            case "베뉴":
-                //adapterDetail = ArrayAdapter.createFromResource(this, R.array.kia_ve, android.R.layout.simple_spinner_dropdown_item);
-                break;
-            case "베라크루즈":
-                break;
-            case "아이오닉":
-                break;
-            case "i40":
-                break;
-            case "에쿠스":
-                break;
-            case "트라제XG":
-                break;
-            case "넥쏘":
-                break;
-            case "베르나":
-                break;
-            case "아슬란":
-                break;
-            case "마이티":
-                break;
-            case "투스카니":
-                break;
-            case "테라칸":
-                break;
-            case "메가트럭":
-                break;
-            case "트라고 엑시언트":
+            case "포터":
+                adapterDetail = ArrayAdapter.createFromResource(this, R.array.hyundai_porter, android.R.layout.simple_spinner_dropdown_item);
                 break;
             case "클릭":
+                adapterDetail = ArrayAdapter.createFromResource(this, R.array.hyundai_click, android.R.layout.simple_spinner_dropdown_item);
                 break;
-            case "카운티":
+            case "벨로스터":
+                adapterDetail = ArrayAdapter.createFromResource(this, R.array.hyundai_veloster, android.R.layout.simple_spinner_dropdown_item);
+                break;
+            case "베르나":
+                adapterDetail = ArrayAdapter.createFromResource(this, R.array.hyundai_verna, android.R.layout.simple_spinner_dropdown_item);
+                break;
+            case "넥쏘":
+                adapterDetail = ArrayAdapter.createFromResource(this, R.array.hyundai_nexo, android.R.layout.simple_spinner_dropdown_item);
+                break;
+            case "아슬란":
+                adapterDetail = ArrayAdapter.createFromResource(this, R.array.hyundai_aslan, android.R.layout.simple_spinner_dropdown_item);
+                break;
+            case "투싼":
+                adapterDetail = ArrayAdapter.createFromResource(this, R.array.hyundai_tucson, android.R.layout.simple_spinner_dropdown_item);
+                break;
+            case "블루온":
+                adapterDetail = ArrayAdapter.createFromResource(this, R.array.hyundai_blueon, android.R.layout.simple_spinner_dropdown_item);
+                break;
+            case "아토스":
+                adapterDetail = ArrayAdapter.createFromResource(this, R.array.hyundai_atos, android.R.layout.simple_spinner_dropdown_item);
+                break;
+
+            case "K3":
+                adapterDetail = ArrayAdapter.createFromResource(this, R.array.kia_k3, android.R.layout.simple_spinner_dropdown_item);
                 break;
             case "K5":
-                break;
-            case "모닝":
-                break;
-            case "쏘렌토":
-                break;
-            case "스포티지":
-                break;
-            case "K3":
+                adapterDetail = ArrayAdapter.createFromResource(this, R.array.kia_k5, android.R.layout.simple_spinner_dropdown_item);
                 break;
             case "K7":
+                adapterDetail = ArrayAdapter.createFromResource(this, R.array.kia_k7, android.R.layout.simple_spinner_dropdown_item);
                 break;
             case "K9":
+                adapterDetail = ArrayAdapter.createFromResource(this, R.array.kia_k9, android.R.layout.simple_spinner_dropdown_item);
                 break;
-            case "카니발":
+            case "모닝":
+                adapterDetail = ArrayAdapter.createFromResource(this, R.array.kia_morning, android.R.layout.simple_spinner_dropdown_item);
                 break;
-            case "니로":
-                break;
-            case "레이":
-                break;
-            case "셀토스":
-                break;
-            case "프라이드":
+            case "세라토":
+                adapterDetail = ArrayAdapter.createFromResource(this, R.array.kia_serato, android.R.layout.simple_spinner_dropdown_item);
                 break;
             case "포르테":
-                break;
-            case "모하비":
+                adapterDetail = ArrayAdapter.createFromResource(this, R.array.kia_forte, android.R.layout.simple_spinner_dropdown_item);
                 break;
             case "스팅어":
+                adapterDetail = ArrayAdapter.createFromResource(this, R.array.kia_stinger, android.R.layout.simple_spinner_dropdown_item);
                 break;
-            case "카렌스":
-                break;
-            case "스토닉":
+            case "프라이드":
+                adapterDetail = ArrayAdapter.createFromResource(this, R.array.kia_pride, android.R.layout.simple_spinner_dropdown_item);
                 break;
             case "쏘울":
+                adapterDetail = ArrayAdapter.createFromResource(this, R.array.kia_soul, android.R.layout.simple_spinner_dropdown_item);
+                break;
+            case "레이":
+                adapterDetail = ArrayAdapter.createFromResource(this, R.array.kia_ray, android.R.layout.simple_spinner_dropdown_item);
+                break;
+            case "오피러스":
+                adapterDetail = ArrayAdapter.createFromResource(this, R.array.kia_opirus, android.R.layout.simple_spinner_dropdown_item);
+                break;
+            case "모하비":
+                adapterDetail = ArrayAdapter.createFromResource(this, R.array.kia_mohave, android.R.layout.simple_spinner_dropdown_item);
+                break;
+            case "니로":
+                adapterDetail = ArrayAdapter.createFromResource(this, R.array.kia_niro, android.R.layout.simple_spinner_dropdown_item);
+                break;
+            case "로체":
+                adapterDetail = ArrayAdapter.createFromResource(this, R.array.kia_lotze, android.R.layout.simple_spinner_dropdown_item);
+                break;
+            case "비스토":
+                adapterDetail = ArrayAdapter.createFromResource(this, R.array.kia_visto, android.R.layout.simple_spinner_dropdown_item);
+                break;
+            case "스펙트라":
+                adapterDetail = ArrayAdapter.createFromResource(this, R.array.kia_spectra, android.R.layout.simple_spinner_dropdown_item);
+                break;
+            case "쏘렌토":
+                adapterDetail = ArrayAdapter.createFromResource(this, R.array.kia_sorento, android.R.layout.simple_spinner_dropdown_item);
+                break;
+            case "엔터프라이즈":
+                adapterDetail = ArrayAdapter.createFromResource(this, R.array.kia_enterprise, android.R.layout.simple_spinner_dropdown_item);
+                break;
+            case "세피아":
+                adapterDetail = ArrayAdapter.createFromResource(this, R.array.kia_sepia, android.R.layout.simple_spinner_dropdown_item);
+                break;
+            case "리갈/옵티마":
+                adapterDetail = ArrayAdapter.createFromResource(this, R.array.kia_optima_rigal, android.R.layout.simple_spinner_dropdown_item);
+                break;
+            case "크레도스":
+                adapterDetail = ArrayAdapter.createFromResource(this, R.array.kia_credos, android.R.layout.simple_spinner_dropdown_item);
+                break;
+            case "포텐샤":
+                adapterDetail = ArrayAdapter.createFromResource(this, R.array.kia_potentia, android.R.layout.simple_spinner_dropdown_item);
+                break;
+            case "리오":
+                adapterDetail = ArrayAdapter.createFromResource(this, R.array.kia_rio, android.R.layout.simple_spinner_dropdown_item);
                 break;
             case "봉고":
-                break;
-            case "쎄라토":
+                adapterDetail = ArrayAdapter.createFromResource(this, R.array.kia_bongo, android.R.layout.simple_spinner_dropdown_item);
                 break;
         }
+        adapterDetail.notifyDataSetChanged();
     }
 
     @Override
