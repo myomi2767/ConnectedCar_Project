@@ -18,7 +18,7 @@ public class RemoteDAOImpl implements RemoteDAO {
 
 	@Override
 	public int insertRemote(RemoteVO vo) {
-		return session.insert("connected.car.control.selectRemote",vo);
+		return session.insert("connected.car.control.insertRemote",vo);
 	}
 
 }

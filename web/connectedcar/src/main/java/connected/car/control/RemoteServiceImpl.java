@@ -14,7 +14,7 @@ public class RemoteServiceImpl implements RemoteService {
 
 	@Override
 	public List<RemoteVO> listAll(String car_id) {
-		return null;
+		return dao.listAll(car_id);
 	}
 
 	@Override

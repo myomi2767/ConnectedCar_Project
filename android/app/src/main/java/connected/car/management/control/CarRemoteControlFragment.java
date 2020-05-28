@@ -50,6 +50,8 @@ public class CarRemoteControlFragment extends Fragment {
 
     Button btnEmerOn;
     Button btnEmerOff;
+    Button btnDoorOpen;
+    Button btnDoorLock;
 
     AsyncTaskPower asyncTaskPower;
     Socket socket;
@@ -83,6 +85,8 @@ public class CarRemoteControlFragment extends Fragment {
         airControl = view.findViewById(R.id.airControl);
         btnEmerOn = view.findViewById(R.id.btnEmerLightOn);
         btnEmerOff = view.findViewById(R.id.btnEmerLightOnSiren);
+        btnDoorOpen = view.findViewById(R.id.btnDoorOpen);
+        btnDoorLock = view.findViewById(R.id.btnDoorLock);
 
         powerOn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,6 +112,19 @@ public class CarRemoteControlFragment extends Fragment {
                 send_msg(v);
             }
         });
+        btnDoorOpen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                send_msg(v);
+
+            }
+        });
+        btnDoorLock.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                send_msg(v);
+            }
+        });
 
         notification = new Notification(getActivity());
 
@@ -128,6 +145,10 @@ public class CarRemoteControlFragment extends Fragment {
                     message = "emergencyOn";
                 }else if(view.getId()==R.id.btnEmerLightOnSiren){
                     message = "emergencyAndSiren";
+                }else if(view.getId()==R.id.btnDoorOpen){
+                    message="doorOpen";
+                }else if(view.getId()==R.id.btnDoorLock){
+                    message="doorLock";
                 }
                 pw.println("job:"+message+":phone:"+carId);
                 pw.flush();
@@ -148,7 +169,7 @@ public class CarRemoteControlFragment extends Fragment {
                         while(true) {
                             String msg;
                             try {
-                                msg = br.readLine();
+                                msg = br.readLine(); //read만. 제어 결과 받는다.
                                 Log.d("remote", "서버로부터 수신된 메시지>>" + msg);
                                 filteringMsg(msg);
                             } catch (IOException e) {
@@ -173,9 +194,9 @@ public class CarRemoteControlFragment extends Fragment {
 
             return null;
         }
-        private void filteringMsg(String msg){
+        private void filteringMsg(String msg){ //서버에서 받은 메세지를 갖고 온다.
             st = new StringTokenizer(msg, ":");
-            String protocol = st.nextToken();
+            String protocol = st.nextToken(); //가장 먼저 들어오는게 protocol,
             int result=0;
             if(protocol.equals("job")) {
                 String message = st.nextToken();

@@ -25,7 +25,7 @@ public class User extends Thread{
 	
 	HashMap<String, User> userlist;
 	HashMap<String, User> carlist;
-	HashMap<String, User> checklist;
+	HashMap<String, User> checklist; //userlist인지 carlist인지 체크하는 용도 
 	
 	String user;
 	public User() {
@@ -75,7 +75,7 @@ public class User extends Thread{
 		}
 	}
 	
-	//id에 맞는 차량이 있는지 확인하는 작업
+	//===============================id에 맞는 차량이 있는지 확인하는 작업========================
 	public boolean check(String id, HashMap<String, User> list) {
 		boolean result = false;
 		if(list.get(id)!=null) {
@@ -106,7 +106,7 @@ public class User extends Thread{
 				System.out.println("카가 메시지보냄"+id);
 				userClient = userlist.get(id);
 			}
-			//null인 부분
+			
 			System.out.println(userClient);
 			if(userClient!=null) {
 				userClient.sendMsg("job:"+message+":"+category+":"+id);
