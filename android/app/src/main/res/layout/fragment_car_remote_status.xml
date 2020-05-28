@@ -4,16 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".control.CarRemoteStatus">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <LinearLayout
         android:id="@+id/statusView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:paddingBottom="80dp">
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-           >
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="300dp"
@@ -246,7 +246,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="새로고침" />
-        </ScrollView>
-    </LinearLayout>
 
+    </LinearLayout>
+    </ScrollView>
 </LinearLayout>
