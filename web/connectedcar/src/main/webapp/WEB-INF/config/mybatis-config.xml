@@ -18,6 +18,7 @@
 		<typeAlias type="connected.car.owner.ShopinfoVO" alias="shopinfovo" />
 		<typeAlias type="connected.car.owner.AddressVO" alias="addressvo"/>
 		<typeAlias type="connected.car.sales.SalesVO" alias="salesvo"/>
+		<typeAlias type="connected.car.control.RemoteVO" alias="remotevo"/>
 		
 	</typeAliases>
 	<mappers>
@@ -26,5 +27,6 @@
 		<mapper resource="mapper/admin.xml"/>
 		<mapper resource="mapper/expendable.xml"/>
 		<mapper resource="mapper/sales.xml"/>
+		<mapper resource="mapper/control.xml"/>
 	</mappers>
 </configuration>
