@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import connected.car.management.R;
 
-public class UserCarActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+public class RegisterCarActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
     TextView textCarNum;
     Spinner brandSpinner;
     Spinner modelSpinner;

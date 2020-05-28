@@ -1,23 +1,60 @@
-//Control LED using Given by Serial communication
-//if input value is 1 => LED : On
-//if inputt value is 0 => LED : Off
 #define LED A2
 char cmd;
+boolean status = true; // 도중에 인터럽트 걸기 위한 조건
+// 0은 꺼진 상태, 1은 켜진 상태
+String engineStatus = "0"; //엔진 상태
+String emergencyStatus = "0"; //비상등 상태
+String doorStatus = "0"; //문 상태
+String airconditionStatus = "0"; //공조 상태
+String hornStatus = "0"; //경적 상태
+
+String result;
 void setup() {
 Serial.begin(9600);
 pinMode(LED,OUTPUT);
 }
-
+/*  들어오는 값 설정
+*   
+*/
 void loop() {
   if(Serial.available()>0){
     cmd = Serial.read();
-    if(cmd=='1'){
-      digitalWrite(LED,HIGH);
-      Serial.println("success");
-    }else if(cmd =='0'){
-      digitalWrite(LED,LOW);
-      Serial.println("fail");
+    if(cmd=='A'){
+      //비상등만 켜기
+      result = "success";
+      emergencyStatus = "1";
+      int count = 0;
+      while(count<=60&status==true){
+        digitalWrite(LED,HIGH);
+        delay(1000);
+        digitalWrite(LED,LOW);
+        delay(1000);
+        count = count+2;
+      }
+    }else if(cmd =='B'){
+      //비상등+경적 켜기
+      result = "success";
+      emergencyStatus = "1";
+      hornStatus = "1";
+      int count = 0;
+      while(count<=30){
+        digitalWrite(LED,HIGH); // LED ON
+        //tone(speakerpin,500,1000); // Horn On
+        delay(1000);
+        digitalWrite(LED,LOW);
+        //tone(speakerpin,500,1000); // Horn On
+        delay(1000);
+        count = count+2;
+      }
+    }else if(cmd == '0'){
+      //차량 상태 불러오기
+      Serial.println(engineStatus+doorStatus+airconditionStatus+emergencyStatus);
+    }else{
+      result = "fail";
+    }
+    
+    if(cmd!='0'){
+      Serial.println(result);
     }
   }
-
 }

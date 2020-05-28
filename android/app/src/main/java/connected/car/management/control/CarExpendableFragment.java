@@ -13,9 +13,9 @@ import connected.car.management.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CarExpendable extends Fragment {
+public class CarExpendableFragment extends Fragment {
 
-    public CarExpendable() {
+    public CarExpendableFragment() {
         // Required empty public constructor
     }
 

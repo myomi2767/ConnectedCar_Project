@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".control.CarRemoteStatus">
+    tools:context=".control.CarRemoteStatusFragment">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -46,6 +46,7 @@
                         android:layout_height="0.1dp"
                         android:background="#E43535"/>
                     <TextView
+                        android:id="@+id/engineText"
                         android:layout_width="50dp"
                         android:layout_height="30dp"
                         android:gravity="end"
@@ -77,6 +78,7 @@
                         android:layout_height="0.1dp"
                         android:background="#E43535"/>
                     <TextView
+                        android:id="@+id/doorText"
                         android:layout_width="50dp"
                         android:layout_height="30dp"
                         android:gravity="end"
@@ -108,6 +110,7 @@
                         android:layout_height="0.1dp"
                         android:background="#E43535"/>
                     <TextView
+                        android:id="@+id/airText"
                         android:layout_width="50dp"
                         android:layout_height="30dp"
                         android:gravity="end"
@@ -137,6 +140,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"/>
             <TextView
+                android:id="@+id/engineText2"
                 android:layout_width="60dp"
                 android:layout_height="match_parent"
                 android:text="꺼짐"
@@ -169,6 +173,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"/>
                 <TextView
+                    android:id="@+id/doorText2"
                     android:layout_width="60dp"
                     android:layout_height="match_parent"
                     android:text="잠김"
@@ -186,6 +191,7 @@
                     android:layout_gravity="left"
                     android:src="@drawable/car"/>
                 <TextView
+                    android:id="@+id/doorText3"
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
                     android:text="모두 닫힘"
@@ -234,6 +240,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"/>
             <TextView
+                android:id="@+id/airText2"
                 android:layout_width="60dp"
                 android:layout_height="match_parent"
                 android:text="꺼짐"

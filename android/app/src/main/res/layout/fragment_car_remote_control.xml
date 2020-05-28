@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@android:color/white"
-    tools:context=".control.CarRemoteControl">
+    tools:context=".control.CarRemoteControlFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -42,20 +42,17 @@
                             android:scaleType="centerCrop"
                             android:background="@android:color/transparent"
                             android:src="@drawable/air"
-                            android:layout_marginTop="30dp"
-                            />
+                            android:layout_marginTop="30dp"/>
 
-                            <TextView
-                                android:id="@+id/air"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="공조 설정"
-                                android:layout_gravity="center"
-                                android:layout_marginTop="10dp"
-                                android:textStyle="bold"
-                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-
-                                />
+                        <TextView
+                            android:id="@+id/air"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="공조 설정"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="10dp"
+                            android:textStyle="bold"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
                     </LinearLayout>
                     <ImageButton
                         android:layout_marginLeft="10dp"
@@ -64,8 +61,7 @@
                         android:layout_height="150dp"
                         android:scaleType="centerCrop"
                         android:src="@drawable/engine"
-                        android:background="@android:color/transparent"
-                    />
+                        android:background="@android:color/transparent" />
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -82,8 +78,7 @@
                                 android:scaleType="centerCrop"
                                 android:background="@android:color/transparent"
                                 android:src="@drawable/switchh"
-                                android:layout_marginTop="30dp"
-                                />
+                                android:layout_marginTop="30dp"/>
 
                             <TextView
                                 android:id="@+id/off"
@@ -93,15 +88,12 @@
                                 android:layout_gravity="center"
                                 android:layout_marginTop="10dp"
                                 android:textStyle="bold"
-                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-
-                                />
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
 
                         </LinearLayout>
-            </LinearLayout>
+                    </LinearLayout>
                 </LinearLayout>
-
-
+            </LinearLayout>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -168,7 +160,10 @@
                     android:text="비상등+경적"
                     android:layout_marginRight="10dp"
                     android:textStyle="bold"/>
-            </LinearLayout><TextView
+            </LinearLayout>
+
+
+                <!--<TextView
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:text="공조제어"
@@ -201,9 +196,7 @@
                     android:layout_marginRight="8dp"
                     android:layout_marginLeft="8dp"
                     android:textStyle="bold"/>
-            </LinearLayout>
+            </LinearLayout>-->
         </LinearLayout>
-
-    </LinearLayout>
     </ScrollView>
 </LinearLayout>

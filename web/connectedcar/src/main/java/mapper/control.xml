@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="connected.car.control">
+	<insert id="insertRemote" parameterType="remotevo">
+		insert into control_result values(#{car_id}, to_date(sysdate, 'yyyy-mm-dd hh24:mi'), #{control_code}, #{control_result})
+	</insert>
+	<!-- select할 때 to_char(컬럼명, 'yyyy-mm-dd hh24:mi:ss') -->
+	<select id="selectRemote" parameterType="String" resultType="remotevo">
+		select to_char(control_date, 'yyyy-mm-dd hh24:mi'), control_code, control_result 
+			from control_result 
+			where car_id = #{car_id} 
+			order by control_date desc
+	</select>
+</mapper>

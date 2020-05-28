@@ -15,6 +15,9 @@ public class ArduinoSerialListener implements SerialPortEventListener {
 	OutputStream canOs; //아두이노로 시리얼출력을 위해 작업
 	SerialConnect arduino;
 	SerialConnect can;
+	String id;
+	String canData;
+	String message;
 
 	public ArduinoSerialListener(BufferedInputStream arduinoBis, SerialConnect arduino, SerialConnect can) {
 		this.arduinoBis = arduinoBis;
@@ -37,9 +40,24 @@ public class ArduinoSerialListener implements SerialPortEventListener {
 				System.out.println("Arduino 시리얼 포트로 전송된 데이터:"+aData);
 				if(canOs!=null) {
 					if(aData.trim().equals("success")) {
-						String id = "00000000";
-						String canData = "0000000000001100";
-						String message = id+canData;
+						id = "00000000";
+						canData = "1111000000000000";
+						message = id+canData;
+						send(message);
+					}else if(aData.trim().equals("fail")) {
+						id = "00000000";
+						canData = "0000111100000000";
+						message = id+canData;
+						send(message);
+					}else {
+						//0이면 꺼짐, 1이면 켜짐 - 받은 그대로 CAN으로 전송
+						//첫번째 String - engineStatus
+						//두번째 String - doorStatus
+						//세번째 String - airconditionStatus
+						//네번째 String - emergencyStatus
+						id = "00000000";
+						canData = "111111111111"+aData.trim();
+						message = id+canData;
 						System.out.println(message);
 						send(message);
 					}
@@ -63,7 +81,6 @@ public class ArduinoSerialListener implements SerialPortEventListener {
 
 		CANWriteThread(String msg) { // =======메세지 보낼때마다 설정
 			this.data = convert_data(msg);
-			System.out.println(data);
 		}
 
 		// msg = msg의 id + 데이터
