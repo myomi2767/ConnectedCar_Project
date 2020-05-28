@@ -1,5 +1,6 @@
 package connected.car.management.member;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -70,6 +71,7 @@ public class LoginAsync extends AsyncTask<MemberVO, Void, MemberVO> {
             Intent intent = new Intent(context, MainActivity.class);
             intent.putExtra("userInfo", vo);
             context.startActivity(intent);
+            ((Activity)context).finish();
         } else {
             //로그인 실패
             Toast.makeText(context, "로그인에 실패했습니다.", Toast.LENGTH_SHORT).show();

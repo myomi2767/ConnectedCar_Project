@@ -97,6 +97,16 @@ public class ClientCar {
 				String data = "0000111100001111";//송신할 데이터 -> 내 마음대로 정해주기, 16글자는 맞춰야함
 				String mesaage = id+data;
 				canReadWriteTest.send(mesaage);
+			} else if(message.equals("engineStart")) {
+				String id = "00000000";
+				String data = "1010101010101010";
+				String message = id+data;
+				canReadWriteTest.send(message);
+			} else if(message.equals("engineStop")) {
+				String id = "00000000";
+				String data = "0101010101010101";
+				String message = id+data;
+				canReadWriteTest.send(message);
 			}
 		}
 	}

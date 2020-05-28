@@ -91,7 +91,10 @@ public class CarRemoteControlFragment extends Fragment {
         powerOn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                send_msg(v);
+                Intent intent = new Intent(getActivity(), CarAirConditionSettingActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+                //send_msg(v);
             }
         });
         engineOff.setOnClickListener(new View.OnClickListener() {
@@ -159,7 +162,8 @@ public class CarRemoteControlFragment extends Fragment {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                socket = new Socket(getContext().getString(R.string.myip), 12345);
+                socket = new Socket("172.20.10.11", 12345);
+
                 if(socket != null){
                     ioWork();
                 }
