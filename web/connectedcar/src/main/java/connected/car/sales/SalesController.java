@@ -1,7 +1,10 @@
 package connected.car.sales;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Map;
+import java.util.Calendar;
+import java.util.Map.Entry;
+import java.util.TreeMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -27,13 +30,25 @@ public class SalesController {
 		ArrayList<ShopExpendableVO> expendList = 
 				(ArrayList<ShopExpendableVO>)service.getExpendList(shop_id);
 		int[] annualSalesList = service.getAnnualSales(shop_id);
-		Map<String, Integer> typeSalesMap = service.getTypeSales(shop_id);
+		TreeMap<String, Integer[]> typeSalesMap = (TreeMap<String, Integer[]>) service.getTypeSales(shop_id);
 		
-		System.out.println(annualSalesList.toString());
-		System.out.println(typeSalesMap.toString());
+		Entry<String, Integer[]> map1 = typeSalesMap.pollLastEntry();
+		Entry<String, Integer[]> map2 = typeSalesMap.pollLastEntry();
+		Entry<String, Integer[]> map3 = typeSalesMap.pollLastEntry();
+		Entry<String, Integer[]> map4 = typeSalesMap.pollLastEntry();
+		Entry<String, Integer[]> map5 = typeSalesMap.pollLastEntry();
+		
 		mav.addObject("expendList", expendList);
 		mav.addObject("annualList", annualSalesList);
-		mav.addObject("typeMap", typeSalesMap);
+		mav.addObject("map1", map1);
+		mav.addObject("map2", map2);
+		mav.addObject("map3", map3);
+		mav.addObject("map4", map4);
+		mav.addObject("map5", map5);
+		
+		DecimalFormat df = new DecimalFormat("00");
+        Calendar currentCalendar = Calendar.getInstance();
+		mav.addObject("thisMonth", Integer.parseInt(df.format(currentCalendar.get(Calendar.MONTH))));
 		
 		mav.setViewName("inventory/inventorymain");
 		return mav;

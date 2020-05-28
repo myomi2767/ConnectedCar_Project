@@ -1,7 +1,7 @@
 package connected.car.sales;
 
 import java.util.List;
-import java.util.Map;
+import java.util.SortedMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -24,12 +24,11 @@ public class SalesServiceImpl implements SalesService {
 	@Override
 	public int[] getAnnualSales(String shop_id) {
 		calc = new CalculatingSales();
-		System.out.println(dao.getAnnualSales(shop_id));
 		return calc.getAnnualSalesArray(dao.getAnnualSales(shop_id));
 	}
 
 	@Override
-	public Map<String, Integer> getTypeSales(String shop_id) {
+	public SortedMap<String, Integer[]> getTypeSales(String shop_id) {
 		calc = new CalculatingSales();
 		return calc.getTypeSalesArray(dao.getTypeSales(shop_id));
 	}
