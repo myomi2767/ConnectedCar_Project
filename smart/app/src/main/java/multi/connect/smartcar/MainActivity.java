@@ -123,14 +123,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     up.setEnabled(true);
                     down.setEnabled(true);
                     new Thread(new Runnable() {
-                        String message = "";
-                        @Override
-                        public void run() {
-                            message = "auto_on";
-                            pw.println(message);
-                            pw.flush();
-                        }
-                    }).start();
+                    String message = "";
+                    @Override
+                    public void run() {
+                        message = "auto_on";
+                        pw.println(message);
+                        pw.flush();
+                    }
+                }).start();
                 }else{
                     power.setBackgroundDrawable(getResources().getDrawable(R.drawable.switchon));
                     Toast.makeText(MainActivity.this,"주행 보조 시스템이 꺼졌습니다.",Toast.LENGTH_SHORT).show();
@@ -251,7 +251,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         protected String doInBackground(Integer... integers) {
             try {
-                socket = new Socket("70.12.226.101", 12345);
+                socket = new Socket("192.168.43.190", 12345);
                 if (socket != null) {
                     ioWork();
                 }
@@ -507,9 +507,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             speedometer.moveToValue(speed);
             speedometer.setLowerText(Integer.toString(speed));
             new Thread(new Runnable() {
+                String message = "";
                 @Override
                 public void run() {
-                    pw.println("speed_30");
+                    message="tablet/speed30";
+                    pw.println(message);
                     pw.flush();
                 }
             }).start();
