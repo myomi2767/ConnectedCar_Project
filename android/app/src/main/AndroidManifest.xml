@@ -19,12 +19,13 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".controlresult.RemoteControlResultActivity"></activity>
         <activity android:name=".member.LoginActivity">
-        <activity android:name=".control.CarAirConditionSettingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".control.CarAirConditionSettingActivity">
         </activity>
         <activity android:name=".control.MyCarInfo" />
         <activity android:name=".control.CarInfoFragment" />

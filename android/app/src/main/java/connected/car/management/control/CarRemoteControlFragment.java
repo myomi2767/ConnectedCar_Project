@@ -138,11 +138,8 @@ public class CarRemoteControlFragment extends Fragment {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-<<<<<<< HEAD:android/app/src/main/java/connected/car/management/control/CarRemoteControl.java
                 socket = new Socket("192.168.200.180", 12345);
-=======
-                socket = new Socket(getContext().getString(R.string.myip), 12345);
->>>>>>> f3b24935b2e2ad14b88c1f3a8356d044a454395f:android/app/src/main/java/connected/car/management/control/CarRemoteControlFragment.java
+
                 if(socket != null){
                     ioWork();
                 }
