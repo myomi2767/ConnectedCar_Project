@@ -22,7 +22,6 @@ public class CarAirConditionSettingActivity extends AppCompatActivity {
     int max = 28;
     int minTime =2;
     int maxTime =10;
-    //int temp = 0;
 
 
     @Override
