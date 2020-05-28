@@ -11,13 +11,21 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final int DB_VERSION = 1;
 
     public DBHelper( Context context) {
-        super(context, "carstate.db", null, DB_VERSION);
+        super(context, "airsetting.db", null, DB_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         Log.d("===","데이터베이스가 생성됨");
 
+        String sql = "create table if not exists airsetting("
+                + "airsettingno integer primary key autoincrement,"
+                + "setime text,"
+                + "carid text,"
+                + "airtemp text,"
+                 +"enginetime text)";
+
+        db.execSQL(sql);
 
     }
 

@@ -16,6 +16,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:background="#CDE2EF">
 
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -25,6 +26,8 @@
             />
     </androidx.appcompat.widget.Toolbar>
 
+
+
     <LinearLayout
         android:layout_margin="10dp"
         android:layout_width="match_parent"
@@ -32,13 +35,26 @@
         android:background='#E9F3F9'
         android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:text="차량 내부 온도 : ">
+            </TextView>
+
         <TextView
             android:id="@+id/text_temperture"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:text="차량 내부 온도">
+            android:text="">
         </TextView>
+        </LinearLayout>
 
     <SeekBar
         android:id="@+id/seekbar_air"
@@ -84,16 +100,29 @@
         android:background='#E9F3F9'
         android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:text="시동 유지 시간 : ">
+            </TextView>
+
         <TextView
-            android:id="@+id/text_engineStart"
+            android:id="@+id/text_enginetime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:text="시동 유지 시간">
+            android:text="">
         </TextView>
+        </LinearLayout>
 
         <SeekBar
-            android:id="@+id/seekbar_air2"
+            android:id="@+id/seekbar_enginetime"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -132,24 +161,40 @@
 
 
     </LinearLayout>
+    <Button
+        android:id="@+id/btn_select"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background='#F8D3D2'
+        android:text="조회"
+        android:onClick="selectAll"
+        android:textStyle="bold"></Button>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/text_select"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
 
-
+        />
+    </ScrollView>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <Button
             android:id="@+id/btn_airsetting"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="저장"
-            android:background='#F8D3D2'
             android:layout_alignParentBottom="true"
-            android:textStyle="bold"
-            >
-        </Button>
+            android:background='#F8D3D2'
+            android:text="저장"
+            android:onClick="insert"
+            android:textStyle="bold"></Button>
     </RelativeLayout>
-
 
 
 </LinearLayout>

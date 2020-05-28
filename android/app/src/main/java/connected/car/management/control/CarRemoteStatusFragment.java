@@ -58,9 +58,9 @@ public class CarRemoteStatusFragment extends Fragment {
     boolean airconditionStatus;
     boolean emergencyStatus;
 
-    public CarRemoteStatus() {
+  /*  public CarRemoteStatus() {
         // Required empty public constructor
-    }
+    }*/
 
 
     @Override
