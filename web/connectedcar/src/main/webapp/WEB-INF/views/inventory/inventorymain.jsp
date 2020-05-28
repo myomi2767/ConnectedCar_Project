@@ -93,7 +93,7 @@
 			var ctx = document.getElementById("annual_chart").getContext("2d");
 			var annualChart = new Chart(ctx, {
 				type: 'bar',
-				data: {
+				data: {				
 					labels: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
 					datasets: [{
 						label: "분기 별 매출액",
@@ -126,6 +126,8 @@
 				}
 			});
 		}
+		
+	
 	</script>
 </body>
 </html>

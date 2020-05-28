@@ -6,12 +6,16 @@
     android:orientation="vertical"
     android:background="@android:color/white"
     tools:context=".control.CarRemoteControl">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/contView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingBottom="80dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -198,5 +202,6 @@
     </LinearLayout>
 
 </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
