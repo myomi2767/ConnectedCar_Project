@@ -9,7 +9,7 @@
 		select e.expend_code, e.expend_name, s.shop_expend_count
 		from shop_expendable s, expendable e
 		where e.expend_id = s.expend_id and rownum <= 20 and s.shop_id = #{shop_id}
-		order by s.shop_expend_date desc
+		order by s.shop_expend_count desc
 	]]>
 	</select>
 	<select id="getAnuualSalesInfo" parameterType="String" resultType="salesvo">
@@ -24,7 +24,7 @@
 	</select>
 	<select id="getTypeSalesInfo" parameterType="String" resultType="salesvo">
 	<![CDATA[
-		select e.expend_type, l.expend_count * -1 expend_count, e.expend_price
+		select to_char(l.in_out_date, 'YY-MM-DD') in_out_date, e.expend_type, l.expend_count * -1 expend_count, e.expend_price
 		from expendable e, expendable_log l
 		where e.expend_id = l.expend_id 
 				and l.shop_id = #{shop_id}
