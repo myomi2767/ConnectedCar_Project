@@ -8,7 +8,10 @@
     tools:context=".member.JoinActivity">
 
     <LinearLayout
-        android:layout_margin="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
@@ -21,8 +24,9 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:gravity="center"
             android:textAlignment="center"
-            android:background="#384452"
-            android:textColor="#FFFFFF" />
+            android:background="@drawable/button_round"
+            android:backgroundTint="#384452"
+            android:textColor="#FFFFFF"/>
         <EditText
             android:id="@+id/edit_id"
             android:layout_marginLeft="10dp"
@@ -34,7 +38,10 @@
 
     </LinearLayout>
     <LinearLayout
-        android:layout_margin="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
@@ -45,7 +52,8 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:gravity="center"
             android:textAlignment="center"
-            android:background="#384452"
+            android:background="@drawable/button_round"
+            android:backgroundTint="#384452"
             android:textColor="#FFFFFF"
             android:text="차량번호"/>
         <EditText
@@ -59,7 +67,10 @@
 
     </LinearLayout>
     <LinearLayout
-        android:layout_margin="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
@@ -70,7 +81,8 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:gravity="center"
             android:textAlignment="center"
-            android:background="#384452"
+            android:background="@drawable/button_round"
+            android:backgroundTint="#384452"
             android:textColor="#FFFFFF"
             android:text="비밀번호"/>
         <EditText
@@ -84,7 +96,10 @@
 
     </LinearLayout>
     <LinearLayout
-        android:layout_margin="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
@@ -95,7 +110,8 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:gravity="center"
             android:textAlignment="center"
-            android:background="#384452"
+            android:background="@drawable/button_round"
+            android:backgroundTint="#384452"
             android:textColor="#FFFFFF"
             android:text="이름"/>
         <EditText
@@ -109,7 +125,10 @@
 
     </LinearLayout>
     <LinearLayout
-        android:layout_margin="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
@@ -120,7 +139,8 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:gravity="center"
             android:textAlignment="center"
-            android:background="#384452"
+            android:background="@drawable/button_round"
+            android:backgroundTint="#384452"
             android:textColor="#FFFFFF"
             android:text="생년월일"/>
         <EditText
@@ -134,7 +154,10 @@
 
     </LinearLayout>
     <LinearLayout
-        android:layout_margin="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
@@ -145,7 +168,8 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:gravity="center"
             android:textAlignment="center"
-            android:background="#384452"
+            android:background="@drawable/button_round"
+            android:backgroundTint="#384452"
             android:textColor="#FFFFFF"
             android:text="성별"/>
         <Spinner
@@ -160,7 +184,10 @@
         </Spinner>
     </LinearLayout>
     <LinearLayout
-        android:layout_margin="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
@@ -171,7 +198,8 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:gravity="center"
             android:textAlignment="center"
-            android:background="#384452"
+            android:background="@drawable/button_round"
+            android:backgroundTint="#384452"
             android:textColor="#FFFFFF"
             android:text="면허 정보"/>
         <EditText
@@ -186,12 +214,14 @@
     </LinearLayout>
 
     <Button
+        android:layout_gravity="center"
         android:id="@+id/btn_join"
-        android:backgroundTint="#384452"
-        android:layout_margin="5dp"
+        android:layout_margin="20dp"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:textColor="#ffffff"
+        android:background="@drawable/button_round"
+        android:backgroundTint="#384452"
+        android:textColor="#FFFFFF"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:text="회원가입" />
 

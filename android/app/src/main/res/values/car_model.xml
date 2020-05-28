@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="hyundai">
+    <string-array name="hyundai_model">
         <item>아반떼</item>
         <item>쏘나타</item>
         <item>그랜저</item>
@@ -9,7 +9,7 @@
         <item>코나</item>
         <item>i30</item>
         <item>팰리세이드</item>
-        <item>제네시스</item>
+        <item>구 제네시스, 현 G 시리즈</item>
         <item>스타렉스</item>
         <item>포터</item>
         <item>벨로스터</item>
@@ -33,7 +33,7 @@
         <item>카운티</item>
     </string-array>
 
-    <string-array name="kia">
+    <string-array name="kia_model">
         <item>K5</item>
         <item>모닝</item>
         <item>쏘렌토</item>
