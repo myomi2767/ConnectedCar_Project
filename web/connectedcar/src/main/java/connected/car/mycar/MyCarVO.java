@@ -1,0 +1,134 @@
+package connected.car.mycar;
+
+public class MyCarVO {
+	private String car_id;
+	private String car_brand;
+	private String car_model;
+	private String car_fuel_type;
+	private String car_year;
+	private String car_volume;
+	private int rapid_speed;
+	private int drop_speed;
+	private int overspeed;
+	private String special_car;
+	private int driver_distance;
+	
+	public MyCarVO() {
+		
+	}
+
+	public MyCarVO(String car_id, String car_brand, String car_model, String car_fuel_type, String car_year,
+			String car_volume, int rapid_speed, int drop_speed, int overspeed, String special_car,
+			int driver_distance) {
+		super();
+		this.car_id = car_id;
+		this.car_brand = car_brand;
+		this.car_model = car_model;
+		this.car_fuel_type = car_fuel_type;
+		this.car_year = car_year;
+		this.car_volume = car_volume;
+		this.rapid_speed = rapid_speed;
+		this.drop_speed = drop_speed;
+		this.overspeed = overspeed;
+		this.special_car = special_car;
+		this.driver_distance = driver_distance;
+	}
+
+	@Override
+	public String toString() {
+		return "MyCarVO [car_id=" + car_id + ", car_brand=" + car_brand + ", car_model=" + car_model
+				+ ", car_fuel_type=" + car_fuel_type + ", car_year=" + car_year + ", car_volume=" + car_volume
+				+ ", rapid_speed=" + rapid_speed + ", drop_speed=" + drop_speed + ", overspeed=" + overspeed
+				+ ", special_car=" + special_car + ", driver_distance=" + driver_distance + "]";
+	}
+
+	public String getCar_id() {
+		return car_id;
+	}
+
+	public void setCar_id(String car_id) {
+		this.car_id = car_id;
+	}
+
+	public String getCar_brand() {
+		return car_brand;
+	}
+
+	public void setCar_brand(String car_brand) {
+		this.car_brand = car_brand;
+	}
+
+	public String getCar_model() {
+		return car_model;
+	}
+
+	public void setCar_model(String car_model) {
+		this.car_model = car_model;
+	}
+
+	public String getCar_fuel_type() {
+		return car_fuel_type;
+	}
+
+	public void setCar_fuel_type(String car_fuel_type) {
+		this.car_fuel_type = car_fuel_type;
+	}
+
+	public String getCar_year() {
+		return car_year;
+	}
+
+	public void setCar_year(String car_year) {
+		this.car_year = car_year;
+	}
+
+	public String getCar_volume() {
+		return car_volume;
+	}
+
+	public void setCar_volume(String car_volume) {
+		this.car_volume = car_volume;
+	}
+
+	public int getRapid_speed() {
+		return rapid_speed;
+	}
+
+	public void setRapid_speed(int rapid_speed) {
+		this.rapid_speed = rapid_speed;
+	}
+
+	public int getDrop_speed() {
+		return drop_speed;
+	}
+
+	public void setDrop_speed(int drop_speed) {
+		this.drop_speed = drop_speed;
+	}
+
+	public int getOverspeed() {
+		return overspeed;
+	}
+
+	public void setOverspeed(int overspeed) {
+		this.overspeed = overspeed;
+	}
+
+	public String getSpecial_car() {
+		return special_car;
+	}
+
+	public void setSpecial_car(String special_car) {
+		this.special_car = special_car;
+	}
+
+	public int getDriver_distance() {
+		return driver_distance;
+	}
+
+	public void setDriver_distance(int driver_distance) {
+		this.driver_distance = driver_distance;
+	}
+	
+	
+}

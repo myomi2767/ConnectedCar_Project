@@ -2,7 +2,7 @@
 <%@ page session="false"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="connected.car.inventory.ExpendableVO" %>
+<%@ page import="connected.car.admin.ExpendableVO" %>
 <%@ page import="connected.car.admin.Pagination" %>
 <%@ page import="java.util.List"%>	
 <!DOCTYPE html>

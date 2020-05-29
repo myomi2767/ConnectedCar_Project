@@ -8,8 +8,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import connected.car.admin.ExpendableVO;
 import connected.car.admin.Pagination;
-import connected.car.inventory.ExpendableVO;
 
 @Repository("expendableDao")
 public class ExpendableDAOImpl implements ExpendableDAO {

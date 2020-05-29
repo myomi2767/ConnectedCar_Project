@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import connected.car.admin.ExpendableVO;
 import connected.car.admin.Pagination;
-import connected.car.inventory.ExpendableVO;
 
 @Service
 public class ExpendableServiceImpl implements ExpendableService {

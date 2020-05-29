@@ -27,8 +27,8 @@ public class CarControlFragment extends Fragment {
     ViewPager viewPager;
     ArrayList<Fragment> fragmentArrayList = new ArrayList<Fragment>();
     String[] titleList = {"원격제어","차량상태"};
-    CarRemoteControlFragment control = new CarRemoteControlFragment();
-    CarRemoteStatusFragment status = new CarRemoteStatusFragment();
+    CarRemoteControlFragment control;
+    CarRemoteStatusFragment status;
 
     public CarControlFragment() {
         // Required empty public constructor
@@ -41,6 +41,9 @@ public class CarControlFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_car_control, container, false);
         tabLayout = view.findViewById(R.id.tablayout);
         viewPager = view.findViewById(R.id.pager);
+
+        control = new CarRemoteControlFragment();
+        status = new CarRemoteStatusFragment();
 
         fragmentArrayList.add(control);
         fragmentArrayList.add(status);

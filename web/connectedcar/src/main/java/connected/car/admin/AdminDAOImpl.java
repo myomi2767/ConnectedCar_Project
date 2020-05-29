@@ -6,8 +6,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import connected.car.inventory.ExpendableVO;
-
 @Repository("adminDAO")
 public class AdminDAOImpl implements AdminDAO {
 	@Autowired
