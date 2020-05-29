@@ -2,6 +2,8 @@ package connected.car.management.control;
 
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,6 +34,8 @@ import java.util.StringTokenizer;
 
 import connected.car.management.R;
 import connected.car.management.controlresult.ControlResultVO;
+import connected.car.management.sqlite.AirSettingVO;
+import connected.car.management.sqlite.DBHelper;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -42,7 +46,7 @@ import okhttp3.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CarRemoteControlFragment extends Fragment {
+public class CarRemoteControlFragment extends Fragment implements View.OnClickListener {
 
     ImageButton powerOn;
     ImageButton airControl;
@@ -68,6 +72,9 @@ public class CarRemoteControlFragment extends Fragment {
     StringTokenizer st;
 
     Notification notification;
+
+    DBHelper dbHelper;
+    SQLiteDatabase db;
     public CarRemoteControlFragment() {
         // Required empty public constructor
     }
@@ -88,13 +95,15 @@ public class CarRemoteControlFragment extends Fragment {
         btnDoorOpen = view.findViewById(R.id.btnDoorOpen);
         btnDoorLock = view.findViewById(R.id.btnDoorLock);
 
+        airControl.setOnClickListener(this);
+
+        dbHelper = new DBHelper(getContext());
+        db = dbHelper.getReadableDatabase();
+
         powerOn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), CarAirConditionSettingActivity.class);
-                startActivity(intent);
-                getActivity().finish();
-                //send_msg(v);
+                send_msg(v);
             }
         });
         engineOff.setOnClickListener(new View.OnClickListener() {
@@ -141,7 +150,21 @@ public class CarRemoteControlFragment extends Fragment {
             @Override
             public void run() {
                 if(view.getId()==R.id.powerOn){
-                    message = "engineStart";
+                    //db에 저장된 온도 정보를 읽어서 보내줌
+                    String sql = "select * from airsetting where car_id = ? and datetime(set_time) = max(datetime(set_time))";
+                    Cursor cursor = db.rawQuery(sql, new String[] {
+                            carId
+                    });
+                    cursor.moveToNext();
+                    if(cursor != null) {
+                        AirSettingVO vo = new AirSettingVO(cursor.getInt(0),
+                                cursor.getString(1),
+                                cursor.getString(2),
+                                cursor.getString(3),
+                                cursor.getString(4));
+                        Log.d("test", vo.toString());
+                        message = "ES" + vo.getAir_temp();
+                    }
                 }else if(view.getId()==R.id.engineOff){
                     message = "engineStop";
                 }else if(view.getId()==R.id.btnEmerLightOn){
@@ -158,6 +181,19 @@ public class CarRemoteControlFragment extends Fragment {
             }
         }).start();
     }
+
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        switch (id) {
+            case R.id.airControl:
+                Intent intent = new Intent(getContext(), CarAirConditionSettingActivity.class);
+                intent.putExtra("carId", carId);
+                startActivity(intent);
+                break;
+        }
+    }
+
     class AsyncTaskPower extends AsyncTask<Void, String, Void>{
         @Override
         protected Void doInBackground(Void... voids) {

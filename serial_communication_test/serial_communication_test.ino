@@ -49,6 +49,11 @@ void loop() {
     }else if(cmd == '0'){
       //차량 상태 불러오기
       Serial.println(engineStatus+doorStatus+airconditionStatus+emergencyStatus);
+    }else if(cmd == 'S') {
+      engineStatus = '1';
+      //CAN에게 시동이 켜졌다고 알림
+      Serial.println(engineStatus);
+      //에어컨 모터 제어
     }else{
       result = "fail";
     }
