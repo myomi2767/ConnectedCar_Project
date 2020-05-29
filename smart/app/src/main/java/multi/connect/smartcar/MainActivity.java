@@ -58,6 +58,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.StringTokenizer;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -65,6 +66,7 @@ import de.nitri.gauge.Gauge;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener,TMapGpsManager.onLocationChangedCallback {
     AsyncTaskSerial asyncTaskSerial;
+    StringTokenizer token;
     InputStream is;
     InputStreamReader isr;
     BufferedReader br;
@@ -127,12 +129,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     down.setEnabled(true);
                     new Thread(new Runnable() {
                     String message = "";
-                    @Override
-                    public void run() {
-                        message = "auto_on";
-                        pw.println(message);
-                        pw.flush();
-                    }
+                        @Override
+                        public void run() {
+                            message = "system/auto_on";
+                            pw.println(message);
+                            pw.flush();
+                        }
                 }).start();
                 }else{
                     power.setBackgroundDrawable(getResources().getDrawable(R.drawable.switchon));
@@ -146,7 +148,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         String message = "";
                         @Override
                         public void run() {
-                            message = "auto_off";
+                            message = "system/auto_off";
                             pw.println(message);
                             pw.flush();
                         }
@@ -276,7 +278,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 if(msg.length() > 0) {
                                     Log.d("test", "서버로 부터 수신된 메시지>>"
                                             + msg);
-                                    publishProgress(msg);
+                                    //publishProgress(msg);
+                                    filteringMsg(msg);
                                 }
                             } catch (IOException e) {
                             }
@@ -291,12 +294,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             return "";
         }
-
+        private void filteringMsg(String msg){
+            token = new StringTokenizer(msg,"/");
+            String protocol = token.nextToken();
+            String message = token.nextToken();
+            System.out.println("프로토콜:"+protocol+",메시지:"+message);
+            if(protocol.equals("sonic")){
+                publishProgress("sonic","msg",message);
+            }else if(protocol.equals("speed")){
+                publishProgress("speed","msg",message);
+            }
+        }
         @Override
         protected void onProgressUpdate(String... values) {
             super.onProgressUpdate(values);
-            if(power.isChecked()){
-                distance.setText(values[0]+" cm");
+            String state = values[0];
+            Log.d("progress",values[0]+":::"+values[1]+":::"+values[2]);
+            if(power.isChecked()) {
+                if (state.equals("sonic")) {
+                    distance.setText(values[2] + "cm");
+                }else if(state.equals("speed")){
+                    speedometer.moveToValue(Integer.parseInt(values[2]));
+                    speedometer.setLowerText(values[2]);
+                }
             }else{
                 distance.setText("");
             }
@@ -492,6 +512,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }else {
                 speed = 240;
             }
+            new Thread(new Runnable() {
+                String message = "";
+                @Override
+                public void run() {
+                    message = "tablet/plus3";
+                    pw.println(message);
+                    pw.flush();
+                }
+            }).start();
             speedometer.moveToValue(speed);
             speedometer.setLowerText(Integer.toString(speed));
         }else if(v.getId()==R.id.btnDown){
@@ -500,6 +529,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }else {
                 speed = 0;
             }
+            new Thread(new Runnable() {
+                String message = "";
+                @Override
+                public void run() {
+                    message = "tablet/minus3";
+                    pw.println(message);
+                    pw.flush();
+                }
+            }).start();
             speedometer.moveToValue(speed);
             speedometer.setLowerText(Integer.toString(speed));
         }else if(v.getId()==R.id.btn30){
@@ -522,7 +560,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    pw.println("speed_60");
+                    pw.println("tablet/speed60");
                     pw.flush();
                 }
             }).start();
@@ -533,7 +571,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    pw.println("speed_90");
+                    pw.println("tablet/speed90");
                     pw.flush();
                 }
             }).start();
