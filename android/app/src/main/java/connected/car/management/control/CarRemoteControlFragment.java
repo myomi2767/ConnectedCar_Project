@@ -163,7 +163,7 @@ public class CarRemoteControlFragment extends Fragment implements View.OnClickLi
                                 cursor.getString(3),
                                 cursor.getString(4));
                         Log.d("test", vo.toString());
-                        message = "ES" + vo.getAir_temp();
+                        message = "ES" + vo.getAir_temp() + vo.getSet_time();
                     }
                 }else if(view.getId()==R.id.engineOff){
                     message = "engineStop";
