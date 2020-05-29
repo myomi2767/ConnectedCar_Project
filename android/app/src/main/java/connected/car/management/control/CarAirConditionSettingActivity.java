@@ -34,7 +34,7 @@ public class CarAirConditionSettingActivity extends AppCompatActivity {
     int max = 28;
     int minTime =2;
     int maxTime =10;
-    String carid = "12가1234";
+    String carid = "";
     String viewtemp = "";
     String viewengine = "";
     int engineTime;
@@ -54,6 +54,8 @@ public class CarAirConditionSettingActivity extends AppCompatActivity {
 
         dbHelper = new DBHelper(this);
         db = dbHelper.getWritableDatabase();
+
+        carid = getIntent().getStringExtra("carId");
 
         airseekbar.setMax(max-min);
         enginetimeseekbar.setMax(maxTime-minTime);
@@ -102,10 +104,10 @@ public class CarAirConditionSettingActivity extends AppCompatActivity {
     //SQLite에 저장하는 메소드
     public void insert(View v){
         ContentValues contentValues = new ContentValues();
-        contentValues.put("carid",carid);
-        contentValues.put("airtemp", temperture.getText().toString() );//이거
-        contentValues.put("enginetime", engineStart.getText().toString());//이거
-        contentValues.put("setime",new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+        contentValues.put("car_id",carid);
+        contentValues.put("air_temp", temperture.getText().toString() );//이거
+        contentValues.put("engine_time", engineStart.getText().toString());//이거
+        contentValues.put("set_time",new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
 
         db.insert("airsetting",null,contentValues);
         Toast.makeText(this,"contentValues삽입성공",Toast.LENGTH_SHORT).show();

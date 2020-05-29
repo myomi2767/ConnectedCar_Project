@@ -26,7 +26,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".control.CarAirConditionSettingActivity"/>
-        <!--<activity android:name=".control.CarAirConditionSettingActivity"/>-->
         <activity android:name=".control.MyCarInfo" />
         <activity android:name=".control.CarInfoFragment" />
         <activity android:name=".car.RegisterCarActivity"/>
