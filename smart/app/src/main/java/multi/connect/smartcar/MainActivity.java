@@ -12,6 +12,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.PointF;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -41,6 +42,7 @@ import com.skt.Tmap.TMapCircle;
 import com.skt.Tmap.TMapData;
 import com.skt.Tmap.TMapGpsManager;
 import com.skt.Tmap.TMapMarkerItem;
+import com.skt.Tmap.TMapMarkerItem2;
 import com.skt.Tmap.TMapPOIItem;
 import com.skt.Tmap.TMapPoint;
 import com.skt.Tmap.TMapPolyLine;
@@ -569,23 +571,87 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 tMapPolygon.addPolygonPoint( polygonPoint.get(i) );
             }
             tmapview.addTMapPolygon("Line1", tMapPolygon);
-            //지도에 마커찍기
-            final ArrayList alTMapPoint = new ArrayList();
-            String nowloc = location.getLatitude()+","+location.getLongitude();
-            Toast.makeText(MainActivity.this,nowloc,Toast.LENGTH_LONG).show();
-            alTMapPoint.add( new TMapPoint(nowLoc.getLatitude()+0.0003875,nowLoc.getLongitude()) );//앞차
-            alTMapPoint.add( new TMapPoint(nowLoc.getLatitude()+0.0003875,nowLoc.getLongitude()-0.0004382) );//앞왼차
-            alTMapPoint.add( new TMapPoint(nowLoc.getLatitude()+0.0003875,nowLoc.getLongitude()+0.0004382) );//앞오른차
-            Bitmap carNum = Bitmap.createScaledBitmap(carNumImg, 230, 100, true);
+
+            //지도에 마커찍기 TMapMarkerItem2
+            final ArrayList<TMapPoint> alTMapPoint = new ArrayList();
+            final ArrayList<String> carnumber = new ArrayList();
+            alTMapPoint.add( new TMapPoint(nowLoc.getLatitude()+0.0003275,nowLoc.getLongitude()) );//앞차
+            carnumber.add("111가1111");
+            alTMapPoint.add( new TMapPoint(nowLoc.getLatitude()+0.0003275,nowLoc.getLongitude()-0.0004382) );//앞왼차
+            carnumber.add("222가2222");
+            alTMapPoint.add( new TMapPoint(nowLoc.getLatitude()+0.0003275,nowLoc.getLongitude()+0.0004382) );//앞오른차
+            carnumber.add("333가3333");
             for(int i=0; i<alTMapPoint.size(); i++){
-                TMapMarkerItem markerItem1 = new TMapMarkerItem();
-                // 마커 아이콘 지정
-                markerItem1.setIcon(carNum);
-                // 마커의 좌표 지정
-                markerItem1.setTMapPoint((TMapPoint)alTMapPoint.get(i));
-                //지도에 마커 추가
-                tmapview.addMarkerItem("markerItem"+i, markerItem1);
+                TMapMarkerItem2 tMapMarkerItem2 = new TMapMarkerItem2();
+                tMapMarkerItem2.setTMapPoint(alTMapPoint.get(i));
+                tmapview.addMarkerItem2(carnumber.get(i),tMapMarkerItem2);
+                tmapview.showCallOutViewWithMarkerItemID(carnumber.get(i));
+
             }
+
+            //지도에 마커찍기
+//            final ArrayList alTMapPoint = new ArrayList();
+//            final ArrayList<String> carnumber = new ArrayList();
+//            String nowloc = location.getLatitude()+","+location.getLongitude();
+//            Toast.makeText(MainActivity.this,nowloc,Toast.LENGTH_LONG).show();
+//            alTMapPoint.add( new TMapPoint(nowLoc.getLatitude()+0.0003275,nowLoc.getLongitude()) );//앞차
+//            carnumber.add("111가1111");
+//            alTMapPoint.add( new TMapPoint(nowLoc.getLatitude()+0.0003275,nowLoc.getLongitude()-0.0004382) );//앞왼차
+//            carnumber.add("222가2222");
+//            alTMapPoint.add( new TMapPoint(nowLoc.getLatitude()+0.0003275,nowLoc.getLongitude()+0.0004382) );//앞오른차
+//            carnumber.add("333가3333");
+//            Bitmap carNum = Bitmap.createScaledBitmap(carNumImg, 230, 100, true);
+//            Bitmap point = Bitmap.createScaledBitmap(carNumImg, 1, 1, true);
+//            for(int i=0; i<alTMapPoint.size(); i++){
+//                TMapMarkerItem markerItem1 = new TMapMarkerItem();
+//                // 마커 아이콘 지정
+//                //markerItem1.setIcon(carNum);
+//                //markerItem1.setIcon(point);
+//                //마커의 오른쪽에 이미지 넣기
+//                markerItem1.setCalloutRightButtonImage(carNum);
+//                //마커의 타이틀(차량번호)
+//                //markerItem1.setCalloutTitle(carnumber.get(i));
+//                //markerItem1.setCalloutTitle("123가1234");
+//                //풍선뷰 사용하기
+//                markerItem1.setCanShowCallout(true);
+//                //마커의 모든 풍선뷰 자동활성화
+//                markerItem1.setAutoCalloutVisible(true);
+//                // 마커의 좌표 지정
+//                markerItem1.setTMapPoint((TMapPoint)alTMapPoint.get(i));
+//
+//                //지도에 마커 추가
+//                tmapview.addMarkerItem(carnumber.get(i), markerItem1);
+//            }
+//            //마커의 풍선뷰 눌렀을때 호출되는 메소드
+//
+//
+//            //마커의 오른쪽이미지가 눌렸을때 호출되는 메소드
+//            tmapview.setOnCalloutRightButtonClickListener(new TMapView.OnCalloutRightButtonClickCallback() {
+//                @Override
+//                public void onCalloutRightButton(TMapMarkerItem tMapMarkerItem) {
+//                    String id = tMapMarkerItem.getID();
+//
+//                    final int[] selectedItem = {0};
+//                    final String[] items = new String[]{"트렁크가 열렸어요","차를 옆으로 빼주세요"};
+//                    AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+//                    dialog.setTitle("보낼 메시지를 고르세요")
+//                            .setSingleChoiceItems(items, 0, new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface dialog, int which) {
+//                                    selectedItem[0] = which;
+//                                }
+//                            })
+//                            .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface dialog, int which) {
+//                                    Toast.makeText(MainActivity.this,"메시지를 보냈습니다",Toast.LENGTH_LONG).show();
+//                                }
+//                            });
+//                    dialog.create();
+//                    dialog.show();
+//                }
+//            });
+
         }
     }
 
