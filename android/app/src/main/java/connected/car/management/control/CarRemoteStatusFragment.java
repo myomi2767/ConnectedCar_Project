@@ -28,18 +28,10 @@ import connected.car.management.R;
  * A simple {@link Fragment} subclass.
  */
 public class CarRemoteStatusFragment extends Fragment {
-    AsyncTaskStatus asyncTaskStatus;
-    Socket socket;
+    CarRemoteControlFragment remoteControlFragment;
+    RemoteControlAsync remoteControlAsync;
 
-    InputStream is;
-    InputStreamReader isr;
-    BufferedReader br;
-
-    OutputStream os;
     PrintWriter pw;
-    String carId;
-
-    StringTokenizer st;
 
     Button refresh;
 
@@ -53,13 +45,15 @@ public class CarRemoteStatusFragment extends Fragment {
     TextView airText;
     TextView airText2;
 
-    boolean engineStatus;
-    boolean doorStatus;
-    boolean airconditionStatus;
-    boolean emergencyStatus;
+    boolean[] status = new boolean[4];
 
-    public CarRemoteStatusFragment() {
+    String carId;
+
+    public CarRemoteStatusFragment(String carId, CarRemoteControlFragment fragment) {
         // Required empty public constructor
+        this.carId = carId;
+        this.remoteControlFragment = fragment;
+
     }
 
     @Override
@@ -78,21 +72,31 @@ public class CarRemoteStatusFragment extends Fragment {
         airText = view.findViewById(R.id.airText);
         airText2 = view.findViewById(R.id.airText2);
 
-        carId = "11111";
-
-        asyncTaskStatus = new AsyncTaskStatus();
-        asyncTaskStatus.execute();
+        remoteControlAsync = remoteControlFragment.getRemoteControlAsync();
 
         refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 send_msg(v);
+                while (!remoteControlAsync.isMsgIn()) {
+
+                }
+                status = remoteControlAsync.getStatusResult();
+                setView();
+                remoteControlAsync.setMessageIn(false);
             }
         });
         return view;
     }
 
     public void send_msg(final View view){
+        if(pw == null) {
+            Log.d("test", "null인가");
+            if(remoteControlAsync.isOnPW()) {
+                pw = remoteControlAsync.getPrintWriter();
+                Log.d("test", pw.toString());
+            }
+        }
         new Thread(new Runnable() {
             String message = "";
             @Override
@@ -106,131 +110,21 @@ public class CarRemoteStatusFragment extends Fragment {
         }).start();
     }
 
-    class AsyncTaskStatus extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected Void doInBackground(Void... voids) {
-            try {
-                socket = new Socket(getActivity().getString(R.string.myip), 12345);
-                if(socket != null){
-                    ioWork();
-                }
-                Thread t1 = new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        while(true) {
-                            String msg;
-                            try {
-                                msg = br.readLine();
-                                Log.d("remote", "서버로부터 수신된 메시지>>" + msg);
-                                filteringMsg(msg);
-                            } catch (IOException e) {
-                                try {
-                                    is.close();
-                                    isr.close();
-                                    br.close();
-                                    os.close();
-                                    socket.close();
-                                } catch (IOException ex) {
-                                    ex.printStackTrace();
-                                }
-                                break;
-                            }
-                        }
-                    }
-                });
-                t1.start();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            return null;
-        }
-        private void filteringMsg(String msg){
-            st = new StringTokenizer(msg, ":");
-            String protocol = st.nextToken();
-            System.out.println("protocol:"+protocol);
-            if(protocol.equals("job")) {
-                String message = st.nextToken();
-                /*String category = st.nextToken();
-                String id = st.nextToken();*/
-                setStatus(message);
-            }
-        }
-        void ioWork(){
-            //최초접속할 때 서버에게 접속한 아이디에 정보를 보내기
-            try {
-                is = socket.getInputStream();
-                isr = new InputStreamReader(is);
-                br = new BufferedReader(isr);
-
-                os = socket.getOutputStream();
-                pw = new PrintWriter(os, true);
-                //DB에 있는 id와 차량번호를 넘긴다.
-                pw.println("phone:"+carId);
-                pw.flush();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        try {
-            if(socket!=null) {
-                socket.close();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void setStatus(String result){
-        char[] status = result.toCharArray();
-        if(status[0]=='0'){
-            engineStatus = false;
-        }else if (status[0]=='1'){
-            engineStatus = true;
-        }
-
-        if(status[1]=='0'){
-            doorStatus = false;
-        }else if (status[1]=='1'){
-            doorStatus = true;
-        }
-
-        if(status[2]=='0'){
-            airconditionStatus = false;
-        }else if (status[2]=='1'){
-            airconditionStatus = true;
-        }
-
-        if(status[0]=='0'){
-            emergencyStatus = false;
-        }else if (status[0]=='1'){
-            emergencyStatus = true;
-        }
-
-        setView();
-    }
-
     public void setView(){
-        if(engineStatus){
+        if(status[0]){
             engineText.setText("켜짐");
             engineText.setTextColor(Color.BLUE);
             engineText2.setText("켜짐");
             engineText2.setTextColor(Color.BLUE);
         }
-        if (doorStatus){
+        if (status[1]){
             doorText.setText("열림");
             doorText.setTextColor(Color.BLUE);
             doorText2.setText("열림");
             doorText2.setTextColor(Color.BLUE);
             doorText3.setText("모두 열림");
         }
-        if (airconditionStatus){
+        if (status[2]){
             airText.setText("켜짐");
             airText.setTextColor(Color.BLUE);
             airText2.setText("켜짐");

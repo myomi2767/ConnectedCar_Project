@@ -19,11 +19,11 @@ public class DBHelper extends SQLiteOpenHelper {
         Log.d("===","데이터베이스가 생성됨");
 
         String sql = "create table if not exists airsetting("
-                + "airsettingno integer primary key autoincrement,"
-                + "setime text,"
-                + "carid text,"
-                + "airtemp text,"
-                 +"enginetime text)";
+                + "air_setting_no integer primary key autoincrement,"
+                + "set_time text,"
+                + "car_id text,"
+                + "air_temp text,"
+                +"engine_time text)";
 
         db.execSQL(sql);
 

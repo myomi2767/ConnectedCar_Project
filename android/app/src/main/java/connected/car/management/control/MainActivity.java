@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     CarInfoFragment car_info;
 
     MemberVO vo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,8 +42,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         final FragmentTransaction transaction = fragmentManager.beginTransaction();
         bottomAppBar = findViewById(R.id.bottom_bar);
 
-
-
+        Intent intent = getIntent();
+        vo = intent.getParcelableExtra("userInfo");
+        Log.d("test", vo.toString());
         /*fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //car_info = new CarInfo();
         car_part = new CarExpendableFragment();
-        condition = new CarControlFragment();
+        condition = new CarControlFragment(vo.getCar_id());
 
         bottomAppBar.setFabAlignmentMode(BottomAppBar.FAB_ALIGNMENT_MODE_CENTER);
         //bottomAppBar의 floating action을 가운데로 맞춰준다.
@@ -61,9 +63,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         getSupportFragmentManager().beginTransaction().add(R.id.page,condition).commit();
 
-        Intent intent = getIntent();
-        vo = intent.getParcelableExtra("userInfo");
-        Log.d("test", vo.toString());
+
 
     }
 

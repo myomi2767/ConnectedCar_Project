@@ -7,12 +7,10 @@ import java.io.OutputStream;
 import ecu.control.ECUControl.CANWriteThread;
 import gnu.io.SerialPortEvent;
 import gnu.io.SerialPortEventListener;
-
-//시리얼 통신을 통해서 데이터가 전송되었을 때 실행되는 클래스
-//전송되어 들어오는 데이터를 읽는 작업만 한다. 
+//아두이노의 값을 읽어오고 캔으로 보내는 작업을 수행한다. 
 public class ArduinoSerialListener implements SerialPortEventListener {
 	BufferedInputStream arduinoBis; 
-	OutputStream canOs; //아두이노로 시리얼출력을 위해 작업
+	OutputStream canOs; //캔으로 시리얼출력을 위해 작업
 	SerialConnect arduino;
 	SerialConnect can;
 	String id;
@@ -37,7 +35,7 @@ public class ArduinoSerialListener implements SerialPortEventListener {
 			try {
 				arduinoBis.read(ArduinoreadBuffer, 0, 1024);
 				String aData = new String(ArduinoreadBuffer);
-				System.out.println("Arduino 시리얼 포트로 전송된 데이터:"+aData);
+				System.out.println("Arduino 시리얼 포트로부터 전송받은 데이터:"+aData);
 				if(canOs!=null) {
 					if(aData.trim().equals("success")) {
 						id = "00000000";

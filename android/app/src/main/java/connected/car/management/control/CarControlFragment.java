@@ -30,8 +30,11 @@ public class CarControlFragment extends Fragment {
     CarRemoteControlFragment control;
     CarRemoteStatusFragment status;
 
-    public CarControlFragment() {
+    String car_id;
+
+    public CarControlFragment(String car_id) {
         // Required empty public constructor
+        this.car_id = car_id;
     }
 
 
@@ -42,8 +45,8 @@ public class CarControlFragment extends Fragment {
         tabLayout = view.findViewById(R.id.tablayout);
         viewPager = view.findViewById(R.id.pager);
 
-        control = new CarRemoteControlFragment();
-        status = new CarRemoteStatusFragment();
+        control = new CarRemoteControlFragment(car_id);
+        status = new CarRemoteStatusFragment(car_id, control);
 
         fragmentArrayList.add(control);
         fragmentArrayList.add(status);
