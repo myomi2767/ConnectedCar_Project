@@ -59,7 +59,7 @@ import java.util.HashMap;
 
 import de.nitri.gauge.Gauge;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener,TMapGpsManager.onLocationChangedCallback {
     AsyncTaskSerial asyncTaskSerial;
     InputStream is;
     InputStreamReader isr;
@@ -109,11 +109,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         distance = findViewById(R.id.distance);
         //power -setting
         power = findViewById(R.id.power);
-        /*btn30.setEnabled(false);
-        btn60.setEnabled(false);
-        btn90.setEnabled(false);
-        up.setEnabled(false);
-        down.setEnabled(false);*/
 
         power.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -128,14 +123,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     up.setEnabled(true);
                     down.setEnabled(true);
                     new Thread(new Runnable() {
-                        String message = "";
-                        @Override
-                        public void run() {
-                            message = "auto_on";
-                            pw.println(message);
-                            pw.flush();
-                        }
-                    }).start();
+                    String message = "";
+                    @Override
+                    public void run() {
+                        message = "auto_on";
+                        pw.println(message);
+                        pw.flush();
+                    }
+                }).start();
                 }else{
                     power.setBackgroundDrawable(getResources().getDrawable(R.drawable.switchon));
                     Toast.makeText(MainActivity.this,"주행 보조 시스템이 꺼졌습니다.",Toast.LENGTH_SHORT).show();
@@ -177,28 +172,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn90.setEnabled(false);
         up.setEnabled(false);
         down.setEnabled(false);
-        power.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    power.setBackgroundDrawable(getResources().getDrawable(R.drawable.switchoff));
-                    Toast.makeText(MainActivity.this,"주행 보조 시스템이 켜졌습니다.",Toast.LENGTH_SHORT).show();
-                    btn30.setEnabled(true);
-                    btn60.setEnabled(true);
-                    btn90.setEnabled(true);
-                    up.setEnabled(true);
-                    down.setEnabled(true);
-                }else{
-                    power.setBackgroundDrawable(getResources().getDrawable(R.drawable.switchon));
-                    Toast.makeText(MainActivity.this,"주행 보조 시스템이 꺼졌습니다.",Toast.LENGTH_SHORT).show();
-                    btn30.setEnabled(false);
-                    btn60.setEnabled(false);
-                    btn90.setEnabled(false);
-                    up.setEnabled(false);
-                    down.setEnabled(false);
-                }
-            }
-        });
+
         //네비 목적지 검색
         naviSearchView = findViewById(R.id.naviSearchView);
         fabMsg = findViewById(R.id.fabMsg);
@@ -271,13 +245,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
+
+    @Override
+    public void onLocationChange(Location location) {
+        tmapview.setLocationPoint(location.getLongitude(),location.getLatitude());
+    }
+
     //서버 연결
     class AsyncTaskSerial extends AsyncTask<Integer,String,String> {
 
         @Override
         protected String doInBackground(Integer... integers) {
             try {
-                socket = new Socket("70.12.226.101", 12345);
+                socket = new Socket("192.168.43.190", 12345);
                 if (socket != null) {
                     ioWork();
                 }
@@ -310,32 +290,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         protected void onProgressUpdate(String... values) {
             super.onProgressUpdate(values);
-            distance.setText(values[0]);
-
+            if(power.isChecked()){
+                distance.setText(values[0]+" cm");
+            }else{
+                distance.setText("");
+            }
         }
     }
-        void ioWork(){
-            try {
-                is = socket.getInputStream();
-                isr = new InputStreamReader(is);
-                br = new BufferedReader(isr);
+    void ioWork(){
+        try {
+            is = socket.getInputStream();
+            isr = new InputStreamReader(is);
+            br = new BufferedReader(isr);
 
-                os = socket.getOutputStream();
-                pw = new PrintWriter(os,true);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            os = socket.getOutputStream();
+            pw = new PrintWriter(os,true);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+    }
 
-        @Override
-        protected void onDestroy() {
-            super.onDestroy();
-            try {
-                socket.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        try {
+            socket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+    }
     private void searchPOI() {
         TMapData data = new TMapData();
         String keyword = destiName.getText().toString();
@@ -357,10 +340,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             });
         }
-    }
-
-    private void moveMap(double lat,double lng){
-        tmapview.setCenterPoint(lng,lat);
     }
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
@@ -385,6 +364,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         endImg =BitmapFactory.decodeResource(this.getResources(),R.drawable.endpin);
         Bitmap carIcon = Bitmap.createScaledBitmap(carImg, 40, 60, true);
 
+        linearLayoutTmap.addView(tmapview);
 
         tmapview.setIcon(carIcon);
         tmapview.setIconVisibility(true);
@@ -410,7 +390,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
         tmapview.setLocationPoint(location.getLongitude(),location.getLatitude());
-        linearLayoutTmap.addView(tmapview);
 
         /*//지도에 마커찍기
         final ArrayList alTMapPoint = new ArrayList();
@@ -483,7 +462,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tMapGpsManager = new TMapGpsManager(this);
         tMapGpsManager.setMinTime(1000);
         tMapGpsManager.setMinDistance(5);
-        tMapGpsManager.setProvider(TMapGpsManager.GPS_PROVIDER);
+        tMapGpsManager.setProvider(TMapGpsManager.NETWORK_PROVIDER);
         tMapGpsManager.OpenGps();
     }
 
@@ -520,7 +499,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }else if(v.getId()==R.id.btnDown){
             if(speed>=3) {
                 speed = speed - 3;
-            }else if(speed<3){
+            }else {
                 speed = 0;
             }
             speedometer.moveToValue(speed);
@@ -529,14 +508,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             speed = 30;
             speedometer.moveToValue(speed);
             speedometer.setLowerText(Integer.toString(speed));
+            new Thread(new Runnable() {
+                String message = "";
+                @Override
+                public void run() {
+                    message="tablet/speed30";
+                    pw.println(message);
+                    pw.flush();
+                }
+            }).start();
         }else if(v.getId()==R.id.btn60){
             speed = 60;
             speedometer.moveToValue(speed);
             speedometer.setLowerText(Integer.toString(speed));
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    pw.println("speed_60");
+                    pw.flush();
+                }
+            }).start();
         }else if(v.getId()==R.id.btn90){
             speed = 90;
             speedometer.moveToValue(speed);
             speedometer.setLowerText(Integer.toString(speed));
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    pw.println("speed_90");
+                    pw.flush();
+                }
+            }).start();
         }else if(v.getId()==R.id.btnBack){
             destiName.setText("");
             naviSearchView.setVisibility(View.INVISIBLE);
@@ -553,7 +555,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }else if(v.getId()==R.id.fabMsg){
             zoomLev = tmapview.getZoomLevel();
             Toast.makeText(MainActivity.this,Integer.toString(zoomLev),Toast.LENGTH_SHORT).show();
-            tmapview.removeTMapCircle("circle1");
+            //tmapview.removeTMapCircle("circle1");
             tMapPoint = new TMapPoint(tMapGpsManager.getLocation().getLatitude(),tMapGpsManager.getLocation().getLongitude());
             tMapCircle = new TMapCircle();
             tMapCircle.setCenterPoint(tMapPoint);
