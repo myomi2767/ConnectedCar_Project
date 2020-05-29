@@ -4,6 +4,7 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.StringTokenizer;
 
 import gnu.io.SerialPortEvent;
 import gnu.io.SerialPortEventListener;
@@ -11,9 +12,7 @@ import gnu.io.SerialPortEventListener;
 public class SerialCANListener implements SerialPortEventListener {
 	BufferedInputStream bis;// 캔통신으로 input되는 데이터를 읽기 위해 오픈된
 	OutputStream os;
-	String msg;
-	PrintWriter pw;
-	AndroidClient androidClient;
+	String resultmsg;
 	String speed;
 	String hexmessage;
 	String result;
@@ -21,12 +20,15 @@ public class SerialCANListener implements SerialPortEventListener {
 	String fromSlave;
 	String hexdata;
 	int start, end;
+	StringTokenizer st;
+	
+	AndroidClient androidClient;
 
 	public SerialCANListener(BufferedInputStream bis) {
 		this.bis = bis;
 		// serialClient = new SerialClient();
 		// System.out.println("캔리스너 포트 불러오는 곳");
-		msg = "";
+		resultmsg = "";
 		// 내가 추가한 부분(아두이노의 데이터를 받기위한 작업)
 	}
 
@@ -42,51 +44,39 @@ public class SerialCANListener implements SerialPortEventListener {
 					int numbyte = bis.read(readBuffer);// 읽은 내용이 readBuffer에 셋팅됨
 				}
 				String data = new String(readBuffer);
-				msg = data;
+				String msg = data;
 				// CanListener가 w28과 U28 둘 다 읽기 때문에 나눠줘야한다.
 				if (msg.trim().startsWith(":W2800000001")) {
 					fromMaster = msg.trim();
-					// System.out.println("Master가 Can시리얼 포트로
-					// 전송한데이터=>"+fromMaster);
+					System.out.println("Master가 Can시리얼 포트로 전송한데이터=>"+fromMaster);
 				} else if (msg.trim().startsWith(":U2800000002")) {
 					fromSlave = msg.trim();
-					// System.out.println("Slave가 Can시리얼 포트로
-					// 전송한데이터=>"+fromSlave);
+					System.out.println("Slave가 Can시리얼 포트로 전송한데이터=>"+fromSlave);
 				}
 				//can에서 읽은 msg가 slave에서 넘어온 데이터와 같을 때
 				if (msg.trim().equals(fromSlave)) {
 					result = getHexToDec(msg);
-					System.out.println("slave에서 보내온 데이터 " + result);
-					androidClient.sendMessage("speed/" + result);
-				} else {
-					System.out.println(":U28 ERROR");
-					// os.write('0');
-				}
-
-				// 내가 추가한 부분.
+					System.out.println("slave에서 보내온 데이터:::> " + result);
+					resultmsg = "speed/"+ result;
+					androidClient.sendMessage(resultmsg);
+				} 
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
 	}
-
-	/*
-	 * public String getMessage() { System.out.println("노예 캔으로부터 받는 중"+msg);
-	 * //String newMsg = ""; switch (msg) { case
-	 * ":U2800000001000000000000005045":
-	 * 
-	 * break;
-	 * 
-	 * default: break; } return msg; }
-	 */
+	
+	public void setAndroidClient(AndroidClient client) {
+		this.androidClient = client;
+	}
 	public String getHexToDec(String hex) {
 		long v = 0;
 		String str = "";
 		String data = hex.substring(12, 28);
 
-		System.out.println("id 뒤 메시지 16자리만 받기" + data);
+		//System.out.println("id 뒤 메시지 16자리만 받기" + data);
 		hexdata = String.valueOf(Integer.parseInt(data)).trim();
-		System.out.println("앞에 00000제외한 헥사 코드"+hexdata);
+		//System.out.println("앞에 00000제외한 헥사 코드"+hexdata);
 		for (int i = 0; i <= hexdata.length() - 2; i += 2) {
 			start = i;
 			end = i + 2;
@@ -98,4 +88,5 @@ public class SerialCANListener implements SerialPortEventListener {
 
 		return str;
 	}
+	
 }
