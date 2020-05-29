@@ -59,7 +59,7 @@ import java.util.HashMap;
 
 import de.nitri.gauge.Gauge;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener,TMapGpsManager.onLocationChangedCallback {
     AsyncTaskSerial asyncTaskSerial;
     InputStream is;
     InputStreamReader isr;
@@ -245,6 +245,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
+
+    @Override
+    public void onLocationChange(Location location) {
+        tmapview.setLocationPoint(location.getLongitude(),location.getLatitude());
+    }
+
     //서버 연결
     class AsyncTaskSerial extends AsyncTask<Integer,String,String> {
 
@@ -335,10 +341,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             });
         }
     }
-
-    private void moveMap(double lat,double lng){
-        tmapview.setCenterPoint(lng,lat);
-    }
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
@@ -362,6 +364,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         endImg =BitmapFactory.decodeResource(this.getResources(),R.drawable.endpin);
         Bitmap carIcon = Bitmap.createScaledBitmap(carImg, 40, 60, true);
 
+        linearLayoutTmap.addView(tmapview);
 
         tmapview.setIcon(carIcon);
         tmapview.setIconVisibility(true);
@@ -387,7 +390,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
         tmapview.setLocationPoint(location.getLongitude(),location.getLatitude());
-        linearLayoutTmap.addView(tmapview);
 
         /*//지도에 마커찍기
         final ArrayList alTMapPoint = new ArrayList();
@@ -460,7 +462,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tMapGpsManager = new TMapGpsManager(this);
         tMapGpsManager.setMinTime(1000);
         tMapGpsManager.setMinDistance(5);
-        tMapGpsManager.setProvider(TMapGpsManager.GPS_PROVIDER);
+        tMapGpsManager.setProvider(TMapGpsManager.NETWORK_PROVIDER);
         tMapGpsManager.OpenGps();
     }
 
@@ -497,7 +499,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }else if(v.getId()==R.id.btnDown){
             if(speed>=3) {
                 speed = speed - 3;
-            }else if(speed<3){
+            }else {
                 speed = 0;
             }
             speedometer.moveToValue(speed);
@@ -553,7 +555,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }else if(v.getId()==R.id.fabMsg){
             zoomLev = tmapview.getZoomLevel();
             Toast.makeText(MainActivity.this,Integer.toString(zoomLev),Toast.LENGTH_SHORT).show();
-            tmapview.removeTMapCircle("circle1");
+            //tmapview.removeTMapCircle("circle1");
             tMapPoint = new TMapPoint(tMapGpsManager.getLocation().getLatitude(),tMapGpsManager.getLocation().getLongitude());
             tMapCircle = new TMapCircle();
             tMapCircle.setCenterPoint(tMapPoint);
