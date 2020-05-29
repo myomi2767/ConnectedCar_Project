@@ -158,9 +158,9 @@
                 </TextView>
 
         </LinearLayout>
-
-
     </LinearLayout>
+
+
     <Button
         android:id="@+id/btn_select"
         android:layout_width="match_parent"

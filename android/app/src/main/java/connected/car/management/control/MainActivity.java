@@ -13,56 +13,70 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
-import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import connected.car.management.R;
 import connected.car.management.car.RegisterCarActivity;
 import connected.car.management.member.MemberVO;
+import connected.car.management.period.PeriodFragment;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    BottomAppBar bottomAppBar;
+
+    //====로그인 액티비티에서 받아온 변수들 -> 연결된 모든 프래그먼트에서 쉽게 쓰려고 일단 적어놓음
+    public String main_user_id="";
+    public String main_car_id="";
+    //로그인 액티비티에서 받은 변수 끝
+
+
     Toolbar toolbar;
-    FloatingActionButton fab;
+    FloatingActionButton fabCenter;
+    FloatingActionButton fabTerm;
+    FloatingActionButton fabInfo;
     CarControlFragment condition;
     CarExpendableFragment car_part;
+    PeriodFragment periodFragment;
     CarInfoFragment car_info;
 
     MemberVO vo;
+
+    FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         toolbar = findViewById(R.id.toolbar);
-        fab = findViewById(R.id.fab);
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        final FragmentTransaction transaction = fragmentManager.beginTransaction();
-        bottomAppBar = findViewById(R.id.bottom_bar);
+        fabCenter = findViewById(R.id.centerMenu);
+        fabTerm = findViewById(R.id.termMenu);
+        fabInfo = findViewById(R.id.infoMenu);
 
+        fragmentManager = getSupportFragmentManager();
+
+        //로그인액티비티에서 로그인 성공 시 intent로 값 넘겨와서 main액티비티로 온다.
         Intent intent = getIntent();
         vo = intent.getParcelableExtra("userInfo");
-        Log.d("test", vo.toString());
-        /*fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                transaction.replace(R.id.page,car_info);
-            }
-        });*/
+        Log.d("===","getFromLoginPage:"+vo.toString());
+
+        //=====로그인액티비티에서 온 데이터 전역 변수에 담기//
+        main_user_id = vo.getUser_id();
+        main_car_id = vo.getCar_id();
+        //=====로그인액티비티에서 온 데이터 정제 끝 ///
 
         //car_info = new CarInfo();
         car_part = new CarExpendableFragment();
         condition = new CarControlFragment(vo.getCar_id());
+        periodFragment = new PeriodFragment();
+        
+        fabCenter.setOnClickListener(this);
+        fabTerm.setOnClickListener(this);
+        fabInfo.setOnClickListener(this);
 
-        bottomAppBar.setFabAlignmentMode(BottomAppBar.FAB_ALIGNMENT_MODE_CENTER);
-        //bottomAppBar의 floating action을 가운데로 맞춰준다.
-        bottomAppBar.setFabCradleRoundedCornerRadius(100);
-        bottomAppBar.setFabCradleMargin(20);
 
-        getSupportFragmentManager().beginTransaction().add(R.id.page,condition).commit();
-
+        fragmentManager.beginTransaction().add(R.id.page,condition).commit();
 
 
     }
@@ -70,7 +84,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+        int id = v.getId();
+        switch (id) {
+            case R.id.centerMenu:
+                fragmentManager.beginTransaction().replace(R.id.page, condition).commit();
+                break;
+            case R.id.termMenu:
+                fragmentManager.beginTransaction().replace(R.id.page, periodFragment).commit();
+                break;
+            case R.id.infoMenu:
+                break;
 
+        }
     }
 
     @Override
@@ -93,17 +118,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    /*  @Override
-    public void onClick(View v) {
-        Fragment select = null;
-        if(v.getId()==R.id.fab1){
-            select = car_info;
-        }else if(v.getId()==R.id.fab2){
-            select = new CarControl();
-        }else if(v.getId()==R.id.fab3){
-            select = car_part;
-        }
-        getSupportFragmentManager().beginTransaction().replace(R.id.page,select).commit();
-
-    }*/
 }

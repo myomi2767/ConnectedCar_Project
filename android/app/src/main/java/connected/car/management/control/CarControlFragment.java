@@ -51,7 +51,7 @@ public class CarControlFragment extends Fragment {
         fragmentArrayList.add(control);
         fragmentArrayList.add(status);
 
-        FragAdapter adapter = new FragAdapter(getFragmentManager(),fragmentArrayList.size());
+        FragAdapter adapter = new FragAdapter(getActivity().getSupportFragmentManager(),fragmentArrayList.size());
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
         return view;

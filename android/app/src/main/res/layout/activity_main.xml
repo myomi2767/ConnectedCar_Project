@@ -27,16 +27,32 @@
         android:layout_gravity="bottom"
         app:backgroundTint="#2538A1"
         app:srcCompat="@android:drawable/ic_menu_send"
-        />
+        >
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/termMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            app:backgroundTint="#FFCADC"
+            />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/infoMenu"
+            android:layout_marginLeft="300dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            app:backgroundTint="#FFCADC"
+            />
+    </com.google.android.material.bottomappbar.BottomAppBar>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/centerMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
         app:backgroundTint="#FFCADC"
         app:layout_anchor="@id/bottom_bar"
-    />
+        />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
