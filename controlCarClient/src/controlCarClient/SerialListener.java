@@ -42,9 +42,16 @@ public class SerialListener implements SerialPortEventListener {
 				String data = new String(readBuffer);
 				System.out.println("Can시리얼 포트로 전송된데이터=>"+data);
 				if(pw!=null) {
-					if(data.trim().equals(":U2800000000000000000000110041")){
-						System.out.println("if문 들어옴");
+					if(data.trim().equals(":U2800000000111100000000000043")){						
 						String msg = "success";
+						String id = "11111";
+						pw.println("job:"+msg+":car:"+id);
+						pw.flush();
+					}else if(data.trim().equals("")) {
+						
+					}else if(data.trim().substring(0, 4).equals(":U28")){
+						//System.out.println(data.trim().substring(24, 28));
+						String msg = data.trim().substring(24, 28);
 						String id = "11111";
 						pw.println("job:"+msg+":car:"+id);
 						pw.flush();

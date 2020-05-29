@@ -69,13 +69,13 @@ public class MemberVO implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        user_id = dest.readString();
-        car_id = dest.readString();
-        user_password = dest.readString();
-        user_name = dest.readString();
-        user_birthdate = dest.readString();
-        user_gender = dest.readString();
-        driver_license = dest.readString();
+        dest.writeString(user_id);
+        dest.writeString(car_id);
+        dest.writeString(user_password);
+        dest.writeString(user_name);
+        dest.writeString(user_birthdate);
+        dest.writeString(user_gender);
+        dest.writeString(driver_license);
     }
 
 }

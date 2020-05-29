@@ -55,18 +55,24 @@
 							<li id="id_pass">
 								<ul>
 									<li class="logintext" id="owner_id">
-									<div class="logintext_div">
+										<div class="logintext_div">
 											<input type="text" class="input_logintext" placeholder=' 아이디'
 												name="owner_id">
-										</div></li>
+										</div>
+									</li>
 									<!-- id -->
-									<li class="logintext" id="owner_password"><div class="logintext_div">
+									<br/>
+									<li class="logintext" id="owner_password">
+										<div class="logintext_div">
 											<input type="password" class="input_logintext" name="owner_password"
 												placeholder=' 비밀번호'>
-										</div></li>
+										</div>
+									</li>
 									<!-- pass -->
 								</ul>
 							</li>
+							<br/>
+							<br/>
 							<li><input type="submit" id="loginbutton" value="로그인" /></li>
 						</ul>
 

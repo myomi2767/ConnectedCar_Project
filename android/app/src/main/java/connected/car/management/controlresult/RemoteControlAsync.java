@@ -1,4 +1,4 @@
-package connected.car.management.member;
+package connected.car.management.controlresult;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,33 +16,34 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import connected.car.management.R;
-import connected.car.management.control.MainActivity;
+import connected.car.management.member.LoginActivity;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class JoinAsync extends AsyncTask<MemberVO, Void, Integer> {
+public class RemoteControlAsync extends AsyncTask<ControlResultVO, Void, Integer> {
     Context context;
 
-    public JoinAsync() {
+    public RemoteControlAsync(){
 
     }
 
-    public JoinAsync(Context context) {
+    public RemoteControlAsync(Context context){
         this.context = context;
     }
 
     @Override
-    protected Integer doInBackground(MemberVO... vo) {
+    protected Integer doInBackground(ControlResultVO... vo) {
         int result = 0;
         Log.d("myip",context.getString(R.string.myip)+"");
         try {
-            URL url = new URL("http://"+context.getString(R.string.myip)+":8088/connectedcar/member/join.do");
+            String path = "http://"+context.getString(R.string.myip)+":8088/connectedcar/remote/insert.do";
+            URL url = new URL(path);
             Gson gson = new Gson();
             String sVo = gson.toJson(vo[0]);
-
+            //보내고 받는 작업
             OkHttpClient client = new OkHttpClient();
 
             Request request = new Request.Builder()
@@ -69,10 +70,9 @@ public class JoinAsync extends AsyncTask<MemberVO, Void, Integer> {
     protected void onPostExecute(Integer value) {
         super.onPostExecute(value);
         if(value == 1) {
-            Intent intent = new Intent(context, LoginActivity.class);
-            context.startActivity(intent);
-        }
-        else if(value == 0)
+
+        }else if(value == 0) {
             Toast.makeText(context, "회원가입에 실패했습니다.", Toast.LENGTH_SHORT).show();
+        }
     }
 }

@@ -56,6 +56,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bottomAppBar.setFabCradleMargin(20);
 
         getSupportFragmentManager().beginTransaction().add(R.id.page,condition).commit();
+
+        Intent intent = getIntent();
+        MemberVO vo = intent.getParcelableExtra("userInfo");
+        Log.d("test", vo.toString());
     }
 
 

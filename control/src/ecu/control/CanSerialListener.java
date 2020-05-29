@@ -54,10 +54,22 @@ public class CanSerialListener implements SerialPortEventListener {
 				 */
 				
 				if(arduinoOs!=null) {
+
 					if(cData.trim().equals(":U280000000000000000000000003F")) {
-						arduinoOs.write('1');
+						//비상등 켜기
+						arduinoOs.write('A');
 					}else if(cData.trim().equals(":U2800000000000000000000001141")){
+						//비상등 끄기
+						arduinoOs.write('B');
+					}else if(cData.trim().equals(":U2800000000000011110000111147")) {
+						//차량상태 파악
 						arduinoOs.write('0');
+					}else if(cData.trim().equals(":U2800000000101010101010101049")) {
+						//엔진 스따뚜
+						arduinoOs.write('S');
+					}else if(cData.trim().equals(":U2800000000010101010101010149")) {
+						//엔진 스똬압
+						arduinoOs.write('T');
 					}
 				}
 			} catch (IOException e) {
