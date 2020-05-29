@@ -10,12 +10,12 @@
     tools:context=".MainActivity">
     <LinearLayout
         android:layout_width="400dp"
-        android:layout_height="wrap_content"
+        android:layout_height="800dp"
         android:orientation="vertical">
         <de.nitri.gauge.Gauge
             android:id="@+id/myGauge"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             gauge:initialValue="0"
@@ -57,22 +57,22 @@
         <TextView
             android:id="@+id/distance"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="70dp"
             android:layout_gravity="center"
             android:gravity="center"
-            android:textSize="50sp"
+            android:textSize="60sp"
             />
+
         <ToggleButton
             android:id="@+id/power"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:layout_gravity="center"
-            android:layout_marginBottom="10dp"
-            android:textOn=""
-            android:textOff=""
+
             android:background="@drawable/switchon"
             android:scaleType="centerCrop"
-            />
+            android:textOff=""
+            android:textOn="" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
