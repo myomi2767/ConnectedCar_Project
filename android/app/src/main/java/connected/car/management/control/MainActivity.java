@@ -41,6 +41,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         final FragmentTransaction transaction = fragmentManager.beginTransaction();
         bottomAppBar = findViewById(R.id.bottom_bar);
 
+
+
         /*fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

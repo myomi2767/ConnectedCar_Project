@@ -36,6 +36,8 @@
         <activity android:name=".control.MyCarInfo" />
         <activity android:name=".control.CarInfoFragment" />
         <activity android:name=".car.RegisterCarActivity">
+        <activity android:name=".control.CarAirConditionSettingActivity"/>
+        <activity android:name=".member.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -43,6 +45,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".control.MainActivity" />
+
         <activity android:name=".member.JoinActivity" />
     </application>
 
