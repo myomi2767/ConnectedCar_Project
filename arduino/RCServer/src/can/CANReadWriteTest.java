@@ -12,6 +12,7 @@ import gnu.io.NoSuchPortException;
 import gnu.io.PortInUseException;
 import gnu.io.SerialPort;
 import gnu.io.UnsupportedCommOperationException;
+import server.AndroidClient;
 import server.SerialArduinoListener;
 import server.SerialCANListener;
 import server.SerialClient;
@@ -69,6 +70,10 @@ public class CANReadWriteTest {
 		}
 
 	}
+	
+	public void setAndroidClient(AndroidClient client) {
+		listener.setAndroidClient(client);
+	}
 
 	// 온도가 올라가면 두번째 캔 장비에 연결되어있는 led한테 작업을 시키겠다 <- 이런식으로 쓸때 send메소드 사용
 	public void send(String msg) {
@@ -76,9 +81,9 @@ public class CANReadWriteTest {
 		new Thread(new CANWriteThread(msg)).start();
 	}
 	
-	public String readMsg() {
+	/*public String readMsg() {
 		return listener.getMessage();
-	}
+	}*/
 
 	class CANWriteThread implements Runnable {
 		String data;
