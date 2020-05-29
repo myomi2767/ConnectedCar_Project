@@ -15,7 +15,7 @@ public class AndroidControlServer {
 			server = new ServerSocket(12345);
 			//캔통신을 할 수 있도록 객체를 생성해서 SerialPort가 사용가능인지 체크
 			//아두이노 포트가 열리도록
-			canReadWriteTest = new CANReadWriteTest("COM7","MasterCan");
+			canReadWriteTest = new CANReadWriteTest("COM6","MasterCan");
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
