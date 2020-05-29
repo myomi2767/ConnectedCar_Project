@@ -87,10 +87,10 @@
 								<td>
 									<a id='${expend.expend_id}' onclick='window.open("manageDetail.do?expend_id=" + $(this).attr("id"), "_blank", "width=800px,height=500px");'>관리</a>
 								</td>
-								<td><form action="/connectedcar/expendable/expendableDelete.do"
+								<td><form action="/connectedcar/expendable/deleteExpend.do"
 									method="POST">
 									<input type="hidden" name="expend_id"
-										value='${expend.expend_id}'>
+										value="${expend.expend_id}">
 									<button type="submit" id="submit_btn" class="btn btn-theme"
 										onclick="alert('삭제되었습니다.');">삭제</button>
 								</form></td>

@@ -73,9 +73,12 @@ public class ExpendableDAOImpl implements ExpendableDAO {
 	}
 
 	@Override
-	public int deleteExpend(ShopExpendableVO vo) {
+	public int deleteExpend(String shop_id, String expend_id) {
+		Map<String, Object> dFindData = new HashMap<String, Object>();
+		dFindData.put("shop_id", shop_id);
+		dFindData.put("expend_id", expend_id);
 		// TODO Auto-generated method stub
-		return sqlSession.delete("connected.car.expendable.deleteExpend", vo);
+		return sqlSession.delete("connected.car.expendable.deleteExpend",dFindData);
 	}
 
 }
