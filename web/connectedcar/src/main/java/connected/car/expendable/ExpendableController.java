@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import connected.car.inventory.ExpendableVO;
+import connected.car.admin.ExpendableVO;
 import connected.car.owner.OwnerVO;
 
 @Controller

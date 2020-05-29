@@ -1,4 +1,4 @@
-package connected.car.inventory;
+package connected.car.admin;
 
 public class ExpendableVO {
 	private String expend_id;

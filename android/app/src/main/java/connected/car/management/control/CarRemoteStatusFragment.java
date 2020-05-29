@@ -110,7 +110,7 @@ public class CarRemoteStatusFragment extends Fragment {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                socket = new Socket("70.12.116.67", 12345);
+                socket = new Socket(getActivity().getString(R.string.myip), 12345);
                 if(socket != null){
                     ioWork();
                 }

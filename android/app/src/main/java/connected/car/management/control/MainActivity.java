@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
@@ -17,6 +19,7 @@ import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import connected.car.management.R;
+import connected.car.management.car.RegisterCarActivity;
 import connected.car.management.member.MemberVO;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -27,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     CarExpendableFragment car_part;
     CarInfoFragment car_info;
 
+    MemberVO vo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +40,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         FragmentManager fragmentManager = getSupportFragmentManager();
         final FragmentTransaction transaction = fragmentManager.beginTransaction();
         bottomAppBar = findViewById(R.id.bottom_bar);
+
+
 
         /*fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,8 +62,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         getSupportFragmentManager().beginTransaction().add(R.id.page,condition).commit();
 
         Intent intent = getIntent();
-        MemberVO vo = intent.getParcelableExtra("userInfo");
+        vo = intent.getParcelableExtra("userInfo");
         Log.d("test", vo.toString());
+
     }
 
 
@@ -71,6 +78,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.toolbar,menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.addCar:
+                Intent intent = new Intent(getApplicationContext(), RegisterCarActivity.class);
+                intent.putExtra("userInfo",vo);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     /*  @Override

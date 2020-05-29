@@ -13,6 +13,10 @@ public class CarVO {
     String special_car;
     int driver_distance;
 
+    public CarVO(){
+
+    }
+
     public CarVO(String car_id, String car_brand, String car_model, String car_fuel_type, String car_year, String car_volume, int rapid_speed, int drop_speed, int overspeed, String special_car, int driver_distance) {
         this.car_id = car_id;
         this.car_brand = car_brand;

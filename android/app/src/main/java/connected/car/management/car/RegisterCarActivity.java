@@ -2,6 +2,7 @@ package connected.car.management.car;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import connected.car.management.R;
+import connected.car.management.member.MemberVO;
 
 public class RegisterCarActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
     TextView textCarNum;
@@ -37,8 +39,15 @@ public class RegisterCarActivity extends AppCompatActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_usercar);
+        //DB에서 불러온 차량번호 입력하는 부분
+        textCarNum = findViewById(R.id.text_carNum);
+        Intent intent = getIntent();
+        MemberVO vo = intent.getParcelableExtra("userInfo");
+        textCarNum.setText(vo.getCar_id());
+
         setViews();
         setSpinner();
+
     }
 
     public void setViews() {
@@ -81,6 +90,7 @@ public class RegisterCarActivity extends AppCompatActivity implements View.OnCli
         int id = v.getId();
         switch (id) {
             case R.id.btn_submit:
+                Log.d("test",((RadioButton)findViewById(radioCar.getCheckedRadioButtonId())).getText().toString());
                 CarVO vo = new CarVO(textCarNum.getText().toString(),
                         brandSpinner.getSelectedItem().toString(),
                         modelSpinner.getSelectedItem().toString(),
@@ -89,7 +99,7 @@ public class RegisterCarActivity extends AppCompatActivity implements View.OnCli
                         editCarCC.getText().toString(),
                         0,0,0,
                         ((RadioButton)findViewById(radioCar.getCheckedRadioButtonId())).getText().toString(),
-                        0);
+                        Integer.parseInt(editCarKm.getText().toString()));
                 new CarAsync(this).execute(vo);
                 break;
         }

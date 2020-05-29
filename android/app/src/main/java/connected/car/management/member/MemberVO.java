@@ -62,6 +62,10 @@ public class MemberVO implements Parcelable {
                 '}';
     }
 
+    public String getCar_id() {
+        return car_id;
+    }
+
     @Override
     public int describeContents() {
         return 0;

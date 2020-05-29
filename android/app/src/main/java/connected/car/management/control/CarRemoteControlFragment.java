@@ -198,7 +198,7 @@ public class CarRemoteControlFragment extends Fragment implements View.OnClickLi
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                socket = new Socket("172.20.10.11", 12345);
+                socket = new Socket(getActivity().getString(R.string.myip), 12345);
 
                 if(socket != null){
                     ioWork();

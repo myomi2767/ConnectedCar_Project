@@ -1,3 +1,4 @@
+#include <Servo.h>
 #define LED A2
 char cmd;
 boolean status = true; // 도중에 인터럽트 걸기 위한 조건
@@ -9,9 +10,14 @@ String airconditionStatus = "0"; //공조 상태
 String hornStatus = "0"; //경적 상태
 
 String result;
+
+Servo doorservo;//서보를 제어할 도어 서보 오브젝트를 만든다.
+int servopos=0; //도어 서보 위치를 저장할 변수를 선언
+
 void setup() {
 Serial.begin(9600);
 pinMode(LED,OUTPUT);
+doorservo.attach(D7); //핀9번의 서보를 서보오브젝트에 연결.
 }
 /*  들어오는 값 설정
 *   
@@ -54,6 +60,16 @@ void loop() {
       //CAN에게 시동이 켜졌다고 알림
       Serial.println(engineStatus);
       //에어컨 모터 제어
+    }else if(cmd=='O'){
+      //도어 열기
+      result = "success";
+      doorservo.write(45);
+
+    }else if(cmd=='L'){
+      //도어 닫기
+      result = "success";
+      doorservo.write(0);
+
     }else{
       result = "fail";
     }

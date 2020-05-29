@@ -2,8 +2,8 @@ package connected.car.expendable;
 
 import java.util.List;
 
+import connected.car.admin.ExpendableVO;
 import connected.car.admin.Pagination;
-import connected.car.inventory.ExpendableVO;
 
 public interface ExpendableService {
 	public ExpendableVO findExpendable(String code, String brand);
