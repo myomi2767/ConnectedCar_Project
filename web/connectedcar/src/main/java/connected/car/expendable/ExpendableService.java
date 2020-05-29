@@ -12,5 +12,6 @@ public interface ExpendableService {
 	public List<ExpendableLogVO> findExpendableLogList(String shop_id, String expend_id);
 	public int insertExpendableLog(ExpendableLogVO log);
 	public int getAllCnt(String shop_id);
-	public int deleteExpend(String expend_id, String shop_id);
+	public int deleteExpend(ShopExpendableVO sevo);
+	public int deleteLog(ShopExpendableVO sevo);
 }

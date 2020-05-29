@@ -7,5 +7,6 @@ public interface AdminService {
 	List<ExpendableVO> listAll(Pagination pagination);
 	int listAllCnt();
 	int expendableDelete(String expend_id);
+	List<ExpendableVO> searchlist(String keyword);
 	
 }

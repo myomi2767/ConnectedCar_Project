@@ -62,7 +62,7 @@
 				<table id="table_managementList" class="type01">
 					<thead>
 						<tr style="font-weight: bold;">
-							<th scope="col">최근 수정일</th>
+							<th scope="col">등록일</th>
 							<th scope="col">부품 코드</th>
 							<th scope="col">종류</th>
 							<th scope="col">제조사</th>
@@ -85,13 +85,13 @@
 								<td>${expend.shop_expend_count}</td>
 								<td>${expend.expend_price}</td>
 								<td>
-									<a id='${expend.expend_id}' onclick='window.open("manageDetail.do?expend_id=" + $(this).attr("id"), "_blank", "width=800px,height=500px");'>관리</a>
+									<a id='${expend.expend_id}'class="btn btn-theme" onclick='window.open("manageDetail.do?expend_id=" + $(this).attr("id"), "_blank", "width=800px,height=500px");'>관리</a>
 								</td>
 								<td><form action="/connectedcar/expendable/deleteExpend.do"
 									method="POST">
 									<input type="hidden" name="expend_id"
 										value="${expend.expend_id}">
-									<button type="submit" id="submit_btn" class="btn btn-theme"
+									<button type="submit" id="submit_btn" class="btn btn-default"
 										onclick="alert('삭제되었습니다.');">삭제</button>
 								</form></td>
 							</tr>

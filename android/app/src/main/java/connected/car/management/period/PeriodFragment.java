@@ -45,6 +45,7 @@ public class PeriodFragment extends Fragment {
         car_id = ((MainActivity)getActivity()).main_car_id; //액티비티로부터 가져온 로그인된 car_id
 
 
+
         //new PeriodAsync(this).execute(car_id);
         //방법이 2개 있따.
         // 1. carid와 회원

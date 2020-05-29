@@ -16,6 +16,11 @@ public class ShopExpendableVO {
 		// TODO Auto-generated constructor stub
 	}
 	
+	
+	
+	
+
+
 	public ShopExpendableVO(String expend_id, String expend_code, String expend_type, String expend_name,
 			String expend_price, String expend_brand, String car_model_name, String shop_expend_date,
 			int shop_expend_count, String shop_id) {

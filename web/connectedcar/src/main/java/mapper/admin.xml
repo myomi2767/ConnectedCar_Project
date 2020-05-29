@@ -31,4 +31,9 @@
 	<delete id="deleteExpendable" parameterType="String">
 		delete from expendable where expend_id = #{expend_id}
 	</delete>
+	
+	<select id= "searchlist" resultType="expendablevo">
+		select * from expendable where expend_name like '%'||#{keyword}||'%'
+	</select>
+	
 </mapper>

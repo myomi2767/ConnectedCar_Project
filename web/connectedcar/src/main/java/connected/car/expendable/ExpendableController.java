@@ -58,7 +58,9 @@ public class ExpendableController {
 		String shop_id = owner.getShop_id();
 		System.out.println("loginuser?"+shop_id);
 		System.out.println("들어온 expend_id값:"+expend_id);
-		service.deleteExpend(shop_id, expend_id);
-		return "redirect:/inventory/manageDetail.do";
+		ShopExpendableVO sevo = new ShopExpendableVO(expend_id, shop_id);
+		service.deleteExpend(sevo);
+		service.deleteLog(sevo);
+		return "redirect:/inventory/manageList.do";
 	}
 }

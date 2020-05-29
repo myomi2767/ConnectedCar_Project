@@ -42,7 +42,11 @@
 		update shop_expendable set shop_expend_count = (shop_expend_count + #{expend_count}) where shop_id = #{shop_id} and expend_id = #{expend_id}
 	</update>
 	
-	<delete id="deleteExpend" parameterType="Map">
+	<delete id="deleteExpend" parameterType="shopexpendvo">
 		delete from shop_expendable where shop_id = #{shop_id} and expend_id = #{expend_id}
+	</delete>
+	
+	<delete id="deleteLog" parameterType="shopexpendvo">
+		delete from expendable_log where shop_id = #{shop_id} and expend_id = #{expend_id}
 	</delete>
 </mapper>
