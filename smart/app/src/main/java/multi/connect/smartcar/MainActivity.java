@@ -40,9 +40,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.skt.Tmap.TMapCircle;
 import com.skt.Tmap.TMapData;
 import com.skt.Tmap.TMapGpsManager;
+import com.skt.Tmap.TMapMarkerItem;
 import com.skt.Tmap.TMapPOIItem;
 import com.skt.Tmap.TMapPoint;
 import com.skt.Tmap.TMapPolyLine;
+import com.skt.Tmap.TMapPolygon;
 import com.skt.Tmap.TMapTapi;
 import com.skt.Tmap.TMapView;
 
@@ -56,6 +58,8 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import de.nitri.gauge.Gauge;
 
@@ -76,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Bitmap carImg;
     Bitmap startImg;
     Bitmap endImg;
+    Bitmap carNumImg;
     AlertDialog alert;
     TextView distance;
     int speed = 0;
@@ -84,8 +89,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Manifest.permission.ACCESS_FINE_LOCATION,
     };
     LinearLayout loading,mapViewTotal,naviSearchView;
-    TMapPoint tMapPoint,startpoint,endpoint;
-    TMapCircle tMapCircle;
+    TMapPoint startpoint,endpoint;
     Location location;
     LocationManager lm;
     FloatingActionButton fabNavi,btnBack,fabMsg;
@@ -97,7 +101,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TMapTapi tmaptapi;
     boolean isTmapApp;
     TMapGpsManager tMapGpsManager;
-    int zoomLev;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -238,6 +241,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(permission_list, 1000);
         } else {
@@ -362,6 +367,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         carImg = BitmapFactory.decodeResource(this.getResources(), R.drawable.pickupcar);
         startImg = BitmapFactory.decodeResource(this.getResources(),R.drawable.pin);
         endImg =BitmapFactory.decodeResource(this.getResources(),R.drawable.endpin);
+        carNumImg = BitmapFactory.decodeResource(this.getResources(),R.drawable.carnum);
         Bitmap carIcon = Bitmap.createScaledBitmap(carImg, 40, 60, true);
 
         linearLayoutTmap.addView(tmapview);
@@ -370,12 +376,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tmapview.setIconVisibility(true);
 
         //현재위치를 중앙으로 이동
-        tmapview.setTrackingMode(true);
-        //보는 방향 전조등
+        Timer timer = new Timer();
+
+        TimerTask TT = new TimerTask() {
+            @Override
+            public void run() {
+                // 반복실행할 구문
+                //현재위치 불러오기
+                tmapview.setTrackingMode(true);
+            }
+        };
+        timer.schedule(TT, 0, 1000); //Timer 실행
+        // 보는 방향 전조등
         tmapview.setSightVisible(true);
         //현재 보는 방향
         tmapview.setCompassMode(true);
-        //현재위치 불러오기
         lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
@@ -390,23 +405,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
         tmapview.setLocationPoint(location.getLongitude(),location.getLatitude());
-
-        /*//지도에 마커찍기
-        final ArrayList alTMapPoint = new ArrayList();
-        alTMapPoint.add(new TMapPoint(37.576016, 126.976867));//광화문
-        alTMapPoint.add(new TMapPoint(37.570432, 126.992169));// 종로3가
-        alTMapPoint.add(new TMapPoint(37.570194, 126.983045));//종로5가
-        final Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mapmark);
-        for(int i=0; i<alTMapPoint.size(); i++){
-            TMapMarkerItem markerItem1 = new TMapMarkerItem();
-            // 마커 아이콘 지정
-            markerItem1.setIcon(bitmap);
-            // 마커의 좌표 지정
-            markerItem1.setTMapPoint((TMapPoint)alTMapPoint.get(i));
-            //지도에 마커 추가
-            tmapview.addMarkerItem("markerItem"+i, markerItem1);
-        }*/
-
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -544,6 +542,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             naviSearchView.setVisibility(View.INVISIBLE);
             mapViewTotal.setVisibility(View.VISIBLE);
         }else if(v.getId()==R.id.fabNavi){
+            tmapview.removeTMapPath();
             naviSearchView.setVisibility(View.VISIBLE);
             mapViewTotal.setVisibility(View.INVISIBLE);
         }else if(v.getId()==R.id.btnDesti){
@@ -552,31 +551,41 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (imm!=null) {
                 imm.hideSoftInputFromWindow(naviSearchView.getWindowToken(), 0);
             }
-        }else if(v.getId()==R.id.fabMsg){
-            zoomLev = tmapview.getZoomLevel();
-            Toast.makeText(MainActivity.this,Integer.toString(zoomLev),Toast.LENGTH_SHORT).show();
-            //tmapview.removeTMapCircle("circle1");
-            tMapPoint = new TMapPoint(tMapGpsManager.getLocation().getLatitude(),tMapGpsManager.getLocation().getLongitude());
-            tMapCircle = new TMapCircle();
-            tMapCircle.setCenterPoint(tMapPoint);
-            switch (zoomLev){
-                case 19:
-                    tMapCircle.setRadius(50);
-                    break;
-                case 18:
-                    tMapCircle.setRadius(170);
-                    break;
-                case 17:
-                    tMapCircle.setRadius(290);
-                    break;
-                case 16:
-                    tMapCircle.setRadius(420);
+        }else if(v.getId()==R.id.fabMsg) {
+            tmapview.setZoomLevel(19);
+            //지도에 삼각형 범위 찍기
+            ArrayList<TMapPoint> polygonPoint = new ArrayList<TMapPoint>();
+            TMapPoint nowLoc = tMapGpsManager.getLocation();
+            polygonPoint.add( tMapGpsManager.getLocation()); // 현재위치
+            polygonPoint.add( new TMapPoint(nowLoc.getLatitude()+0.0004875,nowLoc.getLongitude()-0.0008776) );//왼쪽 끝위치
+            polygonPoint.add( new TMapPoint(nowLoc.getLatitude()+0.0004875,nowLoc.getLongitude()+0.0008764) );//오른쪽 끝위치
+
+            TMapPolygon tMapPolygon = new TMapPolygon();
+            tMapPolygon.setLineColor(Color.BLUE);
+            tMapPolygon.setPolygonWidth(2);
+            tMapPolygon.setAreaColor(Color.GRAY);
+            tMapPolygon.setAreaAlpha(100);
+            for( int i=0; i<polygonPoint.size(); i++ ) {
+                tMapPolygon.addPolygonPoint( polygonPoint.get(i) );
             }
-            tMapCircle.setCircleWidth(2);
-            tMapCircle.setLineColor(Color.BLUE);
-            tMapCircle.setAreaColor(Color.GRAY);
-            tMapCircle.setAreaAlpha(100);
-            tmapview.addTMapCircle("circle1", tMapCircle);
+            tmapview.addTMapPolygon("Line1", tMapPolygon);
+            //지도에 마커찍기
+            final ArrayList alTMapPoint = new ArrayList();
+            String nowloc = location.getLatitude()+","+location.getLongitude();
+            Toast.makeText(MainActivity.this,nowloc,Toast.LENGTH_LONG).show();
+            alTMapPoint.add( new TMapPoint(nowLoc.getLatitude()+0.0003875,nowLoc.getLongitude()) );//앞차
+            alTMapPoint.add( new TMapPoint(nowLoc.getLatitude()+0.0003875,nowLoc.getLongitude()-0.0004382) );//앞왼차
+            alTMapPoint.add( new TMapPoint(nowLoc.getLatitude()+0.0003875,nowLoc.getLongitude()+0.0004382) );//앞오른차
+            Bitmap carNum = Bitmap.createScaledBitmap(carNumImg, 230, 100, true);
+            for(int i=0; i<alTMapPoint.size(); i++){
+                TMapMarkerItem markerItem1 = new TMapMarkerItem();
+                // 마커 아이콘 지정
+                markerItem1.setIcon(carNum);
+                // 마커의 좌표 지정
+                markerItem1.setTMapPoint((TMapPoint)alTMapPoint.get(i));
+                //지도에 마커 추가
+                tmapview.addMarkerItem("markerItem"+i, markerItem1);
+            }
         }
     }
 
