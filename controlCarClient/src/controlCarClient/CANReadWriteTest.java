@@ -13,16 +13,18 @@ public class CANReadWriteTest {
 	SerialConnect serialConnect;//CAN시리얼 포트 연결
 	OutputStream out; // CAN과 output통신할 스트림
 	Socket socket; //CAN에서 서버로 보내줄 pw
+	String carId;
 	
-	public CANReadWriteTest(String portname, Socket socket) {
+	public CANReadWriteTest(String portname, Socket socket, String carId) {
 		this.socket = socket;
+		this.carId = carId;
 		//시리얼 통신을 위해 연결
 		serialConnect = new SerialConnect();
 		serialConnect.connect(portname, this.getClass().getName());
 		
 		//input, output작업을 하기 위해 리스ㄴㅓ를 port에 연결
 		SerialPort commport = (SerialPort)serialConnect.getCommPort();
-		SerialListener listener = new SerialListener(serialConnect.getBis(),socket);
+		SerialListener listener = new SerialListener(serialConnect.getBis(),socket,carId);
 		try {
 			commport.addEventListener(listener);
 			commport.notifyOnDataAvailable(true);//데이터 발생될 때마다 알림

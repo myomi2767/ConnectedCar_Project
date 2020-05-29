@@ -35,7 +35,7 @@ public class ClientCar {
 				ioWork();
 				
 				//CAN통신 열기
-				canReadWriteTest = new CANReadWriteTest("COM6", socket);
+				canReadWriteTest = new CANReadWriteTest("COM6", socket, carId);
 			}
 			Thread t1 = new Thread(new Runnable() {
 	            @Override

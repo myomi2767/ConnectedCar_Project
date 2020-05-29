@@ -16,10 +16,12 @@ public class SerialListener implements SerialPortEventListener {
 	Socket socket;
 	OutputStream os;
 	PrintWriter pw;
+	String carId;
 	
-	public SerialListener(BufferedInputStream bis, Socket socket) {
+	public SerialListener(BufferedInputStream bis, Socket socket, String carId) {
 		this.bis = bis;
 		this.socket = socket;
+		this.carId = carId;
 		try {
 			os = socket.getOutputStream();
 			pw = new PrintWriter(os, true);
@@ -44,16 +46,14 @@ public class SerialListener implements SerialPortEventListener {
 				if(pw!=null) {
 					if(data.trim().equals(":U2800000000111100000000000043")){						
 						String msg = "success";
-						String id = "11111";
-						pw.println("job:"+msg+":car:"+id);
+						pw.println("job:"+msg+":car:"+carId);
 						pw.flush();
 					}else if(data.trim().equals("")) {
 						
 					}else if(data.trim().substring(0, 4).equals(":U28")){
 						//System.out.println(data.trim().substring(24, 28));
 						String msg = data.trim().substring(24, 28);
-						String id = "11111";
-						pw.println("job:"+msg+":car:"+id);
+						pw.println("job:"+msg+":car:"+carId);
 						pw.flush();
 					}
 				}
