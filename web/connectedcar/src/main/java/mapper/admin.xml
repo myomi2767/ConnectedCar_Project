@@ -9,7 +9,7 @@
 	</insert>
 	
 	<select id="listAll" resultType="expendablevo" parameterType="paging">
-		SELECT * FROM (SELECT A.*, ROWNUM AS rnum FROM expendable A) WHERE rnum BETWEEN #{start} AND #{end}
+		SELECT * FROM (SELECT A.*, ROWNUM AS rnum FROM expendable A) WHERE rnum BETWEEN #{start} AND #{end} order by expend_id asc
 
 	</select>
 	<!-- 

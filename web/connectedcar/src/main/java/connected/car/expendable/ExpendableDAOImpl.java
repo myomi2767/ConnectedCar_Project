@@ -72,4 +72,10 @@ public class ExpendableDAOImpl implements ExpendableDAO {
 		return sqlSession.selectOne("connected.car.expendable.getAllCnt", shop_id);
 	}
 
+	@Override
+	public int deleteExpend(ShopExpendableVO vo) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("connected.car.expendable.deleteExpend", vo);
+	}
+
 }

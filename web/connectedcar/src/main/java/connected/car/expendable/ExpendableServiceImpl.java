@@ -44,4 +44,10 @@ public class ExpendableServiceImpl implements ExpendableService {
 	public int getAllCnt(String shop_id) {
 		return dao.getAllCnt(shop_id);
 	}
+
+	@Override
+	public int deleteExpend(ShopExpendableVO vo) {
+		// TODO Auto-generated method stub
+		return dao.deleteExpend(vo);
+	}
 }

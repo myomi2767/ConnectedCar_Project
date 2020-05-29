@@ -70,6 +70,7 @@
 							<th scope="col">개수</th>
 							<th scope="col">가격</th>
 							<th scope="col">관리</th>
+							<th scope="col">삭제</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -86,6 +87,13 @@
 								<td>
 									<a id='${expend.expend_id}' onclick='window.open("manageDetail.do?expend_id=" + $(this).attr("id"), "_blank", "width=800px,height=500px");'>관리</a>
 								</td>
+								<td><form action="/connectedcar/expendable/expendableDelete.do"
+									method="POST">
+									<input type="hidden" name="expend_id"
+										value='${expend.expend_id}'>
+									<button type="submit" id="submit_btn" class="btn btn-theme"
+										onclick="alert('삭제되었습니다.');">삭제</button>
+								</form></td>
 							</tr>
 						</c:forEach>
 						

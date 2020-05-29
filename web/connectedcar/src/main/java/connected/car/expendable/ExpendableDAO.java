@@ -12,4 +12,5 @@ public interface ExpendableDAO {
 	public List<ExpendableLogVO> findExpendableLogList(String shop_id, String expend_id);
 	public int insertExpendableLog(ExpendableLogVO log);
 	public int getAllCnt(String shop_id);
+	public int deleteExpend(ShopExpendableVO vo);
 }

@@ -49,4 +49,13 @@ public class ExpendableController {
 		
 		return obj.toString();
 	}
+	
+
+	//부품삭제 - 개별삭제
+	@RequestMapping(value="/expendable/deleteExpend.do", method = RequestMethod.POST)
+	public String deleteExpend(ShopExpendableVO vo) {
+		//System.out.println("들어온 id값:"+expend_id);
+		service.deleteExpend(vo);
+		return "redirect:/inventory/manageDetail.do";
+	}
 }
