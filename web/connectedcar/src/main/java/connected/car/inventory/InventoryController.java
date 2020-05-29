@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import connected.car.admin.Pagination;
 import connected.car.expendable.ExpendableLogVO;
 import connected.car.expendable.ExpendableService;
 import connected.car.expendable.ShopExpendableVO;
@@ -20,26 +22,62 @@ public class InventoryController {
 	@Autowired
 	ExpendableService service;
 
-	//재고관리 리스트 페이지
-	@RequestMapping(value = "/inventory/manageList.do", method = RequestMethod.GET)
-	public ModelAndView manageView(HttpSession session) {
+
+	//재고관리 메인화면
+	@RequestMapping(value = "/inventory/inventorymain.do", method = RequestMethod.GET)
+	public ModelAndView mainView(HttpSession session, Pagination pagination, @RequestParam(value="curPage", required=false)String curPage,
+																				@RequestParam(value="cntPerPage", required=false)String cntPerPage) {
 		ModelAndView mav = new ModelAndView();
 		OwnerVO owner = (OwnerVO)session.getAttribute("loginuser");
 		String shop_id = owner.getShop_id();
-		ArrayList<ShopExpendableVO> list = (ArrayList<ShopExpendableVO>)service.findShopExpendableList(shop_id);
+		int listCnt = service.getAllCnt(shop_id);
+		if(curPage==null && cntPerPage==null) {
+			curPage = "1";
+			cntPerPage = "5";
+		}else if(curPage==null) {
+			curPage = "1";
+		}else if(cntPerPage==null) {
+			cntPerPage = "5";
+		}
+		pagination = new Pagination(listCnt, Integer.parseInt(curPage), Integer.parseInt(cntPerPage));
+		ArrayList<ShopExpendableVO> list = (ArrayList<ShopExpendableVO>)service.findShopExpendableList(shop_id, pagination);
+		mav.addObject("paging", pagination);
+		mav.addObject("expendList", list);
+		mav.setViewName("inventory/inventorymain");
+		return mav;
+	}
+	
+	
+	//재고관리 리스트 페이지
+	@RequestMapping(value = "/inventory/manageList.do", method = RequestMethod.GET)
+	public ModelAndView manageView(HttpSession session, Pagination pagination, @RequestParam(value="curPage", required=false)String curPage,
+																				@RequestParam(value="cntPerPage", required=false)String cntPerPage) {
+		ModelAndView mav = new ModelAndView();
+		
+		OwnerVO owner = (OwnerVO)session.getAttribute("loginuser");
+		String shop_id = owner.getShop_id();
+		
+		int listCnt = service.getAllCnt(shop_id);
+		if(curPage==null && cntPerPage==null) {
+			curPage = "1";
+			cntPerPage = "5";
+		}else if(curPage==null) {
+			curPage = "1";
+		}else if(cntPerPage==null) {
+			cntPerPage = "5";
+		}
+		pagination = new Pagination(listCnt, Integer.parseInt(curPage), Integer.parseInt(cntPerPage));
+		
+		ArrayList<ShopExpendableVO> list = (ArrayList<ShopExpendableVO>)service.findShopExpendableList(shop_id, pagination);
 		//System.out.println(list.toString());
 		
+		mav.addObject("paging", pagination);
 		mav.addObject("expendList", list);
 		
 		mav.setViewName("inventory/inventoryManagement");
 		return mav;
 	}
 
-	//재고관리 메인화면
-	@RequestMapping(value = "/inventory/inventorymain.do", method = RequestMethod.GET)
-	public String insertView() {
-		return "inventory/inventorymain";
-	}
 	//재고관리 상세 페이지
 	@RequestMapping(value = "/inventory/manageDetail.do", method = RequestMethod.GET)
 	public ModelAndView manageDetailView(String expend_id, HttpSession session) {

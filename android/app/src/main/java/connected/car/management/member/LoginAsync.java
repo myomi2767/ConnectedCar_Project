@@ -1,5 +1,6 @@
 package connected.car.management.member;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -15,6 +16,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import connected.car.management.R;
 import connected.car.management.control.MainActivity;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -32,9 +34,9 @@ public class LoginAsync extends AsyncTask<MemberVO, Void, MemberVO> {
     @Override
     protected MemberVO doInBackground(MemberVO... memberVos) {
         MemberVO resultVo = null;
-
+        Log.d("myip",context.getString(R.string.myip)+"");
         try {
-            URL url = new URL("http://172.20.10.4:8088/connectedcar/member/login.do");
+            URL url = new URL("http://"+ context.getString(R.string.myip)+":8088/connectedcar/member/login.do");
             JSONObject obj = new JSONObject();
             obj.put("user_id", memberVos[0].user_id);
             obj.put("user_password", memberVos[0].user_password);
@@ -69,6 +71,7 @@ public class LoginAsync extends AsyncTask<MemberVO, Void, MemberVO> {
             Intent intent = new Intent(context, MainActivity.class);
             intent.putExtra("userInfo", vo);
             context.startActivity(intent);
+            ((Activity)context).finish();
         } else {
             //로그인 실패
             Toast.makeText(context, "로그인에 실패했습니다.", Toast.LENGTH_SHORT).show();

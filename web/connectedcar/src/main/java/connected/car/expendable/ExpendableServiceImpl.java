@@ -6,7 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import connected.car.inventory.ExpendableVO;
+import connected.car.admin.ExpendableVO;
+import connected.car.admin.Pagination;
 
 @Service
 public class ExpendableServiceImpl implements ExpendableService {
@@ -20,8 +21,8 @@ public class ExpendableServiceImpl implements ExpendableService {
 	}
 	
 	@Override
-	public List<ShopExpendableVO> findShopExpendableList(String shop_id) {
-		return dao.findShopExpendableList(shop_id);
+	public List<ShopExpendableVO> findShopExpendableList(String shop_id, Pagination pagination) {
+		return dao.findShopExpendableList(shop_id, pagination);
 	}
 	
 	@Override
@@ -37,5 +38,16 @@ public class ExpendableServiceImpl implements ExpendableService {
 	@Override
 	public int insertExpendableLog(ExpendableLogVO log) {
 		return dao.insertExpendableLog(log);
+	}
+	
+	@Override
+	public int getAllCnt(String shop_id) {
+		return dao.getAllCnt(shop_id);
+	}
+
+	@Override
+	public int deleteExpend(ShopExpendableVO vo) {
+		// TODO Auto-generated method stub
+		return dao.deleteExpend(vo);
 	}
 }

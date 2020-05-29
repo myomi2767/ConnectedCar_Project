@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="genesis_g">
+        <item>G80 20</item>
+        <item>G90 19</item>
+        <item>G70 17</item>
+        <item>G80 16</item>
+        <item>EQ900 16</item>
+    </string-array>
+
+</resources>
+
+

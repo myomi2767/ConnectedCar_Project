@@ -56,9 +56,7 @@
 							<td><%=row.getOwner_name()%></td>
 							<td><%=row.getOwner_regdate()%></td>
 							<td><%=row.getOwner_phone()%></td>
-							<td><span
-								onclick="window.open('/connectedcar/admin/shop_popup_view.do?shop_id=32',
-									'_blank','width=800px,height=800px');"><%=row.getShop_id()%></span></td>
+							<td><%=row.getShop_id()%></td>
 							<td><a
 								href="/connectedcar/admin/admin_ownerdelete.do?owner_id=<%=row.getOwner_id()%>"
 								onclick="alert('삭제되었습니다.');">삭제</a></td>

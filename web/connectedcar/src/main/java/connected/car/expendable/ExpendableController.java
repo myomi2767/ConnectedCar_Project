@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import connected.car.inventory.ExpendableVO;
+import connected.car.admin.ExpendableVO;
 import connected.car.owner.OwnerVO;
 
 @Controller
@@ -48,5 +48,14 @@ public class ExpendableController {
 		obj.put("result", result);
 		
 		return obj.toString();
+	}
+	
+
+	//부품삭제 - 개별삭제
+	@RequestMapping(value="/expendable/deleteExpend.do", method = RequestMethod.POST)
+	public String deleteExpend(ShopExpendableVO vo) {
+		//System.out.println("들어온 id값:"+expend_id);
+		service.deleteExpend(vo);
+		return "redirect:/inventory/manageDetail.do";
 	}
 }

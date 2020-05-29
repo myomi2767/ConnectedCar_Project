@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import connected.car.management.R;
 import connected.car.management.control.MainActivity;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -36,9 +37,9 @@ public class JoinAsync extends AsyncTask<MemberVO, Void, Integer> {
     @Override
     protected Integer doInBackground(MemberVO... vo) {
         int result = 0;
-
+        Log.d("myip",context.getString(R.string.myip)+"");
         try {
-            URL url = new URL("http://172.20.10.4:8088/connectedcar/member/join.do");
+            URL url = new URL("http://"+context.getString(R.string.myip)+":8088/connectedcar/member/join.do");
             Gson gson = new Gson();
             String sVo = gson.toJson(vo[0]);
 
@@ -53,7 +54,6 @@ public class JoinAsync extends AsyncTask<MemberVO, Void, Integer> {
             JSONObject json = new JSONObject(response.body().string());
             Log.d("test", json.toString());
             result = json.getInt("resultNum");
-
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {

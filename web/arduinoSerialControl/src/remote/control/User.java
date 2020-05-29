@@ -25,7 +25,7 @@ public class User extends Thread{
 	
 	HashMap<String, User> userlist;
 	HashMap<String, User> carlist;
-	HashMap<String, User> checklist;
+	HashMap<String, User> checklist; //userlist인지 carlist인지 체크하는 용도 
 	
 	String user;
 	public User() {
@@ -75,7 +75,7 @@ public class User extends Thread{
 		}
 	}
 	
-	//id에 맞는 차량이 있는지 확인하는 작업
+	//===============================id에 맞는 차량이 있는지 확인하는 작업========================
 	public boolean check(String id, HashMap<String, User> list) {
 		boolean result = false;
 		if(list.get(id)!=null) {
@@ -92,7 +92,7 @@ public class User extends Thread{
 		if(protocol.equals("job")) {
 			String message = st.nextToken();
 			String category = st.nextToken();
-			String id = st.nextToken();
+			String id = st.nextToken().trim();
 			System.out.println("job의 내용:"+message+":"+category+":"+id);
 			User userClient = null;
 			

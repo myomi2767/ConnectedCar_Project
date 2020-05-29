@@ -4,6 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="connected.car.expendable">
+	<select id="getAllCnt" parameterType="String" resultType="int">
+		select count(*) from shop_expendable where shop_id = #{shop_id}
+	</select>
+	
 	<select id="findExpendInfo" parameterType="Map" resultType="expendablevo">
 		select expend_id, expend_code, expend_type, expend_name, expend_price, expend_brand, car_model_name
 		from expendable 
@@ -12,9 +16,10 @@
 	</select>
 	
 	<select id="findShopExpendList" parameterType="Map" resultType="shopexpendvo">
-		select s.shop_expend_date, s.shop_expend_count, e.* 
-		from shop_expendable s, expendable e
-		where s.expend_id = e.expend_id and s.shop_id = #{shop_id}
+		select * from (select s.shop_expend_date, s.shop_expend_count, e.*, rownum as rnum
+						from shop_expendable s, expendable e
+						where s.expend_id = e.expend_id and s.shop_id = #{shop_id}) 
+				 where rnum between #{start} and #{end}
 	</select>
 	
 	<insert id="insertShopExpend" parameterType="Map">
@@ -26,7 +31,7 @@
 	</insert>
 	
 	<select id="findExpendLog" parameterType="Map" resultType="expendlogvo">
-		select * from expendable_log where shop_id = #{shop_id} and expend_id = #{expend_id}
+		select * from expendable_log where shop_id = #{shop_id} and expend_id = #{expend_id} order by in_out_date desc
 	</select>
 	
 	<insert id="insertLog" parameterType="expendlogvo">
@@ -36,4 +41,8 @@
 	<update id="updateShopExpendCount" parameterType="expendlogvo">
 		update shop_expendable set shop_expend_count = (shop_expend_count + #{expend_count}) where shop_id = #{shop_id} and expend_id = #{expend_id}
 	</update>
+	
+	<delete id="deleteExpend" parameterType="shopexpendvo">
+		delete from shop_expendable where shop_id = #{shop_id} and expend_id = #{expend_id}
+	</delete>
 </mapper>

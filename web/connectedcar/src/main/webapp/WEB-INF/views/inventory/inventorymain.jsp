@@ -1,9 +1,9 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
-<!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -19,163 +19,216 @@
 <!-- Core Stylesheet -->
 <link href="/connectedcar/common/css/k_inventorymain.css" rel="stylesheet">
 
+<!-- 차트 -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 
 </head>
-<body>
-	<%-- <%
-		ArrayList<BoardVO> list = (ArrayList<BoardVO>)request.getAttribute("list");
-		memberVO admin_loginuser = (memberVO) session.getAttribute("admin_loginuser");
-	
-	%> --%>
-	
-	
-	<%--  <% if(session.getAttribute("id")!= null){ //로그인유저만 접근 가능 %> --%>
-	<!--  <script type="text/javascript">
-	 var sessionid = session.getAttribute("id");
-	 document.write(sessionid);
-	 </script>
-		  -->
-	
-	
-	<div id="div_expendable">
-
-		
+<body>	
+	<div id="div_expendable">	
 		<div class="container mtb">
 			<div class="col-sm-6" id="table_expendable">
-			<h3>재고 관리</h3>
-						<table class="table table-striped">
-  							<thead class="thead-dark">
-							<tr>
+				<h3>부품 별 현재 재고량</h3>
+				<table class="table table-striped">
+		  			<thead class="thead-dark">
+						<tr>
 							<th>부품코드</th>
 							<th>부품명</th>
-							<th>수량</th>
-												
-							</tr>
-							</thead>
-						<%-- 
-							<%
-								for (int i = 0; i < mealplan.size(); i++) {
-									mealPlannerVO meal = mealplan.get(i);
-							%> --%>
-							<% 
-							for (int i = 0; i < 30; i++) {
-								%>
-							
-							<tr>
-
-								<td><%--  <%=meal.getPlanner_date()%> --%> </td>
-								<td><%-- <% if(meal.getPlanner_code()==1){
-									out.println("아침");
-								}else if(meal.getPlanner_code()==2){
-									out.println("점심");
-								}else{
-									out.println("저녁");
-								}%> --%></td>
-								<td><%-- <%=meal.getMeal_name()%> --%></td>
-							
-
-								<%
-									}
-								%>
-							</tr>
-
-						</table>
-					</div>
-					<div class="col-sm-6"  id = "graph_expendable">
-					<h3>재고 현황 그래프</h3>
-					
-						<table class="table table-striped">
-  							<thead class="thead-dark">
-							<tr>
-							<th>부품코드</th>
-							<th>부품명</th>
-							<th>수량</th>
-												
-							</tr>
-							</thead>
-						<%-- 
-							<%
-								for (int i = 0; i < mealplan.size(); i++) {
-									mealPlannerVO meal = mealplan.get(i);
-							%> --%>
-							<% 
-							for (int i = 0; i < 10; i++) {
-								%>
-							
-							<tr>
-
-								<td><%--  <%=meal.getPlanner_date()%> --%> </td>
-								<td><%-- <% if(meal.getPlanner_code()==1){
-									out.println("아침");
-								}else if(meal.getPlanner_code()==2){
-									out.println("점심");
-								}else{
-									out.println("저녁");
-								}%> --%></td>
-								<td><%-- <%=meal.getMeal_name()%> --%></td>
-							
-
-								<%
-									}
-								%>
-							</tr>
-
-						</table>
-						
-							<h3>재고 관리</h3>
-						<table class="table table-striped">
-  							<thead class="thead-dark">
-							<tr>
-							<th>부품코드</th>
-							<th>부품명</th>
-							<th>수량</th>
-												
-							</tr>
-							</thead>
-						<%-- 
-							<%
-								for (int i = 0; i < mealplan.size(); i++) {
-									mealPlannerVO meal = mealplan.get(i);
-							%> --%>
-							<% 
-							for (int i = 0; i < 10; i++) {
-								%>
-							
-							<tr>
-
-								<td><%--  <%=meal.getPlanner_date()%> --%> </td>
-								<td><%-- <% if(meal.getPlanner_code()==1){
-									out.println("아침");
-								}else if(meal.getPlanner_code()==2){
-									out.println("점심");
-								}else{
-									out.println("저녁");
-								}%> --%></td>
-								<td><%-- <%=meal.getMeal_name()%> --%></td>
-							
-
-								<%
-									}
-								%>
-							</tr>
-
-						</table>
-					
-					</div>
-
+							<th>수량</th>			
+						</tr>
+					</thead>
+					<c:forEach items="${expendList}" var="expend">
+						<tr>
+							<td>${expend.expend_code}</td>
+							<td>${expend.expend_name}</td>
+							<td>${expend.shop_expend_count}</td>
+						</tr>
+					</c:forEach>
+				</table>
+				<br/>
+				<canvas id="doughnut_chart" width="400" height="400"></canvas>
+			</div>
+			<div class="col-sm-6"  id = "graph_expendable">
+				<h3>월 별 총매출 그래프</h3>
+				<canvas id="annual_chart" width="600" height="500"></canvas>
+				<br/>
+				<h3>부품 별 매출 그래프</h3>
+				<canvas id="type_chart" width="600" height="500"></canvas>
+			</div>
 		</div>
 	</div>
 	<div>
 		
 		
 	</div>
-<%--  <% } else{ %>
+	<script type="text/javascript">
+		window.onload = function() {
+			setAnnualChart();
+			setTypeChart();
+			setDoughnutChart();
+		}
+		
+		function setAnnualChart() {
+			var ctx = document.getElementById("annual_chart").getContext("2d");
+			var annualChart = new Chart(ctx, {
+				type: 'bar',
+				data: {				
+					labels: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+					datasets: [{
+						label: '월 별 매출액',
+						data: ['${annualList[0]}','${annualList[1]}','${annualList[2]}','${annualList[3]}',
+							'${annualList[4]}','${annualList[5]}','${annualList[6]}','${annualList[7]}',
+							'${annualList[8]}','${annualList[9]}','${annualList[10]}','${annualList[11]}'],
+						backgroundColor: [
+							'#ff6c5f', '#ff6c5f', '#ff6c5f', '#ff6c5f',
+							'#ffc168', '#ffc168', '#ffc168', '#ffc168',
+							'#2dde98', '#2dde98', '#2dde98', '#2dde98',
+							'#1cc7d0', '#1cc7d0', '#1cc7d0', '#1cc7d0'
+						],
+						borderColor: [
+							'#ff6c5f', '#ff6c5f', '#ff6c5f', '#ff6c5f',
+							'#ffc168', '#ffc168', '#ffc168', '#ffc168',
+							'#2dde98', '#2dde98', '#2dde98', '#2dde98',
+							'#1cc7d0', '#1cc7d0', '#1cc7d0', '#1cc7d0'
+						],
+						borderWidth: 1
+					}]
+				},
+				options: {
+					scales: {
+						yAxes: [{
+							ticks:{
+								beginAtZero: true
+							}
+						}]
+					},
+					legend: {
+						labels: {
+							display: "false"
+						}
+					}
+				}
+			});
+		}
+		
+		function setTypeChart() {
+			var ctx = document.getElementById("type_chart").getContext("2d");
+			var typeChart = new Chart(ctx, {
+				type: 'line',
+				data: {
+					labels: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+					datasets: [{
+						label: '${map1.getKey()}',
+						fill: false,
+						data: ['${map1.getValue()[0]}','${map1.getValue()[1]}','${map1.getValue()[2]}','${map1.getValue()[3]}',
+							'${map1.getValue()[4]}','${map1.getValue()[5]}','${map1.getValue()[6]}','${map1.getValue()[7]}',
+							'${map1.getValue()[8]}','${map1.getValue()[9]}','${map1.getValue()[10]}','${map1.getValue()[11]}'],
+						backgroundColor: '#36a2eb',
+						borderColor: '#36a2eb',
+						borderWidth: 3
+					}, 
+					{
+						label: '${map2.getKey()}',
+						fill: false,
+						data: ['${map2.getValue()[0]}','${map2.getValue()[1]}','${map2.getValue()[2]}','${map2.getValue()[3]}',
+							'${map2.getValue()[4]}','${map2.getValue()[5]}','${map2.getValue()[6]}','${map2.getValue()[7]}',
+							'${map2.getValue()[8]}','${map2.getValue()[9]}','${map2.getValue()[10]}','${map2.getValue()[11]}'],
+						backgroundColor: '#4bc0c0',
+						borderColor: '#4bc0c0',
+						borderWidth: 3
+					},
+					{
+						label: '${map3.getKey()}',
+						fill: false,
+						data: ['${map3.getValue()[0]}','${map3.getValue()[1]}','${map3.getValue()[2]}','${map3.getValue()[3]}',
+							'${map3.getValue()[4]}','${map3.getValue()[5]}','${map3.getValue()[6]}','${map3.getValue()[7]}',
+							'${map3.getValue()[8]}','${map3.getValue()[9]}','${map3.getValue()[10]}','${map3.getValue()[11]}'],
+						backgroundColor: '#ffcd56',
+						borderColor: '#ffcd56',
+						borderWidth: 3
+					}, 
+					{
+						label: '${map4.getKey()}',
+						fill: false,
+						data: ['${map4.getValue()[0]}','${map4.getValue()[1]}','${map4.getValue()[2]}','${map4.getValue()[3]}',
+							'${map4.getValue()[4]}','${map4.getValue()[5]}','${map4.getValue()[6]}','${map4.getValue()[7]}',
+							'${map4.getValue()[8]}','${map4.getValue()[9]}','${map4.getValue()[10]}','${map4.getValue()[11]}'],
+						backgroundColor: '#ff9f40',
+						borderColor: '#ff9f40',
+						borderWidth: 3
+					}, 
+					{
+						label: '${map5.getKey()}',
+						fill: false,
+						data: ['${map5.getValue()[0]}','${map5.getValue()[1]}','${map5.getValue()[2]}','${map5.getValue()[3]}',
+							'${map5.getValue()[4]}','${map5.getValue()[5]}','${map5.getValue()[6]}','${map5.getValue()[7]}',
+							'${map5.getValue()[8]}','${map5.getValue()[9]}','${map5.getValue()[10]}','${map5.getValue()[11]}'],
+						backgroundColor: '#ff6384',
+						borderColor: '#ff6384',
+						borderWidth: 3
+					}]
+				},
+				options: {
+					scales: {
+						yAxes: [{
+							ticks:{
+								beginAtZero: true
+							}
+						}]
+					},
+					legend: {
+						labels: {
+							display: "false"
+						}
+					}
+				}
+			});
+		}
+		
+		function setDoughnutChart()
+		{
+			var ctx = document.getElementById("doughnut_chart").getContext("2d");
+			var typeChart = new Chart(ctx, {
+				type: 'doughnut',
+				data: {
+					datasets: [{
+						data: [
+							'${map1.getValue()[thisMonth]}', '${map2.getValue()[thisMonth]}', '${map3.getValue()[thisMonth]}',
+							'${map4.getValue()[thisMonth]}', '${map5.getValue()[thisMonth]}'],
+						backgroundColor: [
+							'#36a2eb',
+							'#4bc0c0',
+							'#ffcd56',
+							'#ff9f40',
+							'#ff6384',
+						],
+						label: '부품 별 이달의 매출량'
+					}],
+					labels: [
+						'${map1.getKey()}',
+						'${map2.getKey()}',
+						'${map3.getKey()}',
+						'${map4.getKey()}',
+						'${map5.getKey()}'
+					]
+				},
+				options: {
+					responsive: true,
+					legend: {
+						position: 'top',
+					},
+					title: {
+						display: true,
+						text: '각 부품 별 이달의 매출량'
+					},
+					animation: {
+						animateScale: true,
+						animateRotate: true
+					}
+				}
+			});
+		}
+		
 	
-		<script type="text/javascript">
-		alert("로그인이 필요한 기능입니다!");
-		document.location.href="/maeggiSeggi/loginandcustomer/login.do";
-		</script>
-		<% }%>
-	  --%>
+	</script>
 </body>
 </html>

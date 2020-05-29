@@ -13,9 +13,9 @@ import connected.car.management.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CarRemoteStatus extends Fragment {
+public class CarInfoFragment extends Fragment {
 
-    public CarRemoteStatus() {
+    public CarInfoFragment() {
         // Required empty public constructor
     }
 
@@ -23,7 +23,7 @@ public class CarRemoteStatus extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view =inflater.inflate(R.layout.fragment_car_remote_status, container, false);
-        return view;
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_car_info, container, false);
     }
 }
