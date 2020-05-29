@@ -1,6 +1,8 @@
 package connected.car.management.control;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -15,6 +17,7 @@ import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import connected.car.management.R;
+import connected.car.management.member.MemberVO;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     BottomAppBar bottomAppBar;
@@ -33,6 +36,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         FragmentManager fragmentManager = getSupportFragmentManager();
         final FragmentTransaction transaction = fragmentManager.beginTransaction();
         bottomAppBar = findViewById(R.id.bottom_bar);
+
+
 
         /*fab.setOnClickListener(new View.OnClickListener() {
             @Override
