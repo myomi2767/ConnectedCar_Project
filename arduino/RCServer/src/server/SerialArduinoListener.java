@@ -33,7 +33,7 @@ public class SerialArduinoListener implements SerialPortEventListener{
 					String msg = new String(buffer,0,len);
 					//System.out.println(msg); //buffer의0번부터len까지
 					//dto.setMsg(new String(buffer,0,len));
-					androidClient.sendMessage(msg);
+					androidClient.sendMessage("sonic/"+msg);
 					Thread.sleep(1000);
 					//밖에서 포트가 데이터값을 읽고 있는지 아닌지 판단해 밖에서 접근할 수 있게 함
 					if(len == -1) readingStatus = false;

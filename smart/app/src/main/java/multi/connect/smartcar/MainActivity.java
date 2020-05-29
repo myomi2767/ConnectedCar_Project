@@ -291,7 +291,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         protected void onProgressUpdate(String... values) {
             super.onProgressUpdate(values);
             if(power.isChecked()){
-                distance.setText(values[0]);
+                distance.setText(values[0]+" cm");
             }else{
                 distance.setText("");
             }
