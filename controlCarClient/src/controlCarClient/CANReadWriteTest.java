@@ -20,7 +20,7 @@ public class CANReadWriteTest {
 		serialConnect = new SerialConnect();
 		serialConnect.connect(portname, this.getClass().getName());
 		
-		//input, output작업을 하기 위해 리스ㅓ를 port에 연결
+		//input, output작업을 하기 위해 리스ㄴㅓ를 port에 연결
 		SerialPort commport = (SerialPort)serialConnect.getCommPort();
 		SerialListener listener = new SerialListener(serialConnect.getBis(),socket);
 		try {

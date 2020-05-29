@@ -66,11 +66,9 @@ public class CarRemoteControlFragment extends Fragment implements View.OnClickLi
 
     RemoteControlAsync remoteControlAsync;
 
-    Notification notification;
-
     DBHelper dbHelper;
     SQLiteDatabase db;
-    public CarRemoteControlFragment() {
+    public CarRemoteControlFragment(String car_id) {
         // Required empty public constructor
         this.carId = car_id;
     }
@@ -195,12 +193,6 @@ public class CarRemoteControlFragment extends Fragment implements View.OnClickLi
                 break;
         }
     }
-
-    class AsyncTaskPower extends AsyncTask<Void, String, Void>{
-        @Override
-        protected Void doInBackground(Void... voids) {
-            try {
-                socket = new Socket(getActivity().getString(R.string.myip), 12345);
 
     public RemoteControlAsync getRemoteControlAsync() {
         return remoteControlAsync;

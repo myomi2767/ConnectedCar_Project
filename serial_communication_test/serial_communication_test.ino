@@ -1,5 +1,7 @@
-#include <Servo.h>
 #define LED A2
+#define LED A1
+#define servoPin A0
+#include <Servo.h>
 char cmd;
 boolean status = true; // 도중에 인터럽트 걸기 위한 조건
 // 0은 꺼진 상태, 1은 켜진 상태
@@ -15,9 +17,9 @@ Servo doorservo;//서보를 제어할 도어 서보 오브젝트를 만든다.
 int servopos=0; //도어 서보 위치를 저장할 변수를 선언
 
 void setup() {
-Serial.begin(9600);
-pinMode(LED,OUTPUT);
-doorservo.attach(D7); //핀9번의 서보를 서보오브젝트에 연결.
+  Serial.begin(9600);
+  pinMode(LED,OUTPUT);
+  doorservo.attach(servoPin);
 }
 /*  들어오는 값 설정
 *   
@@ -52,24 +54,25 @@ void loop() {
         delay(1000);
         count = count+2;
       }
-    }else if(cmd == '0'){
-      //차량 상태 불러오기
-      Serial.println(engineStatus+doorStatus+airconditionStatus+emergencyStatus);
+    }else if(cmd=='O'){
+       //도어 열기
+      result = "success";
+      doorservo.write(45);
+    }else if(cmd=='L'){
+       //도어 닫기
+      result = "success";
+      doorservo.write(-45);
+
     }else if(cmd == 'S') {
       engineStatus = '1';
       //CAN에게 시동이 켜졌다고 알림
       Serial.println(engineStatus);
       //에어컨 모터 제어
-    }else if(cmd=='O'){
-      //도어 열기
-      result = "success";
-      doorservo.write(45);
-
-    }else if(cmd=='L'){
-      //도어 닫기
-      result = "success";
-      doorservo.write(0);
-
+    }else if(cmd=='T'){
+      
+    }else if(cmd == '0'){
+      //차량 상태 불러오기
+      Serial.println(engineStatus+doorStatus+airconditionStatus+emergencyStatus);
     }else{
       result = "fail";
     }

@@ -2,7 +2,7 @@ package serial;
 
 public class CheckSumTest {
 	public static void main(String[] args) {
-	String data = "W28000000000000000097989990";
+	String data = "G11";
 	char[] data_arr = data.toCharArray();
 	int sum = 0;
 	for(int i = 0;i<data_arr.length; i++) {

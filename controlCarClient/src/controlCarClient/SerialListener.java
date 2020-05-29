@@ -1,5 +1,5 @@
 package controlCarClient;
-
+// 캔에서 데이터 받고, 서버로 보내는 작업 수행 
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,7 +10,7 @@ import java.net.Socket;
 import gnu.io.SerialPortEvent;
 import gnu.io.SerialPortEventListener;
 import serial.SerialConnect;
-//시리얼포트를 통해서 데이터가 전송되었을 때 실행되는 클래스. 전송되서 들어오는 데이터를 읽는 역할만 함
+//시리얼포트를 통해서 데이터가 전송되었을 때 실행되는 클래스
 public class SerialListener implements SerialPortEventListener {
 	BufferedInputStream bis;//캔통신으로 input되는 데이터를 읽기 위해 오픈된
 	Socket socket;

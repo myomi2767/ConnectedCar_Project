@@ -1,5 +1,5 @@
 package controlCarClient;
-
+//서버에서 데이터 받고, 캔으로 데이터 보내는 작업 수행
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -8,7 +8,7 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.StringTokenizer;
-
+//서버에 붙이는 클라이언트 객체로
 public class ClientCar {
 	Socket socket;
 	
@@ -28,14 +28,14 @@ public class ClientCar {
 	}
 	public void connect() {
 		try {
-			socket = new Socket("192.168.200.180", 12345);
+			socket = new Socket("70.12.116.67", 12345);
 			System.out.println("접속 성공!!!");
 			if(socket!=null) {
-				carId="11111";
+				carId="34가6773";
 				ioWork();
 				
 				//CAN통신 열기
-				canReadWriteTest = new CANReadWriteTest("COM17", socket);
+				canReadWriteTest = new CANReadWriteTest("COM6", socket);
 			}
 			Thread t1 = new Thread(new Runnable() {
 	            @Override
@@ -85,28 +85,38 @@ public class ClientCar {
 				//비상등 켜기
 				String id = "00000000";//송신할 메시지의 구분 id
 				String data = "0000000000000000";//송신할 데이터 -> 내 마음대로 정해주기, 16글자는 맞춰야함
-				String mesaage = id+data;
-				canReadWriteTest.send(mesaage);
+				String sendmsg = id+data;
+				canReadWriteTest.send(sendmsg);
 			}else if(message.equals("emergencyAndSiren")) {
 				String id = "00000000";//송신할 메시지의 구분 id
 				String data = "0000000000000011";//송신할 데이터 -> 내 마음대로 정해주기, 16글자는 맞춰야함
-				String mesaage = id+data;
-				canReadWriteTest.send(mesaage);
+				String sendmsg = id+data;
+				canReadWriteTest.send(sendmsg);
 			}else if(message.equals("status")) {
 				String id = "00000000";//송신할 메시지의 구분 id
 				String data = "0000111100001111";//송신할 데이터 -> 내 마음대로 정해주기, 16글자는 맞춰야함
-				String mesaage = id+data;
-				canReadWriteTest.send(mesaage);
-			} else if(message.equals("engineStart")) {
+				String sendmsg = id+data;
+				canReadWriteTest.send(sendmsg);
+			}else if(message.equals("doorOpen")) {
+				String id = "00000000";//송신할 메시지의 구분 id
+				String data = "0000111111110000";//송신할 데이터 -> 내 마음대로 정해주기, 16글자는 맞춰야함
+				String sendmsg = id+data;
+				canReadWriteTest.send(sendmsg);
+			}else if(message.equals("doorLock")) {
+				String id = "00000000";//송신할 메시지의 구분 id
+				String data = "1111000000001111";//송신할 데이터 -> 내 마음대로 정해주기, 16글자는 맞춰야함
+				String sendmsg = id+data;
+				canReadWriteTest.send(sendmsg);
+			}else if(message.equals("engineStart")) {
 				String id = "00000000";
 				String data = "1010101010101010";
-				String message = id+data;
-				canReadWriteTest.send(message);
+				String sendmsg = id+data;
+				canReadWriteTest.send(sendmsg);
 			} else if(message.equals("engineStop")) {
 				String id = "00000000";
 				String data = "0101010101010101";
-				String message = id+data;
-				canReadWriteTest.send(message);
+				String sendmsg = id+data;
+				canReadWriteTest.send(sendmsg);
 			}
 		}
 	}
