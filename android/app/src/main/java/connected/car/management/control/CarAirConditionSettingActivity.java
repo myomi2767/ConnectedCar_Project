@@ -3,6 +3,7 @@ package connected.car.management.control;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import connected.car.management.R;
+import connected.car.management.sqlite.DBHandler;
 import connected.car.management.sqlite.DBHelper;
 
 public class CarAirConditionSettingActivity extends AppCompatActivity {
@@ -27,17 +29,20 @@ public class CarAirConditionSettingActivity extends AppCompatActivity {
     TextView engineStart;
     TextView text_select;
     Button airSettingSubmitBtn;
-    DBHelper dbHelper;
-    SQLiteDatabase db;
+
+    DBHandler handler;
 
     int min = 17;
-    int max = 28;
+    int max = 32;
     int minTime =2;
     int maxTime =10;
     String carid = "";
     String viewtemp = "";
     String viewengine = "";
     int engineTime;
+
+    String temp;
+    String time;
 
 
     @Override
@@ -49,22 +54,41 @@ public class CarAirConditionSettingActivity extends AppCompatActivity {
         enginetimeseekbar = (SeekBar) findViewById(R.id.seekbar_enginetime);
         temperture = (TextView) findViewById(R.id.text_temperture);
         engineStart = (TextView) findViewById(R.id.text_enginetime);
-        text_select = (TextView) findViewById(R.id.text_select);
+        //text_select = (TextView) findViewById(R.id.text_select);
         airSettingSubmitBtn = (Button) findViewById(R.id.btn_airsetting);
 
-        dbHelper = new DBHelper(this);
-        db = dbHelper.getWritableDatabase();
+        handler = new DBHandler(this);
 
         carid = getIntent().getStringExtra("carId");
 
         airseekbar.setMax(max-min);
         enginetimeseekbar.setMax(maxTime-minTime);
 
+        Cursor cursor = handler.select();
+        if(handler.select().getCount()!=0) {
+            while (cursor.moveToNext()) {
+                temp = cursor.getString(0);
+                time = cursor.getString(1);
+            }
+            airseekbar.setProgress(Integer.parseInt(temp)-min);
+            temperture.setText(temp);
+            enginetimeseekbar.setProgress(Integer.parseInt(time)-minTime);
+
+            engineStart.setText(time);
+        }else{
+            airseekbar.setProgress(24-min);
+            temperture.setText("24");
+            enginetimeseekbar.setProgress(6-minTime);
+            engineStart.setText("6");
+        }
+
         airseekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                //realtemp가 최소값을 부르는 부분
                 int realtemp = min + progress;
                 viewtemp = realtemp+"";
+
                 temperture.setText(viewtemp);
             }
 
@@ -99,10 +123,23 @@ public class CarAirConditionSettingActivity extends AppCompatActivity {
             }
         });
 
+        airSettingSubmitBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(handler.select().getCount()==0){
+                    handler.insert(temperture.getText().toString(),engineStart.getText().toString());
+                }else{
+                    handler.update(temperture.getText().toString(),engineStart.getText().toString());
+                }
+                Intent intent = new Intent(CarAirConditionSettingActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     //SQLite에 저장하는 메소드
-    public void insert(View v){
+    /*public void insert(View v){
         ContentValues contentValues = new ContentValues();
         contentValues.put("car_id",carid);
         contentValues.put("air_temp", temperture.getText().toString() );//이거
@@ -135,6 +172,6 @@ public class CarAirConditionSettingActivity extends AppCompatActivity {
                     "===================\n"
             );
         }
-    }
+    }*/
 
 }

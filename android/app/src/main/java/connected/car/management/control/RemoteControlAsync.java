@@ -161,7 +161,7 @@ public class RemoteControlAsync extends AsyncTask<String, String, Void> {
                     JSONObject json = new JSONObject(response.body().string());
                     Log.d("test", json.toString());
                     result = json.getInt("resultNum");
-                    Log.d("msg",result+"개 삽입");
+                    Log.d("test",result+"개 삽입");
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
                 } catch (IOException e) {

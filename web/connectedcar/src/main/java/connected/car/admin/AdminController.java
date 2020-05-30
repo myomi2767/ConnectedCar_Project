@@ -75,15 +75,16 @@ public class AdminController {
 		service.expendableAdd(expendableVO);
 	}
 	
-		@RequestMapping(value = "/admin/search.do")
-		public ModelAndView searchlist(String keyword) {
-			List<ExpendableVO> expendlist = service.searchlist(keyword);
-			ModelAndView mav = new ModelAndView();
-			mav.addObject("expendlist", expendlist);
-			mav.setViewName("redirect:/admin/expendable.do?keyword="+keyword);
-			return mav;
+	@RequestMapping(value = "/admin/search.do", method = RequestMethod.GET)
+	public ModelAndView searchlist(String keyword) {
+		System.out.println(keyword);
+		List<ExpendableVO> expendlist = service.searchlist(keyword);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("expendList", expendlist);
+		mav.setViewName("admin/expendableManage");
+		return mav;
 
-		}
+	}
 	
 	
 	

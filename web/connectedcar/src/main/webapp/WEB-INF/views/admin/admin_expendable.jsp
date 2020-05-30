@@ -76,10 +76,10 @@
 				<!-- 옵션선택 끝 -->
 			</div>
 			<div class="col-sm-8">
-				<form action="/connectedcar/admin/search.do" method="GET"><!-- <label>부품 검색</label> -->
-					<input type="text" name="keyword" style="width: 600px;" />
-					<Button type="submit" id="searchBtn" class="btn btn-default">검색</Button>
-				</form>
+				<!-- <form action="/connectedcar/admin/search.do" method="GET"> --><!-- <label>부품 검색</label> -->
+					<input type="text" id="keyword" name="keyword" style="width: 600px;" />
+					<Button type="button" id="searchBtn" class="btn btn-default">검색</Button>
+				<!-- </form> -->
 			</div>
 			<div class="col-sm-1">
 				<div class="pull-right">
@@ -163,5 +163,19 @@
 		<!-- management area END -->
 
 	</div>
+	<script type="text/javascript">
+	/* var sel = document.getElementById('cntPerPage').value;
+	location.href = "/connectedcar/admin/expendable.do?curPage=${paging.curPage}&cntPerPage="
+			+ sel; */
+	
+		$(document).ready(function(){
+			$("#searchBtn").on("click", function(){
+				keyword = $("#keyword").val();
+				location.href="/connectedcar/admin/search.do?keyword="+encodeURI(keyword);
+				/* $.get("/LPG/match/list.do", {"mchName":$("#mchName").val(),"mchDate":$("#mchDate").val(),
+					"mchPlay":$("#mchPlay").val(),"mchType":$("#mchType"),"grdArea":$("#grdArea").val()}); */
+			});
+		});
+	</script>
 </body>
 </html>

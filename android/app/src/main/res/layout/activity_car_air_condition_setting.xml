@@ -161,7 +161,7 @@
     </LinearLayout>
 
 
-    <Button
+    <!--<Button
         android:id="@+id/btn_select"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -179,7 +179,7 @@
         android:layout_height="wrap_content"
 
         />
-    </ScrollView>
+    </ScrollView>-->
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -192,7 +192,6 @@
             android:layout_alignParentBottom="true"
             android:background='#F8D3D2'
             android:text="저장"
-            android:onClick="insert"
             android:textStyle="bold"></Button>
     </RelativeLayout>
 

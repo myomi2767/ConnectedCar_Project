@@ -37,7 +37,6 @@ public class AdminDAOImpl implements AdminDAO {
 
 	@Override
 	public List<ExpendableVO> searchlist(String keyword) {
-		// TODO Auto-generated method stub
 		return sqlsession.selectList("connected.car.admin.searchlist", keyword);
 	}
 

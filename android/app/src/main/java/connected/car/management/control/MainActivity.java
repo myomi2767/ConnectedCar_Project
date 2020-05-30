@@ -59,18 +59,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //로그인액티비티에서 로그인 성공 시 intent로 값 넘겨와서 main액티비티로 온다.
         Intent intent = getIntent();
         vo = intent.getParcelableExtra("userInfo");
-        Log.d("===","getFromLoginPage:"+vo.toString());
+        if(vo != null) {
+            Log.d("===", "getFromLoginPage:" + vo.toString());
+            //=====로그인액티비티에서 온 데이터 전역 변수에 담기//
+            main_user_id = vo.getUser_id();
+            main_car_id = vo.getCar_id();
+        }
 
-        //=====로그인액티비티에서 온 데이터 전역 변수에 담기//
-        main_user_id = vo.getUser_id();
-        main_car_id = vo.getCar_id();
         //=====로그인액티비티에서 온 데이터 정제 끝 ///
-
         //car_info = new CarInfo();
         car_part = new CarExpendableFragment();
-        condition = new CarControlFragment(vo.getCar_id());
+        condition = new CarControlFragment(main_car_id);
         periodFragment = new PeriodFragment();
-        
+
         fabCenter.setOnClickListener(this);
         fabTerm.setOnClickListener(this);
         fabInfo.setOnClickListener(this);

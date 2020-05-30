@@ -29,7 +29,7 @@
         <activity android:name=".control.MyCarInfo" />
         <activity android:name=".control.CarInfoFragment" />
         <activity android:name=".car.RegisterCarActivity"/>
-        <activity android:name=".control.MainActivity" />
+        <activity android:name=".control.MainActivity" android:launchMode="singleTop"/>
         <activity android:name=".member.JoinActivity" />
     </application>
 
