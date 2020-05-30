@@ -76,8 +76,8 @@
 				<!-- 옵션선택 끝 -->
 			</div>
 			<div class="col-sm-8">
-				<form><!-- <label>부품 검색</label> -->
-					<input type="text" name="expendkeword" style="width: 600px;" />
+				<form action="/connectedcar/admin/search.do" method="GET"><!-- <label>부품 검색</label> -->
+					<input type="text" name="keyword" style="width: 600px;" />
 					<Button type="submit" id="searchBtn" class="btn btn-default">검색</Button>
 				</form>
 			</div>

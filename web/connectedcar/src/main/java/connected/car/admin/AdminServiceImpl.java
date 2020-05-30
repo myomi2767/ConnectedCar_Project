@@ -33,6 +33,13 @@ public class AdminServiceImpl implements AdminService {
 		return dao.expendableDelete(expend_id);
 	}
 
+	@Override
+	public List<ExpendableVO> searchlist(String keyword) {
+		// TODO Auto-generated method stub
+		return dao.searchlist(keyword);
+	}
+
+
 
 
 }

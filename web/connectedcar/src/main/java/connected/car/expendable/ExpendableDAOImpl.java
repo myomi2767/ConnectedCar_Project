@@ -73,9 +73,15 @@ public class ExpendableDAOImpl implements ExpendableDAO {
 	}
 
 	@Override
-	public int deleteExpend(ShopExpendableVO vo) {
+	public int deleteExpend(ShopExpendableVO sevo) {
+
+		return sqlSession.delete("connected.car.expendable.deleteExpend",sevo);
+	}
+
+	@Override
+	public int deleteLog(ShopExpendableVO sevo) {
 		// TODO Auto-generated method stub
-		return sqlSession.delete("connected.car.expendable.deleteExpend", vo);
+		return sqlSession.delete("connected.car.expendable.deleteLog",sevo);
 	}
 
 }

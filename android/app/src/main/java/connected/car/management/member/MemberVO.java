@@ -66,6 +66,58 @@ public class MemberVO implements Parcelable {
         return car_id;
     }
 
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
+    }
+
+    public void setCar_id(String car_id) {
+        this.car_id = car_id;
+    }
+
+    public String getUser_password() {
+        return user_password;
+    }
+
+    public void setUser_password(String user_password) {
+        this.user_password = user_password;
+    }
+
+    public String getUser_name() {
+        return user_name;
+    }
+
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
+    }
+
+    public String getUser_birthdate() {
+        return user_birthdate;
+    }
+
+    public void setUser_birthdate(String user_birthdate) {
+        this.user_birthdate = user_birthdate;
+    }
+
+    public String getUser_gender() {
+        return user_gender;
+    }
+
+    public void setUser_gender(String user_gender) {
+        this.user_gender = user_gender;
+    }
+
+    public String getDriver_license() {
+        return driver_license;
+    }
+
+    public void setDriver_license(String driver_license) {
+        this.driver_license = driver_license;
+    }
+
     @Override
     public int describeContents() {
         return 0;

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import connected.car.owner.AddressVO;
+import connected.car.owner.ShopinfoVO;
 
 //admin의 전체 회원 정보확인 기능은 connected.car.owner패키지에 작성
 
@@ -73,6 +74,19 @@ public class AdminController {
 		//System.out.println("***컨트롤러 받은 값:"+expendableVO);
 		service.expendableAdd(expendableVO);
 	}
+	
+		@RequestMapping(value = "/admin/search.do")
+		public ModelAndView searchlist(String keyword) {
+			List<ExpendableVO> expendlist = service.searchlist(keyword);
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("expendlist", expendlist);
+			mav.setViewName("redirect:/admin/expendable.do?keyword="+keyword);
+			return mav;
+
+		}
+	
+	
+	
 	
 	//정비소 추가
 	@RequestMapping(value="/admin/crawling.do", method=RequestMethod.POST, produces="application/json;charset=UTF-8") 

@@ -53,9 +53,14 @@ public class ExpendableController {
 
 	//부품삭제 - 개별삭제
 	@RequestMapping(value="/expendable/deleteExpend.do", method = RequestMethod.POST)
-	public String deleteExpend(ShopExpendableVO vo) {
-		//System.out.println("들어온 id값:"+expend_id);
-		service.deleteExpend(vo);
-		return "redirect:/inventory/manageDetail.do";
+	public String deleteExpend(String expend_id, HttpSession session) {
+		OwnerVO owner = (OwnerVO)session.getAttribute("loginuser");
+		String shop_id = owner.getShop_id();
+		System.out.println("loginuser?"+shop_id);
+		System.out.println("들어온 expend_id값:"+expend_id);
+		ShopExpendableVO sevo = new ShopExpendableVO(expend_id, shop_id);
+		service.deleteExpend(sevo);
+		service.deleteLog(sevo);
+		return "redirect:/inventory/manageList.do";
 	}
 }
