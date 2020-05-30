@@ -667,6 +667,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             for (int i=0;i<carnumber.size();i++) {
                                 tmapview.removeMarkerItem(carnumber.get(i));
                             }
+                            tmapview.setZoomLevel(16);
                         }
                     });
                     final Button btnWeird = addView.findViewById(R.id.btnWeird);
@@ -679,6 +680,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             for (int i=0;i<carnumber.size();i++) {
                                 tmapview.removeMarkerItem(carnumber.get(i));
                             }
+                            tmapview.setZoomLevel(16);
                         }
                     });
                     final Button btnEm = addView.findViewById(R.id.btnEm);
@@ -691,6 +693,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             for (int i=0;i<carnumber.size();i++) {
                                 tmapview.removeMarkerItem(carnumber.get(i));
                             }
+                            tmapview.setZoomLevel(16);
                         }
                     });
                     builder.setView(addView);
