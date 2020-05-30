@@ -20,6 +20,9 @@
 		<typeAlias type="connected.car.sales.SalesVO" alias="salesvo"/>
 		<typeAlias type="connected.car.control.RemoteVO" alias="remotevo"/>
 		<typeAlias type="connected.car.mycar.MyCarVO" alias="mycarvo"/>
+		<typeAlias type="connected.car.period.MyexpendVO" alias="myexpendvo"/><!-- App 내 자동차 부품 교환 주기 기능 -->
+		<typeAlias type="connected.car.period.TermVO" alias="termvo"/><!-- 교환 주기 vo -->
+		
 	</typeAliases>
 	<mappers>
 		<mapper resource="mapper/ownerloginjoin.xml" />	
@@ -29,5 +32,6 @@
 		<mapper resource="mapper/sales.xml"/>
 		<mapper resource="mapper/control.xml"/>
 		<mapper resource="mapper/mycar.xml"/>
+		<mapper resource="mapper/period.xml"/>
 	</mappers>
 </configuration>

@@ -4,7 +4,7 @@ public class TermVO {
 
     String car_brand;
     String car_fuel_type;
-    String expend_type;
+    String expend_item;
     String expend_term;
 
     public TermVO(){
@@ -19,7 +19,7 @@ public class TermVO {
     public TermVO(String car_brand, String car_fuel_type, String expend_type, String expend_term) {
         this.car_brand = car_brand;
         this.car_fuel_type = car_fuel_type;
-        this.expend_type = expend_type;
+        this.expend_item = expend_type;
         this.expend_term = expend_term;
     }
 
@@ -39,12 +39,12 @@ public class TermVO {
         this.car_fuel_type = car_fuel_type;
     }
 
-    public String getExpend_type() {
-        return expend_type;
+    public String getExpend_item() {
+        return expend_item;
     }
 
-    public void setExpend_type(String expend_type) {
-        this.expend_type = expend_type;
+    public void setExpend_item(String expend_item) {
+        this.expend_item = expend_item;
     }
 
     public String getExpend_term() {
@@ -60,7 +60,7 @@ public class TermVO {
         return "TermVO{" +
                 "car_brand='" + car_brand + '\'' +
                 ", car_fuel_type='" + car_fuel_type + '\'' +
-                ", expend_type='" + expend_type + '\'' +
+                ", expend_type='" + expend_item + '\'' +
                 ", expend_term='" + expend_term + '\'' +
                 '}';
     }
