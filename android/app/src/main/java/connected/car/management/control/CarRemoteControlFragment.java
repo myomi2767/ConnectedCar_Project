@@ -163,18 +163,23 @@ public class CarRemoteControlFragment extends Fragment implements View.OnClickLi
                                 cursor.getString(3),
                                 cursor.getString(4));
                         Log.d("test", vo.toString());
-                        message = "ES" + vo.getAir_temp() + vo.getSet_time();
+                        message = "S" + vo.getAir_temp() + vo.getSet_time();
                     }
                 }else if(view.getId()==R.id.engineOff){
-                    message = "engineStop";
+                    //엔진 스탑
+                    message = "T";
                 }else if(view.getId()==R.id.btnEmerLightOn){
-                    message = "emergencyOn";
+                    //비상등 ON
+                    message = "A";
                 }else if(view.getId()==R.id.btnEmerLightOnSiren){
-                    message = "emergencyAndSiren";
+                    //비상등&경적 ON
+                    message = "B";
                 }else if(view.getId()==R.id.btnDoorOpen){
-                    message="doorOpen";
+                    //도어 Open
+                    message="O";
                 }else if(view.getId()==R.id.btnDoorLock){
-                    message="doorLock";
+                    //도어 Lock
+                    message="L";
                 }
                 pw.println("job:"+message+":phone:"+carId);
                 pw.flush();

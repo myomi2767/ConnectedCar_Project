@@ -5,7 +5,7 @@
   
 <mapper namespace="connected.car.control">
 	<insert id="insertRemote" parameterType="remotevo">
-		insert into control_result values(#{car_id}, to_date(sysdate, 'yyyy-mm-dd hh24:mi'), #{control_code}, #{control_result})
+		insert into control_result values(#{car_id}, sysdate, #{control_code}, #{control_result})
 	</insert>
 	<!-- select할 때 to_char(컬럼명, 'yyyy-mm-dd hh24:mi:ss') -->
 	<select id="selectRemote" parameterType="String" resultType="remotevo">
