@@ -102,7 +102,7 @@ public class CarRemoteStatusFragment extends Fragment {
             @Override
             public void run() {
                 if(view.getId()==R.id.btnRefresh){
-                    message="status";
+                    message="0";
                 }
                 pw.println("job:"+message+":phone:"+carId);
                 pw.flush();
@@ -116,6 +116,11 @@ public class CarRemoteStatusFragment extends Fragment {
             engineText.setTextColor(Color.BLUE);
             engineText2.setText("켜짐");
             engineText2.setTextColor(Color.BLUE);
+        }else {
+            engineText.setText("꺼짐");
+            engineText.setTextColor(Color.BLACK);
+            engineText2.setText("꺼짐");
+            engineText2.setTextColor(Color.BLACK);
         }
         if (status[1]){
             doorText.setText("열림");
@@ -123,12 +128,23 @@ public class CarRemoteStatusFragment extends Fragment {
             doorText2.setText("열림");
             doorText2.setTextColor(Color.BLUE);
             doorText3.setText("모두 열림");
+        }else {
+            doorText.setText("닫힘");
+            doorText.setTextColor(Color.BLACK);
+            doorText2.setText("닫힘");
+            doorText2.setTextColor(Color.BLACK);
+            doorText3.setText("모두 닫힘");
         }
         if (status[2]){
             airText.setText("켜짐");
             airText.setTextColor(Color.BLUE);
             airText2.setText("켜짐");
             airText2.setTextColor(Color.BLUE);
+        }else {
+            airText.setText("꺼짐");
+            airText.setTextColor(Color.BLACK);
+            airText2.setText("꺼짐");
+            airText2.setTextColor(Color.BLACK);
         }
     }
 }

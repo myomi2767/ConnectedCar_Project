@@ -116,18 +116,34 @@ public class RemoteControlAsync extends AsyncTask<String, String, Void> {
             String message = st.nextToken();
             String category = st.nextToken();
             String id = st.nextToken();
+            String control_code="";
             String control_result="";
             /* ==============================제어결과에 대한 DB접근================================= */
-            if(message.equals("success")|message.equals("fail")){
-                if(message.equals("success")){
+            if(message.charAt(message.length()-1)=='P'|message.charAt(message.length()-1)=='F'){
+                //성공 or 실패 구분
+                if(message.charAt(message.length()-1)=='P'){
                     Log.d("remote", "제어성공");
                     control_result = "성공";
-                }else if(message.equals("fail")){
+                }else{
                     Log.d("remote", "제어실패");
                     control_result = "실패";
                 }
+                //제어 구분자 파악
+                if(message.startsWith("EO")){
+                    control_code = "비상등";
+                }else if(message.startsWith("EAS")){
+                    control_code = "비상등+경적";
+                }else if(message.startsWith("DO")){
+                    control_code = "문열림";
+                }else if(message.startsWith("DL")){
+                    control_code = "문닫힘";
+                }else if(message.startsWith("ES")){
+                    control_code = "엔진켜기";
+                }else if(message.startsWith("ET")){
+                    control_code = "엔진끄기";
+                }
                 onProgressUpdate(control_result);
-                ControlResultVO vo = new ControlResultVO(carId, null, "제어구분자", control_result, null);
+                ControlResultVO vo = new ControlResultVO(carId, null, control_code, control_result, null);
                 try {
                     String path = "http://"+context.getString(R.string.myip)+":8088/connectedcar/remote/insert.do";
                     URL url = new URL(path);
@@ -156,6 +172,7 @@ public class RemoteControlAsync extends AsyncTask<String, String, Void> {
             /* ==============================현재 제어 상태에 대한 결과================================= */
             }else{
                 Log.d("test","status 진입");
+                Log.d("test",message);
                 setStatus(message);
                 isMessageIn = true;
             }
@@ -184,7 +201,6 @@ public class RemoteControlAsync extends AsyncTask<String, String, Void> {
     public boolean isOnPW() {
         return isOnPrintWriter;
     }
-
     public boolean isMsgIn() {
         return isMessageIn;
     }
