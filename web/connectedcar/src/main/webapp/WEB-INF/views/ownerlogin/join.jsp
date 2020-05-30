@@ -102,9 +102,8 @@
 	$(document).ready(function() {
 		//id 중복체크
 		$("#owner_id").on("keyup", function() {
-			$.get("/connectedcar/ownerlogin/idCheck.do", {
-				"owner_id" : $("#owner_id").val()
-			}, function(data) {
+			$.get("/connectedcar/ownerlogin/idCheck.do", {"owner_id":$("#owner_id").val()},
+					function(data) {
 				$("#checkVal").text(data);
 			}, "text")
 
