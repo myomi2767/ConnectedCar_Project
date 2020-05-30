@@ -10,4 +10,16 @@
 	<select id="selectMember" parameterType="Map" resultType="membervo">
 		select * from carnect_user where user_id = #{user_id} and user_password = #{user_password}
 	</select>
+	
+	<!-- 자동차 브랜드와 연료종류를 통해 부품 교환 주기 정보를 가져온다.-->
+	<select id="findPeriod" parameterType="membevo" resultType="termvo">
+		select * from exchange_term where car_brand = #{car_brand} and car_fuel_type=#{car_fuel_type}
+	</select>
+	
+	
+	<!-- 회원가입이 진행되면서 my_expendable테이블에 부품교체주기가 insert된다.(부품모델번호, 교체일, 최근교체일은 나중에 update할 때 들어가는 값  -->
+	<insert id="insertExpendPeriod" parameterType="termvo">
+		insert into my_expendable(my_expend_no, car_id, expend_item,expend_type, expend_term, my_expend_km ) 
+		values(myexpend_seq.nextval, #{car_id}, #{expend_item}, #{expend_type}, #{expend_term}, 0)
+	</insert>
 </mapper>

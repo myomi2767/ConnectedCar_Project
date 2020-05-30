@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import connected.car.management.R;
-import connected.car.management.controlresult.ControlResultVO;
 
 public class PeriodAdapter extends RecyclerView.Adapter<PeriodAdapter.ViewHolder>{
     Context context;
@@ -40,7 +39,7 @@ public class PeriodAdapter extends RecyclerView.Adapter<PeriodAdapter.ViewHolder
         TextView txt_expend_max = holder.expend_term;
 
 
-        txt_expend_type.setText(data.get(position).getExpend_type());
+        txt_expend_type.setText(data.get(position).getExpend_item());
         txt_expend_max.setText(data.get(position).getExpend_term());
 
     }
