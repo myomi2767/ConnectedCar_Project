@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="connected.car.management">
+    package="connected.car.management" >
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -16,20 +16,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
-        <activity android:name=".controlresult.RemoteControlResultActivity"></activity>
-        <activity android:name=".member.LoginActivity">
+        android:usesCleartextTraffic="true" >
+        <activity android:name=".period.PeriodExchangeActivity" >
+        </activity>
+        <activity android:name=".controlresult.RemoteControlResultActivity" />
+        <activity android:name=".member.LoginActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".control.CarAirConditionSettingActivity"/>
+        <activity android:name=".control.CarAirConditionSettingActivity" />
         <activity android:name=".control.MyCarInfo" />
         <activity android:name=".control.CarInfoFragment" />
-        <activity android:name=".car.RegisterCarActivity"/>
-        <activity android:name=".control.MainActivity" android:launchMode="singleTop"/>
+        <activity android:name=".car.RegisterCarActivity" />
+        <activity
+            android:name=".control.MainActivity"
+            android:launchMode="singleTop" />
         <activity android:name=".member.JoinActivity" />
     </application>
 

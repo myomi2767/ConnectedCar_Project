@@ -39,7 +39,7 @@ import connected.car.management.member.LoginAsync;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PeriodFragment extends Fragment {
+public class PeriodFragment extends Fragment  {
     PeriodAdapter myadapter;
     LinearLayoutManager manager;
     RecyclerView list;
@@ -68,6 +68,8 @@ public class PeriodFragment extends Fragment {
         myCarName = view.findViewById(R.id.text_myCarModelName);
         car_id = ((MainActivity)getActivity()).main_car_id; //액티비티로부터 가져온 로그인된 car_id
         car_model_name = ((MainActivity)getActivity()).main_car_model_name;
+        drive_distance = Integer.parseInt(((MainActivity)getActivity()).main_driver_distatnce);
+
         Log.d("===", "period프래그먼트: "+car_model_name);
 
         myCarName.setText(car_model_name+"▶"+car_id);
@@ -80,6 +82,11 @@ public class PeriodFragment extends Fragment {
 
         return view;
     }
+
+    public void distanceData(int distance) {
+       distance = drive_distance;
+    }
+
 
     //리싸이클러뷰
     class getPeriodHttpTask extends AsyncTask<Void, Void, String> {
@@ -137,9 +144,10 @@ public class PeriodFragment extends Fragment {
                             periodlist.add(perioditem);
 
                         }
-                        Log.d("===", "periodlist의 어떤 item : perioditem::" + periodlist.get(5));
                         myadapter = new PeriodAdapter(getActivity().getApplicationContext(),
                                 R.layout.period_row, periodlist);
+
+
 
 
                         manager = new LinearLayoutManager(getActivity().getApplicationContext());
