@@ -91,7 +91,7 @@
 									method="POST">
 									<input type="hidden" name="expend_id"
 										value="${expend.expend_id}">
-									<button type="submit" id="submit_btn" class="btn btn-default"
+									<button type="submit" id="expend_delete_btn" class="btn btn-default"
 										onclick="alert('삭제되었습니다.');">삭제</button>
 								</form></td>
 							</tr>

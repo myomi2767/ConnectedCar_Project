@@ -102,7 +102,7 @@ public class CarRemoteStatusFragment extends Fragment {
             @Override
             public void run() {
                 if(view.getId()==R.id.btnRefresh){
-                    message="0";
+                    message="Z";
                 }
                 pw.println("job:"+message+":phone:"+carId);
                 pw.flush();

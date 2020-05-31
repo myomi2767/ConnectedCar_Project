@@ -35,7 +35,7 @@ public class AdminController {
 			@RequestParam(value="curPage", required=false)String curPage,
 			@RequestParam(value="cntPerPage", required=false)String cntPerPage) {
 		ModelAndView mav = new ModelAndView();
-		int listCnt = service.listAllCnt();
+		int listCnt = service.listAllCnt(); //부품 전체 갯수를 페이징
 		if(curPage==null && cntPerPage==null) {
 			curPage = "1";
 			cntPerPage = "5";
@@ -75,15 +75,30 @@ public class AdminController {
 		service.expendableAdd(expendableVO);
 	}
 	
-		@RequestMapping(value = "/admin/search.do")
-		public ModelAndView searchlist(String keyword) {
-			List<ExpendableVO> expendlist = service.searchlist(keyword);
-			ModelAndView mav = new ModelAndView();
-			mav.addObject("expendlist", expendlist);
-			mav.setViewName("redirect:/admin/expendable.do?keyword="+keyword);
-			return mav;
-
+	@RequestMapping(value = "/admin/search.do", method = RequestMethod.GET)
+	public ModelAndView searchlist(String keyword, Pagination pagination,
+			@RequestParam(value="curPage", required=false)String curPage,
+			@RequestParam(value="cntPerPage", required=false)String cntPerPage) {
+		System.out.println(keyword);
+		int searchCnt = service.searchCnt(keyword); //부품 전체 갯수를 페이징
+		if(curPage==null && cntPerPage==null) {
+			curPage = "1";
+			cntPerPage = "5";
+		}else if(curPage==null) {
+			curPage = "1";
+		}else if(cntPerPage==null) {
+			cntPerPage = "5";
 		}
+		pagination = new Pagination(searchCnt, Integer.parseInt(curPage), Integer.parseInt(cntPerPage), keyword);
+		System.out.println(pagination);
+		List<ExpendableVO> expendlist = service.searchlist(pagination);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("paging", pagination);
+		mav.addObject("expendList", expendlist);
+		mav.setViewName("admin/expendableManage");
+		return mav;
+
+	}
 	
 	
 	

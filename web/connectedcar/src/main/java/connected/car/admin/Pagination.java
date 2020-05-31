@@ -9,6 +9,7 @@ public class Pagination {
 	private int lastPage; //마지막페이지
 	private int start; //쿼리에 사용될 start
 	private int end; //쿼리에 사용될 start
+	private String keyword; //검색 시 사용될 keyword
 	
 	private int cntPage = 5;
 	
@@ -24,6 +25,20 @@ public class Pagination {
 		calcStartEndPage(getCurPage(), cntPage);
 		calcStartEnd(getCurPage(), getCntPerPage());
 	}
+	
+	
+	
+	public Pagination(int total, int curPage, int cntPerPage, String keyword) {
+		super();
+		this.curPage = curPage;
+		this.total = total;
+		this.cntPerPage = cntPerPage;
+		this.keyword = keyword;
+		calcLastPage(getTotal(), getCntPerPage());
+		calcStartEndPage(getCurPage(), cntPage);
+		calcStartEnd(getCurPage(), getCntPerPage());
+	}
+
 	//가장 마지막 페이지 계산
 	public void calcLastPage(int total, int cntPerPage) {
 		setLastPage((int)Math.ceil((double)total/(double)cntPerPage));
@@ -100,13 +115,18 @@ public class Pagination {
 	public void setCntPage(int cntPage) {
 		this.cntPage = cntPage;
 	}
+	public String getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
 
 	@Override
 	public String toString() {
 		return "Pagination [curPage=" + curPage + ", startPage=" + startPage + ", endPage=" + endPage + ", total="
 				+ total + ", cntPerPage=" + cntPerPage + ", lastPage=" + lastPage + ", start=" + start + ", end=" + end
-				+ ", cntPage=" + cntPage + "]";
+				+ ", keyword=" + keyword + ", cntPage=" + cntPage + "]";
 	}
-	
 	
 }

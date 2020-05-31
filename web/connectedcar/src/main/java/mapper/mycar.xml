@@ -6,6 +6,10 @@
 <mapper namespace="connected.car.mycar">
 	<insert id="insertMycar" parameterType="mycarvo">
 		insert into car values(#{car_id}, #{car_brand}, #{car_model}, #{car_fuel_type}, #{car_year}, #{car_volume}, 
-			#{rapid_speed}, #{drop_speed}, #{overspeed}, #{special_car}, #{driver_distance})
+			#{rapid_speed}, #{drop_speed}, #{overspeed}, #{special_car}, #{driver_distance}, #{car_model_name})
 	</insert>
+	
+	<select id="getCarinfo" parameterType="String" resultType="mycarvo">
+		select * from car where car_id = #{car_id}
+	</select>
 </mapper>

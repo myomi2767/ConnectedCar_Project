@@ -32,6 +32,10 @@ public class CarControlFragment extends Fragment {
 
     String car_id;
 
+    public CarControlFragment(){
+
+    }
+
     public CarControlFragment(String car_id) {
         // Required empty public constructor
         this.car_id = car_id;

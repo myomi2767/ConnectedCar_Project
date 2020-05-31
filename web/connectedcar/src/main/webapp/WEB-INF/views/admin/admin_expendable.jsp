@@ -13,13 +13,6 @@
 <link rel="stylesheet" type="text/css"
 	href="/connectedcar/common/css/minjae/table.css">
 
-<script>
-	function selChange() {
-		var sel = document.getElementById('cntPerPage').value;
-		location.href = "/connectedcar/admin/expendable.do?curPage=${paging.curPage}&cntPerPage="
-				+ sel;
-	}
-</script>
 </head>
 <body>
 
@@ -76,10 +69,10 @@
 				<!-- 옵션선택 끝 -->
 			</div>
 			<div class="col-sm-8">
-				<form action="/connectedcar/admin/search.do" method="GET"><!-- <label>부품 검색</label> -->
-					<input type="text" name="keyword" style="width: 600px;" />
-					<Button type="submit" id="searchBtn" class="btn btn-default">검색</Button>
-				</form>
+				<!-- <form action="/connectedcar/admin/search.do" method="GET"> --><!-- <label>부품 검색</label> -->
+					<input type="text" id="keyword" name="keyword" style="width: 600px;" />
+					<Button type="button" id="searchBtn" class="btn btn-default">검색</Button>
+				<!-- </form> -->
 			</div>
 			<div class="col-sm-1">
 				<div class="pull-right">
@@ -135,33 +128,73 @@
 						%>
 					</tbody>
 				</table>
+				<% if(paging.getKeyword()==null){ %>
 				<div style="display: block; text-align: center;">
 					<c:if test="${paging.startPage != 1 }">
-						<a
-							href="/connectedcar/admin/expendable.do?curPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
+						<a href="/connectedcar/admin/expendable.do?curPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
 					</c:if>
-					<c:forEach begin="${paging.startPage }" end="${paging.endPage }"
-						var="p">
+					<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
 						<c:choose>
 							<c:when test="${p == paging.curPage }">
 								<b>${p }</b>
 							</c:when>
 							<c:when test="${p != paging.curPage }">
-								<a
-									href="/connectedcar/admin/expendable.do?curPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+								<a href="/connectedcar/admin/expendable.do?curPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
 							</c:when>
 						</c:choose>
 					</c:forEach>
 					<c:if test="${paging.endPage != paging.lastPage}">
-						<a
-							href="/connectedcar/admin/expendable.do?curPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
+						<a href="/connectedcar/admin/expendable.do?curPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
 					</c:if>
 				</div>
+				<% }else { %>
+				<div style="display: block; text-align: center;">
+					<c:if test="${paging.startPage != 1 }">
+						<a href="/connectedcar/admin/search.do?keyword=${paging.keyword}&curPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
+					</c:if>
+					<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
+						<c:choose>
+							<c:when test="${p == paging.curPage }">
+								<b>${p }</b>
+							</c:when>
+							<c:when test="${p != paging.curPage }">
+								<a href="/connectedcar/admin/search.do?keyword=${paging.keyword}&curPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+							</c:when>
+						</c:choose>
+					</c:forEach>
+					<c:if test="${paging.endPage != paging.lastPage}">
+						<a href="/connectedcar/admin/search.do?keyword=${paging.keyword}&curPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
+					</c:if>
+				</div>
+				<% } %>
 			</div>
 			<div class="col-sm-1"></div>
 		</div>
 		<!-- management area END -->
 
 	</div>
+	<script type="text/javascript">
+		function selChange() {
+			var sel = document.getElementById('cntPerPage').value;
+			var path = $(location).attr('pathname');
+			if(path=="/connectedcar/admin/expendable.do"){
+				location.href = "/connectedcar/admin/expendable.do?curPage=${paging.curPage}&cntPerPage="
+					+ sel;	
+			}else{
+				location.href = "/connectedcar/admin/search.do?keyword=${paging.keyword}&curPage=${paging.curPage}&cntPerPage="
+					+ sel;
+			}
+			
+			
+		}
+		$(document).ready(function(){
+			$("#searchBtn").on("click", function(){
+				keyword = $("#keyword").val();
+				location.href="/connectedcar/admin/search.do?&keyword="+encodeURI(keyword);
+				/* $.get("/LPG/match/list.do", {"mchName":$("#mchName").val(),"mchDate":$("#mchDate").val(),
+					"mchPlay":$("#mchPlay").val(),"mchType":$("#mchType"),"grdArea":$("#grdArea").val()}); */
+			});
+		});
+	</script>
 </body>
 </html>

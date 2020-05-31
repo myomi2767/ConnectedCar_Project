@@ -20,10 +20,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
         String sql = "create table if not exists airsetting("
                 + "air_setting_no integer primary key autoincrement,"
-                + "set_time text,"
-                + "car_id text,"
                 + "air_temp text,"
-                +"engine_time text)";
+                + "engine_time text)";
 
         db.execSQL(sql);
 
