@@ -28,7 +28,7 @@ public class PeriodAdapter extends RecyclerView.Adapter<PeriodAdapter.ViewHolder
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(row_res_id,null);
+        View view = LayoutInflater.from(context).inflate(row_res_id,parent,false);
         return new ViewHolder(view);
     }
 
@@ -37,7 +37,7 @@ public class PeriodAdapter extends RecyclerView.Adapter<PeriodAdapter.ViewHolder
         Log.d("===","onBindViewHolder"+position);
         TextView txt_expend_type = holder.expend_type;
         TextView txt_expend_max = holder.expend_term;
-        TextView txt_expend_kind = holder.expend_type;
+        TextView txt_expend_kind = holder.expend_kind;
 
         txt_expend_kind.setText(data.get(position).getExpend_kind());
         txt_expend_type.setText(data.get(position).getExpend_type());
@@ -47,7 +47,7 @@ public class PeriodAdapter extends RecyclerView.Adapter<PeriodAdapter.ViewHolder
 
     @Override
     public int getItemCount() {
-        return 0;
+        return data.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{

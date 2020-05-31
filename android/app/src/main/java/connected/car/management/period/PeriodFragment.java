@@ -1,9 +1,12 @@
 package connected.car.management.period;
 
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -42,6 +45,7 @@ public class PeriodFragment extends Fragment {
     RecyclerView list;
     List<MyexpendVO> periodlist = new ArrayList<MyexpendVO>();
     TextView myCarName;
+    FragmentManager fragmentManager;
 
     public String car_id;
     public String car_model_name;
@@ -71,6 +75,9 @@ public class PeriodFragment extends Fragment {
         getPeriodHttpTask task = new getPeriodHttpTask(car_id);
         task.execute();
 
+
+
+
         return view;
     }
 
@@ -78,6 +85,7 @@ public class PeriodFragment extends Fragment {
     class getPeriodHttpTask extends AsyncTask<Void, Void, String> {
 
         String url;
+        ProgressDialog showPeriod = new ProgressDialog(getContext());
 
 
         public getPeriodHttpTask(String car_id) {
@@ -85,6 +93,15 @@ public class PeriodFragment extends Fragment {
             url += "car_id=" + car_id;
         }
 
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            showPeriod.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            showPeriod.setMessage("Now Loading");
+            showPeriod.show();
+
+
+        }
 
         @Override
         protected String doInBackground(Void... voids) {
@@ -116,7 +133,7 @@ public class PeriodFragment extends Fragment {
 
 
                             MyexpendVO perioditem = new MyexpendVO(my_expend_no, car_id, expend_kind, expend_term,
-                                    expend_kind, expend_id, my_expend_replace, my_expend_km);
+                                    expend_type, expend_id, my_expend_replace, my_expend_km);
                             periodlist.add(perioditem);
 
                         }
@@ -128,9 +145,12 @@ public class PeriodFragment extends Fragment {
                         manager = new LinearLayoutManager(getActivity().getApplicationContext());
                         manager.setOrientation(LinearLayoutManager.VERTICAL);
 
+
                         list.setLayoutManager(manager);
                         list.setAdapter(myadapter);
                         myadapter.notifyDataSetChanged();
+                        Log.d("===","어댑터 붙임");
+                        showPeriod.dismiss();
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

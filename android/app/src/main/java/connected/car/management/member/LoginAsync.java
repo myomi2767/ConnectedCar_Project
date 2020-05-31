@@ -1,6 +1,7 @@
 package connected.car.management.member;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -26,9 +27,19 @@ import okhttp3.Response;
 
 public class LoginAsync extends AsyncTask<MemberVO, Void, MemberVO> {
     Context context;
+    ProgressDialog loadLogin;
 
     public LoginAsync(Context context) {
         this.context = context;
+        loadLogin = new ProgressDialog(this.context);
+    }
+
+    @Override
+    protected void onPreExecute() {
+        loadLogin.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        loadLogin.setMessage("로그인 중입니다");
+        loadLogin.show();
+        super.onPreExecute();
     }
 
     @Override
@@ -66,6 +77,7 @@ public class LoginAsync extends AsyncTask<MemberVO, Void, MemberVO> {
     @Override
     protected void onPostExecute(MemberVO vo) {
         super.onPostExecute(vo);
+        loadLogin.dismiss();
         if(vo != null) {
             //로그인 성공
             Intent intent = new Intent(context, MainActivity.class);
