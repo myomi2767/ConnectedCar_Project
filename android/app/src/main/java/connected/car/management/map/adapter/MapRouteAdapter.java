@@ -10,11 +10,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.second.project.heysched.R;
-
-import org.w3c.dom.Text;
-
 import java.util.List;
+
+import connected.car.management.R;
 
 public class MapRouteAdapter extends RecyclerView.Adapter<MapRouteAdapter.ViewHolder> {
     Context context;
@@ -62,11 +60,11 @@ public class MapRouteAdapter extends RecyclerView.Adapter<MapRouteAdapter.ViewHo
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageView = itemView.findViewById(R.id.map_route_icon2);
+            /*imageView = itemView.findViewById(R.id.map_route_icon2);
             instruction = itemView.findViewById(R.id.map_route_instruction2);
             duration = itemView.findViewById(R.id.map_route_duration2);
             distance = itemView.findViewById(R.id.map_route_distance2);
-            endStop = itemView.findViewById(R.id.map_route_endStop);
+            endStop = itemView.findViewById(R.id.map_route_endStop);*/
         }
     }
 }

@@ -337,14 +337,14 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         }*/
 
         public void setAdapter() {
-            MapRouteAdapter adapter = new MapRouteAdapter(MapActivity.this, R.layout.map_route_row2, wayDataList);
+            /*MapRouteAdapter adapter = new MapRouteAdapter(MapActivity.this, R.layout.map_route_row2, wayDataList);
             LinearLayoutManager manager = new LinearLayoutManager(MapActivity.this);
             manager.setOrientation(LinearLayoutManager.VERTICAL);
 
             recyclerView.setHasFixedSize(true);
             recyclerView.setLayoutManager(manager);
 
-            recyclerView.setAdapter(adapter);
+            recyclerView.setAdapter(adapter);*/
 
 
         }

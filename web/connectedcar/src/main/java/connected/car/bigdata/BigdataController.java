@@ -17,6 +17,9 @@ public class BigdataController {
 		String owner_id = owner.getOwner_id();
 		String shop_id = owner.getShop_id();
 		
+		//이 정보로 sqoop 실행 및 mapreduce 실행
+		
+		
 		return mav;
 		
 	}
