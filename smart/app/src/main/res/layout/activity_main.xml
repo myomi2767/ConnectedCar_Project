@@ -116,10 +116,9 @@
                         android:layout_marginBottom="250dp"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        app:useCompatPadding="true"
-                        android:scaleType="centerCrop"
-                        android:backgroundTint="@android:color/transparent"
-                        gauge:borderWidth="0dp"
+                        android:scaleType="matrix"
+                        app:backgroundTint="@android:color/transparent"
+                        app:borderWidth="0dp"
                         android:clickable="true"/>
                     <com.google.android.material.floatingactionbutton.FloatingActionButton
                         android:id="@+id/fabMsg"
@@ -130,9 +129,9 @@
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         app:useCompatPadding="true"
-                        android:scaleType="centerCrop"
-                        android:backgroundTint="@android:color/transparent"
-                        gauge:borderWidth="0dp"
+                        android:scaleType="fitStart"
+                        app:backgroundTint="@android:color/transparent"
+                        app:borderWidth="0dp"
                         android:clickable="true"/>
                     <com.google.android.material.floatingactionbutton.FloatingActionButton
                         android:id="@+id/fabNavi"
@@ -143,9 +142,9 @@
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         app:useCompatPadding="true"
-                        android:scaleType="centerCrop"
-                        android:backgroundTint="@android:color/transparent"
-                        gauge:borderWidth="0dp"
+                        android:scaleType="fitCenter"
+                        app:backgroundTint="@android:color/transparent"
+                        app:borderWidth="0dp"
                         android:clickable="true"/>
 
                     <LinearLayout
@@ -212,6 +211,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="horizontal">
+
             <Button
                 android:id="@+id/btn30"
                 android:layout_width="300dp"

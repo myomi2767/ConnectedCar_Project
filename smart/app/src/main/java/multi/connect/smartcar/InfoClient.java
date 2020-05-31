@@ -18,7 +18,6 @@ import java.util.StringTokenizer;
 
 public class InfoClient {
     Context context;
-    AsyncTaskMain asyncTaskMain;
     Socket socket;
     BufferedReader br;
     InputStream  is;
@@ -26,25 +25,21 @@ public class InfoClient {
     OutputStream os;
     PrintWriter pw;
     StringTokenizer token;
-    String id;
+    //String id;
     String carNum;
 
-    public InfoClient(Context context,String id, String carNum) {
+    public InfoClient(Context context,String carNum) {
         this.context = context;
-        this.id = id;
+       // this.id = id;
         this.carNum = carNum;
-        asyncTaskMain = new AsyncTaskMain();
-        asyncTaskMain.execute();
+        new AsyncTaskMain().execute();
     }
 
-    public void sendMessage(String msg) {
-        final String message = msg;
+    public void sendMessage(final String msg) {
         new Thread(new Runnable() {
             @Override
             public void run() {
-
-
-                pw.println(message);
+                pw.println("message:"+msg+":info:"+carNum);
             }
         }).start();
     }
@@ -57,8 +52,12 @@ public class InfoClient {
 
             try {
                 //메인서버 아이피 입력
-                socket = new Socket("192.168.43.190", 12345);
+
+                socket = new Socket("172.30.1.42", 12345);
+                Log.d("server","xdsafhgjkljeifjlsf들어왔음");
+                Log.d("server","소켓소켓"+socket);
                 if (socket != null) {
+
                     ioWork();
                 }
                 Thread t1 = new Thread(new Runnable() {
@@ -66,6 +65,7 @@ public class InfoClient {
                     public void run() {
                         while (true) {
                             String msg;
+
                             try {
                                 msg = br.readLine();
                                 if(msg.length() > 0) {
@@ -87,7 +87,7 @@ public class InfoClient {
             return null;
         }
     }
-    void ioWork(){
+    public void ioWork(){
         try {
             is = socket.getInputStream();
             isr = new InputStreamReader(is);
@@ -95,27 +95,52 @@ public class InfoClient {
 
             os = socket.getOutputStream();
             pw = new PrintWriter(os,true);
+            Log.d("server","xdsafhgjkljeifjlsf들어왔음");
+            pw.println("info:"+carNum);
+            pw.flush();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
     public void filteringMsg(String msg) {
-        token = new StringTokenizer(msg, "/");
+        token = new StringTokenizer(msg, ":");
         String protocol = token.nextToken();
         String message = token.nextToken();
-        System.out.println("프로토콜:" + protocol + ",메시지:" + message);
-        if(protocol.equals("engine_on")){
+        if(protocol.equals("job")){
             Intent intent = new Intent(context,MainActivity.class);
             intent.putExtra("carNum", carNum);
-            intent.putExtra("id", id);
+            //intent.putExtra("id", id);
             context.startActivity(intent);
             ((Activity)context).finish();
-        }else if(protocol.equals("emergency")){
-            //publishProgress("sonic","msg",message);
-        }else if(protocol.equals("trunk")){
-           /// publishProgress("speed","msg",message);
-        }else if(protocol.equals("caution")){
-
+        }else if(protocol.equals("message")){
+            String category = token.nextToken();
+            String carNum = token.nextToken();
+            switch (category) {
+                case "EM": {
+                    Intent intent = new Intent(context, MainActivity.class);
+                    intent.putExtra("carNum", carNum);
+                    intent.putExtra("messageType", "EM");
+                    Log.d("alarm","EM 알람 테스트");
+                    break;
+                }
+                case "TRUNK": {
+                    Intent intent = new Intent(context, MainActivity.class);
+                    intent.putExtra("carNum", carNum);
+                    intent.putExtra("messageType", "TRUNK");
+                    Log.d("alarm","TRUNK 알람 테스트");
+                    break;
+                }
+                case "CAUTION": {
+                    Intent intent = new Intent(context, MainActivity.class);
+                    intent.putExtra("carNum", carNum);
+                    intent.putExtra("messageType", "CAUTION");
+                    Log.d("alarm"," CAUTION 알람 테스트");
+                    break;
+                }
+            }
         }
     }
+
+
 }

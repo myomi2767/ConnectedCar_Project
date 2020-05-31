@@ -15,7 +15,7 @@ public class BackGroundActivity extends AppCompatActivity {
         setContentView(R.layout.activity_back_ground);
         id = "backCar";
         carNum = "82가1004";
-        info = new InfoClient(this,id,carNum);
+        info = new InfoClient(this,carNum);
 
 
     }
