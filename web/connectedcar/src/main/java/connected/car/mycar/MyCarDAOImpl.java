@@ -14,4 +14,9 @@ public class MyCarDAOImpl implements MyCarDAO{
 		return session.insert("connected.car.mycar.insertMycar", mycar);
 	}
 
+	@Override
+	public MyCarVO getCarinfo(String carid) {
+		return session.selectOne("connected.car.mycar.getCarinfo", carid);
+	}
+
 }

@@ -2,6 +2,9 @@ package connected.car.mycar;
 
 import java.io.IOException;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,4 +38,16 @@ public class MyCarController {
 		
 		return jsonObject.toString();
 	}
+	
+	
+	//로그인 하면 car_id로 자동차 상태정보를 메인액티비티에 갖고 오는 컨트롤러
+	@RequestMapping(value ="/mycar/getcarinfo.do", method=RequestMethod.GET, produces="application/json;charset=utf-8")
+	public @ResponseBody MyCarVO getCarinfo(HttpServletRequest req, HttpServletResponse res) {
+		String carid = req.getParameter("car_id");
+		System.out.println("get car_id from android:"+ carid);
+		MyCarVO carinfo = service.getCarinfo(carid);
+		System.out.println("mapper거치고 and로 보낼 carinfo:"+carinfo);
+		return carinfo;
+	}
+	
 }

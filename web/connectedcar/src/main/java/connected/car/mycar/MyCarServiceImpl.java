@@ -15,4 +15,10 @@ public class MyCarServiceImpl implements MyCarService {
 		return dao.inseryMyCar(mycar);
 	}
 
+	@Override
+	public MyCarVO getCarinfo(String carid) {
+		// TODO Auto-generated method stub
+		return dao.getCarinfo(carid);
+	}
+
 }
