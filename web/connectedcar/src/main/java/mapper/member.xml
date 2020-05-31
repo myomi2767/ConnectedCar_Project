@@ -12,7 +12,7 @@
 	</select>
 	
 	<!-- 자동차 브랜드와 연료종류를 통해 부품 교환 주기 정보를 가져온다.-->
-	<select id="findPeriod" parameterType="membevo" resultType="termvo">
+	<select id="findPeriod" parameterType="membervo" resultType="termvo">
 		select * from exchange_term where car_brand = #{car_brand} and car_fuel_type=#{car_fuel_type}
 	</select>
 	

@@ -22,7 +22,7 @@ public class AdminServiceImpl implements AdminService {
 	public List<ExpendableVO> listAll(Pagination pagination) {
 		return dao.listAll(pagination);
 	}
-	
+	//부품 전체 갯수
 	@Override
 	public int listAllCnt() {
 		return dao.listAllCnt();
@@ -34,12 +34,16 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<ExpendableVO> searchlist(String keyword) {
-		// TODO Auto-generated method stub
-		return dao.searchlist(keyword);
+	public List<ExpendableVO> searchlist(Pagination pagination) {
+		return dao.searchlist(pagination);
+	}
+	//Search한 부품의 갯수 구하는 메소드
+	@Override
+	public int searchCnt(String keyword) {
+		return dao.searchCnt(keyword);
 	}
 
-
+	
 
 
 }
