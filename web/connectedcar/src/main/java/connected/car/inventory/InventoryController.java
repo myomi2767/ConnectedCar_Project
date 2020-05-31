@@ -123,6 +123,4 @@ public class InventoryController {
 	public String expendableAdd() {
 		return "inventory/expendableAdd";
 	}	
-		
-	
 }

@@ -22,6 +22,10 @@
 				 where rnum between #{start} and #{end}
 	</select>
 	
+	<select id="expendableConfirm" parameterType="Map" resultType="int">
+		select count(*) from shop_expendable where shop_id = #{shop_id} and expend_id = #{expend_id} 
+	</select>
+	
 	<insert id="insertShopExpend" parameterType="Map">
 		insert into shop_expendable values(#{shop_id}, #{expend_id}, sysdate, #{shop_expend_count})
 	</insert>

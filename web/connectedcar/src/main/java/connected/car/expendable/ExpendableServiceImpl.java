@@ -47,13 +47,16 @@ public class ExpendableServiceImpl implements ExpendableService {
 
 	@Override
 	public int deleteExpend(ShopExpendableVO sevo) {
-		// TODO Auto-generated method stub
 		return dao.deleteExpend(sevo);
 	}
 
 	@Override
 	public int deleteLog(ShopExpendableVO sevo) {
-		// TODO Auto-generated method stub
 		return dao.deleteLog(sevo);
+	}
+
+	@Override
+	public int expendableConfirm(String shop_id, String expend_id) {
+		return dao.expendableConfirm(shop_id, expend_id);
 	}
 }

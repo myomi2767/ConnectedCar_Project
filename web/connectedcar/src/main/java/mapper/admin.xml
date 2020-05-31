@@ -7,9 +7,9 @@
 	<insert id="insertExpendable" parameterType="expendablevo">
 		insert into expendable values(expend_seq.NEXTVAL, #{expend_code}, #{expend_type}, #{expend_name}, #{expend_price}, #{expend_brand}, #{car_model_name})
 	</insert>
-	
+	<!-- SELECT * FROM (SELECT A.*, ROWNUM AS rnum FROM expendable A order by to_number(expend_id) desc) WHERE rnum BETWEEN #{start} AND #{end} -->
 	<select id="listAll" resultType="expendablevo" parameterType="paging">
-		SELECT * FROM (SELECT A.*, ROWNUM AS rnum FROM expendable A) WHERE rnum BETWEEN #{start} AND #{end} order by expend_id asc
+		SELECT * FROM (SELECT A.*, ROW_NUMBER() OVER(ORDER BY to_number(expend_id) desc) AS rnum FROM expendable A) WHERE rnum BETWEEN #{start} AND #{end}
 
 	</select>
 	<!-- 
@@ -31,24 +31,21 @@
 	<delete id="deleteExpendable" parameterType="String">
 		delete from expendable where expend_id = #{expend_id}
 	</delete>
-	<select id= "searchlist" resultType="expendablevo" parameterType="String">
-		select * from expendable where expend_name like '%'||#{keyword}||'%'
-	</select>
 	
 	<select id="searchCnt" resultType="int" parameterType="String">
 		select count(*) from expendable where expend_name like '%'||#{keyword}||'%'
 	</select>
 	
 	<select id="searchList" resultType="expendablevo" parameterType="paging">
-		SELECT * FROM (SELECT A.*, ROWNUM AS rnum FROM expendable A
-			<where>
-				<if test="keyword!=''">
-					and expend_name like '%'||#{keyword}||'%'
-				</if>
-			</where> 
-			) 
+		SELECT * FROM (SELECT A.*, ROW_NUMBER() OVER(ORDER BY to_number(expend_id) desc) AS rnum FROM expendable A
+				<where>
+					<if test="keyword!=''">
+						and expend_name like '%'||#{keyword}||'%'
+					</if>
+				</where>
+			order by expend_id desc) 
 			WHERE rnum BETWEEN #{start} AND #{end}
-			order by expend_id asc
+			
 	</select>
 	
 </mapper>
