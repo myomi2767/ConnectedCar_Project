@@ -1,9 +1,12 @@
 package connected.car.management.period;
 
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -42,6 +45,7 @@ public class PeriodFragment extends Fragment {
     RecyclerView list;
     List<MyexpendVO> periodlist;
     TextView myCarName;
+    FragmentManager fragmentManager;
 
     public String car_id;
     public String car_model_name;
@@ -64,6 +68,8 @@ public class PeriodFragment extends Fragment {
         myCarName = view.findViewById(R.id.text_myCarModelName);
         car_id = ((MainActivity)getActivity()).main_car_id; //액티비티로부터 가져온 로그인된 car_id
         car_model_name = ((MainActivity)getActivity()).main_car_model_name;
+        drive_distance = Integer.parseInt(((MainActivity)getActivity()).main_driver_distatnce);
+
         Log.d("===", "period프래그먼트: "+car_model_name);
 
         myCarName.setText(car_model_name+"▶"+car_id);
@@ -82,13 +88,22 @@ public class PeriodFragment extends Fragment {
         getPeriodHttpTask task = new getPeriodHttpTask(car_id);
         task.execute();
 
+
+
+
         return view;
     }
+
+    public void distanceData(int distance) {
+       distance = drive_distance;
+    }
+
 
     //리싸이클러뷰
     class getPeriodHttpTask extends AsyncTask<Void, Void, String> {
 
         String url;
+        ProgressDialog showPeriod = new ProgressDialog(getContext());
 
 
         public getPeriodHttpTask(String car_id) {
@@ -96,6 +111,15 @@ public class PeriodFragment extends Fragment {
             url += "car_id=" + car_id;
         }
 
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            showPeriod.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            showPeriod.setMessage("Now Loading");
+            showPeriod.show();
+
+
+        }
 
         @Override
         protected String doInBackground(Void... voids) {
@@ -127,14 +151,26 @@ public class PeriodFragment extends Fragment {
 
 
                             MyexpendVO perioditem = new MyexpendVO(my_expend_no, car_id, expend_kind, expend_term,
-                                    expend_kind, expend_id, my_expend_replace, my_expend_km);
+                                    expend_type, expend_id, my_expend_replace, my_expend_km);
                             periodlist.add(perioditem);
 
                         }
-                        Log.d("===", "periodlist의 어떤 item : perioditem::" + periodlist.get(5));
+                        myadapter = new PeriodAdapter(getActivity().getApplicationContext(),
+                                R.layout.period_row, periodlist);
 
                         myadapter.notifyDataSetChanged();
 
+
+
+                        manager = new LinearLayoutManager(getActivity().getApplicationContext());
+                        manager.setOrientation(LinearLayoutManager.VERTICAL);
+
+
+                        list.setLayoutManager(manager);
+                        list.setAdapter(myadapter);
+                        myadapter.notifyDataSetChanged();
+                        Log.d("===","어댑터 붙임");
+                        showPeriod.dismiss();
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
