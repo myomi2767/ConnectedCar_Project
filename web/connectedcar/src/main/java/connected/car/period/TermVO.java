@@ -15,11 +15,14 @@ public class TermVO {
 	}
 	
 	
-	public TermVO(String car_brand, String car_fuel_type) {
+	//select 해서 가져온 결과를 저장하려고 만든 생성자
+	public TermVO(String expend_kind, String expend_term, String expend_type) {
 		super();
-		this.car_brand = car_brand;
-		this.car_fuel_type = car_fuel_type;
+		this.expend_kind = expend_kind;
+		this.expend_term = expend_term;
+		this.expend_type = expend_type;
 	}
+
 	
 	
 

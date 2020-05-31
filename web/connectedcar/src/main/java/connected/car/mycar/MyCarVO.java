@@ -12,14 +12,25 @@ public class MyCarVO {
 	private int overspeed;
 	private String special_car;
 	private int driver_distance;
+	private String car_model_name;
 	
 	public MyCarVO() {
 		
 	}
+	
+	
+	//My_expendable 데이터를 회원가입과 동시에 insert하기 위한 생성자 
+	public MyCarVO(String car_brand, String car_fuel_type) {
+		super();
+		this.car_brand = car_brand;
+		this.car_fuel_type = car_fuel_type;
+	}
+
+
 
 	public MyCarVO(String car_id, String car_brand, String car_model, String car_fuel_type, String car_year,
 			String car_volume, int rapid_speed, int drop_speed, int overspeed, String special_car,
-			int driver_distance) {
+			int driver_distance, String car_model_name) {
 		super();
 		this.car_id = car_id;
 		this.car_brand = car_brand;
@@ -32,14 +43,26 @@ public class MyCarVO {
 		this.overspeed = overspeed;
 		this.special_car = special_car;
 		this.driver_distance = driver_distance;
+		this.car_model_name = car_model_name;
 	}
+
+	
 
 	@Override
 	public String toString() {
 		return "MyCarVO [car_id=" + car_id + ", car_brand=" + car_brand + ", car_model=" + car_model
 				+ ", car_fuel_type=" + car_fuel_type + ", car_year=" + car_year + ", car_volume=" + car_volume
 				+ ", rapid_speed=" + rapid_speed + ", drop_speed=" + drop_speed + ", overspeed=" + overspeed
-				+ ", special_car=" + special_car + ", driver_distance=" + driver_distance + "]";
+				+ ", special_car=" + special_car + ", driver_distance=" + driver_distance + ", car_model_name="
+				+ car_model_name + "]";
+	}
+
+	public String getCar_model_name() {
+		return car_model_name;
+	}
+
+	public void setCar_model_name(String car_model_name) {
+		this.car_model_name = car_model_name;
 	}
 
 	public String getCar_id() {

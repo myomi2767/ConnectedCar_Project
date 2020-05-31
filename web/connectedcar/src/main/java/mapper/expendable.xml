@@ -18,7 +18,8 @@
 	<select id="findShopExpendList" parameterType="Map" resultType="shopexpendvo">
 		select * from (select s.shop_expend_date, s.shop_expend_count, e.*, rownum as rnum
 						from shop_expendable s, expendable e
-						where s.expend_id = e.expend_id and s.shop_id = #{shop_id}) 
+						where s.expend_id = e.expend_id and s.shop_id = #{shop_id}
+						order by s.shop_expend_date desc) 
 				 where rnum between #{start} and #{end}
 	</select>
 	

@@ -37,6 +37,11 @@ public class CarAsync extends AsyncTask<CarVO, Void, Integer> {
     }
 
     @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+    }
+
+    @Override
     protected Integer doInBackground(CarVO... vo) {
         int result = 0;
         Log.d("myip",context.getString(R.string.myip)+"");

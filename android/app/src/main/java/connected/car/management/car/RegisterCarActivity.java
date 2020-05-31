@@ -99,7 +99,8 @@ public class RegisterCarActivity extends AppCompatActivity implements View.OnCli
                         editCarCC.getText().toString(),
                         0,0,0,
                         ((RadioButton)findViewById(radioCar.getCheckedRadioButtonId())).getText().toString(),
-                        Integer.parseInt(editCarKm.getText().toString()));
+                        Integer.parseInt(editCarKm.getText().toString()),
+                        detailModelSpinner.getSelectedItem().toString());
                 new CarAsync(this).execute(vo);
                 break;
         }
