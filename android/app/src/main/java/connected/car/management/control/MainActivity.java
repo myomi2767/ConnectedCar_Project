@@ -1,12 +1,14 @@
 package connected.car.management.control;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
@@ -19,6 +21,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import connected.car.management.HttpHandler.StringURLHttpHandler;
 import connected.car.management.R;
 import connected.car.management.car.RegisterCarActivity;
 import connected.car.management.member.MemberVO;
@@ -79,7 +82,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         fragmentManager.beginTransaction().add(R.id.page,condition).commit();
 
-
     }
 
 
@@ -116,6 +118,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    class getCarInfoHttpTask extends AsyncTask<Void, Void, String>{
+
+        String url;
+
+        public getCarInfoHttpTask(String car_id){
+            url = "http://"+getString(R.string.myip)+":8088/connectedcar/mycar/getcarinfo.do?";
+            url += "car_id="+main_car_id;
+        }
+
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            return StringURLHttpHandler.requestData(url);
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            if(s!=null){
+                Log.d("===", "포스트익스큐트스트링:" + s);
+                if(s.length()>10){
+                    Log.d("===", "포스트익스큐트if/받아온데이터:" + s);
+                } else{
+                    Toast.makeText(MainActivity.this,"아직 등록된 자동차 정보가 없습니다.\n" +
+                            "우측 상단의 추가 버튼을 통해 내 자동차 정보를 입력해보세요!",Toast.LENGTH_LONG).show();
+                }
+
+
+            }
         }
     }
 

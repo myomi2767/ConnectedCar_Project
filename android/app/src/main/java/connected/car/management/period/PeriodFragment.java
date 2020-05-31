@@ -26,8 +26,9 @@ public class PeriodFragment extends Fragment {
     RecyclerView list;
     List<TermVO> termlist = new ArrayList<TermVO>();
 
-    private String car_id;
-    private String car_fuel_type;
+    public String car_id;
+    public String car_fuel_type;
+    public int drive_distance;
 
 
     public PeriodFragment() {
