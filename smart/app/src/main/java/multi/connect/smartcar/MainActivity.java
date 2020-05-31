@@ -8,6 +8,7 @@ import androidx.core.app.ActivityCompat;
 import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -104,10 +105,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     boolean isTmapApp;
     TMapGpsManager tMapGpsManager;
 
+    //메시지 주고받기 관련
+    InfoClient infoClient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Intent intent = getIntent();
+        //main 통신
+        infoClient = new InfoClient(this, intent.getStringExtra("id"), intent.getStringExtra("carNum"));
+
         //Serial 통신
         asyncTaskSerial = new AsyncTaskSerial();
         asyncTaskSerial.execute(10,20);
@@ -264,7 +273,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         protected String doInBackground(Integer... integers) {
             try {
-                socket = new Socket("192.168.43.190", 12345);
+                socket = new Socket("192.168.43.190", 50000);
                 if (socket != null) {
                     ioWork();
                 }
@@ -314,7 +323,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (state.equals("sonic")) {
                     distance.setText(values[2] + "cm");
                 }else if(state.equals("speed")){
-                    speedometer.moveToValue(Integer.parseInt(values[2]));
+                    speed = Integer.parseInt(values[2]);
+                    speedometer.moveToValue(speed);
                     speedometer.setLowerText(values[2]);
                 }
             }else{
@@ -344,6 +354,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             e.printStackTrace();
         }
     }
+
     private void searchPOI() {
         TMapData data = new TMapData();
         String keyword = destiName.getText().toString();

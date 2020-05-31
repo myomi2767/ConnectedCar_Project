@@ -11,7 +11,8 @@ char cmd;
 //모터 속도 시작
 int speed_left = 0;
 int speed_right = 0;
-int speed_sum =speed_left + speed_right;
+int 
+speed_sum =speed_left + speed_right;
 int speed_cal = 0;
 int velocity = 0; //계기판에 보낼 값
 //모터 속도 끝
