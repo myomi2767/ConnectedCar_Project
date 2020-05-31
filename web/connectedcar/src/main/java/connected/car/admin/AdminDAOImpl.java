@@ -36,8 +36,13 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override
-	public List<ExpendableVO> searchlist(String keyword) {
-		return sqlsession.selectList("connected.car.admin.searchlist", keyword);
+	public List<ExpendableVO> searchlist(Pagination pagination) {
+		return sqlsession.selectList("connected.car.admin.searchList", pagination);
+	}
+	//search 후 검색된 결과 갯수 찾는 메소드
+	@Override
+	public int searchCnt(String keyword) {
+		return sqlsession.selectOne("connected.car.admin.searchCnt", keyword);
 	}
 
 }

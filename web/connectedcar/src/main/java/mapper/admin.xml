@@ -35,14 +35,19 @@
 		select * from expendable where expend_name like '%'||#{keyword}||'%'
 	</select>
 	
+	<select id="searchCnt" resultType="int" parameterType="String">
+		select count(*) from expendable where expend_name like '%'||#{keyword}||'%'
+	</select>
+	
 	<select id="searchList" resultType="expendablevo" parameterType="paging">
-		SELECT * FROM (SELECT A.*, ROWNUM AS rnum FROM expendable A)
+		SELECT * FROM (SELECT A.*, ROWNUM AS rnum FROM expendable A
 			<where>
-				rnum BETWEEN #{start} AND #{end}
-				<if test="expend_name!=''">
+				<if test="keyword!=''">
 					and expend_name like '%'||#{keyword}||'%'
 				</if>
 			</where> 
+			) 
+			WHERE rnum BETWEEN #{start} AND #{end}
 			order by expend_id asc
 	</select>
 	
