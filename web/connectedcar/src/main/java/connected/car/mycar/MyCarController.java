@@ -1,6 +1,7 @@
 package connected.car.mycar;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import connected.car.period.MyexpendVO;
+import connected.car.period.TermVO;
 
 @Controller
 public class MyCarController {
@@ -29,12 +33,39 @@ public class MyCarController {
 			System.out.println(vo);
 			MyCarVO mycarVO = mapper.readValue(vo, MyCarVO.class);
 			System.out.println(mycarVO.toString());
+			
+			MyCarVO carinfoForTerm = new MyCarVO(mycarVO.getCar_brand(), mycarVO.getCar_fuel_type());
 			result = service.inseryMyCar(mycarVO);
+			
+			//회원가입 할 때는 my_expendable에 연료 주기 정보를 넣어줍니다.
+			List<TermVO> termlist = service.getTerminfo(carinfoForTerm);
+			
+			System.out.println("termlist를 잘 가져왔습니까?갯수는요?"+ termlist.size());
+			//순서는 kind, type, term
+			String car_id = mycarVO.getCar_id();
+			for(int i=0; i<termlist.size();i++) {
+				
+				MyexpendVO expendvo = new MyexpendVO(car_id,
+						termlist.get(i).getExpend_kind(),
+						termlist.get(i).getExpend_type(),
+						termlist.get(i).getExpend_term());
+				
+				service.insertTerm(expendvo);
+				System.out.println("insert 된 상태 : expendvo:"+expendvo);
+				
+			}
+			
 			jsonObject = new JSONObject();
 			jsonObject.put("resultNum", result);
+			
+			
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		
+		
 		
 		return jsonObject.toString();
 	}

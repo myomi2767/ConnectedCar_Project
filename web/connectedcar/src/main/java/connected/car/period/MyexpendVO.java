@@ -18,6 +18,20 @@ public class MyexpendVO {
 	
 	
 	
+	
+
+	public MyexpendVO(String car_id, String expend_kind, String expend_type, String expend_term) {
+		super();
+		this.car_id = car_id;
+		this.expend_kind = expend_kind;
+		this.expend_type = expend_type;
+		this.expend_term = expend_term;
+		
+	}
+
+
+
+
 
 	public MyexpendVO(String my_expend_no, String car_id, String expend_kind, String expend_type, String expend_term,
 			String my_expend_replace, String my_expend_km, String expend_id) {

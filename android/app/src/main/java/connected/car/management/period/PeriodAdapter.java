@@ -37,9 +37,10 @@ public class PeriodAdapter extends RecyclerView.Adapter<PeriodAdapter.ViewHolder
         Log.d("===","onBindViewHolder"+position);
         TextView txt_expend_type = holder.expend_type;
         TextView txt_expend_max = holder.expend_term;
+        TextView txt_expend_kind = holder.expend_type;
 
-
-        txt_expend_type.setText(data.get(position).getExpend_item());
+        txt_expend_kind.setText(data.get(position).getExpend_kind());
+        txt_expend_type.setText(data.get(position).getExpend_type());
         txt_expend_max.setText(data.get(position).getExpend_term());
 
     }
@@ -50,12 +51,14 @@ public class PeriodAdapter extends RecyclerView.Adapter<PeriodAdapter.ViewHolder
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
+        TextView expend_kind;
         TextView expend_type;
         TextView expend_term;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            expend_type = itemView.findViewById(R.id.text_bar);
+            expend_kind = itemView.findViewById(R.id.text_kind);
+            expend_type = itemView.findViewById(R.id.text_type);
             expend_term = itemView.findViewById(R.id.text_max);
 
         }
