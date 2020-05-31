@@ -52,14 +52,7 @@ public class PeriodFragment extends Fragment {
         car_model_name = ((MainActivity)getActivity()).main_car_model_name;
         Log.d("===", "period프래그먼트: "+car_model_name);
 
-        myCarName.setText(car_model_name);
-
-
-
-
-        //new PeriodAsync(this).execute(car_id);
-        //방법이 2개 있따.
-        // 1. carid와 회원
+        myCarName.setText(car_model_name+"/"+car_id);
 
         return view;
     }

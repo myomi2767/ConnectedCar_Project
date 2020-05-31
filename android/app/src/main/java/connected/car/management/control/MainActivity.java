@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public String main_car_id="";
     //로그인 액티비티에서 받은 변수 끝
 
-    //=========자동차 정보 변수들=단, 바로는 안나오고 refresh되거나 그 이후 다른 fragment로 갈때만 사용.============//
+    //=========자동차 정보 변수들=단, 바로는 안나오고 refresh되거나 그 이후 다른 fragment로 이동했을 때 사용가능.============//
     public String main_car_brand="";
     public String main_car_model="";
     public String main_car_model_name="";
@@ -93,10 +93,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         fragmentManager.beginTransaction().add(R.id.page,condition).commit();
 
+        //입력한 로그인에서 car_id를 통해 자동차 정보를 가져옵니다.
         getCarInfoHttpTask carinfoTask = new getCarInfoHttpTask(main_car_id);
         carinfoTask.execute();
-
-        Log.d("===","car_model_detail"+main_car_model_name+"//car_fule_type"+main_car_fuel_type+"//car_brand"+main_car_brand);
 
 
     }
@@ -138,6 +137,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    //로그인 한 정보를 토대로, 자동차 정보를 가져오기 위한 기능
     class getCarInfoHttpTask extends AsyncTask<Void, Void, String>{
 
         String url;

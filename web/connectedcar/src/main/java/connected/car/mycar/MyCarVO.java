@@ -17,6 +17,16 @@ public class MyCarVO {
 	public MyCarVO() {
 		
 	}
+	
+	
+	//My_expendable 데이터를 회원가입과 동시에 insert하기 위한 생성자 
+	public MyCarVO(String car_brand, String car_fuel_type) {
+		super();
+		this.car_brand = car_brand;
+		this.car_fuel_type = car_fuel_type;
+	}
+
+
 
 	public MyCarVO(String car_id, String car_brand, String car_model, String car_fuel_type, String car_year,
 			String car_volume, int rapid_speed, int drop_speed, int overspeed, String special_car,
