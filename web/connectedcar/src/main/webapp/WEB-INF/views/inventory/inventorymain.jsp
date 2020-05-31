@@ -54,6 +54,11 @@
 				<h3>부품 별 매출 그래프</h3>
 				<canvas id="type_chart" width="600" height="500"></canvas>
 			</div>
+			<div class="col-sm-6">
+				<form action="">
+					<button id="btn_submit" type="submit" class="btn btn-theme" onclick="" style="margin-left: 150px">내년 예상 구매량 분석 결과 보기</button>
+				</form>
+			</div>
 		</div>
 	</div>
 	<div>
