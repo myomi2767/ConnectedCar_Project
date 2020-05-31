@@ -16,10 +16,12 @@ import android.graphics.PointF;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -99,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TMapPoint startpoint,endpoint;
     Location location;
     LocationManager lm;
-    FloatingActionButton fabNavi,btnBack,fabMsg;
+    FloatingActionButton fabNavi,btnBack,fabMsg,fabCancel;
     EditText destiName;
     Button btnDesti;
     ListView destiList;
@@ -109,6 +111,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     boolean isTmapApp;
     TMapGpsManager tMapGpsManager;
     AlertDialog alertDialog;
+    int carNormalEmer;
+    MediaPlayer mediaPlayer;
+    final ArrayList<String> carnumber = new ArrayList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -188,6 +193,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         naviSearchView = findViewById(R.id.naviSearchView);
         fabMsg = findViewById(R.id.fabMsg);
         fabMsg.setOnClickListener(this);
+        fabCancel = findViewById(R.id.fabCancel);
+        fabCancel.setOnClickListener(this);
         fabNavi = findViewById(R.id.fabNavi);
         fabNavi.setOnClickListener(this);
         destiName = findViewById(R.id.destiName);
@@ -238,7 +245,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 startpoint = tMapGpsManager.getLocation();
                                 endpoint = new TMapPoint(Double.parseDouble(loc_lat),Double.parseDouble(loc_lon));
                                 searchRoute(startpoint,endpoint);
-                                tmapview.setZoomLevel(16);
+                                tmapview.setZoomLevel(15);
                                 naviSearchView.setVisibility(View.INVISIBLE);
                                 mapViewTotal.setVisibility(View.VISIBLE);
                             }
@@ -349,6 +356,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             socket.close();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        // MediaPlayer 해지
+        if(mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
         }
     }
     private void searchPOI() {
@@ -512,6 +524,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
+    public void popup(String text){
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setCancelable(true);
+        final View receiveView = LayoutInflater.from(MainActivity.this).inflate(R.layout.receive_msg, null);
+        final TextView receiveMsg = receiveView.findViewById(R.id.receiveMsg);
+        receiveMsg.setText(text);
+        final Button msgCheck = receiveView.findViewById(R.id.msgCheck);
+        msgCheck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+        builder.setView(receiveView);
+        alertDialog = builder.create();
+
+        alertDialog.show();
+        mediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.test);
+        mediaPlayer.start();
+    }
+
     @Override
     public void onClick(View v) {
         if(v.getId()==R.id.btnUp){
@@ -597,7 +630,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (imm!=null) {
                 imm.hideSoftInputFromWindow(naviSearchView.getWindowToken(), 0);
             }
+        }else if(v.getId()==R.id.fabCancel){
+            //취소 누를 경우 지도에 삼각형 및 번호판 지우기
+            tmapview.removeTMapPolygon("Line1");
+            for (int i = 0; i < carnumber.size(); i++) {
+                tmapview.removeMarkerItem(carnumber.get(i));
+            }
+            fabCancel.hide();
         }else if(v.getId()==R.id.fabMsg) {
+            fabCancel.show();
             //지도에 삼각형 범위 찍기
             ArrayList<TMapPoint> polygonPoint = new ArrayList<TMapPoint>();
             TMapPoint nowLoc = tMapGpsManager.getLocation();
@@ -618,7 +659,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //지도에 마커찍기
 
             final ArrayList alTMapPoint = new ArrayList();
-            final ArrayList<String> carnumber = new ArrayList();
+            carnumber.clear();
             alTMapPoint.add(new TMapPoint(nowLoc.getLatitude() + 0.0003275, nowLoc.getLongitude()));//앞차
             carnumber.add("111가1111");
             alTMapPoint.add(new TMapPoint(nowLoc.getLatitude() + 0.0003275, nowLoc.getLongitude() - 0.0004382));//앞왼차
@@ -626,7 +667,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             alTMapPoint.add(new TMapPoint(nowLoc.getLatitude() + 0.0003275, nowLoc.getLongitude() + 0.0004382));//앞오른차
             carnumber.add("333가3333");
             Bitmap carNum = Bitmap.createScaledBitmap(carNumImg, 230, 100, true);
-            Bitmap point = Bitmap.createScaledBitmap(carNumImg, 1, 1, true);
             Bitmap sendMessage = Bitmap.createScaledBitmap(sendmsg, 70, 50, true);
             for (int i = 0; i < alTMapPoint.size(); i++) {
                 TMapMarkerItem markerItem1 = new TMapMarkerItem();
@@ -649,59 +689,114 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 tmapview.setZoomLevel(19);
             }
-            tmapview.setOnCalloutRightButtonClickListener(new TMapView.OnCalloutRightButtonClickCallback() {
-                @Override
-                public void onCalloutRightButton(TMapMarkerItem tMapMarkerItem) {
-                    Toast.makeText(MainActivity.this, tMapMarkerItem.getID() + "풍선뷰 클릭", Toast.LENGTH_SHORT).show();
-                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            carNormalEmer = 1;
+            if(carNormalEmer==0) {
+                tmapview.setOnCalloutRightButtonClickListener(new TMapView.OnCalloutRightButtonClickCallback() {
+                    @Override
+                    public void onCalloutRightButton(TMapMarkerItem tMapMarkerItem) {
+                        Toast.makeText(MainActivity.this, tMapMarkerItem.getID() + "풍선뷰 클릭", Toast.LENGTH_SHORT).show();
+                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
-                    builder.setCancelable(true);
-                    final View addView = LayoutInflater.from(MainActivity.this).inflate(R.layout.sendmsgview, null);
-                    final Button btnTrunk = addView.findViewById(R.id.btnTrunk);
-                    btnTrunk.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Toast.makeText(MainActivity.this, "트렁크가 열렸습니다", Toast.LENGTH_SHORT).show();
-                            alertDialog.dismiss();
-                            tmapview.removeTMapPolygon("Line1");
-                            for (int i=0;i<carnumber.size();i++) {
-                                tmapview.removeMarkerItem(carnumber.get(i));
+                        builder.setCancelable(true);
+                        final View addView = LayoutInflater.from(MainActivity.this).inflate(R.layout.sendmsgview, null);
+                        final Button btnTrunkNormal = addView.findViewById(R.id.btnTrunkNormal);
+                        btnTrunkNormal.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Toast.makeText(MainActivity.this, "트렁크가 열렸습니다", Toast.LENGTH_SHORT).show();
+                                alertDialog.dismiss();
+                                tmapview.removeTMapPolygon("Line1");
+                                for (int i = 0; i < carnumber.size(); i++) {
+                                    tmapview.removeMarkerItem(carnumber.get(i));
+                                }
+                                tmapview.setZoomLevel(15);
+                                fabCancel.hide();
                             }
-                            tmapview.setZoomLevel(16);
-                        }
-                    });
-                    final Button btnWeird = addView.findViewById(R.id.btnWeird);
-                    btnWeird.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Toast.makeText(MainActivity.this, "안전운전하세요", Toast.LENGTH_SHORT).show();
-                            alertDialog.dismiss();
-                            tmapview.removeTMapPolygon("Line1");
-                            for (int i=0;i<carnumber.size();i++) {
-                                tmapview.removeMarkerItem(carnumber.get(i));
+                        });
+                        final Button btnWeirdNormal = addView.findViewById(R.id.btnWeirdNormal);
+                        btnWeirdNormal.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Toast.makeText(MainActivity.this, "안전운전하세요", Toast.LENGTH_SHORT).show();
+                                alertDialog.dismiss();
+                                tmapview.removeTMapPolygon("Line1");
+                                for (int i = 0; i < carnumber.size(); i++) {
+                                    tmapview.removeMarkerItem(carnumber.get(i));
+                                }
+                                tmapview.setZoomLevel(15);
+                                fabCancel.hide();
                             }
-                            tmapview.setZoomLevel(16);
-                        }
-                    });
-                    final Button btnEm = addView.findViewById(R.id.btnEm);
-                    btnEm.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Toast.makeText(MainActivity.this, "응급상황입니다. 옆으로 비켜주세요", Toast.LENGTH_SHORT).show();
-                            alertDialog.dismiss();
-                            tmapview.removeTMapPolygon("Line1");
-                            for (int i=0;i<carnumber.size();i++) {
-                                tmapview.removeMarkerItem(carnumber.get(i));
-                            }
-                            tmapview.setZoomLevel(16);
-                        }
-                    });
-                    builder.setView(addView);
-                    alertDialog = builder.create();
+                        });
+                        builder.setView(addView);
+                        alertDialog = builder.create();
 
-                    alertDialog.show();
-                }
-            });
+                        alertDialog.show();
+                    }
+                });
+            }else if(carNormalEmer==1){
+                tmapview.setOnCalloutRightButtonClickListener(new TMapView.OnCalloutRightButtonClickCallback() {
+                    @Override
+                    public void onCalloutRightButton(TMapMarkerItem tMapMarkerItem) {
+                        Toast.makeText(MainActivity.this, tMapMarkerItem.getID() + "풍선뷰 클릭", Toast.LENGTH_SHORT).show();
+                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+
+                        builder.setCancelable(true);
+                        final View addView = LayoutInflater.from(MainActivity.this).inflate(R.layout.sendmsgview, null);
+                        final Button btnTrunk = addView.findViewById(R.id.btnTrunk);
+                        btnTrunk.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Toast.makeText(MainActivity.this, "트렁크가 열렸습니다", Toast.LENGTH_SHORT).show();
+                                alertDialog.dismiss();
+                                tmapview.removeTMapPolygon("Line1");
+                                for (int i = 0; i < carnumber.size(); i++) {
+                                    tmapview.removeMarkerItem(carnumber.get(i));
+                                }
+                                tmapview.setZoomLevel(15);
+                                fabCancel.hide();
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        popup("트렁크가 열렸습니다");
+                                    }
+                                },1900);
+                            }
+                        });
+                        final Button btnWeird = addView.findViewById(R.id.btnWeird);
+                        btnWeird.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Toast.makeText(MainActivity.this, "안전운전하세요", Toast.LENGTH_SHORT).show();
+                                alertDialog.dismiss();
+                                tmapview.removeTMapPolygon("Line1");
+                                for (int i = 0; i < carnumber.size(); i++) {
+                                    tmapview.removeMarkerItem(carnumber.get(i));
+                                }
+                                tmapview.setZoomLevel(15);
+                                fabCancel.hide();
+                            }
+                        });
+                        final Button btnEm = addView.findViewById(R.id.btnEm);
+                        btnEm.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Toast.makeText(MainActivity.this, "응급상황입니다. 옆으로 비켜주세요", Toast.LENGTH_SHORT).show();
+                                alertDialog.dismiss();
+                                tmapview.removeTMapPolygon("Line1");
+                                for (int i = 0; i < carnumber.size(); i++) {
+                                    tmapview.removeMarkerItem(carnumber.get(i));
+                                }
+                                tmapview.setZoomLevel(15);
+                                fabCancel.hide();
+                            }
+                        });
+                        builder.setView(addView);
+                        alertDialog = builder.create();
+
+                        alertDialog.show();
+                    }
+                });
+            }
         }
     }
 }

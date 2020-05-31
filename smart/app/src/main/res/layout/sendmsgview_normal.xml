@@ -6,7 +6,7 @@
     android:orientation="vertical"
     >
     <Button
-        android:id="@+id/btnTrunk"
+        android:id="@+id/btnTrunkNormal"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:text="트렁크"
@@ -14,19 +14,10 @@
         android:layout_marginBottom="30dp"
         />
     <Button
-        android:id="@+id/btnWeird"
+        android:id="@+id/btnWeirdNormal"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:text="이상감지"
-        android:textSize="30sp"
-        android:layout_marginBottom="30dp"
-        />
-    <Button
-        android:id="@+id/btnEm"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="#FF3030"
-        android:text="응급상황"
         android:textSize="30sp"
         />
 </LinearLayout>
