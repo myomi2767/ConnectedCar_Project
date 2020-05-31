@@ -122,7 +122,7 @@ public class PeriodFragment extends Fragment {
                         }
                         Log.d("===", "periodlist의 어떤 item : perioditem::" + periodlist.get(5));
                         myadapter = new PeriodAdapter(getActivity().getApplicationContext(),
-                                R.layout.fragment_period, periodlist);
+                                R.layout.period_row, periodlist);
 
 
                         manager = new LinearLayoutManager(getActivity().getApplicationContext());
