@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +12,7 @@
 		<div class="col-lg-8 col-lg-offset-2">
 			<h4>부품 추가</h4>
 			<form id="shop_expend_form" role="form-horizontal" action="/connectedcar/expendable/insertExpend.do" method="post">
-				<input type="text" name="expend_id" value="" style="display: none;"/>
+				<input type="text" name="expend_id" value="" style=" display: none;"/>
 				<label for="">제조사 : </label>
 				<div class="btn-group btn-group-toggle" data-toggle="buttons" style="">
 					<label class="btn btn-secondary" for="model1">
@@ -51,13 +52,13 @@
 				<button id="btn_submit" type="submit" class="btn btn-theme" onclick="">추가</button>
 				<button type="reset" class="btn btn-theme" onclick="self.close();">취소</button>
 			</form>
+			<%-- <% int cnt = (int)request.getAttribute("count"); % --%>
 		</div>
 	</div>
 	<script type="text/javascript">
 		$("#btn_submit").on("click", function() {
 			$("#shop_expend_form").submit();
 			opener.parent.location.reload();
-			self.close();
 		});
 		$(document).ready(function() {
 			setExpendDetail();

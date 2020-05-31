@@ -14,4 +14,5 @@ public interface ExpendableService {
 	public int getAllCnt(String shop_id);
 	public int deleteExpend(ShopExpendableVO sevo);
 	public int deleteLog(ShopExpendableVO sevo);
+	public int expendableConfirm(String shop_id, String expend_id);
 }

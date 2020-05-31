@@ -4,5 +4,9 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="connected.car.period">
+
+<select id="getPeriodlist" resultType="myexpendvo">
+		select * from my_expendable where car_id=#{car_id}
+	</select>
 	
 </mapper>

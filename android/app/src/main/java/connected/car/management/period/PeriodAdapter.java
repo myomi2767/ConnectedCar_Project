@@ -17,9 +17,9 @@ import connected.car.management.R;
 public class PeriodAdapter extends RecyclerView.Adapter<PeriodAdapter.ViewHolder>{
     Context context;
     int row_res_id;
-    List<TermVO> data;
+    List<MyexpendVO> data;
 
-    public PeriodAdapter(Context context, int row_res_id, List<TermVO> data) {
+    public PeriodAdapter(Context context, int row_res_id, List<MyexpendVO> data) {
         this.context = context;
         this.row_res_id = row_res_id;
         this.data = data;

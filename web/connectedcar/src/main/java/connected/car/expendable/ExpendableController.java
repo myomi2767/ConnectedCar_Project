@@ -5,9 +5,11 @@ import javax.servlet.http.HttpSession;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import connected.car.admin.ExpendableVO;
 import connected.car.owner.OwnerVO;
@@ -29,10 +31,21 @@ public class ExpendableController {
 	
 	//부품 추가하기
 	@RequestMapping(value="/expendable/insertExpend.do", method=RequestMethod.POST)
-	public void insertNewExpendable(ShopExpendableVO vo,  HttpSession session) {
+	public ModelAndView insertNewExpendable(ShopExpendableVO vo, Model model, HttpSession session) {
 		OwnerVO owner = (OwnerVO)session.getAttribute("loginuser");
 		String shop_id = owner.getShop_id();
-		service.insertShopExpendable(shop_id, vo);
+		ModelAndView mav = new ModelAndView();
+		int count = service.expendableConfirm(shop_id, vo.getExpend_id());
+		String result = "";
+		if(count==1) {
+			result = "이미 추가되어 있는 부품이 있습니다.";
+		}else {
+			service.insertShopExpendable(shop_id, vo);
+			result = "부품이 삽입되었습니다.";
+		}
+		mav.addObject("msg", result);
+		mav.setViewName("empty");
+		return mav;
 		/*if(result == 2) System.out.println("부품 추가 성공");
 		else if(result == 1) System.out.println("로그나 부품에서 실패한 부분이 있습니다.");
 		else System.out.println("부품 추가 실패");*/
