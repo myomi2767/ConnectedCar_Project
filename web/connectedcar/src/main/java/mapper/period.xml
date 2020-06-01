@@ -5,8 +5,15 @@
 
 <mapper namespace="connected.car.period">
 
-<select id="getPeriodlist" resultType="myexpendvo">
-		select * from my_expendable where car_id=#{car_id}
+	<select id="getPeriodlist" resultType="myexpendvo">
+		select * from
+		my_expendable where car_id=#{car_id}
 	</select>
-	
+
+
+	<select id="getExpendlist" resultType="changevo">
+		select * from
+		expendable where expend_type=#{expend_type} and car_model_name=#{car_model_name}
+	</select>
+
 </mapper>

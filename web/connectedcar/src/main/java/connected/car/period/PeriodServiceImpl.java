@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import connected.car.admin.ExpendableVO;
 import connected.car.period.MyexpendVO;
 import connected.car.period.TermVO;
 
@@ -19,6 +20,12 @@ public class PeriodServiceImpl implements PeriodService {
 	public List<MyexpendVO> getPeriodlist(String car_id) {
 		// TODO Auto-generated method stub
 		return dao.getPeriodlist(car_id);
+	}
+
+	@Override
+	public List<ExpendableVO> getExpendlist(ChangeVO expendinfo) {
+		// TODO Auto-generated method stub
+		return dao.getExpendlist(expendinfo);
 	}
 	
 
