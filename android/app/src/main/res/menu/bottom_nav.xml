@@ -2,17 +2,34 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/termMenu"
+        android:id="@+id/termMenuItem"
         android:enabled="true"
-        android:icon="@drawable/switchh"
+        android:icon="@drawable/test1"
         android:title="부품주기"
         app:showAsAction="always" />
     <item
-        android:id="@+id/infoMenu"
+        android:id="@+id/testMenuItem"
         android:enabled="true"
-        android:icon="@drawable/switchh"
-        android:title="My car"
+        android:title="테스트"
+        app:showAsAction="always"
+        android:icon="@drawable/test2"/>
+    <item
+        android:id="@+id/homeMenuItem"
+        android:enabled="true"
+        android:title="홈"
+        android:checked="true"
+        app:showAsAction="always"
+        android:icon="@drawable/switchh"/>
+    <item
+        android:id="@+id/controlResultMenuItem"
+        android:enabled="true"
+        android:icon="@drawable/test3"
+        android:title="제어결과"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/infoMenuItem"
+        android:enabled="true"
+        android:icon="@drawable/test4"
+        android:title="내 차정보"
         app:showAsAction="always" />
-
-
 </menu>

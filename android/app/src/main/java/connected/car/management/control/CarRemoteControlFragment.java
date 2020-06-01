@@ -173,7 +173,7 @@ public class CarRemoteControlFragment extends Fragment implements View.OnClickLi
                             time = cursor.getString(1);
                         }
                     }
-                    if (Integer.parseInt(time)<9){
+                    if (Integer.parseInt(time)<=9){
                         time = "0" + time;
                     }
                     message = "S" + temp + time;

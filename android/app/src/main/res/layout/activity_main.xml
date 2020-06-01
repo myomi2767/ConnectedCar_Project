@@ -20,39 +20,15 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-    <com.google.android.material.bottomappbar.BottomAppBar
-        android:id="@+id/bottom_bar"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_gravity="bottom"
-        app:backgroundTint="#2538A1"
-        app:srcCompat="@android:drawable/ic_menu_send"
-        >
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/termMenu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            app:backgroundTint="#FFCADC"
-            />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/infoMenu"
-            android:layout_marginLeft="300dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            app:backgroundTint="#FFCADC"
-            />
-    </com.google.android.material.bottomappbar.BottomAppBar>
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/centerMenu"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:clickable="true"
-        app:backgroundTint="#FFCADC"
-        app:layout_anchor="@id/bottom_bar"
-        />
+        android:layout_gravity="bottom"
+        android:background="#2538A1"
+        app:menu="@menu/bottom_nav"
+        >
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
