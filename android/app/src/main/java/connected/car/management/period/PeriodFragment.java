@@ -39,11 +39,11 @@ import connected.car.management.member.LoginAsync;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PeriodFragment extends Fragment  {
+public class PeriodFragment extends Fragment {
     PeriodAdapter myadapter;
     LinearLayoutManager manager;
     RecyclerView list;
-    List<MyexpendVO> periodlist = new ArrayList<MyexpendVO>();
+    List<MyexpendVO> periodlist;
     TextView myCarName;
     FragmentManager fragmentManager;
 
@@ -73,6 +73,17 @@ public class PeriodFragment extends Fragment  {
         Log.d("===", "period프래그먼트: "+car_model_name);
 
         myCarName.setText(car_model_name+"▶"+car_id);
+
+        periodlist = new ArrayList<MyexpendVO>();
+
+        myadapter = new PeriodAdapter(getActivity().getApplicationContext(),
+                R.layout.period_row, periodlist);
+
+        manager = new LinearLayoutManager(getActivity().getApplicationContext());
+        manager.setOrientation(LinearLayoutManager.VERTICAL);
+
+        list.setLayoutManager(manager);
+        list.setAdapter(myadapter);
 
         getPeriodHttpTask task = new getPeriodHttpTask(car_id);
         task.execute();
@@ -144,18 +155,7 @@ public class PeriodFragment extends Fragment  {
                             periodlist.add(perioditem);
 
                         }
-                        myadapter = new PeriodAdapter(getActivity().getApplicationContext(),
-                                R.layout.period_row, periodlist);
 
-
-
-
-                        manager = new LinearLayoutManager(getActivity().getApplicationContext());
-                        manager.setOrientation(LinearLayoutManager.VERTICAL);
-
-
-                        list.setLayoutManager(manager);
-                        list.setAdapter(myadapter);
                         myadapter.notifyDataSetChanged();
                         Log.d("===","어댑터 붙임");
                         showPeriod.dismiss();
