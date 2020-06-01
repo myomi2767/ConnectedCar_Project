@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity{
 
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.page,condition).commitAllowingStateLoss();
-
+        bottomNavigationView.setSelectedItemId(R.id.homeMenuItem);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
