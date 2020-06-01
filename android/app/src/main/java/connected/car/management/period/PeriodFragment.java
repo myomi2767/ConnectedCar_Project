@@ -155,19 +155,7 @@ public class PeriodFragment extends Fragment {
                             periodlist.add(perioditem);
 
                         }
-                        myadapter = new PeriodAdapter(getActivity().getApplicationContext(),
-                                R.layout.period_row, periodlist);
 
-                        myadapter.notifyDataSetChanged();
-
-
-
-                        manager = new LinearLayoutManager(getActivity().getApplicationContext());
-                        manager.setOrientation(LinearLayoutManager.VERTICAL);
-
-
-                        list.setLayoutManager(manager);
-                        list.setAdapter(myadapter);
                         myadapter.notifyDataSetChanged();
                         Log.d("===","어댑터 붙임");
                         showPeriod.dismiss();
