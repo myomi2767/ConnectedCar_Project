@@ -182,6 +182,13 @@
                         android:text="검색"
                         android:layout_gravity="center"
                         android:textSize="50sp" />
+                    <Button
+                        android:id="@+id/btnMic"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:text="마이크(이미지)"
+                        android:layout_gravity="center"
+                        android:textSize="20sp" />
                 </LinearLayout>
                 <FrameLayout
                     android:layout_width="match_parent"

@@ -13,7 +13,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.PointF;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -22,7 +21,9 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.MediaStore;
+import android.speech.RecognitionListener;
+import android.speech.RecognizerIntent;
+import android.speech.SpeechRecognizer;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -42,11 +43,9 @@ import android.widget.ToggleButton;
 
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.skt.Tmap.TMapCircle;
 import com.skt.Tmap.TMapData;
 import com.skt.Tmap.TMapGpsManager;
 import com.skt.Tmap.TMapMarkerItem;
-import com.skt.Tmap.TMapMarkerItem2;
 import com.skt.Tmap.TMapPOIItem;
 import com.skt.Tmap.TMapPoint;
 import com.skt.Tmap.TMapPolyLine;
@@ -69,6 +68,10 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import de.nitri.gauge.Gauge;
+import multi.connect.smartcar.TMapMarker.TMapCarNumber;
+import multi.connect.smartcar.TMapMarker.TMapMarker;
+import multi.connect.smartcar.TMapMarker.TMapRoute;
+import multi.connect.smartcar.voice.Destination;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener,
                                                                 TMapGpsManager.onLocationChangedCallback{
@@ -98,6 +101,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String[] permission_list = {
             Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.RECORD_AUDIO
     };
     LinearLayout loading,mapViewTotal,naviSearchView;
     TMapPoint startpoint,endpoint;
@@ -107,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     EditText destiName;
     Button btnDesti;
     ListView destiList;
-    ArrayAdapter<POI> POIAdapter;
+
     String des,loc_lat,loc_lon;
     TMapTapi tmaptapi;
     boolean isTmapApp;
@@ -115,6 +119,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     AlertDialog alertDialog;
     MediaPlayer mediaPlayer;
     final ArrayList<String> carnumber = new ArrayList();
+    //서버에 보낼 현재위치
+    String loc_sendgps;
+    Timer timer1;
+    //음성인식 버튼
+    Button btnMic;
+    Intent voiceIntent;
+    SpeechRecognizer voiceRecognizer;
+    Destination destination;
 
     //메시지 주고받기 관련
     InfoClient infoClient;
@@ -126,6 +138,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        connectViews();
 
         Intent intent = getIntent();
         //main 통신 - 메시지 주고받기
@@ -225,6 +238,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn60 = findViewById(R.id.btn60);  btn60.setOnClickListener(this);
         btn90 = findViewById(R.id.btn90);  btn90.setOnClickListener(this);
 
+        //네비 목적지 검색
+        naviSearchView = findViewById(R.id.naviSearchView);
+        fabMsg = findViewById(R.id.fabMsg);
+        fabMsg.setOnClickListener(this);
+        fabCancel = findViewById(R.id.fabCancel);
+        fabCancel.setOnClickListener(this);
+        fabNavi = findViewById(R.id.fabNavi);
+        fabNavi.setOnClickListener(this);
+        destiName = findViewById(R.id.destiName);
+        btnDesti = findViewById(R.id.btnDesti);
+        btnDesti.setOnClickListener(this);
+        destiList = findViewById(R.id.destiList);
+
+        //음성인식
+        btnMic = findViewById(R.id.btnMic);
+        voiceIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        voiceIntent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE,getPackageName());
+        voiceIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE,"ko-KR");
+        destination = new Destination(this, destiName, tmapview, naviSearchView);
+        btnMic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                voiceRecognizer = SpeechRecognizer.createSpeechRecognizer(MainActivity.this);
+                voiceRecognizer.setRecognitionListener(destination);
+                voiceRecognizer.startListening(voiceIntent);
+            }
+        });
+
         btnBack = findViewById(R.id.btnBack);
         btnBack.setOnClickListener(this);
         speedometer.setLowerText("0");
@@ -238,20 +279,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         up.setEnabled(false);
         down.setEnabled(false);
 
-        //네비 목적지 검색
-        naviSearchView = findViewById(R.id.naviSearchView);
-        fabMsg = findViewById(R.id.fabMsg);
-        fabMsg.setOnClickListener(this);
-        fabCancel = findViewById(R.id.fabCancel);
-        fabCancel.setOnClickListener(this);
-        fabNavi = findViewById(R.id.fabNavi);
-        fabNavi.setOnClickListener(this);
-        destiName = findViewById(R.id.destiName);
-        btnDesti = findViewById(R.id.btnDesti);
-        btnDesti.setOnClickListener(this);
-        destiList = findViewById(R.id.destiList);
-        POIAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1);
-        destiList.setAdapter(POIAdapter);
+        destiList.setAdapter(destination.getAdapter());
         destiList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -270,7 +298,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 destiName.setText("");
-                                POIAdapter.clear();
+                                destination.getAdapter().clear();
                                 tmaptapi= new TMapTapi(MainActivity.this);
                                 tmaptapi.setSKTMapAuthentication("l7xx69415d661c8445a8b35bd80789e07ebf");
                                 isTmapApp = tmaptapi.isTmapApplicationInstalled();
@@ -290,11 +318,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 destiName.setText("");
-                                POIAdapter.clear();
+                                destination.getAdapter().clear();
                                 startpoint = tMapGpsManager.getLocation();
                                 endpoint = new TMapPoint(Double.parseDouble(loc_lat),Double.parseDouble(loc_lon));
-                                searchRoute(startpoint,endpoint);
-                                tmapview.setZoomLevel(15);
+                                TMapRoute tMapRoute =new TMapRoute(startpoint,endpoint,MainActivity.this,startImg,endImg,tmapview);
+                                tMapRoute.search();
+                                tmapview.setZoomLevel(16);
                                 naviSearchView.setVisibility(View.INVISIBLE);
                                 mapViewTotal.setVisibility(View.VISIBLE);
                             }
@@ -305,13 +334,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(permission_list, 1000);
         } else {
             init();
         }
+
+    }
+
+    public void connectViews() {
 
     }
 
@@ -329,6 +360,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 socket = new Socket("172.30.1.42", 50000);
                 if (socket != null) {
                     ioWork();
+
                 }
                 Thread t1 = new Thread(new Runnable() {
                     @Override
@@ -411,30 +443,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mediaPlayer.release();
             mediaPlayer = null;
         }
+        //gps 반복보내기 종료
+        timer1.cancel();
+        timer1 = null;
     }
 
-    private void searchPOI() {
-        TMapData data = new TMapData();
-        String keyword = destiName.getText().toString();
-        if (!TextUtils.isEmpty(keyword)) {
-            data.findAllPOI(keyword, new TMapData.FindAllPOIListenerCallback() {
-                @Override
-                public void onFindAllPOI(final ArrayList<TMapPOIItem> arrayList) {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            tmapview.removeAllMarkerItem();
-                            POIAdapter.clear();
-
-                            for (TMapPOIItem poi : arrayList) {
-                                POIAdapter.add(new POI(poi));
-                            }
-                        }
-                    });
-                }
-            });
-        }
-    }
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
@@ -461,7 +474,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Bitmap carIcon = Bitmap.createScaledBitmap(carImg, 40, 60, true);
 
         linearLayoutTmap.addView(tmapview);
-
         tmapview.setIcon(carIcon);
         tmapview.setIconVisibility(true);
 
@@ -503,7 +515,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mapViewTotal.setVisibility(View.VISIBLE);
             }
         },1900);
-
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //클라이언트 서버로 현재위치 10초마다 보내기
+                timer1 = new Timer();
+                TimerTask TT1 = new TimerTask() {
+                    @Override
+                    public void run() {
+                        if (tMapGpsManager.getLocation()!=null) {
+                            loc_sendgps = tMapGpsManager.getLocation().getLatitude() + "," + tMapGpsManager.getLocation().getLongitude();
+                            Log.d("hgwh", loc_sendgps);
+                            //pw.println("tablet/location/"+loc_sendgps);
+                            //pw.flush();
+                        }
+                    }
+                };
+                timer1.schedule(TT1, 0, 10000); //Timer 실행
+            }
+        },3000);
     }
 
     private final LocationListener mLocationListener = new LocationListener() {
@@ -521,13 +551,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }
 
-        public void onProviderDisabled(String provider) {
-        }
-
-        public void onProviderEnabled(String provider) {
-        }
-
+        @Override
         public void onStatusChanged(String provider, int status, Bundle extras) {
+
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+
         }
     };
 
@@ -552,28 +588,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tMapGpsManager.setMinDistance(5);
         tMapGpsManager.setProvider(TMapGpsManager.NETWORK_PROVIDER);
         tMapGpsManager.OpenGps();
-    }
 
-    public void searchRoute(TMapPoint startpoint,TMapPoint endpoint){
-        TMapData data = new TMapData();
-        data.findPathData(startpoint,endpoint, new TMapData.FindPathDataListenerCallback() {
-            @Override
-            public void onFindPathData(final TMapPolyLine path) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Bitmap startIcon = Bitmap.createScaledBitmap(startImg, 40, 50, true);
-                        Bitmap endIcon = Bitmap.createScaledBitmap(endImg, 40, 50, true);
-                        path.setLineWidth(5);
-                        path.setLineColor(Color.RED);
-                        tmapview.addTMapPath(path);
-                        tmapview.setTMapPathIcon(startIcon,endIcon);
-                    }
-                });
-            }
-        });
     }
-
 
     @Override
     public void onClick(View v) {
@@ -655,7 +671,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             naviSearchView.setVisibility(View.VISIBLE);
             mapViewTotal.setVisibility(View.INVISIBLE);
         }else if(v.getId()==R.id.btnDesti){
-            searchPOI();
+            destination.searchPOI();
             InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
             if (imm!=null) {
                 imm.hideSoftInputFromWindow(naviSearchView.getWindowToken(), 0);
@@ -667,57 +683,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 tmapview.removeMarkerItem(carnumber.get(i));
             }
             fabCancel.hide();
+            tmapview.setZoomLevel(16);
         }else if(v.getId()==R.id.fabMsg) {
             fabCancel.show();
-            //지도에 삼각형 범위 찍기
-            ArrayList<TMapPoint> polygonPoint = new ArrayList<TMapPoint>();
+            tmapview.setZoomLevel(19);
+            //메시지 보낼때 지도에 삼각형 범위 찍기
             TMapPoint nowLoc = tMapGpsManager.getLocation();
-            polygonPoint.add(tMapGpsManager.getLocation()); // 현재위치
-            polygonPoint.add(new TMapPoint(nowLoc.getLatitude() + 0.0004875, nowLoc.getLongitude() - 0.0008776));//왼쪽 끝위치
-            polygonPoint.add(new TMapPoint(nowLoc.getLatitude() + 0.0004875, nowLoc.getLongitude() + 0.0008764));//오른쪽 끝위치
+            TMapMarker tMapMarker = new TMapMarker(nowLoc);
+            tmapview.addTMapPolygon("Line1", tMapMarker.tMapPolygon());
 
-            TMapPolygon tMapPolygon = new TMapPolygon();
-            tMapPolygon.setLineColor(Color.BLUE);
-            tMapPolygon.setPolygonWidth(2);
-            tMapPolygon.setAreaColor(Color.GRAY);
-            tMapPolygon.setAreaAlpha(100);
-            for (int i = 0; i < polygonPoint.size(); i++) {
-                tMapPolygon.addPolygonPoint(polygonPoint.get(i));
-            }
-            tmapview.addTMapPolygon("Line1", tMapPolygon);
-
-            //지도에 마커찍기
-
+            //지도에 메시지 보낼 상대차량 번호판 찍기
             final ArrayList alTMapPoint = new ArrayList();
             carnumber.clear();
-            alTMapPoint.add(new TMapPoint(nowLoc.getLatitude() + 0.0003275, nowLoc.getLongitude()));//앞차
+            alTMapPoint.add(new TMapPoint(nowLoc.getLatitude() + 0.0002775, nowLoc.getLongitude()));//앞차
             carnumber.add("111가1111");
-            alTMapPoint.add(new TMapPoint(nowLoc.getLatitude() + 0.0003275, nowLoc.getLongitude() - 0.0004382));//앞왼차
-            carnumber.add("222가2222");
-            alTMapPoint.add(new TMapPoint(nowLoc.getLatitude() + 0.0003275, nowLoc.getLongitude() + 0.0004382));//앞오른차
-            carnumber.add("333가3333");
+//            alTMapPoint.add(new TMapPoint(nowLoc.getLatitude() + 0.0003275, nowLoc.getLongitude() - 0.0004382));//앞왼차
+//            carnumber.add("222가2222");
+//            alTMapPoint.add(new TMapPoint(nowLoc.getLatitude() + 0.0003275, nowLoc.getLongitude() + 0.0004382));//앞오른차
+//            carnumber.add("333가3333");
             final Bitmap carNum = Bitmap.createScaledBitmap(carNumImg, 230, 100, true);
             Bitmap sendMessage = Bitmap.createScaledBitmap(sendmsg, 70, 50, true);
             for (int i = 0; i < alTMapPoint.size(); i++) {
-                TMapMarkerItem markerItem1 = new TMapMarkerItem();
-                // 마커 아이콘 지정
-                markerItem1.setIcon(carNum);
-                //markerItem1.setIcon(point);
-                //마커의 오른쪽에 이미지 넣기
-                markerItem1.setCalloutRightButtonImage(sendMessage);
-                //마커의 타이틀(차량번호)
-                markerItem1.setCalloutTitle("메시지 보내기");
-                //풍선뷰 사용하기
-                markerItem1.setCanShowCallout(true);
-                //마커의 모든 풍선뷰 자동활성화
-                //markerItem1.setAutoCalloutVisible(true);
-                // 마커의 좌표 지정
-                markerItem1.setTMapPoint((TMapPoint) alTMapPoint.get(i));
-                //지도에 마커 추가
-                tmapview.addMarkerItem(carnumber.get(i), markerItem1);
+                TMapCarNumber tMapCarNumber = new TMapCarNumber((TMapPoint)alTMapPoint.get(i),carNum,sendMessage);
+                tmapview.addMarkerItem(carnumber.get(i),tMapCarNumber.markerItem());
                 Log.d("point", "다중마커 생성" + carnumber.get(i));
-
-                tmapview.setZoomLevel(19);
             }
                 tmapview.setOnCalloutRightButtonClickListener(new TMapView.OnCalloutRightButtonClickCallback() {
                     @Override
@@ -732,14 +721,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             @Override
                             public void onClick(View v) {
                                 Toast.makeText(MainActivity.this, "트렁크가 열렸습니다", Toast.LENGTH_SHORT).show();
-                                alertDialog.dismiss();
-                                infoClient.sendMessage("TRUNK");
-                                tmapview.removeTMapPolygon("Line1");
-                                for (int i = 0; i < carnumber.size(); i++) {
-                                    tmapview.removeMarkerItem(carnumber.get(i));
-                                }
-                                tmapview.setZoomLevel(15);
-                                fabCancel.hide();
+                                //infoClient.sendMessage("TRUNK");
+                                afterSendMsg();
                             }
                         });
                         final Button btnWeird = addView.findViewById(R.id.btnWeird);
@@ -747,14 +730,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             @Override
                             public void onClick(View v) {
                                 Toast.makeText(MainActivity.this, "안전운전하세요", Toast.LENGTH_SHORT).show();
-                                alertDialog.dismiss();
                                 infoClient.sendMessage("CAUTION");
-                                tmapview.removeTMapPolygon("Line1");
-                                for (int i = 0; i < carnumber.size(); i++) {
-                                    tmapview.removeMarkerItem(carnumber.get(i));
-                                }
-                                tmapview.setZoomLevel(15);
-                                fabCancel.hide();
+                                afterSendMsg();
                             }
                         });
                         final Button btnEm = addView.findViewById(R.id.btnEm);
@@ -762,22 +739,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             @Override
                             public void onClick(View v) {
                                 Toast.makeText(MainActivity.this, "응급상황입니다. 옆으로 비켜주세요", Toast.LENGTH_SHORT).show();
-                                alertDialog.dismiss();
                                 infoClient.sendMessage("EM");
-                                tmapview.removeTMapPolygon("Line1");
-                                for (int i = 0; i < carnumber.size(); i++) {
-                                    tmapview.removeMarkerItem(carnumber.get(i));
-                                }
-                                tmapview.setZoomLevel(15);
-                                fabCancel.hide();
+                                afterSendMsg();
                             }
                         });
                         builder.setView(addView);
                         alertDialog = builder.create();
-
                         alertDialog.show();
                     }
                 });
             }
+        }
+        public void afterSendMsg(){
+            alertDialog.dismiss();
+            tmapview.removeTMapPolygon("Line1");
+            for (int i = 0; i < carnumber.size(); i++) {
+                tmapview.removeMarkerItem(carnumber.get(i));
+            }
+            tmapview.setZoomLevel(16);
+            fabCancel.hide();
         }
     }
