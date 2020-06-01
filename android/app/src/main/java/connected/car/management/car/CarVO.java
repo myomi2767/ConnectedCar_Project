@@ -11,14 +11,14 @@ public class CarVO {
     int drop_speed;
     int overspeed;
     String special_car;
-    int driver_distance;
+    int drive_distance;
     String car_model_name;
 
     public CarVO(){
 
     }
 
-    public CarVO(String car_id, String car_brand, String car_model, String car_fuel_type, String car_year, String car_volume, int rapid_speed, int drop_speed, int overspeed, String special_car, int driver_distance, String car_model_name) {
+    public CarVO(String car_id, String car_brand, String car_model, String car_fuel_type, String car_year, String car_volume, int rapid_speed, int drop_speed, int overspeed, String special_car, int drive_distance, String car_model_name) {
         this.car_id = car_id;
         this.car_brand = car_brand;
         this.car_model = car_model;
@@ -29,7 +29,7 @@ public class CarVO {
         this.drop_speed = drop_speed;
         this.overspeed = overspeed;
         this.special_car = special_car;
-        this.driver_distance = driver_distance;
+        this.drive_distance = drive_distance;
         this.car_model_name = car_model_name;
     }
     public String getCar_id() {
@@ -112,12 +112,12 @@ public class CarVO {
         this.special_car = special_car;
     }
 
-    public int getDriver_distance() {
-        return driver_distance;
+    public int getDrive_distance() {
+        return drive_distance;
     }
 
-    public void setDriver_distance(int driver_distance) {
-        this.driver_distance = driver_distance;
+    public void setDrive_distance(int drive_distance) {
+        this.drive_distance = drive_distance;
     }
 
     public String getCar_model_name() {
@@ -143,7 +143,7 @@ public class CarVO {
                 ", drop_speed=" + drop_speed +
                 ", overspeed=" + overspeed +
                 ", special_car='" + special_car + '\'' +
-                ", driver_distance=" + driver_distance +
+                ", drive_distance=" + drive_distance +
                 
                 '}';
     }

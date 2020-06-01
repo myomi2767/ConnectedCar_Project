@@ -6,7 +6,6 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,26 +14,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import connected.car.management.HttpHandler.StringURLHttpHandler;
 import connected.car.management.R;
 import connected.car.management.control.MainActivity;
-import connected.car.management.member.LoginAsync;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -53,6 +43,7 @@ public class PeriodFragment extends Fragment {
     public int drive_distance;
 
 
+
     public PeriodFragment() {
         // Required empty public constructor
     }
@@ -68,16 +59,17 @@ public class PeriodFragment extends Fragment {
         myCarName = view.findViewById(R.id.text_myCarModelName);
         car_id = ((MainActivity)getActivity()).main_car_id; //액티비티로부터 가져온 로그인된 car_id
         car_model_name = ((MainActivity)getActivity()).main_car_model_name;
-        drive_distance = Integer.parseInt(((MainActivity)getActivity()).main_driver_distatnce);
+        drive_distance = Integer.parseInt(((MainActivity)getActivity()).main_drive_distatnce);
 
         Log.d("===", "period프래그먼트: "+car_model_name);
+        Log.d("===","period프래그먼트의 주행거리정보:===>>"+drive_distance);
 
         myCarName.setText(car_model_name+"▶"+car_id);
 
         periodlist = new ArrayList<MyexpendVO>();
 
         myadapter = new PeriodAdapter(getActivity().getApplicationContext(),
-                R.layout.period_row, periodlist);
+                R.layout.period_row, periodlist, drive_distance, car_model_name);
 
         manager = new LinearLayoutManager(getActivity().getApplicationContext());
         manager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -88,14 +80,7 @@ public class PeriodFragment extends Fragment {
         getPeriodHttpTask task = new getPeriodHttpTask(car_id);
         task.execute();
 
-
-
-
         return view;
-    }
-
-    public void distanceData(int distance) {
-       distance = drive_distance;
     }
 
 

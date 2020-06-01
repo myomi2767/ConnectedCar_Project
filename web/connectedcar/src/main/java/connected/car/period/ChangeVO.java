@@ -1,6 +1,9 @@
-package connected.car.admin;
+package connected.car.period;
 
-public class ExpendableVO {
+
+//ExpendableVO와 동일한 VO입니다. 
+//ExpendableVO에서 사용하려고 했는데 "다른 매개변수지만 매개변수가 갯수가 같은 생성자가 있어서" 사용불가로 뜨기때문에 새롭게 만들었습니다. 
+public class ChangeVO {
 	private String expend_id;
 	private String expend_code;
 	private String expend_type;
@@ -9,19 +12,24 @@ public class ExpendableVO {
 	private String expend_brand;
 	private String car_model_name;
 	
-	public ExpendableVO() {
+	public ChangeVO() {
 		
 	}
 	
 
-
-	public ExpendableVO(String expend_code, String expend_brand) {
+	public ChangeVO(String expend_type, String car_model_name) {
 		super();
-		this.expend_code = expend_code;
-		this.expend_brand = expend_brand;
+		this.expend_type = expend_type;
+		this.car_model_name = car_model_name;
 	}
-	
-	public ExpendableVO(String expend_code, String expend_type, String expend_name, String expend_price,
+
+
+
+
+
+
+
+	public ChangeVO(String expend_code, String expend_type, String expend_name, String expend_price,
 			String expend_brand, String car_model_name) {
 		super();
 		this.expend_code = expend_code;
@@ -32,7 +40,7 @@ public class ExpendableVO {
 		this.car_model_name = car_model_name;
 	}
 	
-	public ExpendableVO(String expend_id, String expend_code, String expend_type, String expend_name,
+	public ChangeVO(String expend_id, String expend_code, String expend_type, String expend_name,
 			String expend_price, String expend_brand, String car_model_name) {
 		super();
 		this.expend_id = expend_id;

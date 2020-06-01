@@ -1,6 +1,7 @@
 package connected.car.management.control;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +40,12 @@ public class CarControlFragment extends Fragment {
     public CarControlFragment(String car_id) {
         // Required empty public constructor
         this.car_id = car_id;
+
+        control = new CarRemoteControlFragment(car_id);
+        status = new CarRemoteStatusFragment(car_id, control);
+
+        fragmentArrayList.add(control);
+        fragmentArrayList.add(status);
     }
 
 
@@ -49,15 +56,9 @@ public class CarControlFragment extends Fragment {
         tabLayout = view.findViewById(R.id.tablayout);
         viewPager = view.findViewById(R.id.pager);
 
-        control = new CarRemoteControlFragment(car_id);
-        status = new CarRemoteStatusFragment(car_id, control);
-
-        fragmentArrayList.add(control);
-        fragmentArrayList.add(status);
-
         FragAdapter adapter = new FragAdapter(getActivity().getSupportFragmentManager(),fragmentArrayList.size());
         viewPager.setAdapter(adapter);
-        tabLayout.setupWithViewPager(viewPager);
+        tabLayout.setupWithViewPager(viewPager, true);
         return view;
     }
     class FragAdapter extends FragmentStatePagerAdapter {
@@ -69,6 +70,7 @@ public class CarControlFragment extends Fragment {
 
         @Override
         public Fragment getItem(int position) {
+            Log.d("test", "title의 포지션 : " + position);
             return fragmentArrayList.get(position);
         }
 
