@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public String main_car_model_name="";
     public String main_car_fuel_type="";
     public String main_car_year="";
-    public String main_driver_distatnce="";
+    public String main_drive_distatnce ="";
     public String main_car_volume="";
     public String main_special_car="";
     //========자동차에서 받은 변수 들 끝==========
@@ -167,12 +167,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         main_car_model=jo.getString("car_model");
                         main_car_fuel_type=jo.getString("car_fuel_type");
                         main_car_year=jo.getString("car_year");
-                        main_driver_distatnce=jo.getString("driver_distance");
+                        main_drive_distatnce =jo.getString("drive_distance");
                         main_car_volume=jo.getString("car_volume");
                         main_special_car=jo.getString("special_car");
                         main_car_model_name = jo.getString("car_model_name");
 
-                        Log.d("===","포스트이후다."+main_car_model_name);
+                        Log.d("===","mainactivity에서 포스트이후 main_car_model_name."+main_car_model_name);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
