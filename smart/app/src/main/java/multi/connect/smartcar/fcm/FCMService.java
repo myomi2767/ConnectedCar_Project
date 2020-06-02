@@ -30,8 +30,6 @@ import multi.connect.smartcar.R;
 
 
 public class FCMService extends FirebaseMessagingService {
-    //MainActivity mainActivity;
-    AlertDialog alertDialog;
     public FCMService() {
     }
     //토큰값이 새롭게 갱신되면 호출되는 메소드 - 토큰값을 가지고 있게 되는데 거의 변경되지 않는다.

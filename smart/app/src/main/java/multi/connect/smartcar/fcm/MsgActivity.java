@@ -45,7 +45,7 @@ public class MsgActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
-                mediaPlayer.pause();
+                mediaPlayer.release();
             }
         });
     }

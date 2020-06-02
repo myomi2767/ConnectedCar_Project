@@ -69,14 +69,12 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import de.nitri.gauge.Gauge;
-<<<<<<< HEAD
 import multi.connect.smartcar.fcm.FCMActivity;
-=======
+
 import multi.connect.smartcar.TMapMarker.TMapCarNumber;
 import multi.connect.smartcar.TMapMarker.TMapMarker;
 import multi.connect.smartcar.TMapMarker.TMapRoute;
 import multi.connect.smartcar.voice.Destination;
->>>>>>> ff04c3d5a624079937d9140342ae60976ad24401
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener,
                                                                 TMapGpsManager.onLocationChangedCallback{
@@ -140,37 +138,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         car_id = "82가1007";
         FCMActivity fcmActivity = new FCMActivity();
         fcmActivity.getToken(car_id);
-        //Intent intent = getIntent();
-        //main 통신 - 메시지 주고받기
-
-        recieveArea = findViewById(R.id.receiveMsg);
-        msgCheck = findViewById(R.id.msgCheck);
-        sendDitance = findViewById(R.id.distanceShare);
+        //findViewById 호출
         connectViews();
-
-        Intent intent = getIntent();
         //main 통신 - 메시지 주고받기
-        id = "backCar";
-        carNum = "82가1004";
         /*infoClient = new InfoClient(this,intent.getStringExtra("carNum"));*/
-        infoClient = new InfoClient(this,carNum);
-        messageType = getIntent().getStringExtra("messageType");
-        if(messageType !=null){
-            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-            builder.setCancelable(true);
-            final View receiveView = LayoutInflater.from(MainActivity.this).inflate(R.layout.receive_msg, null);
-            final TextView receiveMsg = receiveView.findViewById(R.id.receiveMsg);
-            final Button msgCheck = receiveView.findViewById(R.id.msgCheck);
-            if(messageType.equals("EM")){
-                String text = "EM";
-                receiveMsg.setText(text);
-            }else if(messageType.equals("TRUNK")){
-                String text = "TRUNK";
-                receiveMsg.setText(text);
-            }else if(messageType.equals("CAUTION")){
-                String text = "CAUTION";
-                receiveMsg.setText(text);
-            }
+        //infoClient = new InfoClient(this,carNum);
 
         //이동거리 보내기
         sendDitance.setOnClickListener(new View.OnClickListener() {
@@ -184,7 +156,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         asyncTaskSerial = new AsyncTaskSerial();
         asyncTaskSerial.execute(10,20);
         //power -setting
-
         power.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -313,8 +284,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void connectViews() {
+        //fcm 통신
         recieveArea = findViewById(R.id.receiveMsg);
         msgCheck = findViewById(R.id.msgCheck);
+        sendDitance = findViewById(R.id.distanceShare);
         //Serial 통신
         distance = findViewById(R.id.distance);
         //power -setting
@@ -364,12 +337,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 socket = new Socket("70.12.116.61", 50000);
                 if (socket != null) {
                     ioWork();
-<<<<<<< HEAD
                     pw.println("info:" + car_id);
                     pw.flush();
-=======
-
->>>>>>> ff04c3d5a624079937d9140342ae60976ad24401
                 }
                 Thread t1 = new Thread(new Runnable() {
                     @Override
@@ -446,11 +415,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             socket.close();
         } catch (IOException e) {
             e.printStackTrace();
-        }
-        // MediaPlayer 해지
-        if(mediaPlayer != null) {
-            mediaPlayer.release();
-            mediaPlayer = null;
         }
         //gps 반복보내기 종료
         timer1.cancel();
@@ -637,40 +601,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             speedometer.moveToValue(speed);
             speedometer.setLowerText(Integer.toString(speed));
         }else if(v.getId()==R.id.btn30){
-            speed = 30;
-            speedometer.moveToValue(speed);
-            speedometer.setLowerText(Integer.toString(speed));
-            new Thread(new Runnable() {
-                String message = "";
-                @Override
-                public void run() {
-                    message="tablet:speed30";
-                    pw.println(message);
-                    pw.flush();
-                }
-            }).start();
-        }else if(v.getId()==R.id.btn60){
-            speed = 60;
-            speedometer.moveToValue(speed);
-            speedometer.setLowerText(Integer.toString(speed));
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    pw.println("tablet:speed60");
-                    pw.flush();
-                }
-            }).start();
-        }else if(v.getId()==R.id.btn90){
-            speed = 90;
-            speedometer.moveToValue(speed);
-            speedometer.setLowerText(Integer.toString(speed));
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    pw.println("tablet:speed90");
-                    pw.flush();
-                }
-            }).start();
             sendSpeed(30);
         }else if(v.getId()==R.id.btn60){
             sendSpeed(60);
@@ -746,8 +676,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     public void run() {
                                         String type = "TRUNK";
                                         new FCMActivity.rquestThread(car_id,type).start();
-                                        //pw.println("TRUNK:" + carNum);
-                                        //pw.flush();
                                     }
                                 }).start();
                                 tmapview.removeTMapPolygon("Line1");
@@ -770,8 +698,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     public void run() {
                                         String type = "CAUTION";
                                         new FCMActivity.rquestThread(car_id,type).start();
-                                        //pw.println("CAUTION:" + car_id);
-                                        //pw.flush();
                                     }
                                 }).start();
                                 tmapview.removeTMapPolygon("Line1");
@@ -794,8 +720,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     public void run() {
                                         String type = "EM";
                                         new FCMActivity.rquestThread(car_id,type).start();
-                                        //pw.println("EM:" + car_id);
-                                        //pw.flush();
                                     }
                                 }).start();
                                 tmapview.removeTMapPolygon("Line1");
@@ -836,5 +760,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }).start();
         }
->>>>>>> ff04c3d5a624079937d9140342ae60976ad24401
     }
