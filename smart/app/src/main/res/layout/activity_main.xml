@@ -108,6 +108,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                     <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/fabCancel"
+                        android:layout_gravity="bottom|right"
+                        android:visibility="invisible"
+                        android:src="@drawable/msgclose"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="250dp"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:scaleType="matrix"
+                        app:backgroundTint="@android:color/transparent"
+                        app:borderWidth="0dp"
+                        android:clickable="true"/>
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
                         android:id="@+id/fabMsg"
                         android:layout_gravity="bottom|right"
                         android:src="@drawable/msg"
@@ -116,9 +129,9 @@
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         app:useCompatPadding="true"
-                        android:scaleType="centerCrop"
-                        android:backgroundTint="@android:color/transparent"
-                        gauge:borderWidth="0dp"
+                        android:scaleType="fitStart"
+                        app:backgroundTint="@android:color/transparent"
+                        app:borderWidth="0dp"
                         android:clickable="true"/>
                     <com.google.android.material.floatingactionbutton.FloatingActionButton
                         android:id="@+id/fabNavi"
@@ -129,9 +142,9 @@
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         app:useCompatPadding="true"
-                        android:scaleType="centerCrop"
-                        android:backgroundTint="@android:color/transparent"
-                        gauge:borderWidth="0dp"
+                        android:scaleType="fitCenter"
+                        app:backgroundTint="@android:color/transparent"
+                        app:borderWidth="0dp"
                         android:clickable="true"/>
 
                     <LinearLayout
@@ -169,6 +182,13 @@
                         android:text="검색"
                         android:layout_gravity="center"
                         android:textSize="50sp" />
+                    <Button
+                        android:id="@+id/btnMic"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:text="마이크(이미지)"
+                        android:layout_gravity="center"
+                        android:textSize="20sp" />
                 </LinearLayout>
                 <FrameLayout
                     android:layout_width="match_parent"
@@ -198,6 +218,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="horizontal">
+
             <Button
                 android:id="@+id/btn30"
                 android:layout_width="300dp"
