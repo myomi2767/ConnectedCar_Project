@@ -10,10 +10,17 @@
 		my_expendable where car_id=#{car_id}
 	</select>
 
-
 	<select id="getExpendlist" resultType="changevo">
 		select * from
-		expendable where expend_type=#{expend_type} and car_model_name=#{car_model_name}
+		expendable
+		where expend_type=#{expend_type} and car_model_name=#{car_model_name}
 	</select>
+
+	<update id="updateMyExpendlist" parameterType="changevo">
+		update my_expendable set my_expend_replace=sysdate,
+		my_expend_km=#{my_expend_km},
+		expend_id=#{expend_id}
+		where my_expend_no = #{my_expend_no}
+	</update>
 
 </mapper>

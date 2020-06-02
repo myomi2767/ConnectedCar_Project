@@ -142,7 +142,7 @@ public class PeriodFragment extends Fragment {
                         }
 
                         myadapter.notifyDataSetChanged();
-                        Log.d("===","어댑터 붙임");
+                        //Log.d("===","어댑터 붙임");
                         showPeriod.dismiss();
                     } catch (JSONException e) {
                         e.printStackTrace();

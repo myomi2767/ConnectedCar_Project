@@ -19,6 +19,21 @@ public class MyexpendVO {
 	
 	
 	
+	
+	
+//앱에서 부품교체 시 업데이트 되는 기능의 생성자 : my_expend_no와 일치하는 행에서 "주행거리"와 "교체한부품정보"가 update된다.
+	public MyexpendVO(String my_expend_no, String my_expend_km, String expend_id) {
+		super();
+		this.my_expend_no = my_expend_no;
+		this.my_expend_km = my_expend_km;
+		this.expend_id = expend_id;
+	}
+
+
+
+
+
+
 
 	public MyexpendVO(String car_id, String expend_kind, String expend_type, String expend_term) {
 		super();

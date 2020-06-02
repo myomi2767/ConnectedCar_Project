@@ -18,7 +18,7 @@ import java.util.List;
 import connected.car.management.R;
 
 public class PeriodAdapter extends RecyclerView.Adapter<PeriodAdapter.ViewHolder>{
-    //private static final int FLAG_ACTIVITY_NEW_TASK = ;
+    private static final int FLAG_ACTIVITY_NEW_TASK = 0;
     private final int drive_distance;
     private final String car_model_name;
     Context context;
@@ -48,6 +48,7 @@ public class PeriodAdapter extends RecyclerView.Adapter<PeriodAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         //Log.d("===","onBindViewHolder"+position);
+        TextView txt_expend_id = holder.expend_id;
         TextView txt_expend_type = holder.expend_type;
         TextView txt_expend_max = holder.expend_term;
         TextView txt_expend_kind = holder.expend_kind;
@@ -56,6 +57,7 @@ public class PeriodAdapter extends RecyclerView.Adapter<PeriodAdapter.ViewHolder
         Button btn_expend_change = holder.expend_change;
         Button btn_expend_recommend = holder.expend_recommend;
 
+       // txt_expend_id.setText(data.get(position).getExpend_id());//여기서 이슈가 생기고있는데 expend_id를 못받아오고있는 것 같다.
         txt_expend_kind.setText(data.get(position).getExpend_kind());
         txt_expend_type.setText(data.get(position).getExpend_type());
         txt_expend_max.setText(data.get(position).getExpend_term());
@@ -72,6 +74,7 @@ public class PeriodAdapter extends RecyclerView.Adapter<PeriodAdapter.ViewHolder
                 Intent intent;
                 intent = new Intent(v.getContext(), PeriodExchangeActivity.class);
 
+                //intent.putExtra("expend_id",data.get(position).getExpend_id());
                 intent.putExtra("expend_kind", data.get(position).getExpend_kind());
                 intent.putExtra("expend_type",data.get(position).getExpend_type());
                 intent.putExtra("expend_term",data.get(position).getExpend_term());
@@ -98,6 +101,7 @@ public class PeriodAdapter extends RecyclerView.Adapter<PeriodAdapter.ViewHolder
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
+        TextView expend_id;
         TextView expend_kind;
         TextView expend_type;
         TextView expend_term;
@@ -107,6 +111,7 @@ public class PeriodAdapter extends RecyclerView.Adapter<PeriodAdapter.ViewHolder
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            expend_id = itemView.findViewById(R.id.text_exchange_id);
             expend_kind = itemView.findViewById(R.id.text_kind);
             expend_type = itemView.findViewById(R.id.text_type);
             expend_term = itemView.findViewById(R.id.text_max);

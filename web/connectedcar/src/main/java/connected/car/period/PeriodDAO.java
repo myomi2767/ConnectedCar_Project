@@ -10,6 +10,7 @@ public interface PeriodDAO {
 
 	public List<MyexpendVO> getPeriodlist(String car_id);
 	public List<ExpendableVO> getExpendlist(ChangeVO expendinfo);
+	public int updateMyExpendlist(MyexpendVO updateinfo);
 	
 	
 }
