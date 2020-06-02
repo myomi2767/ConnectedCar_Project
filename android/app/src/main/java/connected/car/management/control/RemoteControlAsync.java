@@ -143,7 +143,7 @@ public class RemoteControlAsync extends AsyncTask<String, String, Void> {
                     control_code = "엔진끄기";
                 }
                 onProgressUpdate(control_result);
-                ControlResultVO vo = new ControlResultVO(carId, null, control_code, control_result, null);
+                ControlResultVO vo = new ControlResultVO(carId, null, control_code, control_result);
                 try {
                     String path = "http://"+context.getString(R.string.myip)+":8088/connectedcar/remote/insert.do";
                     URL url = new URL(path);

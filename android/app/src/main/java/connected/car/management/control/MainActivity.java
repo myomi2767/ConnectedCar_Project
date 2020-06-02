@@ -92,8 +92,6 @@ public class MainActivity extends AppCompatActivity{
                     case R.id.termMenuItem:
                         getSupportFragmentManager().beginTransaction().replace(R.id.page, periodFragment).commitAllowingStateLoss();
                         return true;
-                    case R.id.testMenuItem:
-                        return true;
                     case R.id.homeMenuItem:
                         getSupportFragmentManager().beginTransaction().replace(R.id.page, condition).commitAllowingStateLoss();
                         return true;

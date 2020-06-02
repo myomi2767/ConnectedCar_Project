@@ -109,7 +109,7 @@ public class RemoteControlResultActivity extends AppCompatActivity {
                     String control_code = object.getString("control_code");
                     String control_result = object.getString("control_result");
 
-                    ControlResultVO item = new ControlResultVO(control_date,control_code,control_result,"");
+                    ControlResultVO item = new ControlResultVO(control_date,control_code,control_result);
                     recycle_datalist.add(item);
                 }
                 adapter.notifyDataSetChanged();
