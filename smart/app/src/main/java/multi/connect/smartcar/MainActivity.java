@@ -144,8 +144,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //main 통신 - 메시지 주고받기
         id = "backCar";
         carNum = "82가1004";
-        recieveArea = findViewById(R.id.receiveMsg);
-        msgCheck = findViewById(R.id.msgCheck);
         /*infoClient = new InfoClient(this,intent.getStringExtra("carNum"));*/
         infoClient = new InfoClient(this,carNum);
         messageType = getIntent().getStringExtra("messageType");
@@ -184,9 +182,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //Serial 통신
         asyncTaskSerial = new AsyncTaskSerial();
         asyncTaskSerial.execute(10,20);
-        distance = findViewById(R.id.distance);
         //power -setting
-        power = findViewById(R.id.power);
 
         power.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -230,29 +226,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        //속도 제어
-        speedometer = findViewById(R.id.myGauge);
-        up = findViewById(R.id.btnUp);  up.setOnClickListener(this);
-        down = findViewById(R.id.btnDown);  down.setOnClickListener(this);
-        btn30 = findViewById(R.id.btn30);  btn30.setOnClickListener(this);
-        btn60 = findViewById(R.id.btn60);  btn60.setOnClickListener(this);
-        btn90 = findViewById(R.id.btn90);  btn90.setOnClickListener(this);
-
-        //네비 목적지 검색
-        naviSearchView = findViewById(R.id.naviSearchView);
-        fabMsg = findViewById(R.id.fabMsg);
-        fabMsg.setOnClickListener(this);
-        fabCancel = findViewById(R.id.fabCancel);
-        fabCancel.setOnClickListener(this);
-        fabNavi = findViewById(R.id.fabNavi);
-        fabNavi.setOnClickListener(this);
-        destiName = findViewById(R.id.destiName);
-        btnDesti = findViewById(R.id.btnDesti);
-        btnDesti.setOnClickListener(this);
-        destiList = findViewById(R.id.destiList);
-
         //음성인식
-        btnMic = findViewById(R.id.btnMic);
         voiceIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         voiceIntent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE,getPackageName());
         voiceIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE,"ko-KR");
@@ -266,12 +240,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        btnBack = findViewById(R.id.btnBack);
-        btnBack.setOnClickListener(this);
         speedometer.setLowerText("0");
-        linearLayoutTmap = findViewById(R.id.layoutMapView);
-        loading = findViewById(R.id.loading);
-        mapViewTotal = findViewById(R.id.mapViewTotal);
         //power -setting
         btn30.setEnabled(false);
         btn60.setEnabled(false);
@@ -343,7 +312,41 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void connectViews() {
-
+        recieveArea = findViewById(R.id.receiveMsg);
+        msgCheck = findViewById(R.id.msgCheck);
+        //Serial 통신
+        distance = findViewById(R.id.distance);
+        //power -setting
+        power = findViewById(R.id.power);
+        //계기판
+        speedometer = findViewById(R.id.myGauge);
+        //속도 제어
+        up = findViewById(R.id.btnUp);  up.setOnClickListener(this);
+        down = findViewById(R.id.btnDown);  down.setOnClickListener(this);
+        btn30 = findViewById(R.id.btn30);  btn30.setOnClickListener(this);
+        btn60 = findViewById(R.id.btn60);  btn60.setOnClickListener(this);
+        btn90 = findViewById(R.id.btn90);  btn90.setOnClickListener(this);
+        //네비 목적지 검색
+        naviSearchView = findViewById(R.id.naviSearchView);
+        fabMsg = findViewById(R.id.fabMsg);
+        fabMsg.setOnClickListener(this);
+        fabCancel = findViewById(R.id.fabCancel);
+        fabCancel.setOnClickListener(this);
+        fabNavi = findViewById(R.id.fabNavi);
+        fabNavi.setOnClickListener(this);
+        destiName = findViewById(R.id.destiName);
+        btnDesti = findViewById(R.id.btnDesti);
+        btnDesti.setOnClickListener(this);
+        destiList = findViewById(R.id.destiList);
+        //네비 목적지 검색화면에서 뒤로가기 버튼
+        btnBack = findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(this);
+        //음성인식
+        btnMic = findViewById(R.id.btnMic);
+        //기본 화면 fragment (큰 틀)
+        linearLayoutTmap = findViewById(R.id.layoutMapView);
+        loading = findViewById(R.id.loading);
+        mapViewTotal = findViewById(R.id.mapViewTotal);
     }
 
     @Override
@@ -628,40 +631,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             speedometer.moveToValue(speed);
             speedometer.setLowerText(Integer.toString(speed));
         }else if(v.getId()==R.id.btn30){
-            speed = 30;
-            speedometer.moveToValue(speed);
-            speedometer.setLowerText(Integer.toString(speed));
-            new Thread(new Runnable() {
-                String message = "";
-                @Override
-                public void run() {
-                    message="tablet/speed30";
-                    pw.println(message);
-                    pw.flush();
-                }
-            }).start();
+            sendSpeed(30);
         }else if(v.getId()==R.id.btn60){
-            speed = 60;
-            speedometer.moveToValue(speed);
-            speedometer.setLowerText(Integer.toString(speed));
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    pw.println("tablet/speed60");
-                    pw.flush();
-                }
-            }).start();
+            sendSpeed(60);
         }else if(v.getId()==R.id.btn90){
-            speed = 90;
-            speedometer.moveToValue(speed);
-            speedometer.setLowerText(Integer.toString(speed));
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    pw.println("tablet/speed90");
-                    pw.flush();
-                }
-            }).start();
+            sendSpeed(90);
         }else if(v.getId()==R.id.btnBack){
             destiName.setText("");
             naviSearchView.setVisibility(View.INVISIBLE);
@@ -721,7 +695,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             @Override
                             public void onClick(View v) {
                                 Toast.makeText(MainActivity.this, "트렁크가 열렸습니다", Toast.LENGTH_SHORT).show();
-                                //infoClient.sendMessage("TRUNK");
                                 afterSendMsg();
                             }
                         });
@@ -730,7 +703,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             @Override
                             public void onClick(View v) {
                                 Toast.makeText(MainActivity.this, "안전운전하세요", Toast.LENGTH_SHORT).show();
-                                infoClient.sendMessage("CAUTION");
                                 afterSendMsg();
                             }
                         });
@@ -739,7 +711,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             @Override
                             public void onClick(View v) {
                                 Toast.makeText(MainActivity.this, "응급상황입니다. 옆으로 비켜주세요", Toast.LENGTH_SHORT).show();
-                                infoClient.sendMessage("EM");
                                 afterSendMsg();
                             }
                         });
@@ -758,5 +729,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             tmapview.setZoomLevel(16);
             fabCancel.hide();
+        }
+        public void sendSpeed(int speedVal){
+            speed = speedVal;
+            speedometer.moveToValue(speed);
+            speedometer.setLowerText(Integer.toString(speed));
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    pw.println("tablet/speed"+speed);
+                    pw.flush();
+                }
+            }).start();
         }
     }
