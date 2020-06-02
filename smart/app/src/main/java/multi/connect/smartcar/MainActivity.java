@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -69,12 +70,13 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import de.nitri.gauge.Gauge;
+import multi.connect.smartcar.fcm.FCMActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener,
                                                                 TMapGpsManager.onLocationChangedCallback{
+    LinearLayout sendDitance;
     AsyncTaskSerial asyncTaskSerial;
-    String id;
-    String carNum;
+    String car_id;
     Button msgCheck;
     TextView recieveArea;
     StringTokenizer token;
@@ -116,58 +118,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     MediaPlayer mediaPlayer;
     final ArrayList<String> carnumber = new ArrayList();
 
-    //메시지 주고받기 관련
-    InfoClient infoClient;
-
-    //mChatId = getIntent().getStringExtra("chat_Id");
-    String messageType = null;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        Intent intent = getIntent();
+        car_id = "82가1007";
+        FCMActivity fcmActivity = new FCMActivity();
+        fcmActivity.getToken(car_id);
+        //Intent intent = getIntent();
         //main 통신 - 메시지 주고받기
-        id = "backCar";
-        carNum = "82가1004";
+
         recieveArea = findViewById(R.id.receiveMsg);
         msgCheck = findViewById(R.id.msgCheck);
-        /*infoClient = new InfoClient(this,intent.getStringExtra("carNum"));*/
-        infoClient = new InfoClient(this,carNum);
-        messageType = getIntent().getStringExtra("messageType");
-        if(messageType !=null){
-            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-            builder.setCancelable(true);
-            final View receiveView = LayoutInflater.from(MainActivity.this).inflate(R.layout.receive_msg, null);
-            final TextView receiveMsg = receiveView.findViewById(R.id.receiveMsg);
-            final Button msgCheck = receiveView.findViewById(R.id.msgCheck);
-            if(messageType.equals("EM")){
-                String text = "EM";
-                receiveMsg.setText(text);
-            }else if(messageType.equals("TRUNK")){
-                String text = "TRUNK";
-                receiveMsg.setText(text);
-            }else if(messageType.equals("CAUTION")){
-                String text = "CAUTION";
-                receiveMsg.setText(text);
+        sendDitance = findViewById(R.id.distanceShare);
+
+        //이동거리 보내기
+        sendDitance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new SendDistance().execute();
             }
+        });
 
-            msgCheck.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    alertDialog.dismiss();
-                }
-            });
-            builder.setView(receiveView);
-            alertDialog = builder.create();
-
-            alertDialog.show();
-            mediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.test);
-            mediaPlayer.start();
-            messageType = null;
-
-        }
         //Serial 통신
         asyncTaskSerial = new AsyncTaskSerial();
         asyncTaskSerial.execute(10,20);
@@ -191,7 +163,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     String message = "";
                         @Override
                         public void run() {
-                            message = "system/auto_on";
+                            message = "system:auto_on";
                             pw.println(message);
                             pw.flush();
                         }
@@ -208,7 +180,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         String message = "";
                         @Override
                         public void run() {
-                            message = "system/auto_off";
+                            message = "system:auto_off";
                             pw.println(message);
                             pw.flush();
                         }
@@ -320,15 +292,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tmapview.setLocationPoint(location.getLongitude(),location.getLatitude());
     }
 
-    //서버 연결
+    //라떼 서버 연결
     class AsyncTaskSerial extends AsyncTask<Integer,String,String> {
 
         @Override
         protected String doInBackground(Integer... integers) {
             try {
-                socket = new Socket("172.30.1.42", 50000);
+                socket = new Socket("70.12.116.61", 50000);
                 if (socket != null) {
                     ioWork();
+                    pw.println("info:" + car_id);
+                    pw.flush();
                 }
                 Thread t1 = new Thread(new Runnable() {
                     @Override
@@ -357,7 +331,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return "";
         }
         private void filteringMsg(String msg){
-            token = new StringTokenizer(msg,"/");
+            token = new StringTokenizer(msg,":");
             String protocol = token.nextToken();
             String message = token.nextToken();
             System.out.println("프로토콜:"+protocol+",메시지:"+message);
@@ -587,7 +561,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 String message = "";
                 @Override
                 public void run() {
-                    message = "tablet/plus3";
+                    message = "tablet:plus3";
                     pw.println(message);
                     pw.flush();
                 }
@@ -604,7 +578,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 String message = "";
                 @Override
                 public void run() {
-                    message = "tablet/minus3";
+                    message = "tablet:minus3";
                     pw.println(message);
                     pw.flush();
                 }
@@ -619,7 +593,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 String message = "";
                 @Override
                 public void run() {
-                    message="tablet/speed30";
+                    message="tablet:speed30";
                     pw.println(message);
                     pw.flush();
                 }
@@ -631,7 +605,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    pw.println("tablet/speed60");
+                    pw.println("tablet:speed60");
                     pw.flush();
                 }
             }).start();
@@ -642,7 +616,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    pw.println("tablet/speed90");
+                    pw.println("tablet:speed90");
                     pw.flush();
                 }
             }).start();
@@ -690,12 +664,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             final ArrayList alTMapPoint = new ArrayList();
             carnumber.clear();
-            alTMapPoint.add(new TMapPoint(nowLoc.getLatitude() + 0.0003275, nowLoc.getLongitude()));//앞차
-            carnumber.add("111가1111");
-            alTMapPoint.add(new TMapPoint(nowLoc.getLatitude() + 0.0003275, nowLoc.getLongitude() - 0.0004382));//앞왼차
+            alTMapPoint.add(new TMapPoint(nowLoc.getLatitude() + 0.0002775, nowLoc.getLongitude()));//앞차
+            carnumber.add("82가1008");
+            /*alTMapPoint.add(new TMapPoint(nowLoc.getLatitude() + 0.0003275, nowLoc.getLongitude() - 0.0004382));//앞왼차
             carnumber.add("222가2222");
             alTMapPoint.add(new TMapPoint(nowLoc.getLatitude() + 0.0003275, nowLoc.getLongitude() + 0.0004382));//앞오른차
-            carnumber.add("333가3333");
+            carnumber.add("333가3333");*/
             final Bitmap carNum = Bitmap.createScaledBitmap(carNumImg, 230, 100, true);
             Bitmap sendMessage = Bitmap.createScaledBitmap(sendmsg, 70, 50, true);
             for (int i = 0; i < alTMapPoint.size(); i++) {
@@ -733,7 +707,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             public void onClick(View v) {
                                 Toast.makeText(MainActivity.this, "트렁크가 열렸습니다", Toast.LENGTH_SHORT).show();
                                 alertDialog.dismiss();
-                                infoClient.sendMessage("TRUNK");
+                                new Thread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        String type = "TRUNK";
+                                        new FCMActivity.rquestThread(car_id,type).start();
+                                        //pw.println("TRUNK:" + carNum);
+                                        //pw.flush();
+                                    }
+                                }).start();
                                 tmapview.removeTMapPolygon("Line1");
                                 for (int i = 0; i < carnumber.size(); i++) {
                                     tmapview.removeMarkerItem(carnumber.get(i));
@@ -748,7 +730,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             public void onClick(View v) {
                                 Toast.makeText(MainActivity.this, "안전운전하세요", Toast.LENGTH_SHORT).show();
                                 alertDialog.dismiss();
-                                infoClient.sendMessage("CAUTION");
+                                new Thread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        String type = "CAUTION";
+                                        new FCMActivity.rquestThread(car_id,type).start();
+                                        //pw.println("CAUTION:" + car_id);
+                                        //pw.flush();
+                                    }
+                                }).start();
                                 tmapview.removeTMapPolygon("Line1");
                                 for (int i = 0; i < carnumber.size(); i++) {
                                     tmapview.removeMarkerItem(carnumber.get(i));
@@ -763,7 +753,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             public void onClick(View v) {
                                 Toast.makeText(MainActivity.this, "응급상황입니다. 옆으로 비켜주세요", Toast.LENGTH_SHORT).show();
                                 alertDialog.dismiss();
-                                infoClient.sendMessage("EM");
+                                new Thread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        String type = "EM";
+                                        new FCMActivity.rquestThread(car_id,type).start();
+                                        //pw.println("EM:" + car_id);
+                                        //pw.flush();
+                                    }
+                                }).start();
                                 tmapview.removeTMapPolygon("Line1");
                                 for (int i = 0; i < carnumber.size(); i++) {
                                     tmapview.removeMarkerItem(carnumber.get(i));
@@ -780,4 +778,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 });
             }
         }
+
     }

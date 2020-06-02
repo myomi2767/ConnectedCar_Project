@@ -62,17 +62,48 @@
             android:gravity="center"
             android:textSize="60sp"
             />
+        <LinearLayout
+            android:id="@+id/distanceShare"
+            android:layout_marginTop="15dp"
+            android:layout_width="240dp"
+            android:layout_height="80dp"
+            android:background="#FFF2C9"
+            android:clickable="true"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:focusable="true">
 
+            <ImageView
+                android:id="@+id/img"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="20dp"
+                android:outlineSpotShadowColor="@color/colorPrimary"
+                android:src="@android:drawable/ic_menu_share" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="5dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@android:color/black"
+                android:text="누적 거리 측정"
+                android:textStyle="bold"/>
+        </LinearLayout>
         <ToggleButton
             android:id="@+id/power"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_gravity="center"
-
+            android:layout_marginTop="20dp"
             android:background="@drawable/switchon"
             android:scaleType="centerCrop"
             android:textOff=""
             android:textOn="" />
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"

@@ -22,6 +22,7 @@ public class SendDistance extends AsyncTask<String,Void,Void> {
     @Override
     protected Void doInBackground(String... strings) {
         try {
+            //Log.d("server","distance보내기 Test");
             URL url = new URL("http://172.20.10.11:8088/connectedcar/member/join.do");
             OkHttpClient client = new OkHttpClient();
             JSONObject json = new JSONObject();
