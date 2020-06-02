@@ -28,7 +28,7 @@ public class RemoteControlResultAdapter extends RecyclerView.Adapter<RemoteContr
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(row_res_id,null);
+        View view = LayoutInflater.from(context).inflate(row_res_id,parent,false);
         return new ViewHolder(view);
     }
 
@@ -38,30 +38,26 @@ public class RemoteControlResultAdapter extends RecyclerView.Adapter<RemoteContr
         TextView control_date = holder.control_date;
         TextView control_code = holder.control_code;
         TextView control_result = holder.control_result;
-        TextView control_remark = holder.control_remark;
 
-        control_date.setText(data.get(position).getControl_date());
+        control_date.setText(data.get(position).getControl_date().substring(5));
         control_code.setText(data.get(position).getControl_code());
         control_result.setText(data.get(position).getControl_result());
-        control_remark.setText(data.get(position).getControl_remark());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return data.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
         TextView control_date;
         TextView control_code;
         TextView control_result;
-        TextView control_remark;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             control_date = itemView.findViewById(R.id.control_date);
             control_code = itemView.findViewById(R.id.control_code);
             control_result = itemView.findViewById(R.id.control_result);
-            control_remark = itemView.findViewById(R.id.control_remark);
         }
     }
 }

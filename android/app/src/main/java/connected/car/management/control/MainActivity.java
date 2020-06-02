@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONException;
@@ -24,10 +25,11 @@ import org.json.JSONObject;
 import connected.car.management.HttpHandler.StringURLHttpHandler;
 import connected.car.management.R;
 import connected.car.management.car.RegisterCarActivity;
+import connected.car.management.controlresult.RemoteControlResultActivity;
 import connected.car.management.member.MemberVO;
 import connected.car.management.period.PeriodFragment;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity{
 
     //====로그인 액티비티에서 받아온 변수들 -> 연결된 모든 프래그먼트에서 쉽게 쓰려고 일단 적어놓음
     public String main_user_id="";
@@ -47,11 +49,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     Toolbar toolbar;
-    FloatingActionButton fabCenter;
-    FloatingActionButton fabTerm;
-    FloatingActionButton fabInfo;
+    BottomNavigationView bottomNavigationView;
+    //fragment 선언
     CarControlFragment condition;
-    CarExpendableFragment car_part;
     PeriodFragment periodFragment;
     CarInfoFragment car_info;
 
@@ -63,15 +63,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
         toolbar = findViewById(R.id.toolbar);
-        fabCenter = findViewById(R.id.centerMenu);
-        fabTerm = findViewById(R.id.termMenu);
-        fabInfo = findViewById(R.id.infoMenu);
-
-        fragmentManager = getSupportFragmentManager();
 
         //로그인액티비티에서 로그인 성공 시 intent로 값 넘겨와서 main액티비티로 온다.
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         vo = intent.getParcelableExtra("userInfo");
         if(vo != null) {
             Log.d("===", "getFromLoginPage:" + vo.toString());
@@ -80,41 +76,41 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             main_car_id = vo.getCar_id();
         }
 
-        //=====로그인액티비티에서 온 데이터 정제 끝 ///
-        //car_info = new CarInfo();
-        car_part = new CarExpendableFragment();
         condition = new CarControlFragment(main_car_id);
         periodFragment = new PeriodFragment();
+        car_info = new CarInfoFragment();
+        //=====로그인액티비티에서 온 데이터 정제 끝 ///
+        //car_info = new CarInfo();
 
-        fabCenter.setOnClickListener(this);
-        fabTerm.setOnClickListener(this);
-        fabInfo.setOnClickListener(this);
-
-
-        fragmentManager.beginTransaction().add(R.id.page,condition).commit();
+        fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.page,condition).commitAllowingStateLoss();
+        bottomNavigationView.setSelectedItemId(R.id.homeMenuItem);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.termMenuItem:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.page, periodFragment).commitAllowingStateLoss();
+                        return true;
+                    case R.id.homeMenuItem:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.page, condition).commitAllowingStateLoss();
+                        return true;
+                    case R.id.controlResultMenuItem:
+                        Intent intent1 = new Intent(getApplicationContext(), RemoteControlResultActivity.class);
+                        intent1.putExtra("carId",main_car_id);
+                        startActivity(intent1);
+                        return true;
+                    case R.id.infoMenuItem:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.page, car_info).commitAllowingStateLoss();
+                        return true;
+                }
+                return false;
+            }
+        });
 
         //입력한 로그인에서 car_id를 통해 자동차 정보를 가져옵니다.
         getCarInfoHttpTask carinfoTask = new getCarInfoHttpTask(main_car_id);
         carinfoTask.execute();
-
-
-    }
-
-
-    @Override
-    public void onClick(View v) {
-        int id = v.getId();
-        switch (id) {
-            case R.id.centerMenu:
-                fragmentManager.beginTransaction().replace(R.id.page, condition).commit();
-                break;
-            case R.id.termMenu:
-                fragmentManager.beginTransaction().replace(R.id.page, periodFragment).commit();
-                break;
-            case R.id.infoMenu:
-                break;
-
-        }
     }
 
     @Override
