@@ -10,5 +10,5 @@ public interface PeriodService {
 	
 	List<MyexpendVO> getPeriodlist(String car_id);
 	List<ExpendableVO> getExpendlist(ChangeVO expendinfo);
-	
+	int updateMyExpendlist(MyexpendVO updateinfo);
 }

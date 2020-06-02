@@ -40,10 +40,25 @@ public class PeriodController {
 		String car_model_name = req.getParameter("car_model_name");
 		
 		ChangeVO expendinfo = new ChangeVO(expend_type, car_model_name);
-		System.out.println("getExpendlist의 서비스를 수행하기 직전의 expendinfo:"+expendinfo);
+		//System.out.println("getExpendlist의 서비스를 수행하기 직전의 expendinfo:"+expendinfo);
 		List<ExpendableVO> expendlist = service.getExpendlist(expendinfo);
-		System.out.println("mapper 거치고 expendlist 가 제대로 나왔나????:"+expendlist);
+		//System.out.println("mapper 거치고 expendlist 가 제대로 나왔나????:"+expendlist);
 		return expendlist;
+	}
+	
+	@RequestMapping(value ="/period/updateMyExpendlist.do", method=RequestMethod.GET, produces="application/json;charset=utf-8")
+	public @ResponseBody int updateMyExpendlist(HttpServletRequest req, HttpServletResponse res) {
+		int result;
+		String my_expend_km = req.getParameter("my_expend_km");
+		String expend_id = req.getParameter("expend_id");
+		String my_expend_no = req.getParameter("my_expend_no");
+		MyexpendVO updateinfo = new MyexpendVO(my_expend_no,my_expend_km,expend_id);
+		
+		System.out.println("updateMyExpendlist 서비스를 수행하기 직전의 주행거리, expend_id, my_Expend_no:"+my_expend_km+","+expend_id+","+my_expend_no);
+		result = service.updateMyExpendlist(updateinfo);
+		System.out.println("updateMyExpendlist 매퍼거치고나서 보내질 행 갯수:"+result);
+		
+		return result;
 	}
 	
 

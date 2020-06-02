@@ -27,6 +27,12 @@ public class PeriodServiceImpl implements PeriodService {
 		// TODO Auto-generated method stub
 		return dao.getExpendlist(expendinfo);
 	}
+
+	@Override
+	public int updateMyExpendlist(MyexpendVO updateinfo) {
+		// TODO Auto-generated method stub
+		return dao.updateMyExpendlist(updateinfo);
+	}
 	
 
 	

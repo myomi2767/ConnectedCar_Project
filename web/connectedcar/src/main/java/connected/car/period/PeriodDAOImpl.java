@@ -29,6 +29,13 @@ public class PeriodDAOImpl implements PeriodDAO{
 		return session.selectList("connected.car.period.getExpendlist",expendinfo);
 	}
 
+
+	@Override
+	public int updateMyExpendlist(MyexpendVO updateinfo) {
+		// TODO Auto-generated method stub
+		return session.update("connected.car.period.updateMyExpendlist", updateinfo);
+	}
+
 	
 
 	

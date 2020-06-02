@@ -4,12 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,10 +27,13 @@ import connected.car.management.R;
 
 public class PeriodExchangeActivity extends AppCompatActivity {
 
+    public int selectedText;
+
+    String ex_id="";
     String ex_kind="";
     String ex_type="";
     String ex_term="";
-    int my_expend_km=0;
+    int drive_distance=0;
     String car_id="";
     String my_expend_no="";
     String car_model_name="";
@@ -36,17 +43,36 @@ public class PeriodExchangeActivity extends AppCompatActivity {
     TextView selectedExpend;
     ExchangeAdapter myadapter;
     LinearLayoutManager manager;
+    TextView selectedItem;
+    TextView hiddenExpendId;
+    TextView hiddenDriveDistance;
+    TextView hiddenMyExpendNo;
+    Button cancelBtn;
+    Button completeExchangeBtn;
+
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_period_exchange);
+        list = findViewById(R.id.rlist);
+        hiddenExpendId = findViewById(R.id.text_hidden_expend_id);
+        hiddenDriveDistance = findViewById(R.id.text_hidden_drive_distance);
+        hiddenMyExpendNo = findViewById(R.id.text_hidden_my_expend_no);
+        selectedItem = findViewById(R.id.text_selectExpendable);
+        cancelBtn = findViewById(R.id.button_cancel);
+        completeExchangeBtn = findViewById(R.id.button_completeExchange);
+
+
+
         Intent intent = getIntent();
+        //ex_id = intent.getStringExtra("expend_id");
         ex_kind = intent.getStringExtra("expend_kind");
         ex_type = intent.getStringExtra("expend_type");
         ex_term = intent.getStringExtra("expend_term");
-        my_expend_km = intent.getIntExtra("drive_distance", 1); //값이 없으면 1로 들어옵니다.
+        drive_distance = intent.getIntExtra("drive_distance", 1); //값이 없으면 1로 들어옵니다.
         car_id= intent.getStringExtra("car_id");
         my_expend_no = intent.getStringExtra("my_expend_no");
         car_model_name = intent.getStringExtra("car_model_name");
@@ -61,10 +87,15 @@ public class PeriodExchangeActivity extends AppCompatActivity {
         //DB에 업데이트 해줄 update문 : update my_expendable set my_expend_replace=sysdate, my_expend_km=#{my_expend_km},
         //expend_id = #{expend_id} where my_expend_no = #{my_expend_no}
 
-        //이제 어댑터를 만듭시다.
+        //hiddenExpendId.setText(ex_id);
+        hiddenMyExpendNo.setText(my_expend_no);
+        hiddenDriveDistance.setText(drive_distance+"");
 
         expendlist = new ArrayList<ExpendableVO>();
+        ExpendableVO initItem = new ExpendableVO("부품 미선택", null,null, "해당 없음",null, null, null );
+        expendlist.add(initItem);
 
+        Log.d("===", "task로 들어갈 ex_type, car_model_name"+ex_type+car_model_name);
         myadapter = new ExchangeAdapter(this,
                 R.layout.period_exchange_row, expendlist);
 
@@ -73,20 +104,54 @@ public class PeriodExchangeActivity extends AppCompatActivity {
 
         list.setLayoutManager(manager);
         list.setAdapter(myadapter);
+
         getPeriodHttpTask task = new getPeriodHttpTask(ex_type, car_model_name);
         task.execute();
 
         Log.d("===", "expendlist"+expendlist);
 
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        completeExchangeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(hiddenExpendId.getText()==""){
+                    Toast.makeText(PeriodExchangeActivity.this, "교체할 부품이 없는 경우, 해당없음을 선택해 주세요.", Toast.LENGTH_SHORT).show();
+
+                }else{
+                    String expend_id_from_text = hiddenExpendId.getText()+"";
+                    String drive_distance_string = drive_distance+"";
+                   /* if(Integer.parseInt(drive_distance_string) > Integer.parseInt(ex_term)){
+                        drive_distance_string = ex_term;
+                    }*/
+                    setMyExpendlistTask task = new setMyExpendlistTask(drive_distance_string,expend_id_from_text,my_expend_no);
+                    task.execute();
+
+                    FragmentTransaction ft = getFragmentManager().beginTransaction();
+                    //ft.detach(PeriodFragment.this).attach(PeriodFragment.this).commit();
+                }
+
+
+
+
+            }
+        });
+
     }
 
 
-    //리싸이클러뷰
-    class getPeriodHttpTask extends AsyncTask<Void, Void, String> {
 
+    //================================AsyncTask 2개가 정의되어 있습니다.==========================
+    //교체할 부품 목록을 보여주는 리싸이클러뷰
+    class getPeriodHttpTask extends AsyncTask<Void, Void, String> {
         String url;
         /*ProgressDialog showPeriod = new ProgressDialog(getApplicationContext());*/
-
 
         public getPeriodHttpTask(String ex_type, String car_model_name) {
             Log.d("===", "task로 들어갈 ex_type, car_model_name"+ex_type+car_model_name);
@@ -94,8 +159,6 @@ public class PeriodExchangeActivity extends AppCompatActivity {
             url += "expend_type=" + ex_type;
             url += "&car_model_name="+car_model_name;
         }
-
-
 
         @Override
         protected String doInBackground(Void... voids) {
@@ -116,7 +179,7 @@ public class PeriodExchangeActivity extends AppCompatActivity {
                         ja = new JSONArray(s);
                         for (int i = 0; i < ja.length(); i++) {
                             JSONObject jo = ja.getJSONObject(i);
-                            String expend_id = jo.getString("my_expend_no");
+                            String expend_id = jo.getString("expend_id");
                             String expend_code = jo.getString("expend_code");
                             String expend_type = jo.getString("expend_type");
                             String expend_name = jo.getString("expend_name");
@@ -124,12 +187,9 @@ public class PeriodExchangeActivity extends AppCompatActivity {
                             String expend_brand = jo.getString("expend_brand");
                             String car_name = jo.getString("car_model_name");
 
-
-
                             ExpendableVO expenditem = new ExpendableVO(expend_id, expend_code, expend_type,
                                     expend_name, expend_price, expend_brand, car_name);
                             expendlist.add(expenditem);
-
                         }
 
                         myadapter.notifyDataSetChanged();
@@ -146,4 +206,43 @@ public class PeriodExchangeActivity extends AppCompatActivity {
         }
 
     }
+
+
+
+    //부품 교체가 update되는 Task
+    class setMyExpendlistTask extends AsyncTask<Void, Void, String> {
+        String url;
+        /*ProgressDialog showPeriod = new ProgressDialog(getApplicationContext());*/
+
+        public setMyExpendlistTask(String drive_distance_string, String expend_id_from_text, String my_expend_no) {
+
+            Log.d("===", "부품교체update task로 들어갈 my_expend_km, expend_id, my_expend_no"
+                    +drive_distance_string+expend_id_from_text+my_expend_no);
+            url = "http://" + getString(R.string.myip) + ":8088/connectedcar/period/updateMyExpendlist.do?";
+            url += "my_expend_km=" + drive_distance_string;
+            url += "&expend_id="+expend_id_from_text;
+            url += "&my_expend_no="+my_expend_no;
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            return StringURLHttpHandler.requestData(url);
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            if(Integer.parseInt(s)==1){
+
+
+                Toast.makeText(PeriodExchangeActivity.this,s+"개 행 업데이트 성공. 교체 주기가 리셋되었습니다.", Toast.LENGTH_LONG).show();
+
+                finish();
+            }
+
+
+        }
+
+    }
+
 }
