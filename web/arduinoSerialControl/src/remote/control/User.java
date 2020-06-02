@@ -77,7 +77,6 @@ public class User extends Thread {
 			}
 			System.out.println("폰:" + userlist.size());
 			System.out.println("카:" + carlist.size());
-			System.out.println("인포 : "+ infolist.size());
 			System.out.println("인포:"+infolist.size());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -112,11 +111,11 @@ public class User extends Thread {
 				//폰이 메세지를 보냄
 				System.out.println("폰이 메시지 보냄:"+id);
 				userClient = carlist.get(id);
-				if(message.charAt(0)=='S') {
+				if(message.charAt(0)=='S'||message.charAt(0)=='T') {
 					infoClient = infolist.get(id);
 					infoClient.sendMsg("job:"+message+":"+category+":"+id);
 				}
-			}else {
+			}else if(category.equals("car")){
 				System.out.println("카가 메시지보냄"+id);
 				userClient = userlist.get(id);
 			}

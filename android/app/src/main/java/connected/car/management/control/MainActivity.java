@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity{
 
         //로그인액티비티에서 로그인 성공 시 intent로 값 넘겨와서 main액티비티로 온다.
         final Intent intent = getIntent();
+        //인텐트 제어조건 수정할 것!!!!!!!
         vo = intent.getParcelableExtra("userInfo");
         if(vo != null) {
             Log.d("===", "getFromLoginPage:" + vo.toString());

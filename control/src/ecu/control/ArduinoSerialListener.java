@@ -13,9 +13,16 @@ public class ArduinoSerialListener implements SerialPortEventListener {
 	OutputStream canOs; //캔으로 시리얼출력을 위해 작업
 	SerialConnect arduino;
 	SerialConnect can;
+	
 	String id;
 	String canData;
 	String message;
+	
+	String sum;
+	String zerosum;
+	String HexCode;
+	String aData;
+	char[] data_arr;
 
 	public ArduinoSerialListener(BufferedInputStream arduinoBis, SerialConnect arduino, SerialConnect can) {
 		this.arduinoBis = arduinoBis;
@@ -30,43 +37,43 @@ public class ArduinoSerialListener implements SerialPortEventListener {
 	public void serialEvent(SerialPortEvent event) {
 		switch(event.getEventType()) { 
 		case SerialPortEvent.DATA_AVAILABLE:
+			HexCode ="";
+			sum = "";
+			zerosum = "";
 			//데이터가 도착하면 어떻게 할 것인지 정의
 			byte[] ArduinoreadBuffer = new byte[1024];
 			try {
 				arduinoBis.read(ArduinoreadBuffer, 0, 1024);
-				String aData = new String(ArduinoreadBuffer);
+				aData = new String(ArduinoreadBuffer);
 				System.out.println("Arduino 시리얼 포트로부터 전송받은 데이터:"+aData);
-				if(canOs!=null) {
-					if(aData.trim().equals("success")) {
-						id = "00000000";
-						canData = "1111000000000000";
-						message = id+canData;
-						send(message);
-					}else if(aData.trim().equals("fail")) {
-						id = "00000000";
-						canData = "0000111100000000";
-						message = id+canData;
-						send(message);
-					}else {
-						//0이면 꺼짐, 1이면 켜짐 - 받은 그대로 CAN으로 전송
-						//첫번째 String - engineStatus
-						//두번째 String - doorStatus
-						//세번째 String - airconditionStatus
-						//네번째 String - emergencyStatus
-						id = "00000000";
-						canData = "111111111111"+aData.trim();
-						message = id+canData;
-						System.out.println(message);
-						send(message);
-					}
-				}
 				
+				HexCode = convertToHex(aData);
+				
+				if(canOs!=null) {
+					id = "00000002";
+					canData = HexCode.trim();
+					message = id+canData;
+					send(message);
+				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 		
+	}
+	
+	public String convertToHex(String aData) {
+		data_arr = aData.trim().toUpperCase().toCharArray();//대문자로 변경 후 한 글자씩 data_arr에 넣기
+		for (int i = 0; i < data_arr.length; i++) {
+			sum = sum + Integer.toHexString(data_arr[i]);//data_arr에서 값 하나씩 빼서 hex로 변환
+		}
+		for( int i = 0; i < 16 - sum.length();i++) {
+			zerosum = zerosum + "0";
+		}
+		String result = zerosum.concat(sum);//16개에 맞춰서 => 0000000... + hex값
+		System.out.println("Dec > Hex 변환된 데이터 값=>"+result);
+		return result;
 	}
 	
 	public void send(String msg) {
