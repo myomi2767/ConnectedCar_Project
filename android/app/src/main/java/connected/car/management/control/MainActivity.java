@@ -25,6 +25,7 @@ import org.json.JSONObject;
 import connected.car.management.HttpHandler.StringURLHttpHandler;
 import connected.car.management.R;
 import connected.car.management.car.RegisterCarActivity;
+import connected.car.management.controlresult.RemoteControlResultActivity;
 import connected.car.management.member.MemberVO;
 import connected.car.management.period.PeriodFragment;
 
@@ -65,12 +66,8 @@ public class MainActivity extends AppCompatActivity{
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         toolbar = findViewById(R.id.toolbar);
 
-        condition = new CarControlFragment(main_car_id);
-        periodFragment = new PeriodFragment();
-        car_info = new CarInfoFragment();
-
         //로그인액티비티에서 로그인 성공 시 intent로 값 넘겨와서 main액티비티로 온다.
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         vo = intent.getParcelableExtra("userInfo");
         if(vo != null) {
             Log.d("===", "getFromLoginPage:" + vo.toString());
@@ -79,6 +76,9 @@ public class MainActivity extends AppCompatActivity{
             main_car_id = vo.getCar_id();
         }
 
+        condition = new CarControlFragment(main_car_id);
+        periodFragment = new PeriodFragment();
+        car_info = new CarInfoFragment();
         //=====로그인액티비티에서 온 데이터 정제 끝 ///
         //car_info = new CarInfo();
 
@@ -98,6 +98,9 @@ public class MainActivity extends AppCompatActivity{
                         getSupportFragmentManager().beginTransaction().replace(R.id.page, condition).commitAllowingStateLoss();
                         return true;
                     case R.id.controlResultMenuItem:
+                        Intent intent1 = new Intent(getApplicationContext(), RemoteControlResultActivity.class);
+                        intent1.putExtra("carId",main_car_id);
+                        startActivity(intent1);
                         return true;
                     case R.id.infoMenuItem:
                         getSupportFragmentManager().beginTransaction().replace(R.id.page, car_info).commitAllowingStateLoss();

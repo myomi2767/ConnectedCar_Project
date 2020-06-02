@@ -25,11 +25,12 @@ public class CarControlFragment extends Fragment {
     CarRemoteControlFragment control;
     CarRemoteStatusFragment status;
     String car_id;
-    public CarControlFragment(){
-    }
+    /*public CarControlFragment(){
+    }*/
     public CarControlFragment(String car_id) {
         // Required empty public constructor
         this.car_id = car_id;
+        Log.d("msg",this.car_id+"::::"+car_id);
         control = new CarRemoteControlFragment(car_id);
         status = new CarRemoteStatusFragment(car_id, control);
         fragmentArrayList.add(control);

@@ -1,13 +1,13 @@
 package connected.car.management.controlresult;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.LinearLayout;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,23 +31,30 @@ public class RemoteControlResultActivity extends AppCompatActivity {
     ControlResultVO controlResultVO;
     String carId;
     List<ControlResultVO> recycle_datalist;
+    RemoteControlResultAdapter adapter;
+    LinearLayoutManager manager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_remote_control_result);
         list = findViewById(R.id.controlResultList);
 
+        Intent intent = getIntent();
+        carId = intent.getStringExtra("carId");
+        Log.d("msg","제어결과의 carID=>"+carId);
+
         recycle_datalist = new ArrayList<ControlResultVO>();
+
         //DB에 접근하여 제어결과값 가져오는 부분
         controlResultVO = new ControlResultVO(carId);
         HttpSelect task = new HttpSelect();
         task.execute(controlResultVO);
 
-        RemoteControlResultAdapter adapter = new RemoteControlResultAdapter(this,
-                R.layout.activity_remote_control_result_item,recycle_datalist);
-
-        LinearLayoutManager manager = new LinearLayoutManager(getApplicationContext());
+        manager = new LinearLayoutManager(getApplicationContext());
         manager.setOrientation(LinearLayoutManager.VERTICAL);
+
+        adapter = new RemoteControlResultAdapter(this,
+                R.layout.activity_remote_control_result_item,recycle_datalist);
 
         list.setLayoutManager(manager);
         list.setAdapter(adapter);
@@ -86,17 +93,16 @@ public class RemoteControlResultActivity extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-
             return result;
         }
 
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+            Log.d("result","Post쪽:"+s);
             JSONArray ja = null;
             try {
-                ja = new JSONArray();
+                ja = new JSONArray(s);
                 for (int i=0;i<ja.length();i++){
                     JSONObject object = ja.getJSONObject(i);
                     String control_date = object.getString("control_date");
@@ -106,6 +112,8 @@ public class RemoteControlResultActivity extends AppCompatActivity {
                     ControlResultVO item = new ControlResultVO(control_date,control_code,control_result,"");
                     recycle_datalist.add(item);
                 }
+                adapter.notifyDataSetChanged();
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
