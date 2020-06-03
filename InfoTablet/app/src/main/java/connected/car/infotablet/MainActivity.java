@@ -87,10 +87,10 @@ public class MainActivity extends AppCompatActivity{
                 receiveMsg.setText(text);
             }
             //이동거리 보내기
-            sendDitance.setOnClickListener(new View.OnClickListener() {
+            sendDistance.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    new SendDistance().execute();
+                    new multi.connect.smartcar.SendDistance().execute();
                 }
             });
 

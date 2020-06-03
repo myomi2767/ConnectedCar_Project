@@ -63,7 +63,7 @@
             android:textSize="60sp"
             />
 
-        <LinearLayout
+        <Button
             android:id="@+id/distanceShare"
             android:layout_marginTop="15dp"
             android:layout_width="240dp"
@@ -71,7 +71,6 @@
             android:background="#FFF2C9"
             android:clickable="true"
             android:layout_gravity="center"
-            android:orientation="horizontal"
             android:focusable="true">
 
         <ToggleButton
@@ -84,7 +83,7 @@
             android:scaleType="centerCrop"
             android:textOff=""
             android:textOn="" />
-    </LinearLayout>
+    </Button>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -256,4 +255,5 @@
                 android:textSize="50dp" />
         </LinearLayout>
     </LinearLayout>
+</LinearLayout>
 </LinearLayout>
