@@ -68,7 +68,9 @@ public class PeriodFragment extends Fragment {
         car_id = MyApplication.CarInfo.getCar_id(); //액티비티로부터 가져온 로그인된 car_id
         car_model_name = MyApplication.CarInfo.getCar_model_name();
         drive_distance = MyApplication.CarInfo.getDrive_distance();
-        }
+
+        notice = view.findViewById(R.id.text_notice);
+
 
         Log.d("===", "period프래그먼트: "+car_model_name);
         Log.d("===","period프래그먼트의 주행거리정보:===>>"+drive_distance);
