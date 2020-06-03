@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import connected.car.member.MemberVO;
 import connected.car.period.MyexpendVO;
 import connected.car.period.TermVO;
 
@@ -33,18 +34,15 @@ public class MyCarController {
 			System.out.println(vo);
 			MyCarVO mycarVO = mapper.readValue(vo, MyCarVO.class);
 			System.out.println(mycarVO.toString());
-			
-			MyCarVO carinfoForTerm = new MyCarVO(mycarVO.getCar_brand(), mycarVO.getCar_fuel_type());
 			result = service.inseryMyCar(mycarVO);
 			
 			//회원가입 할 때는 my_expendable에 연료 주기 정보를 넣어줍니다.
-			List<TermVO> termlist = service.getTerminfo(carinfoForTerm);
+			List<TermVO> termlist = service.getTerminfo(mycarVO.getCar_brand(), mycarVO.getCar_fuel_type());
 			
 			System.out.println("termlist를 잘 가져왔습니까?갯수는요?"+ termlist.size());
 			//순서는 kind, type, term
 			String car_id = mycarVO.getCar_id();
 			for(int i=0; i<termlist.size();i++) {
-				
 				MyexpendVO expendvo = new MyexpendVO(car_id,
 						termlist.get(i).getExpend_kind(),
 						termlist.get(i).getExpend_type(),
@@ -54,19 +52,11 @@ public class MyCarController {
 				System.out.println("insert 된 상태 : expendvo:"+expendvo);
 				
 			}
-			
 			jsonObject = new JSONObject();
 			jsonObject.put("resultNum", result);
-			
-			
-			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		
-		
-		
 		return jsonObject.toString();
 	}
 	
@@ -79,6 +69,25 @@ public class MyCarController {
 		MyCarVO carinfo = service.getCarinfo(carid);
 		System.out.println("mapper거치고 and로 보낼 carinfo:"+carinfo);
 		return carinfo;
+	}
+	
+	@RequestMapping(value="/mycar/update.do", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+	public @ResponseBody String joinMember(@RequestBody String vo) {
+		ObjectMapper mapper = new ObjectMapper();
+		JSONObject jsonObject = null;
+		int result = 0;
+		try {
+			System.out.println(vo);
+			MyCarVO myCarVO = mapper.readValue(vo, MyCarVO.class);
+			System.out.println(myCarVO.toString());
+			result = service.updateDistance(myCarVO);
+			jsonObject = new JSONObject();
+			jsonObject.put("resultNum", result);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return jsonObject.toString();
 	}
 	
 }

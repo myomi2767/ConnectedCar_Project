@@ -18,10 +18,11 @@ public class CarVO {
 
     }
 
-    public CarVO(String car_id, String car_brand, String car_model, String car_fuel_type, String car_year, String car_volume, int rapid_speed, int drop_speed, int overspeed, String special_car, int drive_distance, String car_model_name) {
+    public CarVO(String car_id, String car_brand, String car_model,String car_model_name,String car_fuel_type, String car_year, String car_volume, int rapid_speed, int drop_speed, int overspeed, String special_car, int drive_distance) {
         this.car_id = car_id;
         this.car_brand = car_brand;
         this.car_model = car_model;
+        this.car_model_name = car_model_name;
         this.car_fuel_type = car_fuel_type;
         this.car_year = car_year;
         this.car_volume = car_volume;
@@ -30,7 +31,8 @@ public class CarVO {
         this.overspeed = overspeed;
         this.special_car = special_car;
         this.drive_distance = drive_distance;
-        this.car_model_name = car_model_name;
+
+
     }
     public String getCar_id() {
         return car_id;
@@ -135,7 +137,6 @@ public class CarVO {
                 "car_id='" + car_id + '\'' +
                 ", car_brand='" + car_brand + '\'' +
                 ", car_model='" + car_model + '\'' +
-                ",car_model_name="+car_model_name+
                 ", car_fuel_type='" + car_fuel_type + '\'' +
                 ", car_year='" + car_year + '\'' +
                 ", car_volume='" + car_volume + '\'' +
@@ -144,7 +145,7 @@ public class CarVO {
                 ", overspeed=" + overspeed +
                 ", special_car='" + special_car + '\'' +
                 ", drive_distance=" + drive_distance +
-                
+                ", car_model_name='" + car_model_name + '\'' +
                 '}';
     }
 }

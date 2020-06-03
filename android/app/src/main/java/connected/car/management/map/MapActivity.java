@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +35,7 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
@@ -46,6 +48,7 @@ import java.util.List;
 import javax.net.ssl.HttpsURLConnection;
 
 import connected.car.management.R;
+import connected.car.management.control.RemoteControlAsync;
 import connected.car.management.map.adapter.MapRouteAdapter;
 import connected.car.management.map.adapter.MapRouteItem;
 
@@ -69,6 +72,11 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     //경로 정보 list
     List<MapRouteItem> wayDataList;
+    //location 정보 가져올 변수
+    RemoteControlAsync remoteControlAsync;
+    LocationVO locationVO;
+    PrintWriter pw;
+    String carId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,19 +85,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         setView();
 
         Intent intent = getIntent();
-        String sArrivalTime = intent.getStringExtra("arrivalTime");
-        location = intent.getStringExtra("location");
-        myAddress = intent.getStringExtra("address");
-        Log.d("test", location);
+        carId = intent.getStringExtra("carId");
 
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date = null;
-        try {
-            date = df.parse(sArrivalTime);
-            arrivalTime = date.getTime();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
 
         checkPermissions(permission_list);
     }
@@ -140,12 +137,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     public void setView() {
         mapTextView = new HashMap<String, TextView>();
-        mapTextView.put("소요시간", (TextView) findViewById(R.id.map_duration));
-        mapTextView.put("출발시간", (TextView) findViewById(R.id.map_departure_time));
-        mapTextView.put("도착시간", (TextView) findViewById(R.id.map_arrival_time));
+        //mapTextView.put("소요시간", (TextView) findViewById(R.id.map_duration));
+        //mapTextView.put("출발시간", (TextView) findViewById(R.id.map_departure_time));
+        //mapTextView.put("도착시간", (TextView) findViewById(R.id.map_arrival_time));
 
-        container = findViewById(R.id.map_bar_container);
-        recyclerView = findViewById(R.id.map_route_list);
+        //container = findViewById(R.id.map_bar_container);
+        //recyclerView = findViewById(R.id.map_route_list);
 
         wayDataList = new ArrayList<MapRouteItem>();
     }
@@ -348,5 +345,26 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
 
         }
+    }
+
+    public void send_msg(final View view){
+        if(pw == null) {
+            Log.d("test", "null인가");
+            if(remoteControlAsync.isOnPW()) {
+                pw = remoteControlAsync.getPrintWriter();
+                Log.d("test", pw.toString());
+            }
+        }
+        new Thread(new Runnable() {
+            String message = "";
+            @Override
+            public void run() {
+                if(view.getId()==R.id.btnRefresh){
+                    message="Z";
+                }
+                pw.println("job:"+message+":phone:"+carId);
+                pw.flush();
+            }
+        }).start();
     }
 }

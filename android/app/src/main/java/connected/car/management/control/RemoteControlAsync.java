@@ -3,6 +3,7 @@ package connected.car.management.control;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -24,6 +25,7 @@ import java.util.StringTokenizer;
 
 import connected.car.management.R;
 import connected.car.management.controlresult.ControlResultVO;
+import connected.car.management.map.LocationVO;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -59,6 +61,8 @@ public class RemoteControlAsync extends AsyncTask<String, String, Void> {
     boolean emergencyStatus;
     boolean[] statusResult = new boolean[4];
 
+    //차량위치 받은 변수
+    LocationVO locationVO;
 
     public RemoteControlAsync(){
 
@@ -176,7 +180,14 @@ public class RemoteControlAsync extends AsyncTask<String, String, Void> {
                 setStatus(message);
                 isMessageIn = true;
             }
-
+        }else if(protocol.equals("location")){
+            String message = st.nextToken();
+            String category = st.nextToken();
+            String id = st.nextToken();
+            String latitude = st.nextToken();
+            String longitude = st.nextToken();
+            locationVO = new LocationVO(Double.parseDouble(latitude), Double.parseDouble(longitude));
+            Log.d("locationtest",locationVO+"");
         }
     }
     void ioWork(){
@@ -261,7 +272,9 @@ public class RemoteControlAsync extends AsyncTask<String, String, Void> {
     public boolean[] getStatusResult(){
         return statusResult;
     }
-
-
+    //차량위치정보 호출하는 메소드
+    public LocationVO getLocationVO(){
+        return locationVO;
+    }
 
 }

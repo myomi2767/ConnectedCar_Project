@@ -27,9 +27,9 @@ public class MyCarServiceImpl implements MyCarService {
 	}
 
 	@Override
-	public List<TermVO> getTerminfo(MyCarVO carinfoForTerm) {
+	public List<TermVO> getTerminfo(String car_brand, String car_fuel_type) {
 		// TODO Auto-generated method stub
-		return dao.getTerminfo(carinfoForTerm);
+		return dao.getTerminfo(car_brand, car_fuel_type);
 	}
 
 	@Override
@@ -37,6 +37,11 @@ public class MyCarServiceImpl implements MyCarService {
 		// TODO Auto-generated method stub
 		dao.insertTerm(expendvo);
 		
+	}
+
+	@Override
+	public int updateDistance(MyCarVO myCarVO) {
+		return dao.updateDistance(myCarVO);
 	}
 
 }

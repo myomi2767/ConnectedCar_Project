@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/border">
 
 
 
@@ -17,6 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="대분류"
+            android:fontFamily="@font/bmhananapro"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"></TextView>
 
         <TextView
@@ -24,6 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=" > "
+            android:fontFamily="@font/bmhananapro"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"></TextView>
 
         <TextView
@@ -31,6 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="교체부품이름 "
+            android:fontFamily="@font/bmhananapro"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"></TextView>
     </LinearLayout>
 
@@ -38,7 +42,8 @@
         android:id="@+id/progress_bar"
         style="@android:style/Widget.DeviceDefault.ProgressBar.Horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -52,11 +57,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="교체주기"
+            android:fontFamily="@font/bmhananapro"
             ></TextView>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Km">
+            android:text="Km"
+            android:fontFamily="@font/bmhananapro">
         </TextView>
     </LinearLayout>
 
@@ -76,13 +83,18 @@
         </Button>
 
         <Button
+            android:layout_marginBottom="10dp"
             android:id="@+id/button_exchange"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:text="교체">
+            android:text="교체"
+            android:background="@color/skyblue"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:fontFamily="@font/bmhananapro"
+            android:textColor="@color/brown">
 
         </Button>
 

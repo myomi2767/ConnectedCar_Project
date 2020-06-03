@@ -15,6 +15,14 @@ public class CanSerialListener implements SerialPortEventListener {
 	OutputStream arduinoOs; //아두이노로 시리얼출력을 위해 작업
 	SerialConnect arduino;
 	SerialConnect can;
+	
+	String hexmessage;
+	String result;
+	String fromMaster;
+	String fromSlave;
+	String hexdata;
+	int start;
+	int end;
 
 	public CanSerialListener(BufferedInputStream canBis, SerialConnect arduino, SerialConnect can) {
 		this.canBis = canBis;
@@ -37,45 +45,29 @@ public class CanSerialListener implements SerialPortEventListener {
 				}
 				String cData = new String(CanreadBuffer);
 				System.out.println("Can 시리얼 포트로 전송된 데이터:"+cData);
-				//일단 데이터를 읽으면, print하는 기능을 넣었다. 
-				//전송되는 메시지를 검사해서 적절하게 다른 장치를 제어하거나 
-				//Car클라이언트 객체로 전달해서 서버로 전송되도록 처리 
-				
-				//캔으로 수신된 데이터가 0000000000000011면 LED끄기
-				//캔으로 수신된 데이터가 0000000000000000이면 LED켜기
-				
-				/*
-				 * 1. 아두이노와 시리얼통신할 수 있도록 output스트림얻기
-				 * 	=> 생성자에서 한 번 작업할 수 있도록 처리
-				 * 2. output스트림으로 '0', '1' 내보내기 
-				 * 	=> CAN으로 수신된 데이터를 비교해서 
-				 * 	:U28000000000000000000000003F
-				 * 
-				 */
 				
 				if(arduinoOs!=null) {
-
-					if(cData.trim().equals(":U280000000000000000000000003F")) {
-						//비상등 켜기
-						arduinoOs.write('A');
-					}else if(cData.trim().equals(":U2800000000000000000000001141")){
-						//비상등 끄기
-						arduinoOs.write('B');
-					}else if(cData.trim().equals(":U2800000000000011110000111147")) {
-						//차량상태 파악
-						arduinoOs.write('0');
-					}else if(cData.trim().equals(":U2800000000000011111111000047")) {
-						//도어 Open
-						arduinoOs.write('O');
-					}else if(cData.trim().equals(":U2800000000111100000000111147")) {
-						//도어 Lock
-						arduinoOs.write('L');
-					}else if(cData.trim().equals(":U2800000000101010101010101049")) {
-						//엔진 스따뚜
-						arduinoOs.write('S');
-					}else if(cData.trim().equals(":U2800000000010101010101010149")) {
-						//엔진 스똬압
-						arduinoOs.write('T');
+					if (cData.trim().startsWith(":W2800000002")) {
+						//하위 ECU가 데이터를 보낼 경우 id=00000002
+						fromSlave = cData.trim();
+					} else if (cData.trim().startsWith(":U2800000001")) {
+						//상위 ECU가 데이터를 보낼 경우 id=00000001
+						fromMaster = cData.trim();
+					}
+					//can에서 읽은 msg가 slave에서 넘어온 데이터와 같을 때
+					if (cData.trim().equals(fromMaster)) {
+						result = getHexToDec(cData);
+						System.out.println("상위에서 보내온 데이터(Hex > Dec)=>" + result);
+						if(result.charAt(0)=='S') {
+							for(int i=0;i<result.length();i++) {
+								arduinoOs.write(result.charAt(i));
+							}
+						}else {
+							arduinoOs.write(result.charAt(0));
+						}
+						
+					} else {
+						System.out.println(":U28 ERROR");
 					}
 				}
 			} catch (IOException e) {
@@ -83,6 +75,20 @@ public class CanSerialListener implements SerialPortEventListener {
 				e.printStackTrace();
 			}
 		}
-		
+	}
+	public String getHexToDec(String hex) {
+		StringBuilder sb = new StringBuilder();
+		long v = 0;
+		String str = "";
+		String data = hex.substring(12, 28);
+		for (int i = 0; i <= data.length() - 2; i += 2) {
+			start = i;
+			end = i + 2;
+			//2글자(16진수) -> 10진수 v로 변환해준다.
+			v = Long.parseLong(data.substring(start, end), 16);
+			sb.append((char)v);
+		}
+
+		return sb.toString().trim();
 	}
 }

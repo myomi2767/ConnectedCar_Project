@@ -131,8 +131,7 @@ public class CarAirConditionSettingActivity extends AppCompatActivity {
                 }else{
                     handler.update(temperture.getText().toString(),engineStart.getText().toString());
                 }
-                Intent intent = new Intent(CarAirConditionSettingActivity.this, MainActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
 

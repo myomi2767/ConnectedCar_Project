@@ -12,20 +12,26 @@ import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import connected.car.management.HttpHandler.StringURLHttpHandler;
 import connected.car.management.R;
+import connected.car.management.application.MyApplication;
+import connected.car.management.car.CarVO;
 import connected.car.management.car.RegisterCarActivity;
 import connected.car.management.controlresult.RemoteControlResultActivity;
+import connected.car.management.map.MapActivity;
+import connected.car.management.map.MapFragment;
 import connected.car.management.member.MemberVO;
 import connected.car.management.period.PeriodFragment;
 
@@ -33,7 +39,7 @@ public class MainActivity extends AppCompatActivity{
 
     //====로그인 액티비티에서 받아온 변수들 -> 연결된 모든 프래그먼트에서 쉽게 쓰려고 일단 적어놓음
     public String main_user_id="";
-    public String main_car_id="";
+    //public String main_car_id="";
     //로그인 액티비티에서 받은 변수 끝
 
     //=========자동차 정보 변수들=단, 바로는 안나오고 refresh되거나 그 이후 다른 fragment로 이동했을 때 사용가능.============//
@@ -54,6 +60,7 @@ public class MainActivity extends AppCompatActivity{
     CarControlFragment condition;
     PeriodFragment periodFragment;
     CarInfoFragment car_info;
+    MapFragment mapFragment;
 
     MemberVO vo;
 
@@ -68,22 +75,29 @@ public class MainActivity extends AppCompatActivity{
 
         //로그인액티비티에서 로그인 성공 시 intent로 값 넘겨와서 main액티비티로 온다.
         final Intent intent = getIntent();
+        //인텐트 제어조건 수정할 것!!!!!!!
         vo = intent.getParcelableExtra("userInfo");
         if(vo != null) {
             Log.d("===", "getFromLoginPage:" + vo.toString());
             //=====로그인액티비티에서 온 데이터 전역 변수에 담기//
             main_user_id = vo.getUser_id();
-            main_car_id = vo.getCar_id();
+            MyApplication.CarInfo.setCar_id(vo.getCar_id());
         }
 
-        condition = new CarControlFragment(main_car_id);
+        condition = new CarControlFragment(MyApplication.CarInfo.getCar_id());
         periodFragment = new PeriodFragment();
         car_info = new CarInfoFragment();
+        mapFragment = new MapFragment(MyApplication.CarInfo.getCar_id(), condition);
         //=====로그인액티비티에서 온 데이터 정제 끝 ///
         //car_info = new CarInfo();
 
         fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.page,condition).commitAllowingStateLoss();
+        if(intent.getIntExtra("fromPeriod", 0) == 1) {
+            fragmentManager.beginTransaction().replace(R.id.page,periodFragment).commitAllowingStateLoss();
+        } else {
+            fragmentManager.beginTransaction().replace(R.id.page,condition).commitAllowingStateLoss();
+        }
+
         bottomNavigationView.setSelectedItemId(R.id.homeMenuItem);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -92,12 +106,15 @@ public class MainActivity extends AppCompatActivity{
                     case R.id.termMenuItem:
                         getSupportFragmentManager().beginTransaction().replace(R.id.page, periodFragment).commitAllowingStateLoss();
                         return true;
+                    case R.id.locationMenuItem:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.page, mapFragment).commitAllowingStateLoss();
+                        return true;
                     case R.id.homeMenuItem:
                         getSupportFragmentManager().beginTransaction().replace(R.id.page, condition).commitAllowingStateLoss();
                         return true;
                     case R.id.controlResultMenuItem:
                         Intent intent1 = new Intent(getApplicationContext(), RemoteControlResultActivity.class);
-                        intent1.putExtra("carId",main_car_id);
+                        intent1.putExtra("carId",MyApplication.CarInfo.getCar_id());
                         startActivity(intent1);
                         return true;
                     case R.id.infoMenuItem:
@@ -109,7 +126,7 @@ public class MainActivity extends AppCompatActivity{
         });
 
         //입력한 로그인에서 car_id를 통해 자동차 정보를 가져옵니다.
-        getCarInfoHttpTask carinfoTask = new getCarInfoHttpTask(main_car_id);
+        getCarInfoHttpTask carinfoTask = new getCarInfoHttpTask(MyApplication.CarInfo.getCar_id());
         carinfoTask.execute();
     }
 
@@ -167,6 +184,8 @@ public class MainActivity extends AppCompatActivity{
                         main_car_volume=jo.getString("car_volume");
                         main_special_car=jo.getString("special_car");
                         main_car_model_name = jo.getString("car_model_name");
+                        Gson gson = new Gson();
+                        MyApplication.setCarInfo(gson.fromJson(jo.toString(), CarVO.class));
 
                         Log.d("===","mainactivity에서 포스트이후 main_car_model_name."+main_car_model_name);
                     } catch (JSONException e) {

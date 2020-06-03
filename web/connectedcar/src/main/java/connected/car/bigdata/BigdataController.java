@@ -1,16 +1,11 @@
 package connected.car.bigdata;
 
-import javax.servlet.http.HttpSession;
+/*import org.springframework.stereotype.Controller;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.servlet.ModelAndView;
-
-import connected.car.owner.OwnerVO;
-
-@Controller
+@Controller*/
 public class BigdataController {
 
-	public ModelAndView getBigdataResult(HttpSession session) {
+/*	public ModelAndView getBigdataResult(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		
 		OwnerVO owner = (OwnerVO)session.getAttribute("loginuser");
@@ -22,5 +17,5 @@ public class BigdataController {
 		
 		return mav;
 		
-	}
+	}*/
 }

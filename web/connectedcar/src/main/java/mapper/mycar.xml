@@ -6,7 +6,7 @@
 <mapper namespace="connected.car.mycar">
 	<insert id="insertMycar" parameterType="mycarvo">
 		insert into car values(#{car_id}, #{car_brand}, #{car_model}, #{car_fuel_type}, #{car_year}, #{car_volume}, 
-			#{rapid_speed}, #{drop_speed}, #{overspeed}, #{special_car}, #{driver_distance}, #{car_model_name})
+			#{rapid_speed}, #{drop_speed}, #{overspeed}, #{special_car}, #{drive_distance}, #{car_model_name})
 	</insert>
 	
 	<select id="getCarinfo" parameterType="String" resultType="mycarvo">
@@ -15,7 +15,7 @@
 	
 	
 	<!-- 회원 가입 시 term을 반환하는 매퍼 -->
-	<select id="getTerminfo" parameterType="mycarvo" resultType="termvo">
+	<select id="getTerminfo" parameterType="Map" resultType="termvo">
 		select expend_kind, expend_term, expend_type from EXCHANGE_TERM where car_brand=#{car_brand} and car_fuel_type=#{car_fuel_type}
 	</select>
 	
@@ -24,6 +24,10 @@
 		insert into my_expendable(my_expend_no, car_id, expend_kind, expend_type, expend_term, my_expend_km) values
 		(myexpend_seq.nextval, #{car_id},#{expend_kind}, #{expend_type}, #{expend_term}, 0)
 	</insert>
+	
+	<update id="updateDistance" parameterType="mycarvo">
+		update car set drive_distance = #{drive_distacne} where car_id = #{car_id}
+	</update>
 	
 	
 </mapper>

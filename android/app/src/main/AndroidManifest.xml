@@ -10,16 +10,17 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".application.MyApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/connectedcar"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true" >
-        <activity android:name=".period.PeriodExchangeActivity" >
-        </activity>
+        <activity android:name=".period.PeriodExchangeActivity" />
         <activity android:name=".controlresult.RemoteControlResultActivity" />
+        <activity android:name=".map.MapActivity"/>
         <activity android:name=".member.LoginActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,6 +36,9 @@
             android:name=".control.MainActivity"
             android:launchMode="singleTop" />
         <activity android:name=".member.JoinActivity" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDwq0H7Y1eKw3ZBxw-x85Xzvew4WQmA8aM" />
     </application>
 
 </manifest>

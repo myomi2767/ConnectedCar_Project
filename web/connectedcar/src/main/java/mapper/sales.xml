@@ -8,7 +8,7 @@
 	<![CDATA[
 		select e.expend_code, e.expend_name, s.shop_expend_count
 		from shop_expendable s, expendable e
-		where e.expend_id = s.expend_id and rownum <= 20 and s.shop_id = #{shop_id}
+		where e.expend_id = s.expend_id and rownum <= 10 and s.shop_id = #{shop_id}
 		order by s.shop_expend_count desc
 	]]>
 	</select>
