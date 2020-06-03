@@ -77,211 +77,211 @@ import multi.connect.smartcar.TMapMarker.TMapRoute;
 import multi.connect.smartcar.voice.Destination;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener,
-                                                                TMapGpsManager.onLocationChangedCallback{
-    LinearLayout sendDitance;
-    AsyncTaskSerial asyncTaskSerial;
-    String car_id;
-    Button msgCheck;
-    TextView recieveArea;
-    StringTokenizer token;
-    InputStream is;
-    InputStreamReader isr;
-    BufferedReader br;
-    Socket socket;
-    OutputStream os;
-    PrintWriter pw;
-    Button btn30, btn60, btn90;
-    ImageButton up, down;
-    Gauge speedometer;
-    TMapView tmapview;
-    LinearLayout linearLayoutTmap;
-    ToggleButton power;
-    Bitmap carImg,startImg,endImg,carNumImg,sendmsg;
+            TMapGpsManager.onLocationChangedCallback{
+        LinearLayout sendDitance;
+        AsyncTaskSerial asyncTaskSerial;
+        String car_id;
+        Button msgCheck;
+        TextView recieveArea;
+        StringTokenizer token;
+        InputStream is;
+        InputStreamReader isr;
+        BufferedReader br;
+        Socket socket;
+        OutputStream os;
+        PrintWriter pw;
+        Button btn30, btn60, btn90;
+        ImageButton up, down;
+        Gauge speedometer;
+        TMapView tmapview;
+        LinearLayout linearLayoutTmap;
+        ToggleButton power;
+        Bitmap carImg,startImg,endImg,carNumImg,sendmsg;
 
-    AlertDialog alert;
-    TextView distance;
-    int speed = 0;
-    String[] permission_list = {
-            Manifest.permission.ACCESS_COARSE_LOCATION,
-            Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.RECORD_AUDIO
-    };
-    LinearLayout loading,mapViewTotal,naviSearchView;
-    TMapPoint startpoint,endpoint;
-    Location location;
-    LocationManager lm;
-    FloatingActionButton fabNavi,btnBack,fabMsg,fabCancel;
-    EditText destiName;
-    Button btnDesti;
-    ListView destiList;
+        AlertDialog alert;
+        TextView distance;
+        int speed = 0;
+        String[] permission_list = {
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.RECORD_AUDIO
+        };
+        LinearLayout loading,mapViewTotal,naviSearchView;
+        TMapPoint startpoint,endpoint;
+        Location location;
+        LocationManager lm;
+        FloatingActionButton fabNavi,btnBack,fabMsg,fabCancel;
+        EditText destiName;
+        Button btnDesti;
+        ListView destiList;
 
-    String des,loc_lat,loc_lon;
-    TMapTapi tmaptapi;
-    boolean isTmapApp;
-    TMapGpsManager tMapGpsManager;
-    AlertDialog alertDialog;
-    MediaPlayer mediaPlayer;
-    final ArrayList<String> carnumber = new ArrayList();
-    //서버에 보낼 현재위치
-    String loc_sendgps;
-    Timer timer1;
-    //음성인식 버튼
-    Button btnMic;
-    Intent voiceIntent;
-    SpeechRecognizer voiceRecognizer;
-    Destination destination;
+        String des,loc_lat,loc_lon;
+        TMapTapi tmaptapi;
+        boolean isTmapApp;
+        TMapGpsManager tMapGpsManager;
+        AlertDialog alertDialog;
+        MediaPlayer mediaPlayer;
+        final ArrayList<String> carnumber = new ArrayList();
+        //서버에 보낼 현재위치
+        String loc_sendgps;
+        Timer timer1;
+        //음성인식 버튼
+        Button btnMic;
+        Intent voiceIntent;
+        SpeechRecognizer voiceRecognizer;
+        Destination destination;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        car_id = "82가1007";
-        FCMActivity fcmActivity = new FCMActivity();
-        fcmActivity.getToken(car_id);
-        //findViewById 호출
-        connectViews();
-        //main 통신 - 메시지 주고받기
-        /*infoClient = new InfoClient(this,intent.getStringExtra("carNum"));*/
-        //infoClient = new InfoClient(this,carNum);
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_main);
+            car_id = "82가1005";
+            FCMActivity fcmActivity = new FCMActivity();
+            fcmActivity.getToken(car_id);
+            //findViewById 호출
+            connectViews();
+            //main 통신 - 메시지 주고받기
+            /*infoClient = new InfoClient(this,intent.getStringExtra("carNum"));*/
+            //infoClient = new InfoClient(this,carNum);
 
-        //이동거리 보내기
-        sendDitance.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new SendDistance().execute();
-            }
-        });
-
-        //Serial 통신
-        asyncTaskSerial = new AsyncTaskSerial();
-        asyncTaskSerial.execute(10,20);
-        //power -setting
-        power.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-
-                    power.setBackgroundDrawable(getResources().getDrawable(R.drawable.switchoff));
-                    Toast.makeText(MainActivity.this,"주행 보조 시스템이 켜졌습니다.",Toast.LENGTH_SHORT).show();
-                    btn30.setEnabled(true);
-                    btn60.setEnabled(true);
-                    btn90.setEnabled(true);
-                    up.setEnabled(true);
-                    down.setEnabled(true);
-                    new Thread(new Runnable() {
-                    String message = "";
-                        @Override
-                        public void run() {
-                            message = "system:auto_on";
-                            pw.println(message);
-                            pw.flush();
-                        }
-                }).start();
-                }else{
-                    power.setBackgroundDrawable(getResources().getDrawable(R.drawable.switchon));
-                    Toast.makeText(MainActivity.this,"주행 보조 시스템이 꺼졌습니다.",Toast.LENGTH_SHORT).show();
-                    btn30.setEnabled(false);
-                    btn60.setEnabled(false);
-                    btn90.setEnabled(false);
-                    up.setEnabled(false);
-                    down.setEnabled(false);
-                    new Thread(new Runnable() {
-                        String message = "";
-                        @Override
-                        public void run() {
-                            message = "system:auto_off";
-                            pw.println(message);
-                            pw.flush();
-                        }
-                    }).start();
+            //이동거리 보내기
+            sendDitance.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new SendDistance().execute();
                 }
-            }
-        });
+            });
 
-        //음성인식
-        voiceIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        voiceIntent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE,getPackageName());
-        voiceIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE,"ko-KR");
-        destination = new Destination(this, destiName, tmapview, naviSearchView);
-        btnMic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                voiceRecognizer = SpeechRecognizer.createSpeechRecognizer(MainActivity.this);
-                voiceRecognizer.setRecognitionListener(destination);
-                voiceRecognizer.startListening(voiceIntent);
-            }
-        });
+            //Serial 통신
+            asyncTaskSerial = new AsyncTaskSerial();
+            asyncTaskSerial.execute(10,20);
+            //power -setting
+            power.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if(isChecked){
 
-        speedometer.setLowerText("0");
-        //power -setting
-        btn30.setEnabled(false);
-        btn60.setEnabled(false);
-        btn90.setEnabled(false);
-        up.setEnabled(false);
-        down.setEnabled(false);
-
-        destiList.setAdapter(destination.getAdapter());
-        destiList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String[] destiList = parent.getItemAtPosition(position).toString().split(",");
-                des = destiList[0];
-                String[] locList = destiList[1].split(" ");
-                loc_lat = locList[1];
-                loc_lon = locList[3];
-                Toast.makeText(getApplicationContext(),des,Toast.LENGTH_SHORT).show();
-
-                AlertDialog.Builder builder
-                        = new AlertDialog.Builder(MainActivity.this);
-                builder.setCancelable(true);
-                builder .setTitle("목적지를 "+des+"으로 설정합니다")
-                        .setPositiveButton("T네비", new DialogInterface.OnClickListener() {
+                        power.setBackgroundDrawable(getResources().getDrawable(R.drawable.switchoff));
+                        Toast.makeText(MainActivity.this,"주행 보조 시스템이 켜졌습니다.",Toast.LENGTH_SHORT).show();
+                        btn30.setEnabled(true);
+                        btn60.setEnabled(true);
+                        btn90.setEnabled(true);
+                        up.setEnabled(true);
+                        down.setEnabled(true);
+                        new Thread(new Runnable() {
+                            String message = "";
                             @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                destiName.setText("");
-                                destination.getAdapter().clear();
-                                tmaptapi= new TMapTapi(MainActivity.this);
-                                tmaptapi.setSKTMapAuthentication("l7xx69415d661c8445a8b35bd80789e07ebf");
-                                isTmapApp = tmaptapi.isTmapApplicationInstalled();
-                                if (isTmapApp){
+                            public void run() {
+                                message = "system:auto_on";
+                                pw.println(message);
+                                pw.flush();
+                            }
+                        }).start();
+                    }else{
+                        power.setBackgroundDrawable(getResources().getDrawable(R.drawable.switchon));
+                        Toast.makeText(MainActivity.this,"주행 보조 시스템이 꺼졌습니다.",Toast.LENGTH_SHORT).show();
+                        btn30.setEnabled(false);
+                        btn60.setEnabled(false);
+                        btn90.setEnabled(false);
+                        up.setEnabled(false);
+                        down.setEnabled(false);
+                        new Thread(new Runnable() {
+                            String message = "";
+                            @Override
+                            public void run() {
+                                message = "system:auto_off";
+                                pw.println(message);
+                                pw.flush();
+                            }
+                        }).start();
+                    }
+                }
+            });
+
+            //음성인식
+            voiceIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+            voiceIntent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE,getPackageName());
+            voiceIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE,"ko-KR");
+            destination = new Destination(this, destiName, tmapview, naviSearchView);
+            btnMic.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    voiceRecognizer = SpeechRecognizer.createSpeechRecognizer(MainActivity.this);
+                    voiceRecognizer.setRecognitionListener(destination);
+                    voiceRecognizer.startListening(voiceIntent);
+                }
+            });
+
+            speedometer.setLowerText("0");
+            //power -setting
+            btn30.setEnabled(false);
+            btn60.setEnabled(false);
+            btn90.setEnabled(false);
+            up.setEnabled(false);
+            down.setEnabled(false);
+
+            destiList.setAdapter(destination.getAdapter());
+            destiList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    String[] destiList = parent.getItemAtPosition(position).toString().split(",");
+                    des = destiList[0];
+                    String[] locList = destiList[1].split(" ");
+                    loc_lat = locList[1];
+                    loc_lon = locList[3];
+                    Toast.makeText(getApplicationContext(),des,Toast.LENGTH_SHORT).show();
+
+                    AlertDialog.Builder builder
+                            = new AlertDialog.Builder(MainActivity.this);
+                    builder.setCancelable(true);
+                    builder .setTitle("목적지를 "+des+"으로 설정합니다")
+                            .setPositiveButton("T네비", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    destiName.setText("");
+                                    destination.getAdapter().clear();
+                                    tmaptapi= new TMapTapi(MainActivity.this);
+                                    tmaptapi.setSKTMapAuthentication("l7xx69415d661c8445a8b35bd80789e07ebf");
+                                    isTmapApp = tmaptapi.isTmapApplicationInstalled();
+                                    if (isTmapApp){
+                                        startpoint = tMapGpsManager.getLocation();
+                                        HashMap pathInfo = new HashMap();
+                                        pathInfo.put("rGoName", des);
+                                        pathInfo.put("rGoY", loc_lat);
+                                        pathInfo.put("rGoX", loc_lon);
+                                        tmaptapi.invokeRoute(pathInfo);
+                                        naviSearchView.setVisibility(View.INVISIBLE);
+                                        mapViewTotal.setVisibility(View.VISIBLE);
+                                    }
+                                }
+                            })
+                            .setNeutralButton("경로표시", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    destiName.setText("");
+                                    destination.getAdapter().clear();
                                     startpoint = tMapGpsManager.getLocation();
-                                    HashMap pathInfo = new HashMap();
-                                    pathInfo.put("rGoName", des);
-                                    pathInfo.put("rGoY", loc_lat);
-                                    pathInfo.put("rGoX", loc_lon);
-                                    tmaptapi.invokeRoute(pathInfo);
+                                    endpoint = new TMapPoint(Double.parseDouble(loc_lat),Double.parseDouble(loc_lon));
+                                    TMapRoute tMapRoute =new TMapRoute(startpoint,endpoint,MainActivity.this,startImg,endImg,tmapview);
+                                    tMapRoute.search();
+                                    tmapview.setZoomLevel(16);
                                     naviSearchView.setVisibility(View.INVISIBLE);
                                     mapViewTotal.setVisibility(View.VISIBLE);
                                 }
-                            }
-                        })
-                        .setNeutralButton("경로표시", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                destiName.setText("");
-                                destination.getAdapter().clear();
-                                startpoint = tMapGpsManager.getLocation();
-                                endpoint = new TMapPoint(Double.parseDouble(loc_lat),Double.parseDouble(loc_lon));
-                                TMapRoute tMapRoute =new TMapRoute(startpoint,endpoint,MainActivity.this,startImg,endImg,tmapview);
-                                tMapRoute.search();
-                                tmapview.setZoomLevel(16);
-                                naviSearchView.setVisibility(View.INVISIBLE);
-                                mapViewTotal.setVisibility(View.VISIBLE);
-                            }
-                        })
-                        .setNegativeButton("취소", null);
-                alert = builder.create();
-                alert.show();
+                            })
+                            .setNegativeButton("취소", null);
+                    alert = builder.create();
+                    alert.show();
+                }
+            });
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(permission_list, 1000);
+            } else {
+                init();
             }
-        });
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            requestPermissions(permission_list, 1000);
-        } else {
-            init();
         }
-
-    }
 
     public void connectViews() {
         //fcm 통신
