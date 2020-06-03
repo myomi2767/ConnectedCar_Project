@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:paddingBottom="80dp"
+
             >
 
             <LinearLayout
@@ -27,14 +27,15 @@
                 android:orientation="vertical"
                 >
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_weight="1">
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:layout_marginLeft="35dp">
+                        >
                         <ImageButton
                             android:id="@+id/airControl"
                             android:layout_width="80dp"
@@ -42,7 +43,7 @@
                             android:scaleType="centerCrop"
                             android:background="@android:color/transparent"
                             android:src="@drawable/air"
-                            android:layout_marginTop="30dp"/>
+                            android:layout_marginTop="30dp" />
 
                         <TextView
                             android:id="@+id/air"
@@ -51,11 +52,13 @@
                             android:text="공조 설정"
                             android:layout_gravity="center"
                             android:layout_marginTop="10dp"
-                            android:textStyle="bold"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:fontFamily="@font/bmhananapro"
+                            android:textColor="#000000"/>
                     </LinearLayout>
                     <ImageButton
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="30dp"
+                        android:layout_marginLeft="30dp"
                         android:id="@+id/powerOn"
                         android:layout_width="150dp"
                         android:layout_height="150dp"
@@ -70,7 +73,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:layout_marginLeft="20dp">
+                            >
                             <ImageButton
                                 android:id="@+id/engineOff"
                                 android:layout_width="80dp"
@@ -87,20 +90,25 @@
                                 android:text="엔진 Off"
                                 android:layout_gravity="center"
                                 android:layout_marginTop="10dp"
-                                android:textStyle="bold"
-                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
+                                android:fontFamily="@font/bmhananapro"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                android:textColor="#000000"/>
 
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
+
+
             <TextView
+                android:layout_marginTop="50dp"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:text="도어제어"
                 android:gravity="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textStyle="bold"
+                android:textSize="30dp"
+                android:textColor="#000000"
+                android:fontFamily="@font/bmhananapro"
                 />
             <LinearLayout
                 android:layout_width="match_parent"
@@ -116,7 +124,9 @@
                     android:layout_marginLeft="8dp"
                     android:text="OPEN"
                     android:layout_marginRight="10dp"
-                    android:textStyle="bold"/>
+                    android:fontFamily="@font/bmhananapro"
+                    android:textColor="@color/brown"
+                    />
                 <Button
                     android:id="@+id/btnDoorLock"
                     android:layout_width="match_parent"
@@ -126,15 +136,18 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:text="LOCK"
                     android:layout_marginRight="10dp"
-                    android:textStyle="bold"/>
+                    android:fontFamily="@font/bmhananapro"
+                    android:textColor="@color/brown"/>
             </LinearLayout>
             <TextView
+                android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:text="비상등"
                 android:gravity="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textStyle="bold"/>
+                android:textSize="30dp"
+                android:textColor="#000000"
+                android:fontFamily="@font/bmhananapro" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -149,7 +162,8 @@
                     android:text="비상등"
                     android:layout_marginRight="8dp"
                     android:layout_marginLeft="8dp"
-                    android:textStyle="bold"/>
+                    android:fontFamily="@font/bmhananapro"
+                    android:textColor="@color/brown"/>
                 <Button
                     android:id="@+id/btnEmerLightOnSiren"
                     android:layout_width="match_parent"
@@ -159,7 +173,8 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:text="비상등+경적"
                     android:layout_marginRight="10dp"
-                    android:textStyle="bold"/>
+                    android:fontFamily="@font/bmhananapro"
+                    android:textColor="@color/brown"/>
             </LinearLayout>
 
 
