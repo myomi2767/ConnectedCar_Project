@@ -48,7 +48,6 @@ public class PeriodFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -82,7 +81,6 @@ public class PeriodFragment extends Fragment {
 
         return view;
     }
-
 
     //리싸이클러뷰
     class getPeriodHttpTask extends AsyncTask<Void, Void, String> {
