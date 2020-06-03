@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import connected.car.member.MemberVO;
 import connected.car.period.MyexpendVO;
 import connected.car.period.TermVO;
 
@@ -42,7 +43,6 @@ public class MyCarController {
 			//순서는 kind, type, term
 			String car_id = mycarVO.getCar_id();
 			for(int i=0; i<termlist.size();i++) {
-				
 				MyexpendVO expendvo = new MyexpendVO(car_id,
 						termlist.get(i).getExpend_kind(),
 						termlist.get(i).getExpend_type(),
@@ -52,19 +52,11 @@ public class MyCarController {
 				System.out.println("insert 된 상태 : expendvo:"+expendvo);
 				
 			}
-			
 			jsonObject = new JSONObject();
 			jsonObject.put("resultNum", result);
-			
-			
-			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		
-		
-		
 		return jsonObject.toString();
 	}
 	
@@ -77,6 +69,25 @@ public class MyCarController {
 		MyCarVO carinfo = service.getCarinfo(carid);
 		System.out.println("mapper거치고 and로 보낼 carinfo:"+carinfo);
 		return carinfo;
+	}
+	
+	@RequestMapping(value="/mycar/update.do", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+	public @ResponseBody String joinMember(@RequestBody String vo) {
+		ObjectMapper mapper = new ObjectMapper();
+		JSONObject jsonObject = null;
+		int result = 0;
+		try {
+			System.out.println(vo);
+			MyCarVO myCarVO = mapper.readValue(vo, MyCarVO.class);
+			System.out.println(myCarVO.toString());
+			result = service.updateDistance(myCarVO);
+			jsonObject = new JSONObject();
+			jsonObject.put("resultNum", result);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return jsonObject.toString();
 	}
 	
 }

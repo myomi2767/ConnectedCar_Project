@@ -1,14 +1,14 @@
 package connected.car.infotablet;
 
-public class locationVO {
+public class LocationVO {
     private double latitude;
     private double longitude;
 
-    public locationVO(){
+    public LocationVO(){
 
     }
 
-    public locationVO(double latitude, double longitude) {
+    public LocationVO(double latitude, double longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
     }

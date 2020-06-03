@@ -76,7 +76,7 @@
 			</div>
 			<div class="col-sm-1">
 				<div class="pull-right">
-					<button id="add_parts" class="btn btn-primary"
+					<button id="add_parts" class="btn btn-primary" style=""
 						onclick="window.open('adminexpendableAdd.do', '_blank', 'width=500px,height=600px')">부품추가</button>
 				</div>
 			</div>

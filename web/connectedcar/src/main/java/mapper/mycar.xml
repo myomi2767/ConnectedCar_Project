@@ -25,5 +25,9 @@
 		(myexpend_seq.nextval, #{car_id},#{expend_kind}, #{expend_type}, #{expend_term}, 0)
 	</insert>
 	
+	<update id="updateDistance" parameterType="mycarvo">
+		update car set drive_distance = #{drive_distacne} where car_id = #{car_id}
+	</update>
+	
 	
 </mapper>

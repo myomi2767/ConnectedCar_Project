@@ -10,4 +10,6 @@ public interface MyCarDAO {
 	public MyCarVO getCarinfo(String carid);
 	public List<TermVO> getTerminfo(String car_brand, String car_fuel_type);
 	public void insertTerm(MyexpendVO expendvo);
+	
+	public int updateDistance(MyCarVO myCarVO);
 }

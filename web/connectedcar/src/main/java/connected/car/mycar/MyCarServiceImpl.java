@@ -39,4 +39,9 @@ public class MyCarServiceImpl implements MyCarService {
 		
 	}
 
+	@Override
+	public int updateDistance(MyCarVO myCarVO) {
+		return dao.updateDistance(myCarVO);
+	}
+
 }

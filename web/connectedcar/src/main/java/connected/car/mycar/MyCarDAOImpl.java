@@ -41,5 +41,10 @@ public class MyCarDAOImpl implements MyCarDAO{
 		
 	}
 
+	@Override
+	public int updateDistance(MyCarVO myCarVO) {
+		return session.update("connected.car.mycar.updateDistance", myCarVO);
+	}
+
 	
 }

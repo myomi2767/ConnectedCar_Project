@@ -65,21 +65,8 @@ import static androidx.core.content.ContextCompat.getSystemService;
 public class MapFragment extends Fragment implements OnMapReadyCallback,
         GoogleMap.OnCameraMoveListener{
     GoogleMap gMap;
-    MarkerOptions markerOptions;
     String[] permission_list = {Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.ACCESS_COARSE_LOCATION};
-    MapLocation mapLocation;
-    //검색 기준 데이터
-    long arrivalTime;
-
-    //레이아웃
-    LinearLayout container;
-    RecyclerView recyclerView;
-    HashMap<String, TextView> mapTextView;
-
-    //경로 정보 list
-    List<MapRouteItem> wayDataList;
-
     //location 정보 가져올 변수
     Button searchMyCar;
 
@@ -104,6 +91,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         remoteControlAsync = carControlFragment.getCarRemoteControlFragment().getRemoteControlAsync();
 
         searchMyCar = view.findViewById(R.id.myCarSearch);
+        init();
+
         searchMyCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,19 +102,39 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
                 }
                 Log.d("locationtest","====>"+locationVO+"");
                 //setView();
-                LatLng loc = new LatLng(locationVO.getLatitude(),locationVO.getLongitude());
-                gMap.setMyLocationEnabled(true);
+                setMyLocation(locationVO.getLatitude(),locationVO.getLongitude());
                 remoteControlAsync.setMessageIn(false);
             }
         });
 
         return view;
     }
+    public void setMyLocation(double lat, double longi){
+        double latitude = lat;
+        double longitude = longi;
 
+        LatLng latLng = new LatLng(latitude,longitude);
+
+        CameraPosition cameraPosition = new CameraPosition.Builder().target(latLng).zoom(18).build();
+        Log.d("locationtest",gMap+"");
+        gMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(latLng);
+        markerOptions.title("차량 위치");
+        markerOptions.snippet("내차 위치입니다.");
+        gMap.addMarker(markerOptions).showInfoWindow();
+    }
     @Override
     public void onMapReady(GoogleMap googleMap) {
         gMap = googleMap;
+        Log.d("locationtest","onMapReady"+gMap);
         if(gMap != null) {
+            gMap.getUiSettings().setZoomControlsEnabled(true);
+            gMap.getUiSettings().setRotateGesturesEnabled(true);
+            gMap.getUiSettings().setScrollGesturesEnabled(true);
+            gMap.getUiSettings().setTiltGesturesEnabled(true);
+
             gMap.setOnCameraMoveListener(this);
             gMap.getUiSettings().setZoomControlsEnabled(true);
         }
@@ -150,8 +159,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         }
     }
     public void init() {
-        FragmentManager manager = getChildFragmentManager();
-        SupportMapFragment mapFragment = (SupportMapFragment) manager.findFragmentById(R.id.plan_map);
+        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.plan_map);
         mapFragment.getMapAsync(this);
     }
     public void send_msg(final View view){

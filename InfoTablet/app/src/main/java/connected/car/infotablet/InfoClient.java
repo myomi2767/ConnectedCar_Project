@@ -56,7 +56,7 @@ public class InfoClient {
             try {
                 //메인서버 아이피 입력
 
-                socket = new Socket("192.168.43.232", 12345);
+                socket = new Socket("192.168.201.114", 12345);
                 Log.d("server","");
                 Log.d("server","소켓소켓"+socket);
                 if (socket != null) {
@@ -147,7 +147,7 @@ public class InfoClient {
                 }
             }
         }else if (protocol.equals("location")){
-            locationVO vo = ((BackGroundActivity) context).startLocationService();
+            LocationVO vo = ((BackGroundActivity) context).getLocationVO();
             pw.println("location:search:info:"+carNum+":"+vo.getLatitude()+":"+vo.getLongitude());
         }
     }

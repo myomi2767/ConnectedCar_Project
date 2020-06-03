@@ -1,5 +1,6 @@
 table.type01 {
     border-collapse: collapse;
+    width: 100%;
     text-align: center;
     line-height: 1.5;
     border-left: 1px solid #ccc;
