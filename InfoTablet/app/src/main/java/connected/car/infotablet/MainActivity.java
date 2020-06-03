@@ -54,6 +54,9 @@ public class MainActivity extends AppCompatActivity{
     //mChatId = getIntent().getStringExtra("chat_Id");
     String messageType = null;
 
+    //주행 거리 추가 버튼
+    Button sendDistance;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +86,13 @@ public class MainActivity extends AppCompatActivity{
                 String text = "CAUTION";
                 receiveMsg.setText(text);
             }
+            //이동거리 보내기
+            sendDitance.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new SendDistance().execute();
+                }
+            });
 
             msgCheck.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -113,6 +123,8 @@ public class MainActivity extends AppCompatActivity{
         linearLayoutTmap = findViewById(R.id.layoutMapView);
         loading = findViewById(R.id.loading);
         mapViewTotal = findViewById(R.id.mapViewTotal);
+
+        sendDistance = findViewById(R.id.distanceShare);
     }
 
     @Override
