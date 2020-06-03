@@ -82,7 +82,7 @@ public class PeriodExchangeActivity extends AppCompatActivity {
         //그리고 [확인] 버튼을 누르면 setText된 부품이 db에 update되고 액티비티가 꺼집니다.
 
         //리사이클러뷰에 보여줄 select문 : select * from expendable where expend_type=#{expend_type} and car_model_name=#{car_model_name}
-        //냉각수, 디프렌셜오일, 브레이크액, 트랜스퍼오일, 밸브간극부품, 에어컨냉매, 에어컨필터, 연료계부품, 연료필터, 연료필터카트리지,
+        // 디프렌셜오일, 브레이크액, 트랜스퍼오일, 밸브간극부품, 에어컨냉매, 에어컨필터, 연료계부품, 연료필터, 연료필터카트리지,
         //예열플러그, 타이밍벨트, 타이밍시스템, 타이어위치, 휠얼라인먼트 car_model_name이 들어가지 않도록 컨트롤러에서 설계(무조건 다나오게)
         //DB에 업데이트 해줄 update문 : update my_expendable set my_expend_replace=sysdate, my_expend_km=#{my_expend_km},
         //expend_id = #{expend_id} where my_expend_no = #{my_expend_no}
@@ -136,9 +136,6 @@ public class PeriodExchangeActivity extends AppCompatActivity {
                     FragmentTransaction ft = getFragmentManager().beginTransaction();
                     //ft.detach(PeriodFragment.this).attach(PeriodFragment.this).commit();
                 }
-
-
-
 
             }
         });
