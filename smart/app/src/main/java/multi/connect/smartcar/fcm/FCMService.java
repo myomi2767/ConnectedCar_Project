@@ -58,7 +58,7 @@ public class FCMService extends FirebaseMessagingService {
                 public void run() {
                     if(car_id==null){
 
-                        Toast.makeText(getBaseContext(),message,Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getBaseContext(),message,Toast.LENGTH_SHORT).show();
                         Intent popupIntent = new Intent(getBaseContext(), MsgActivity.class);
                         popupIntent.putExtra("message",message);
                         PendingIntent pi = PendingIntent.getActivity(getBaseContext(), 0, popupIntent, PendingIntent.FLAG_ONE_SHOT);
@@ -68,7 +68,7 @@ public class FCMService extends FirebaseMessagingService {
                             Toast.makeText(getBaseContext(), e.toString(), Toast.LENGTH_LONG);
                         }
                     }else {
-                        Toast.makeText(getBaseContext(),message,Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getBaseContext(),message,Toast.LENGTH_SHORT).show();
                         setOtherGps(message);
                     }
                 }

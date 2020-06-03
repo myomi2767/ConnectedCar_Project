@@ -117,13 +117,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         EditText destiName;
         Button btnDesti;
         ListView destiList;
+        TMapData tMapData;
 
         String des,loc_lat,loc_lon;
         TMapTapi tmaptapi;
         boolean isTmapApp;
         TMapGpsManager tMapGpsManager;
         AlertDialog alertDialog;
-        MediaPlayer mediaPlayer;
         final ArrayList<String> carnumber = new ArrayList();
         //서버에 보낼 현재위치
         String loc_sendgps;

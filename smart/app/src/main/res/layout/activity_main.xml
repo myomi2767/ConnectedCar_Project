@@ -217,8 +217,8 @@
                         android:id="@+id/btnMic"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:text="마이크(이미지)"
                         android:layout_gravity="center"
+                        android:background="@drawable/mic"
                         android:textSize="20sp" />
                 </LinearLayout>
                 <FrameLayout

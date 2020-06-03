@@ -27,17 +27,15 @@ public class MsgActivity extends AppCompatActivity {
         Button OK = findViewById(R.id.msgCheck);
         Bundle extras = getIntent().getExtras();
         message = extras.getString("message");
-        mediaPlayer = MediaPlayer.create(MsgActivity.this,R.raw.test);
-        mediaPlayer.start();
         if(message.equals("EM")){
             text =getString(R.string.EM);
-            mediaPlayer = MediaPlayer.create(MsgActivity.this,R.raw.basic1);
+            mediaPlayer = MediaPlayer.create(MsgActivity.this,R.raw.em);
         }else if(message.equals("TRUNK")){
             text =getString(R.string.TRUNK);
-            mediaPlayer = MediaPlayer.create(MsgActivity.this,R.raw.basic2);
+            mediaPlayer = MediaPlayer.create(MsgActivity.this,R.raw.trunk);
         }else if(message.equals("CAUTION")) {
             text = getString(R.string.CAUTION);
-            mediaPlayer = MediaPlayer.create(MsgActivity.this,R.raw.basic3);
+            mediaPlayer = MediaPlayer.create(MsgActivity.this,R.raw.caution);
         }
         mediaPlayer.start();
         receiveMsg.setText(text);
