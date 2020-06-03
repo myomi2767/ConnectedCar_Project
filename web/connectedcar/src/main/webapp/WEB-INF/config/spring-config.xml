@@ -97,6 +97,4 @@
 	
 	<context:component-scan base-package="connected" />
 	
-	
-	
 </beans:beans>

@@ -1,6 +1,7 @@
 package connected.car.management.car;
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -17,6 +18,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import connected.car.management.R;
+import connected.car.management.application.MyApplication;
 import connected.car.management.control.MainActivity;
 import connected.car.management.member.LoginActivity;
 import okhttp3.MediaType;
@@ -48,8 +50,11 @@ public class CarAsync extends AsyncTask<CarVO, Void, Integer> {
         try {
             URL url = new URL("http://"+context.getString(R.string.myip)+":8088/connectedcar/mycar/insert.do");
             Gson gson = new Gson();
-            String sVo = gson.toJson(vo[0]);
-            Log.d("test",vo[0].toString());
+            CarVO car = vo[0];
+            String sVo = gson.toJson(car);
+            Log.d("test",car.toString());
+            MyApplication.setCarInfo(car);
+
             OkHttpClient client = new OkHttpClient();
 
             Request request = new Request.Builder()

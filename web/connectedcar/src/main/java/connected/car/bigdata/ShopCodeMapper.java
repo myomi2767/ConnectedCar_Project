@@ -16,7 +16,7 @@ public class ShopCodeMapper extends Mapper<LongWritable, Text, CustomKey, Text> 
 		String[] line = value.toString().split(",");
 		
 		outputKey.setShop_id(line[0]);
-		outputKey.setTag(0);
+		outputKey.setTag(key.get());
 		outputVal.set(line[1]);
 		
 		context.write(outputKey, outputVal);
