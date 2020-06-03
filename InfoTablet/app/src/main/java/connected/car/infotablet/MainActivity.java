@@ -86,14 +86,6 @@ public class MainActivity extends AppCompatActivity{
                 String text = "CAUTION";
                 receiveMsg.setText(text);
             }
-            //이동거리 보내기
-            sendDitance.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    new SendDistance().execute();
-                }
-            });
-
             msgCheck.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -107,6 +99,13 @@ public class MainActivity extends AppCompatActivity{
             messageType = null;
 
         }
+        //이동거리 보내기
+        sendDistance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new SendDistance().execute(carNum);
+            }
+        });
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(permission_list, 1000);
