@@ -14,6 +14,14 @@ public class GroupKeyComparator extends WritableComparator {
 		CustomKey c1 = (CustomKey)obj1;
 		CustomKey c2 = (CustomKey)obj2;
 		
-		return c1.getShop_id().compareTo(c2.getShop_id());
+		int result = c1.getShop_id().compareTo(c2.getShop_id());
+		if(result == 0) {
+			result = c1.getYear().compareTo(c2.getYear());
+		}
+		if(result == 0) {
+			result = c1.getExpend_type().compareTo(c2.getExpend_type());
+		}
+		
+		return result;
 	}
 }

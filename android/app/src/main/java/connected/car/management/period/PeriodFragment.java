@@ -24,6 +24,7 @@ import java.util.List;
 
 import connected.car.management.HttpHandler.StringURLHttpHandler;
 import connected.car.management.R;
+import connected.car.management.application.MyApplication;
 import connected.car.management.control.MainActivity;
 
 /**
@@ -56,9 +57,9 @@ public class PeriodFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_period, container, false);
         list = view.findViewById(R.id.rlist);
         myCarName = view.findViewById(R.id.text_myCarModelName);
-        car_id = ((MainActivity)getActivity()).main_car_id; //액티비티로부터 가져온 로그인된 car_id
-        car_model_name = ((MainActivity)getActivity()).main_car_model_name;
-        drive_distance = Integer.parseInt(((MainActivity)getActivity()).main_drive_distatnce);
+        car_id = MyApplication.CarInfo.getCar_id(); //액티비티로부터 가져온 로그인된 car_id
+        car_model_name = MyApplication.CarInfo.getCar_model_name();
+        drive_distance = MyApplication.CarInfo.getDrive_distance();
 
         Log.d("===", "period프래그먼트: "+car_model_name);
         Log.d("===","period프래그먼트의 주행거리정보:===>>"+drive_distance);

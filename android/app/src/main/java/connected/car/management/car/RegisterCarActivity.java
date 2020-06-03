@@ -94,13 +94,14 @@ public class RegisterCarActivity extends AppCompatActivity implements View.OnCli
                 CarVO vo = new CarVO(textCarNum.getText().toString(),
                         brandSpinner.getSelectedItem().toString(),
                         modelSpinner.getSelectedItem().toString(),
+                        detailModelSpinner.getSelectedItem().toString(),
                         fuelSpinner.getSelectedItem().toString(),
                         carYearSpinner.getSelectedItem().toString(),
                         editCarCC.getText().toString(),
                         0,0,0,
                         ((RadioButton)findViewById(radioCar.getCheckedRadioButtonId())).getText().toString(),
-                        Integer.parseInt(editCarKm.getText().toString()),
-                        detailModelSpinner.getSelectedItem().toString());
+                        Integer.parseInt(editCarKm.getText().toString()));
+                Log.d("test","어싱크돌려질 회원가입정보:"+vo);
                 new CarAsync(this).execute(vo);
                 break;
         }

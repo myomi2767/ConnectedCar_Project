@@ -33,12 +33,10 @@ public class MyCarController {
 			System.out.println(vo);
 			MyCarVO mycarVO = mapper.readValue(vo, MyCarVO.class);
 			System.out.println(mycarVO.toString());
-			
-			MyCarVO carinfoForTerm = new MyCarVO(mycarVO.getCar_brand(), mycarVO.getCar_fuel_type());
 			result = service.inseryMyCar(mycarVO);
 			
 			//회원가입 할 때는 my_expendable에 연료 주기 정보를 넣어줍니다.
-			List<TermVO> termlist = service.getTerminfo(carinfoForTerm);
+			List<TermVO> termlist = service.getTerminfo(mycarVO.getCar_brand(), mycarVO.getCar_fuel_type());
 			
 			System.out.println("termlist를 잘 가져왔습니까?갯수는요?"+ termlist.size());
 			//순서는 kind, type, term

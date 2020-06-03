@@ -38,7 +38,7 @@ public class JoinActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void setViews() {
-        editTextId = findViewById(R.id.edit_password);
+        editTextId = findViewById(R.id.edit_id);
         editTextCarId = findViewById(R.id.edit_carNum);
         editTextPassword = findViewById(R.id.edit_password);
         editTextName = findViewById(R.id.edit_name);

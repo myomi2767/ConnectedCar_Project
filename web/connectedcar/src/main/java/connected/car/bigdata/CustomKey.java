@@ -10,20 +10,30 @@ import org.apache.hadoop.io.WritableUtils;
 public class CustomKey implements WritableComparable<CustomKey>{
 	//shop_id가 조인키가 된다.
 	private String shop_id;
+	private String year;
 	private String expend_type;
-	private Integer month;
+	private String car_model_name;
 	//조인을 위한 태그
-	private Integer tag;
+	private Long tag;
 	
 	public CustomKey() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	public CustomKey(String shop_id, String expend_type, Integer month, Integer tag) {
+
+	public CustomKey(String shop_id, String year, String expend_type, String car_model_name) {
 		super();
 		this.shop_id = shop_id;
+		this.year = year;
 		this.expend_type = expend_type;
-		this.month = month;
+		this.car_model_name = car_model_name;
+	}
+
+	public CustomKey(String shop_id, String year, String expend_type, String car_model_name, Long tag) {
+		super();
+		this.shop_id = shop_id;
+		this.year = year;
+		this.expend_type = expend_type;
+		this.car_model_name = car_model_name;
 		this.tag = tag;
 	}
 
@@ -35,6 +45,14 @@ public class CustomKey implements WritableComparable<CustomKey>{
 		this.shop_id = shop_id;
 	}
 
+	public String getYear() {
+		return year;
+	}
+
+	public void setYear(String year) {
+		this.year = year;
+	}
+
 	public String getExpend_type() {
 		return expend_type;
 	}
@@ -43,47 +61,58 @@ public class CustomKey implements WritableComparable<CustomKey>{
 		this.expend_type = expend_type;
 	}
 
-	public Integer getMonth() {
-		return month;
+	public String getCar_model_name() {
+		return car_model_name;
 	}
 
-	public void setMonth(Integer month) {
-		this.month = month;
+	public void setCar_model_name(String car_model_name) {
+		this.car_model_name = car_model_name;
 	}
 
-	public Integer getTag() {
+	public Long getTag() {
 		return tag;
 	}
 
-	public void setTag(Integer tag) {
+	public void setTag(Long tag) {
 		this.tag = tag;
 	}
 
 	@Override
 	public void readFields(DataInput in) throws IOException {
 		shop_id = WritableUtils.readString(in);
+		year = WritableUtils.readString(in);
 		expend_type = WritableUtils.readString(in);
-		month = in.readInt();
-		tag = in.readInt();
+		car_model_name = WritableUtils.readString(in);
+		tag = in.readLong();
 	}
 	@Override
 	public void write(DataOutput out) throws IOException {
 		WritableUtils.writeString(out, shop_id);
+		WritableUtils.writeString(out, year);
 		WritableUtils.writeString(out, expend_type);
-		out.writeInt(month);
-		out.writeInt(tag);
+		WritableUtils.writeString(out, car_model_name);
+		out.writeLong(tag);
 		
 	}
 	@Override
 	public int compareTo(CustomKey obj) {
 		int result = shop_id.compareTo(obj.shop_id);
 		if(result == 0) {
-			result = tag.compareTo(obj.tag);
+			result = year.compareTo(obj.year);
+		}
+		if(result == 0) {
+			result = expend_type.compareTo(obj.expend_type);
+		}
+		if(result == 0) {
+			result = car_model_name.compareTo(obj.car_model_name);
 		}
 		return result;
 	}
-	
-	
-	
+
+	@Override
+	public String toString() {
+		return (new StringBuffer().append(shop_id).append(",").append(year).append(",")
+				.append(expend_type).append(",").append(car_model_name)).toString();
+	}
 
 }
