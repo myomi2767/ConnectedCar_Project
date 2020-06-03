@@ -22,6 +22,7 @@ public class RemoteController {
 	
 	@RequestMapping(value="/remote/list.do", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
 	public @ResponseBody String listAll(@RequestBody String json){
+		System.out.println(json);
 		ObjectMapper mapper = new ObjectMapper();
 		JSONObject object = null;
 		List<RemoteVO> list = null;
@@ -30,7 +31,7 @@ public class RemoteController {
 			RemoteVO remote = mapper.readValue(json, RemoteVO.class);
 			list = service.listAll(remote.getCar_id());
 			result = mapper.writeValueAsString(list);
-			
+			System.out.println(result);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -1,6 +1,8 @@
 package connected.car.mycar;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +27,11 @@ public class MyCarDAOImpl implements MyCarDAO{
 	}
 
 	@Override
-	public List<TermVO> getTerminfo(MyCarVO carinfoForTerm) {
-		// TODO Auto-generated method stub
-		return session.selectList("connected.car.mycar.getTerminfo", carinfoForTerm);
+	public List<TermVO> getTerminfo(String car_brand, String car_fuel_type) {
+		Map<String, String> mFindInfo = new HashMap<String, String>();
+		mFindInfo.put("car_brand", car_brand);
+		mFindInfo.put("car_fuel_type", car_fuel_type);
+		return session.selectList("connected.car.mycar.getTerminfo", mFindInfo);
 	}
 
 	@Override

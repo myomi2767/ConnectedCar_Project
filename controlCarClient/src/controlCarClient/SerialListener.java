@@ -18,6 +18,14 @@ public class SerialListener implements SerialPortEventListener {
 	PrintWriter pw;
 	String carId;
 	
+	String hexmessage;
+	String result;
+	String fromMaster;
+	String fromSlave;
+	String hexdata;
+	int start;
+	int end;
+	
 	public SerialListener(BufferedInputStream bis, Socket socket, String carId) {
 		this.bis = bis;
 		this.socket = socket;
@@ -44,17 +52,19 @@ public class SerialListener implements SerialPortEventListener {
 				String data = new String(readBuffer);
 				System.out.println("Can시리얼 포트로 전송된데이터=>"+data);
 				if(pw!=null) {
-					if(data.trim().equals(":U2800000000111100000000000043")){						
-						String msg = "success";
-						pw.println("job:"+msg+":car:"+carId);
+					if (data.trim().startsWith(":W2800000001")) {
+						fromMaster = data.trim();
+					} else if (data.trim().startsWith(":U2800000002")) {
+						fromSlave = data.trim();
+					}
+					//can에서 읽은 data가 slave에서 넘어온 데이터와 같을 때
+					if (data.trim().equals(fromSlave)) {
+						result = getHexToDec(data);
+						System.out.println("하위ECU에서 보내온 데이터(Hex > Dec)=> " + result);
+						pw.println("job:"+result+":car:"+carId);
 						pw.flush();
-					}else if(data.trim().equals("")) {
-						
-					}else if(data.trim().substring(0, 4).equals(":U28")){
-						//System.out.println(data.trim().substring(24, 28));
-						String msg = data.trim().substring(24, 28);
-						pw.println("job:"+msg+":car:"+carId);
-						pw.flush();
+					} else {
+						System.out.println(":U28 ERROR");
 					}
 				}
 				//내가 추가한 부분.
@@ -63,5 +73,18 @@ public class SerialListener implements SerialPortEventListener {
 			}
 		}
 	}
+	
+	public String getHexToDec(String hex) {
+		StringBuilder sb = new StringBuilder();
+		long v = 0;
+		String data = hex.substring(12, 28);
 
+		for (int i = 0; i <= data.length() - 2; i += 2) {
+			start = i;
+			end = i + 2;
+			v = Long.parseLong(data.substring(start, end), 16);
+			sb.append((char)v);
+		}
+		return sb.toString().trim();
+	}
 }

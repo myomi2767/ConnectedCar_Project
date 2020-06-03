@@ -36,29 +36,34 @@ public class CanSerialListener implements SerialPortEventListener {
 				}
 				String cData = new String(CanreadBuffer);
 				System.out.println("Can 시리얼 포트로 전송된 데이터: "+cData);
-				//일단 데이터를 읽으면, print하는 기능을 넣었다. 
-				//전송되는 메시지를 검사해서 적절하게 다른 장치를 제어하거나 
-				//Car클라이언트 객체로 전달해서 서버로 전송되도록 처리 
-				
-				//캔으로 수신된 데이터가 0000000000000011면 LED끄기
-				//캔으로 수신된 데이터가 0000000000000000이면 LED켜기
-				
-				/*
-				 * 1. 아두이노와 시리얼통신할 수 있도록 output스트림얻기
-				 * 	=> 생성자에서 한 번 작업할 수 있도록 처리
-				 * 2. output스트림으로 '0', '1' 내보내기 
-				 * 	=> CAN으로 수신된 데이터를 비교해서 
-				 * 	:U28000000000000000000000003F
-				 * 
-				 */
-				
+
 				if(arduinoOs!=null) {
-					if(cData.trim().equals(":U2800000001000000000000000646")) {
-						//50cm미만
+				
+					if(cData.trim().equals(":U2800000001000000000000000343")) {
+						//speed30
 						System.out.println("찍히니");
+						arduinoOs.write('1');
+					}else if(cData.trim().equals(":U2800000001000000000000000444")) {
+						//speed60
+						System.out.println("찍히니");
+						arduinoOs.write('2');
+					}else if(cData.trim().equals(":U2800000001000000000000000545")){
+						//speed90
+						arduinoOs.write('3');
+					}else if(cData.trim().equals(":U2800000001000000000000000141")){
+						//속도 +3
+						arduinoOs.write('4');
+					}
+					else if(cData.trim().equals(":U2800000001000000000000000242")){
+						//속도 -3
+						arduinoOs.write('5');
+					}
+					else if(cData.trim().equals(":U2800000001000000000000000646")){
+						//차간거리 50cm미만
 						arduinoOs.write('6');
-					}else if(cData.trim().equals(":U2800000001000000000000000747")){
-						//50cm이상
+					}
+					else if(cData.trim().equals(":U2800000001000000000000000747")){
+						//차간거리 50cm이상
 						arduinoOs.write('7');
 					}
 				}

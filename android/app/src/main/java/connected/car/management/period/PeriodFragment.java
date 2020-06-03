@@ -26,6 +26,7 @@ import java.util.List;
 
 import connected.car.management.HttpHandler.StringURLHttpHandler;
 import connected.car.management.R;
+import connected.car.management.application.MyApplication;
 import connected.car.management.control.MainActivity;
 
 /**
@@ -54,7 +55,6 @@ public class PeriodFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -65,22 +65,9 @@ public class PeriodFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_period, container, false);
         list = view.findViewById(R.id.rlist);
         myCarName = view.findViewById(R.id.text_myCarModelName);
-        notice = view.findViewById(R.id.text_notice);
-
-
-            car_id = ((MainActivity)getActivity()).main_car_id; //액티비티로부터 가져온 로그인된 car_id
-
-
-        if(((MainActivity)getActivity()).main_car_model_name==null || ((MainActivity)getActivity()).main_car_model_name==""){
-            car_model_name="";
-        }else{
-            car_model_name = ((MainActivity)getActivity()).main_car_model_name;
-        }
-
-        if(((MainActivity)getActivity()).main_drive_distatnce==null || ((MainActivity)getActivity()).main_drive_distatnce==""){
-            drive_distance=0;
-        }else{
-            drive_distance = Integer.parseInt(((MainActivity)getActivity()).main_drive_distatnce);
+        car_id = MyApplication.CarInfo.getCar_id(); //액티비티로부터 가져온 로그인된 car_id
+        car_model_name = MyApplication.CarInfo.getCar_model_name();
+        drive_distance = MyApplication.CarInfo.getDrive_distance();
         }
 
         Log.d("===", "period프래그먼트: "+car_model_name);
@@ -109,7 +96,6 @@ public class PeriodFragment extends Fragment {
             return view;
 
         }
-
 
 
     }

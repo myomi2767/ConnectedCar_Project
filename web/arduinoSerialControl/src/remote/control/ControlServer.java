@@ -9,6 +9,8 @@ public class ControlServer {
 	private ServerSocket server;
 	HashMap<String, User> userlist = new HashMap<String, User>();
 	HashMap<String, User> carlist = new HashMap<String, User>();
+	HashMap<String, User> infolist = new HashMap<String, User>();
+	
 	public static void main(String[] args) {
 		new ControlServer().connect();
 	}
@@ -33,7 +35,7 @@ public class ControlServer {
 						String ip = client.getInetAddress().getHostAddress();
 						System.out.println(ip+"가 접속\n");
 						
-						User user = new User(client, userlist, carlist);
+						User user = new User(client, userlist, carlist, infolist);
 						user.start();
 					
 					} catch (IOException e) {

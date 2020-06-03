@@ -9,7 +9,7 @@
 	</insert>
 	<!-- select할 때 to_char(컬럼명, 'yyyy-mm-dd hh24:mi:ss') -->
 	<select id="selectRemote" parameterType="String" resultType="remotevo">
-		select to_char(control_date, 'yyyy-mm-dd hh24:mi'), control_code, control_result 
+		select to_char(control_date, 'yyyy-mm-dd hh24:mi') control_date, control_code, control_result 
 			from control_result 
 			where car_id = #{car_id} 
 			order by control_date desc

@@ -24,6 +24,7 @@ import java.util.List;
 
 import connected.car.management.HttpHandler.StringURLHttpHandler;
 import connected.car.management.R;
+import connected.car.management.control.MainActivity;
 
 public class PeriodExchangeActivity extends AppCompatActivity {
 
@@ -230,10 +231,10 @@ public class PeriodExchangeActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
 
             if(Integer.parseInt(s)==1){
-
-
+                Intent intent = new Intent(PeriodExchangeActivity.this, MainActivity.class);
+                intent.putExtra("fromPeriod", 1);
+                startActivity(intent);
                 Toast.makeText(PeriodExchangeActivity.this,s+"개 행 업데이트 성공. 교체 주기가 리셋되었습니다.", Toast.LENGTH_LONG).show();
-
                 finish();
             }
 

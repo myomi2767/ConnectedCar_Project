@@ -5,7 +5,6 @@ public class ControlResultVO {
     String control_date;
     String control_code;
     String control_result;
-    String control_remark;
 
     public ControlResultVO(){
 
@@ -17,19 +16,17 @@ public class ControlResultVO {
 
 
 
-    public ControlResultVO(String control_date, String control_code, String control_result, String control_remark) {
+    public ControlResultVO(String control_date, String control_code, String control_result) {
         this.control_date = control_date;
         this.control_code = control_code;
         this.control_result = control_result;
-        this.control_remark = control_remark;
     }
 
-    public ControlResultVO(String car_id, String control_date, String control_code, String control_result, String control_remark) {
+    public ControlResultVO(String car_id, String control_date, String control_code, String control_result) {
         this.car_id = car_id;
         this.control_date = control_date;
         this.control_code = control_code;
         this.control_result = control_result;
-        this.control_remark = control_remark;
     }
 
     public String getCar_id() {
@@ -64,13 +61,6 @@ public class ControlResultVO {
         this.control_result = control_result;
     }
 
-    public String getControl_remark() {
-        return control_remark;
-    }
-
-    public void setControl_remark(String control_remark) {
-        this.control_remark = control_remark;
-    }
 
     @Override
     public String toString() {
@@ -78,7 +68,6 @@ public class ControlResultVO {
                 "control_date='" + control_date + '\'' +
                 ", control_code='" + control_code + '\'' +
                 ", control_result='" + control_result + '\'' +
-                ", control_remark='" + control_remark + '\'' +
                 '}';
     }
 }
