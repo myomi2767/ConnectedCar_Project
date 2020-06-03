@@ -22,6 +22,14 @@ public class ClientCar {
 	StringTokenizer st;
 	String carId;
 	
+	String sum; //hex로 변환하기 위한 sum 변수
+	String zerosum; //0을 추가하기 위한 변수
+	String HexCode; //변환된 HexCode로 받은 변수
+	// CAN으로 송신할 id, data;
+	String id="";
+	String data="";
+	char[] data_arr;
+	
 	CANReadWriteTest canReadWriteTest;
 	public static void main(String[] args) {
 		new ClientCar().connect();
@@ -35,7 +43,7 @@ public class ClientCar {
 				ioWork();
 				
 				//CAN통신 열기
-				canReadWriteTest = new CANReadWriteTest("COM6", socket, carId);
+				canReadWriteTest = new CANReadWriteTest("COM17", socket, carId);
 			}
 			Thread t1 = new Thread(new Runnable() {
 	            @Override
@@ -75,50 +83,38 @@ public class ClientCar {
 		}
 	}
 	private void filteringMsg(String msg) {
-		System.out.println("클라이언트가 받은 메시지"+msg);
+		HexCode ="";
+		sum = "";
+		zerosum = "";
+		
+		System.out.println("클라이언트가 받은 메시지=>"+msg);
 		st = new StringTokenizer(msg, ":");
 		String protocol = st.nextToken();
 		//app에게 받은 메시지 수행!!
 		if(protocol.equals("job")) {
 			String message = st.nextToken();
-			if(message.equals("emergencyOn")) {
-				//비상등 켜기
-				String id = "00000000";//송신할 메시지의 구분 id
-				String data = "0000000000000000";//송신할 데이터 -> 내 마음대로 정해주기, 16글자는 맞춰야함
-				String sendmsg = id+data;
-				canReadWriteTest.send(sendmsg);
-			}else if(message.equals("emergencyAndSiren")) {
-				String id = "00000000";//송신할 메시지의 구분 id
-				String data = "0000000000000011";//송신할 데이터 -> 내 마음대로 정해주기, 16글자는 맞춰야함
-				String sendmsg = id+data;
-				canReadWriteTest.send(sendmsg);
-			}else if(message.equals("status")) {
-				String id = "00000000";//송신할 메시지의 구분 id
-				String data = "0000111100001111";//송신할 데이터 -> 내 마음대로 정해주기, 16글자는 맞춰야함
-				String sendmsg = id+data;
-				canReadWriteTest.send(sendmsg);
-			}else if(message.equals("doorOpen")) {
-				String id = "00000000";//송신할 메시지의 구분 id
-				String data = "0000111111110000";//송신할 데이터 -> 내 마음대로 정해주기, 16글자는 맞춰야함
-				String sendmsg = id+data;
-				canReadWriteTest.send(sendmsg);
-			}else if(message.equals("doorLock")) {
-				String id = "00000000";//송신할 메시지의 구분 id
-				String data = "1111000000001111";//송신할 데이터 -> 내 마음대로 정해주기, 16글자는 맞춰야함
-				String sendmsg = id+data;
-				canReadWriteTest.send(sendmsg);
-			}else if(message.equals("engineStart")) {
-				String id = "00000000";
-				String data = "1010101010101010";
-				String sendmsg = id+data;
-				canReadWriteTest.send(sendmsg);
-			} else if(message.equals("engineStop")) {
-				String id = "00000000";
-				String data = "0101010101010101";
-				String sendmsg = id+data;
-				canReadWriteTest.send(sendmsg);
-			}
+			System.out.println("제어구분자==>"+message);
+			HexCode = convertToHex(message);
+			
+			id = "00000001";//송신할 메시지의 구분 id
+			data = HexCode.trim();//송신할 데이터 
+			
+			String sendmsg = id+data;
+			canReadWriteTest.send(sendmsg);
 		}
+	}
+	
+	public String convertToHex(String aData) {
+		data_arr = aData.trim().toUpperCase().toCharArray();//대문자로 변경 후 한 글자씩 data_arr에 넣기
+		for (int i = 0; i < data_arr.length; i++) {
+			sum = sum + Integer.toHexString(data_arr[i]);//data_arr에서 값 하나씩 빼서 hex로 변환
+		}
+		for( int i = 0; i < 16 - sum.length();i++) {
+			zerosum = zerosum + "0";
+		}
+		String result = zerosum.concat(sum);//16개에 맞춰서 => 0000000... + hex값
+		System.out.println("Dec > Hex 변환==>"+result);
+		return result;
 	}
 	
 	public void ioWork() {

@@ -81,8 +81,6 @@ public class CarAsync extends AsyncTask<CarVO, Void, Integer> {
     protected void onPostExecute(Integer value) {
         super.onPostExecute(value);
         if(value == 1) {
-            Intent intent = new Intent(context, MainActivity.class);
-            context.startActivity(intent);
             ((Activity)context).finish();
         }
         else if(value == 0)

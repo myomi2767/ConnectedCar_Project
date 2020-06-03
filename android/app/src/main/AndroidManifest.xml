@@ -18,8 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true" >
-        <activity android:name=".period.PeriodExchangeActivity" >
-        </activity>
+        <activity android:name=".period.PeriodExchangeActivity" />
         <activity android:name=".controlresult.RemoteControlResultActivity" />
         <activity android:name=".member.LoginActivity" >
             <intent-filter>

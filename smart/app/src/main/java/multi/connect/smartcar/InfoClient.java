@@ -54,7 +54,7 @@ public class InfoClient {
                 //메인서버 아이피 입력
 
                 socket = new Socket("172.30.1.42", 12345);
-                Log.d("server","xdsafhgjkljeifjlsf들어왔음");
+                Log.d("server","");
                 Log.d("server","소켓소켓"+socket);
                 if (socket != null) {
 
