@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="connected.car.bigdata">
+	<select id="selectBigdataList" parameterType="String" resultType="bigdatavo">
+		<![CDATA[
+			select * from sqoop_result where shop_id = #{shop_id} and rownum <= 10
+			order by out_count desc
+		]]>
+	</select>
+</mapper>

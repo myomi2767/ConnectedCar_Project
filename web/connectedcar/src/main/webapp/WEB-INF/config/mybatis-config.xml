@@ -24,6 +24,7 @@
 		<typeAlias type="connected.car.period.MyexpendVO" alias="myexpendvo"/>
 		<typeAlias type="connected.car.period.TermVO" alias="termvo"/>
 		<typeAlias type="connected.car.period.ChangeVO" alias="changevo"/>
+		<typeAlias type="connected.car.bigdata.BigdataVO" alias="bigdatavo"/>
 		
 	</typeAliases>
 	<mappers>
@@ -36,5 +37,6 @@
 		<mapper resource="mapper/mycar.xml"/>
 		<mapper resource="mapper/fcm.xml"/>
 		<mapper resource="mapper/period.xml"/>
+		<mapper resource="mapper/bigdata.xml" />
 	</mappers>
 </configuration>

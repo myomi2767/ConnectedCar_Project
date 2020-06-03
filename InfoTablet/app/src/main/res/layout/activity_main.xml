@@ -63,6 +63,17 @@
             android:textSize="60sp"
             />
 
+        <LinearLayout
+            android:id="@+id/distanceShare"
+            android:layout_marginTop="15dp"
+            android:layout_width="240dp"
+            android:layout_height="80dp"
+            android:background="#FFF2C9"
+            android:clickable="true"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:focusable="true">
+
         <ToggleButton
             android:id="@+id/power"
             android:layout_width="120dp"

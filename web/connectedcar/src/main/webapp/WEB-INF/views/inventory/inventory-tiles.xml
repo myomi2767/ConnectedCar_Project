@@ -32,4 +32,8 @@
 		<put-attribute name="content" value="/WEB-INF/views/inventory/inventorymain.jsp"/>
 	</definition>
 	
+	<definition name="inventory/bigdata" extends="mycarTemplate">
+		<put-attribute name="content" value="/WEB-INF/views/inventory/bigdata_main.jsp"/>
+	</definition>
+	
 </tiles-definitions>   
