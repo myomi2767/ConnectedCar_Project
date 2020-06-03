@@ -1,4 +1,4 @@
-package multi.connect.smartcar;
+package multi.connect.smartcar.login;
 
 public class CarDTO {
     public String speed;

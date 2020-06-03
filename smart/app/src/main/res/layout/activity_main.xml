@@ -62,17 +62,48 @@
             android:gravity="center"
             android:textSize="60sp"
             />
+        <LinearLayout
+            android:id="@+id/distanceShare"
+            android:layout_marginTop="15dp"
+            android:layout_width="240dp"
+            android:layout_height="80dp"
+            android:background="#FFF2C9"
+            android:clickable="true"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:focusable="true">
 
+            <ImageView
+                android:id="@+id/img"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="20dp"
+                android:outlineSpotShadowColor="@color/colorPrimary"
+                android:src="@android:drawable/ic_menu_share" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="5dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@android:color/black"
+                android:text="누적 거리 측정"
+                android:textStyle="bold"/>
+        </LinearLayout>
         <ToggleButton
             android:id="@+id/power"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_gravity="center"
-
+            android:layout_marginTop="20dp"
             android:background="@drawable/switchon"
             android:scaleType="centerCrop"
             android:textOff=""
             android:textOn="" />
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -114,8 +145,8 @@
                         android:src="@drawable/msgclose"
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="250dp"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
                         android:scaleType="matrix"
                         app:backgroundTint="@android:color/transparent"
                         app:borderWidth="0dp"
@@ -126,8 +157,8 @@
                         android:src="@drawable/msg"
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="130dp"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
                         app:useCompatPadding="true"
                         android:scaleType="fitStart"
                         app:backgroundTint="@android:color/transparent"
@@ -139,8 +170,8 @@
                         android:src="@drawable/gps"
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="10dp"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
                         app:useCompatPadding="true"
                         android:scaleType="fitCenter"
                         app:backgroundTint="@android:color/transparent"
@@ -186,8 +217,8 @@
                         android:id="@+id/btnMic"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:text="마이크(이미지)"
                         android:layout_gravity="center"
+                        android:background="@drawable/mic"
                         android:textSize="20sp" />
                 </LinearLayout>
                 <FrameLayout
@@ -203,8 +234,8 @@
                         android:layout_gravity="bottom|right"
                         android:src="@drawable/back"
                         android:background="#00232323"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
                         app:useCompatPadding="true"
                         android:scaleType="centerCrop"
                         gauge:borderWidth="0dp"

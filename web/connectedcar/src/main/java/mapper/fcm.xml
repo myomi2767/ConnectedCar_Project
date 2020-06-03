@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="connected.car.fcm">
+<select parameterType="String" resultType="fcmvo" id="readToken">select * from fcm_info where token = #{token} </select>
+<select parameterType="String" resultType="fcmvo" id="readClientToken">select * from fcm_info where car_id not in (#{car_id}) </select>
+<insert parameterType="String" id="insertToken"> insert into fcm_info values(#{car_id},#{token}) </insert>
+<select parameterType="String" resultType="fcmvo" id="readClientGps">select * from fcm_info where car_id not in (#{car_id}) </select>
+</mapper>
+

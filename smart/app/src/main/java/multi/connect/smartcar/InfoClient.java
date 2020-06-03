@@ -53,8 +53,7 @@ public class InfoClient {
             try {
                 //메인서버 아이피 입력
 
-                socket = new Socket("172.30.1.42", 12345);
-                Log.d("server","xdsafhgjkljeifjlsf들어왔음");
+                socket = new Socket("192.168.137.1", 12345);
                 Log.d("server","소켓소켓"+socket);
                 if (socket != null) {
 
@@ -107,39 +106,7 @@ public class InfoClient {
         token = new StringTokenizer(msg, ":");
         String protocol = token.nextToken();
         String message = token.nextToken();
-        if(protocol.equals("job")){
-            Intent intent = new Intent(context,MainActivity.class);
-            intent.putExtra("carNum", carNum);
-            //intent.putExtra("id", id);
-            context.startActivity(intent);
-            ((Activity)context).finish();
-        }else if(protocol.equals("message")){
-            String category = token.nextToken();
-            String carNum = token.nextToken();
-            switch (category) {
-                case "EM": {
-                    Intent intent = new Intent(context, MainActivity.class);
-                    intent.putExtra("carNum", carNum);
-                    intent.putExtra("messageType", "EM");
-                    Log.d("alarm","EM 알람 테스트");
-                    break;
-                }
-                case "TRUNK": {
-                    Intent intent = new Intent(context, MainActivity.class);
-                    intent.putExtra("carNum", carNum);
-                    intent.putExtra("messageType", "TRUNK");
-                    Log.d("alarm","TRUNK 알람 테스트");
-                    break;
-                }
-                case "CAUTION": {
-                    Intent intent = new Intent(context, MainActivity.class);
-                    intent.putExtra("carNum", carNum);
-                    intent.putExtra("messageType", "CAUTION");
-                    Log.d("alarm"," CAUTION 알람 테스트");
-                    break;
-                }
-            }
-        }
+
     }
 
 
