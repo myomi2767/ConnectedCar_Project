@@ -86,6 +86,17 @@ public class MainActivity extends AppCompatActivity{
                 String text = "CAUTION";
                 receiveMsg.setText(text);
             }
+<<<<<<< HEAD
+            //이동거리 보내기
+            sendDistance.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new multi.connect.smartcar.SendDistance().execute();
+                }
+            });
+
+=======
+>>>>>>> a78ef7fbe7c49a074f15e95258cdc11d8c3fb83e
             msgCheck.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

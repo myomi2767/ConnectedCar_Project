@@ -63,7 +63,12 @@
             android:textSize="60sp"
             />
 
+<<<<<<< HEAD
+        <Button
+            android:id="@+id/distanceShare"
+=======
         <LinearLayout
+>>>>>>> a78ef7fbe7c49a074f15e95258cdc11d8c3fb83e
             android:layout_marginTop="15dp"
             android:layout_width="240dp"
             android:layout_height="80dp"
@@ -108,7 +113,7 @@
             android:scaleType="centerCrop"
             android:textOff=""
             android:textOn="" />
-   </LinearLayout>
+    </Button>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -280,4 +285,5 @@
                 android:textSize="50dp" />
         </LinearLayout>
     </LinearLayout>
+</LinearLayout>
 </LinearLayout>
