@@ -129,17 +129,19 @@ public class User extends Thread {
 			String category = st.nextToken();
 			String id = st.nextToken().trim();
 			System.out.println("message의 내용=>" + message + ":" + category + ":" + id);
-			User userclient = null;
+			User user = null;
 			Set<String> keySet = infolist.keySet();
 			for (Iterator iterator = keySet.iterator(); iterator.hasNext();) {
 				String key = (String) iterator.next();
 				if(key != id) {
-					userclient = infolist.get(key);
-					userclient.sendMsg(msg);
-		}
-				
-	}
-			
+					user = infolist.get(key);
+					user.sendMsg(msg);
+				}
+			}
+		}else if(protocol.equals("location")) {
+			String carid = st.nextToken();
+			User revUser = userlist.get(carid);
+			revUser.sendMsg(msg);
 		}
 	}
 

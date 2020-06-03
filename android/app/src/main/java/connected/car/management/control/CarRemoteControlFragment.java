@@ -162,22 +162,23 @@ public class CarRemoteControlFragment extends Fragment implements View.OnClickLi
                                 Toast.makeText(getContext(),"공조설정을 하세요",Toast.LENGTH_SHORT).show();
                             }
                         });
-                    }
-                    //db에 저장된 온도 정보를 읽어서 보내줌
-                    Cursor cursor = handler.select();
-                    String temp = "";
-                    String time = "";
-                    if(handler.select().getCount()!=0) {
-                        while (cursor.moveToNext()) {
-                            temp = cursor.getString(0);
-                            time = cursor.getString(1);
+                    }else {
+                        //db에 저장된 온도 정보를 읽어서 보내줌
+                        Cursor cursor = handler.select();
+                        String temp = "";
+                        String time = "";
+                        if (handler.select().getCount() != 0) {
+                            while (cursor.moveToNext()) {
+                                temp = cursor.getString(0);
+                                time = cursor.getString(1);
+                            }
                         }
+                        if (Integer.parseInt(time) <= 9) {
+                            time = "0" + time;
+                        }
+                        message = "S" + temp + time;
+                        Log.d("test", message);
                     }
-                    if (Integer.parseInt(time)<=9){
-                        time = "0" + time;
-                    }
-                    message = "S" + temp + time;
-                    Log.d("test",message);
                 }else if(view.getId()==R.id.engineOff){
                     //엔진 스탑
                     message = "T";

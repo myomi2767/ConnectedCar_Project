@@ -28,11 +28,14 @@ public class InfoClient {
     //String id;
     String carNum;
 
+
+
     public InfoClient(Context context,String carNum) {
         this.context = context;
        // this.id = id;
         this.carNum = carNum;
         new AsyncTaskMain().execute();
+
     }
 
     public void sendMessage(final String msg) {
@@ -53,7 +56,7 @@ public class InfoClient {
             try {
                 //메인서버 아이피 입력
 
-                socket = new Socket("70.12.116.67", 12345);
+                socket = new Socket("192.168.43.232", 12345);
                 Log.d("server","");
                 Log.d("server","소켓소켓"+socket);
                 if (socket != null) {
@@ -112,7 +115,7 @@ public class InfoClient {
             Intent intent = null;
             if(message.charAt(0)=='S'){
                 intent = new Intent(context,MainActivity.class);
-            }else{
+            }else {
                 intent = new Intent(context,BackGroundActivity.class);
             }
             context.startActivity(intent);
@@ -143,6 +146,9 @@ public class InfoClient {
                     break;
                 }
             }
+        }else if (protocol.equals("location")){
+            locationVO vo = ((BackGroundActivity) context).startLocationService();
+            pw.println("location:"+carNum+":"+vo.getLatitude()+":"+vo.getLongitude());
         }
     }
 

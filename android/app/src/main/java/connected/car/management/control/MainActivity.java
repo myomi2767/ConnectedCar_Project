@@ -30,6 +30,8 @@ import connected.car.management.application.MyApplication;
 import connected.car.management.car.CarVO;
 import connected.car.management.car.RegisterCarActivity;
 import connected.car.management.controlresult.RemoteControlResultActivity;
+import connected.car.management.map.MapActivity;
+import connected.car.management.map.MapFragment;
 import connected.car.management.member.MemberVO;
 import connected.car.management.period.PeriodFragment;
 
@@ -58,6 +60,7 @@ public class MainActivity extends AppCompatActivity{
     CarControlFragment condition;
     PeriodFragment periodFragment;
     CarInfoFragment car_info;
+    MapFragment mapFragment;
 
     MemberVO vo;
 
@@ -84,6 +87,7 @@ public class MainActivity extends AppCompatActivity{
         condition = new CarControlFragment(MyApplication.CarInfo.getCar_id());
         periodFragment = new PeriodFragment();
         car_info = new CarInfoFragment();
+        mapFragment = new MapFragment();
         //=====로그인액티비티에서 온 데이터 정제 끝 ///
         //car_info = new CarInfo();
 
@@ -101,6 +105,9 @@ public class MainActivity extends AppCompatActivity{
                 switch (item.getItemId()){
                     case R.id.termMenuItem:
                         getSupportFragmentManager().beginTransaction().replace(R.id.page, periodFragment).commitAllowingStateLoss();
+                        return true;
+                    case R.id.locationMenuItem:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.page, mapFragment).commitAllowingStateLoss();
                         return true;
                     case R.id.homeMenuItem:
                         getSupportFragmentManager().beginTransaction().replace(R.id.page, condition).commitAllowingStateLoss();
