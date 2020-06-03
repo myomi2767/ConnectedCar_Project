@@ -4,6 +4,7 @@ public class FCMVO {
 	String car_id;
 	String token;
 	String type;
+	String gps;
 	public FCMVO() {
 		// TODO Auto-generated constructor stub
 	}
@@ -17,6 +18,20 @@ public class FCMVO {
 		this.car_id = car_id;
 		this.token = token;
 		this.type = type;
+	}
+	
+	public FCMVO(String car_id, String token, String type, String gps) {
+		super();
+		this.car_id = car_id;
+		this.token = token;
+		this.type = type;
+		this.gps = gps;
+	}
+	public String getGps() {
+		return gps;
+	}
+	public void setGps(String gps) {
+		this.gps = gps;
 	}
 	public String getCar_id() {
 		return car_id;
@@ -38,7 +53,7 @@ public class FCMVO {
 	}
 	@Override
 	public String toString() {
-		return "FCMVO [car_id=" + car_id + ", token=" + token + ", type=" + type + "]";
+		return "FCMVO [car_id=" + car_id + ", token=" + token + ", type=" + type + ", gps=" + gps + "]";
 	}
-	
+
 }

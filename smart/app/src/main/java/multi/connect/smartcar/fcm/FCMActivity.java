@@ -22,16 +22,16 @@ import okhttp3.Request;
 
 public class FCMActivity extends AppCompatActivity {
     String car_id;
-    String type;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fcm);
         getToken(car_id);
     }
-    public void request(View view){
+/*    public void request(View view){
         new rquestThread(car_id,type).start();
-    }
+    }*/
     //토큰을 생성하고 만드는 작업
     public void getToken(final String car_id){
         FirebaseInstanceId.getInstance().getInstanceId()
@@ -117,7 +117,7 @@ public class FCMActivity extends AppCompatActivity {
             try {
                 OkHttpClient client = new OkHttpClient();
                 Request.Builder builder = new Request.Builder();
-                builder = builder.url("http://192.168.43.229:8088/connectedcar/fcm/sendClient?car_id="+car_id+"&gps="+gps);
+                builder = builder.url("http://192.168.43.229:8088/connectedcar/fcm/sendGps?car_id="+car_id+"&gps="+gps);
                 Request request = builder.build();
                 Call newcall = client.newCall(request);
                 newcall.execute();

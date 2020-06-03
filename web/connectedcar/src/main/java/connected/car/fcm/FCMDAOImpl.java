@@ -38,6 +38,14 @@ public class FCMDAOImpl implements FCMDAO {
 		return data;
 		
 	}
+
+	@Override
+	public List<FCMVO> getClientGps(String car_id) {
+		System.out.println("gps받기"+car_id);
+		List<FCMVO> data =  sqlsession.selectList("connected.car.fcm.readClientGps", car_id);
+		System.out.println(data + ":::"+ data.size());
+		return data;
+	}
 	
 
 }

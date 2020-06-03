@@ -28,6 +28,11 @@ public class FCMServiceImpl implements FCMService {
 		return dao.getClientToken(car_id);
 	}
 
+	@Override
+	public List<FCMVO> getClientGps(String car_id) {
+		return dao.getClientGps(car_id);
+	}
+
 	
 	
 

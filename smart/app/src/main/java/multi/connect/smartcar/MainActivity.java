@@ -130,12 +130,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent voiceIntent;
         SpeechRecognizer voiceRecognizer;
         Destination destination;
-
+        //메시지 보낼 차량의 gps
+        String otherCarGps;
+        TMapPoint otherPoint;
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
-            car_id = "82가1005";
+            car_id = "82가1007";
             FCMActivity fcmActivity = new FCMActivity();
             fcmActivity.getToken(car_id);
             //findViewById 호출
@@ -143,6 +145,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //main 통신 - 메시지 주고받기
             /*infoClient = new InfoClient(this,intent.getStringExtra("carNum"));*/
             //infoClient = new InfoClient(this,carNum);
+
+            //상대차량 gps 셋팅하기
+            Intent intent = getIntent();
+            otherCarGps = intent.getStringExtra("gps");
+
 
             //이동거리 보내기
             sendDitance.setOnClickListener(new View.OnClickListener() {
@@ -334,11 +341,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         protected String doInBackground(Integer... integers) {
             try {
-                socket = new Socket("70.12.116.61", 50000);
+                socket = new Socket("192.168.201.107", 50000);
                 if (socket != null) {
                     ioWork();
-                    pw.println("info:" + car_id);
-                    pw.flush();
+                    //pw.println("info:" + car_id);
+                    //pw.flush();
                 }
                 Thread t1 = new Thread(new Runnable() {
                     @Override
@@ -643,13 +650,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //지도에 메시지 보낼 상대차량 번호판 찍기
             final ArrayList alTMapPoint = new ArrayList();
             carnumber.clear();
-            alTMapPoint.add(new TMapPoint(nowLoc.getLatitude() + 0.0002775, nowLoc.getLongitude()));//앞차
-            carnumber.add("82가1008");
+            TMapPolyLine line = new TMapPolyLine();
+            line.addLinePoint(nowLoc);
+            line.addLinePoint(otherPoint);
+            Double dist = line.getDistance();
+            if(dist<10.0) {
+                alTMapPoint.add(new TMapPoint(nowLoc.getLatitude() + 0.0002775, nowLoc.getLongitude()));//앞차
+                carnumber.add("82가1008");
+            }
             /*alTMapPoint.add(new TMapPoint(nowLoc.getLatitude() + 0.0003275, nowLoc.getLongitude() - 0.0004382));//앞왼차
             carnumber.add("222가2222");
             alTMapPoint.add(new TMapPoint(nowLoc.getLatitude() + 0.0003275, nowLoc.getLongitude() + 0.0004382));//앞오른차
             carnumber.add("333가3333");*/
-            carnumber.add("111가1111");
+            //carnumber.add("111가1111");
 //            alTMapPoint.add(new TMapPoint(nowLoc.getLatitude() + 0.0003275, nowLoc.getLongitude() - 0.0004382));//앞왼차
 //            carnumber.add("222가2222");
 //            alTMapPoint.add(new TMapPoint(nowLoc.getLatitude() + 0.0003275, nowLoc.getLongitude() + 0.0004382));//앞오른차
@@ -759,9 +772,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    pw.println("tablet/speed"+speed);
+                    pw.println("tablet:speed"+speed);
                     pw.flush();
                 }
             }).start();
+        }
+        public void setOtherGps(String otherCarGps){
+            StringTokenizer stk = new StringTokenizer(otherCarGps,",");
+            double otherLat = Double.parseDouble(stk.nextToken());
+            double otherLog = Double.parseDouble(stk.nextToken());
+
+            otherPoint = new TMapPoint(otherLat,otherLog);
+
+
+
         }
     }

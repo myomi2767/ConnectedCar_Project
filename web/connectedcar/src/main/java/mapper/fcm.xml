@@ -6,5 +6,6 @@
 <select parameterType="String" resultType="fcmvo" id="readToken">select * from fcm_info where token = #{token} </select>
 <select parameterType="String" resultType="fcmvo" id="readClientToken">select * from fcm_info where car_id not in (#{car_id}) </select>
 <insert parameterType="String" id="insertToken"> insert into fcm_info values(#{car_id},#{token}) </insert>
+<select parameterType="String" resultType="fcmvo" id="readClientGps">select * from fcm_info where car_id not in (#{car_id}) </select>
 </mapper>
 
