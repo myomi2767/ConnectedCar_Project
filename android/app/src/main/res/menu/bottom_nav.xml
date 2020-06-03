@@ -8,6 +8,12 @@
         android:title="부품주기"
         app:showAsAction="always" />
     <item
+        android:id="@+id/locationMenuItem"
+        android:enabled="true"
+        android:icon="@drawable/test2"
+        android:title="차량위치"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/homeMenuItem"
         android:enabled="true"
         android:title="차량제어"

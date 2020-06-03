@@ -1,6 +1,7 @@
 package connected.car.management.period;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -13,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -31,6 +33,7 @@ import connected.car.management.control.MainActivity;
  * A simple {@link Fragment} subclass.
  */
 public class PeriodFragment extends Fragment {
+
     PeriodAdapter myadapter;
     LinearLayoutManager manager;
     RecyclerView list;
@@ -38,21 +41,25 @@ public class PeriodFragment extends Fragment {
     TextView myCarName;
     FragmentManager fragmentManager;
 
+    TextView notice;
+
     public String car_id;
     public String car_model_name;
     public String car_fuel_type;
     public int drive_distance;
 
+    getPeriodHttpTask task;
 
 
     public PeriodFragment() {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
         // Inflate the layout for this fragment
         //Log.d("===", "period프래그먼트 생기기직전: ");
         View view = inflater.inflate(R.layout.fragment_period, container, false);
@@ -61,6 +68,9 @@ public class PeriodFragment extends Fragment {
         car_id = MyApplication.CarInfo.getCar_id(); //액티비티로부터 가져온 로그인된 car_id
         car_model_name = MyApplication.CarInfo.getCar_model_name();
         drive_distance = MyApplication.CarInfo.getDrive_distance();
+
+        notice = view.findViewById(R.id.text_notice);
+
 
         Log.d("===", "period프래그먼트: "+car_model_name);
         Log.d("===","period프래그먼트의 주행거리정보:===>>"+drive_distance);
@@ -78,11 +88,21 @@ public class PeriodFragment extends Fragment {
         list.setLayoutManager(manager);
         list.setAdapter(myadapter);
 
-        getPeriodHttpTask task = new getPeriodHttpTask(car_id);
-        task.execute();
 
-        return view;
+        if(car_model_name.equals("") || car_model_name==null){
+            notice.setText("아직 등록된 차량이 없습니다! \n 화면 우측 상단 차량 추가 버튼을 통해 차량을 등록해주세요.");
+            return view;
+        }else {
+            task = new getPeriodHttpTask(car_id);
+            task.execute();
+            return view;
+
+        }
+
+
     }
+
+
 
 
     //리싸이클러뷰
@@ -139,7 +159,6 @@ public class PeriodFragment extends Fragment {
                             MyexpendVO perioditem = new MyexpendVO(my_expend_no, car_id, expend_kind, expend_term,
                                     expend_type, expend_id, my_expend_replace, my_expend_km);
                             periodlist.add(perioditem);
-
                         }
 
                         myadapter.notifyDataSetChanged();

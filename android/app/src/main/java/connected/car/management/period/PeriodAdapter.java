@@ -1,5 +1,6 @@
 package connected.car.management.period;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -19,12 +20,11 @@ import connected.car.management.R;
 
 public class PeriodAdapter extends RecyclerView.Adapter<PeriodAdapter.ViewHolder>{
     private static final int FLAG_ACTIVITY_NEW_TASK = 0;
-    private final int drive_distance;
-    private final String car_model_name;
+    private int drive_distance;
+    private String car_model_name;
     Context context;
     int row_res_id;
     List<MyexpendVO> data;
-
 
     public PeriodAdapter(Context context, int row_res_id, List<MyexpendVO> data, int drive_distance, String car_model_name) {
         this.context = context;
@@ -88,11 +88,8 @@ public class PeriodAdapter extends RecyclerView.Adapter<PeriodAdapter.ViewHolder
 
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
-
             }
         });
-
-
     }
 
     @Override

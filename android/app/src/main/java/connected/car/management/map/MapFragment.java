@@ -1,23 +1,24 @@
 package connected.car.management.map;
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -38,10 +39,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -49,15 +47,17 @@ import javax.net.ssl.HttpsURLConnection;
 
 import connected.car.management.R;
 import connected.car.management.control.RemoteControlAsync;
-import connected.car.management.map.adapter.MapRouteAdapter;
 import connected.car.management.map.adapter.MapRouteItem;
 
-public class MapActivity extends AppCompatActivity implements OnMapReadyCallback,
-        GoogleMap.OnCameraMoveListener {
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class MapFragment extends Fragment implements OnMapReadyCallback,
+        GoogleMap.OnCameraMoveListener{
     GoogleMap gMap;
     MarkerOptions markerOptions;
     String[] permission_list = {Manifest.permission.ACCESS_FINE_LOCATION,
-                                Manifest.permission.ACCESS_COARSE_LOCATION};
+            Manifest.permission.ACCESS_COARSE_LOCATION};
     MapLocation mapLocation;
 
     //검색 기준 데이터
@@ -72,30 +72,29 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     //경로 정보 list
     List<MapRouteItem> wayDataList;
+
     //location 정보 가져올 변수
     RemoteControlAsync remoteControlAsync;
     LocationVO locationVO;
     PrintWriter pw;
     String carId;
 
+    public MapFragment() {
+        // Required empty public constructor
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.map_route);
-        setView();
-
-        Intent intent = getIntent();
-        carId = intent.getStringExtra("carId");
-
-
-        checkPermissions(permission_list);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.map_route, container, false);
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         gMap = googleMap;
         if(gMap != null) {
-            mapLocation = new MapLocation(this, permission_list);
+            mapLocation = new MapLocation(getContext(), permission_list);
 
             MarkerOptions markerOptions = new MarkerOptions();
             markerOptions.position(mapLocation.getMyLocation());
@@ -113,7 +112,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         for (int result : grantResults) {
             if(result == PackageManager.PERMISSION_DENIED) {
-                Toast.makeText(this, "권한이 설정되지 않았습니다. 앱을 다시 실행해주세요",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "권한이 설정되지 않았습니다. 앱을 다시 실행해주세요",Toast.LENGTH_SHORT).show();
                 return;
             }
         }
@@ -128,21 +127,20 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             loadDirections();
         }
     }
-
     public void init() {
-        FragmentManager manager = getSupportFragmentManager();
+        FragmentManager manager = getChildFragmentManager();
         SupportMapFragment mapFragment = (SupportMapFragment) manager.findFragmentById(R.id.plan_map);
         mapFragment.getMapAsync(this);
     }
 
     public void setView() {
         mapTextView = new HashMap<String, TextView>();
-        mapTextView.put("소요시간", (TextView) findViewById(R.id.map_duration));
-        mapTextView.put("출발시간", (TextView) findViewById(R.id.map_departure_time));
-        mapTextView.put("도착시간", (TextView) findViewById(R.id.map_arrival_time));
+        mapTextView.put("소요시간", (TextView) getActivity().findViewById(R.id.map_duration));
+        mapTextView.put("출발시간", (TextView) getActivity().findViewById(R.id.map_departure_time));
+        mapTextView.put("도착시간", (TextView) getActivity().findViewById(R.id.map_arrival_time));
 
-        container = findViewById(R.id.map_bar_container);
-        recyclerView = findViewById(R.id.map_route_list);
+        container = getActivity().findViewById(R.id.map_bar_container);
+        recyclerView = getActivity().findViewById(R.id.map_route_list);
 
         wayDataList = new ArrayList<MapRouteItem>();
     }
@@ -166,8 +164,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         @Override
         protected JSONObject doInBackground(Void... voids) {
-            if(mapLocation == null ) {
-                mapLocation = new MapLocation(MapActivity.this, permission_list);
+            if (mapLocation == null) {
+                mapLocation = new MapLocation(getContext(), permission_list);
             }
             //Log.d("test", mapLocation.getLatLngFromAddress("경기도 수원시 장안구 조원동 898") + "");
             String path = getPath(mapLocation.getMyLocation(),
@@ -178,15 +176,15 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             JSONObject json = null;
             try {
                 URL url = new URL(path);
-                HttpsURLConnection connection = (HttpsURLConnection)url.openConnection();
+                HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
                 connection.setRequestMethod("GET");
                 connection.setRequestProperty("Content-Type", "application/json");
 
-                if(connection.getResponseCode() == HttpsURLConnection.HTTP_OK) {
+                if (connection.getResponseCode() == HttpsURLConnection.HTTP_OK) {
                     in = new BufferedReader(new InputStreamReader(connection.getInputStream(), "UTF-8"));
                     sb = new StringBuffer();
                     String data = null;
-                    while((data = in.readLine()) != null) {
+                    while ((data = in.readLine()) != null) {
                         data = data.replaceAll("(^\\p{Z}+|\\p{Z}+$)", "");
                         sb.append(data);
                     }
@@ -208,7 +206,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         @Override
         protected void onPostExecute(JSONObject json) {
             super.onPostExecute(json);
-            if(json == null) {
+            if (json == null) {
                 Log.d("test", "null이다아아아아아");
                 return;
             }
@@ -229,7 +227,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     Log.d("test", point.latitude + "," + point.longitude);
                 }*/
                 Polyline line = gMap.addPolyline(new PolylineOptions()
-                        .color(Color.argb(220,86, 129, 218))
+                        .color(Color.argb(220, 86, 129, 218))
                         .width(10));
                 line.setPoints(listPoints);
 
@@ -250,100 +248,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             path.append("language=ko&");
             path.append("key=").append("AIzaSyABcoK6IL4ctXEp3TOXQ_fxrKN8v0eP9MI");
             return path.toString();
-        }
-
-        /*public void setViewDetail(JSONArray legs) {
-            //텍스트뷰 설정
-            try {
-                String[] info = {
-                        legs.getJSONObject(0).getJSONObject("duration").getString("text"),
-                        legs.getJSONObject(0).getJSONObject("departure_time").getString("text"),
-                        legs.getJSONObject(0).getJSONObject("arrival_time").getString("text"),
-                };
-                mapTextView.get("소요시간").setText(info[0]);
-                mapTextView.get("출발시간").setText(info[1]);
-                mapTextView.get("도착시간").setText(info[2]);
-
-                //경로 설정
-                int allTime = legs.getJSONObject(0).getJSONObject("duration").getInt("value");
-                JSONArray steps = legs.getJSONObject(0).getJSONArray("steps");
-                //adpterItem 리스트에 아이템 추가
-                for (int i = 0; i < steps.length(); i++) {
-                    String distance = steps.getJSONObject(i).getJSONObject("distance").getString("text");
-                    String timeString = steps.getJSONObject(i).getJSONObject("duration").getString("text");
-                    int time = steps.getJSONObject(i).getJSONObject("duration").getInt("value");
-                    String html_instructions = steps.getJSONObject(i).getString("html_instructions");
-                    String mode = steps.getJSONObject(i).getString("travel_mode");
-                    String detailMode = "";
-                    String number = "";
-                    int stops = 0;
-                    String start_stop = "";
-                    String end_stop = "";
-                    if(mode.equals("TRANSIT")) {
-                        detailMode = steps.getJSONObject(i).getJSONObject("transit_details")
-                                .getJSONObject("line").getJSONObject("vehicle").getString("type");
-                        number = steps.getJSONObject(i).getJSONObject("transit_details")
-                                .getJSONObject("line").getString("short_name");
-                        stops = steps.getJSONObject(i).getJSONObject("transit_details")
-                                .getInt("num_stops");
-                        start_stop = steps.getJSONObject(i).getJSONObject("transit_details")
-                                .getJSONObject("departure_stop").getString("name");
-                        end_stop = steps.getJSONObject(i).getJSONObject("transit_details")
-                                .getJSONObject("arrival_stop").getString("name") + "역 하차 ";
-                        if(detailMode.equals("SUBWAY")) {
-                            html_instructions = start_stop + "역 탑승 후\n" + stops + " 정거장 이동";
-                            wayDataList.add(new MapRouteItem(
-                                    R.drawable.train,
-                                    html_instructions,
-                                    timeString,
-                                    distance,
-                                    end_stop
-                            ));
-                        }
-                        else if(detailMode.equals("BUS")) {
-                            html_instructions = "버스 " + number + "번 탑승 후\n" + stops + " 정거장 이동";
-                            wayDataList.add(new MapRouteItem(
-                                    R.drawable.bus,
-                                    html_instructions,
-                                    timeString,
-                                    distance,
-                                    end_stop
-                            ));
-                        }
-                    }
-                    else if (mode.equals("WALKING")) {
-                        wayDataList.add(new MapRouteItem(
-                                R.drawable.footprint,
-                                html_instructions,
-                                timeString,
-                                distance
-                        ));
-                    }
-
-
-                }
-
-                //RecyclerView Adapter 설정
-                *//*for (MapRouteItem item : wayDataList) {
-                    Log.d("test", item.toString());
-                }*//*
-                setAdapter();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }*/
-
-        public void setAdapter() {
-            /*MapRouteAdapter adapter = new MapRouteAdapter(MapActivity.this, R.layout.map_route_row2, wayDataList);
-            LinearLayoutManager manager = new LinearLayoutManager(MapActivity.this);
-            manager.setOrientation(LinearLayoutManager.VERTICAL);
-
-            recyclerView.setHasFixedSize(true);
-            recyclerView.setLayoutManager(manager);
-
-            recyclerView.setAdapter(adapter);*/
-
-
         }
     }
 

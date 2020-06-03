@@ -14,13 +14,14 @@
         android:layout_height="wrap_content"
         android:padding="5dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:background="#CDE2EF">
+        android:background="@color/skyblue">
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="공조설정"
+            android:fontFamily="@font/bmhananapro"
 
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             />
@@ -31,7 +32,7 @@
     <LinearLayout
         android:layout_margin="10dp"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="120dp"
         android:background='#E9F3F9'
         android:orientation="vertical">
 
@@ -41,10 +42,12 @@
             android:orientation="horizontal">
 
             <TextView
+                android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:text="차량 내부 온도 : ">
+                android:text="차량 내부 온도 : "
+                android:fontFamily="@font/bmhananapro">
             </TextView>
 
         <TextView
@@ -58,7 +61,7 @@
 
     <SeekBar
         android:id="@+id/seekbar_air"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:progress="10"/>
@@ -74,7 +77,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:text="LOW">
+                    android:text="LOW"
+                    android:fontFamily="@font/bmjua_ttf">
                 </TextView>
             </LinearLayout>
             <LinearLayout
@@ -87,7 +91,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:text="HIGH">
+                    android:text="HIGH"
+                    android:fontFamily="@font/bmjua_ttf">
                 </TextView>
             </LinearLayout>
         </LinearLayout>
@@ -96,9 +101,10 @@
     <LinearLayout
         android:layout_margin="10dp"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background='#E9F3F9'
-        android:orientation="vertical">
+        android:layout_height="120dp"
+        android:background= "#E9F3F9"
+        android:orientation="vertical"
+        >
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -106,10 +112,12 @@
             android:orientation="horizontal">
 
             <TextView
+                android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:text="시동 유지 시간 : ">
+                android:text="시동 유지 시간 : "
+                android:fontFamily="@font/bmhananapro">
             </TextView>
 
         <TextView
@@ -123,10 +131,11 @@
 
         <SeekBar
             android:id="@+id/seekbar_enginetime"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:progress="10"/>
+            android:progress="10"
+            />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -138,7 +147,8 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:layout_weight="1"
                     android:layout_marginLeft="5dp"
-                    android:text="2분">
+                    android:text="2분"
+                    android:fontFamily="@font/bmjua_ttf">
                 </TextView>
                 <TextView
                     android:id="@+id/text_Time6"
@@ -146,7 +156,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:text="6분">
+                    android:text="6분"
+                    android:fontFamily="@font/bmjua_ttf">
                 </TextView>
                 <TextView
                     android:id="@+id/text_Time10"
@@ -154,7 +165,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:text="10분">
+                    android:text="10분"
+                    android:fontFamily="@font/bmjua_ttf">
                 </TextView>
 
         </LinearLayout>
@@ -190,9 +202,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:background='#F8D3D2'
+            android:background="#F8D3D2"
             android:text="저장"
-            android:textStyle="bold"></Button>
+            android:fontFamily="@font/bmhananapro"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"></Button>
     </RelativeLayout>
 
 

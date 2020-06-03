@@ -7,7 +7,8 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1" >
+        android:layout_weight="1"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -20,7 +21,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="일시" />
+                android:text="일시"
+                android:fontFamily="@font/bmhananapro"/>
 
             <TextView
                 android:id="@+id/control_code"
@@ -28,7 +30,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="원격제어" />
+                android:text="원격제어"
+                android:fontFamily="@font/bmhananapro"/>
 
             <TextView
                 android:id="@+id/control_result"
@@ -36,7 +39,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="결과" />
+                android:text="결과"
+                android:fontFamily="@font/bmhananapro"/>
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
