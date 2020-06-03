@@ -7,7 +7,7 @@ public class AnalyzePurchasePartitioner extends Partitioner<CustomKey, IntWritab
 
 	@Override
 	public int getPartition(CustomKey key, IntWritable value, int numPartitions) {
-		int partition = (key.getShop_id().hashCode() + key.getYear().hashCode() + key.getExpend_type().hashCode()) % numPartitions;
+		int partition = (key.getShop_id().hashCode() + key.getYear().hashCode() + key.getExpend_type().hashCode() + key.getCar_model_name().hashCode()) % numPartitions;
 		return partition;
 	}
 	

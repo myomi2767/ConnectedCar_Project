@@ -14,29 +14,35 @@ public class AnalyzeJoinReducer extends Reducer<CustomKey, IntWritable, CustomKe
 			throws IOException, InterruptedException {
 		Iterator<IntWritable> iter = values.iterator();
 		
-		//String shop_id = key.getShop_id();
-		//String year = key.getYear();
-		//String expend_type = key.getExpend_type();
+		String year = key.getYear();
+		String expend_type = key.getExpend_type();
 		String car_model_name = key.getCar_model_name();
 		int sum = 0;
 		while(iter.hasNext()) {
 			if(!car_model_name.equals(key.getCar_model_name())) {
+				System.out.println(car_model_name + " : " + key.getCar_model_name());
+				//| !expend_type.equals(key.getExpend_type())
+				//| !year.equals(key.getYear())) {
 				outputKey.setShop_id(key.getShop_id());
-				outputKey.setYear(key.getYear());
-				outputKey.setExpend_type(key.getExpend_type());
+				outputKey.setYear(year);
+				outputKey.setExpend_type(expend_type);
 				outputKey.setCar_model_name(car_model_name);
 				outputVal.set(sum);
 				context.write(outputKey, outputVal);
 				sum = 0;
 			}
 			sum += iter.next().get();
-			car_model_name = key.getCar_model_name();
+			year = key.getYear();                      
+			expend_type = key.getExpend_type();        
+			car_model_name = key.getCar_model_name();  
 		}
 		
 		if(car_model_name.equals(key.getCar_model_name())) {
+				//& expend_type.equals(key.getExpend_type())
+				//& year.equals(key.getYear())) {
 			outputKey.setShop_id(key.getShop_id());
-			outputKey.setYear(key.getYear());
-			outputKey.setExpend_type(key.getExpend_type());
+			outputKey.setYear(year);
+			outputKey.setExpend_type(expend_type);
 			outputKey.setCar_model_name(car_model_name);
 			outputVal.set(sum);
 			context.write(outputKey, outputVal);

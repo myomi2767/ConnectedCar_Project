@@ -111,8 +111,8 @@ public class CustomKey implements WritableComparable<CustomKey>{
 
 	@Override
 	public String toString() {
-		return (new StringBuffer().append(shop_id).append(",").append(year).append(",")
-				.append(expend_type).append(",").append(car_model_name)).toString();
+		return (new StringBuffer().append(shop_id).append("\t").append(year).append("\t")
+				.append(expend_type).append("\t").append(car_model_name)).toString();
 	}
 
 }
