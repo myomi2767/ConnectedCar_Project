@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 
 <!-- 테이블 용 css -->
-<link rel="stylesheet" type="text/css"	href="/connectedcar/common/css/minjae/table.css">
+ <link rel="stylesheet" type="text/css"	href="/connectedcar/common/css/minjae/table.css">
 </head>
 <body onbeforeunload="opener.parent.location.reload();">
 	<div class="container">

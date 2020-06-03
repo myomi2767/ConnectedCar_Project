@@ -13,7 +13,7 @@
 	<select id="getExpendlist" resultType="changevo">
 		select * from
 		expendable
-		where expend_type=#{expend_type} and car_model_name=#{car_model_name}
+		where expend_type=#{expend_type} and car_model_name=#{car_model_name} order by my_expend_no asc;
 	</select>
 
 	<update id="updateMyExpendlist" parameterType="changevo">
