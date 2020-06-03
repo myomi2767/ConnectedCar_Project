@@ -5,6 +5,9 @@
   
 <mapper namespace="connected.car.bigdata">
 	<select id="selectBigdataList" parameterType="String" resultType="bigdatavo">
-		select * from sqoop_result where shop_id = #{shop_id}
+		<![CDATA[
+			select * from sqoop_result where shop_id = #{shop_id} and rownum <= 10
+			order by out_count desc
+		]]>
 	</select>
 </mapper>
