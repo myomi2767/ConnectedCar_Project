@@ -79,7 +79,7 @@
 				data: {				
 					labels: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
 					datasets: [{
-						label: '월 별 매출액',
+						label: '분기 별 매출액',
 						data: ['${annualList[0]}','${annualList[1]}','${annualList[2]}','${annualList[3]}',
 							'${annualList[4]}','${annualList[5]}','${annualList[6]}','${annualList[7]}',
 							'${annualList[8]}','${annualList[9]}','${annualList[10]}','${annualList[11]}'],
