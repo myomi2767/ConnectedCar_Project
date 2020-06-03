@@ -139,9 +139,16 @@ public class User extends Thread {
 				}
 			}
 		}else if(protocol.equals("location")) {
-			String carid = st.nextToken();
-			User revUser = userlist.get(carid);
-			revUser.sendMsg(msg);
+			String message = st.nextToken();
+			String category = st.nextToken();
+			String id = st.nextToken();
+			User client = null;
+			if(category.equals("phone")) {
+				client = infolist.get(id);
+			}else {
+				client = userlist.get(id);
+			}
+			client.sendMsg(msg);
 		}
 	}
 

@@ -181,10 +181,13 @@ public class RemoteControlAsync extends AsyncTask<String, String, Void> {
                 isMessageIn = true;
             }
         }else if(protocol.equals("location")){
+            String message = st.nextToken();
+            String category = st.nextToken();
             String id = st.nextToken();
             String latitude = st.nextToken();
             String longitude = st.nextToken();
             locationVO = new LocationVO(Double.parseDouble(latitude), Double.parseDouble(longitude));
+            Log.d("locationtest",locationVO+"");
         }
     }
     void ioWork(){

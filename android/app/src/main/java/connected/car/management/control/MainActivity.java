@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity{
         condition = new CarControlFragment(MyApplication.CarInfo.getCar_id());
         periodFragment = new PeriodFragment();
         car_info = new CarInfoFragment();
-        mapFragment = new MapFragment();
+        mapFragment = new MapFragment(MyApplication.CarInfo.getCar_id(), condition);
         //=====로그인액티비티에서 온 데이터 정제 끝 ///
         //car_info = new CarInfo();
 

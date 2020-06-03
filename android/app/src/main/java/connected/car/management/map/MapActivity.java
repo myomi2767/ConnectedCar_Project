@@ -137,12 +137,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     public void setView() {
         mapTextView = new HashMap<String, TextView>();
-        mapTextView.put("소요시간", (TextView) findViewById(R.id.map_duration));
-        mapTextView.put("출발시간", (TextView) findViewById(R.id.map_departure_time));
-        mapTextView.put("도착시간", (TextView) findViewById(R.id.map_arrival_time));
+        //mapTextView.put("소요시간", (TextView) findViewById(R.id.map_duration));
+        //mapTextView.put("출발시간", (TextView) findViewById(R.id.map_departure_time));
+        //mapTextView.put("도착시간", (TextView) findViewById(R.id.map_arrival_time));
 
-        container = findViewById(R.id.map_bar_container);
-        recyclerView = findViewById(R.id.map_route_list);
+        //container = findViewById(R.id.map_bar_container);
+        //recyclerView = findViewById(R.id.map_route_list);
 
         wayDataList = new ArrayList<MapRouteItem>();
     }

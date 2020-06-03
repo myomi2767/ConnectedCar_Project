@@ -148,7 +148,7 @@ public class InfoClient {
             }
         }else if (protocol.equals("location")){
             locationVO vo = ((BackGroundActivity) context).startLocationService();
-            pw.println("location:"+carNum+":"+vo.getLatitude()+":"+vo.getLongitude());
+            pw.println("location:search:info:"+carNum+":"+vo.getLatitude()+":"+vo.getLongitude());
         }
     }
 

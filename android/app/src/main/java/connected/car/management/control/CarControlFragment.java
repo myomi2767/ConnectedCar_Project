@@ -66,4 +66,8 @@ public class CarControlFragment extends Fragment {
             return titleList[position];
         }
     }
+
+    public CarRemoteControlFragment getCarRemoteControlFragment(){
+        return control;
+    }
 }
