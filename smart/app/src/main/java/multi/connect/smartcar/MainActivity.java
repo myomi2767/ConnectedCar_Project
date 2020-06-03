@@ -4,12 +4,15 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -131,8 +134,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         SpeechRecognizer voiceRecognizer;
         Destination destination;
         //메시지 보낼 차량의 gps
-        String otherCarGps;
         TMapPoint otherPoint;
+
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -147,8 +150,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //infoClient = new InfoClient(this,carNum);
 
             //상대차량 gps 셋팅하기
-            Intent intent = getIntent();
-            otherCarGps = intent.getStringExtra("gps");
 
 
             //이동거리 보내기
@@ -426,6 +427,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //gps 반복보내기 종료
         timer1.cancel();
         timer1 = null;
+        //다른 차량 gps 받아오는것 종료
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiver);
     }
 
     @Override
@@ -518,6 +521,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 timer1.schedule(TT1, 0, 10000); //Timer 실행
             }
         },3000);
+
+        //다른 차량 gps LocalBroadcastManager로 FCMService에서 받기
+        LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReceiver,new IntentFilter("otherGPS"));
     }
 
     private final LocationListener mLocationListener = new LocationListener() {
@@ -777,14 +783,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }).start();
         }
-        public void setOtherGps(String otherCarGps){
-            StringTokenizer stk = new StringTokenizer(otherCarGps,",");
-            double otherLat = Double.parseDouble(stk.nextToken());
-            double otherLog = Double.parseDouble(stk.nextToken());
-
-            otherPoint = new TMapPoint(otherLat,otherLog);
-
-
-
-        }
+        private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                String otherLoc = intent.getStringExtra("gps");
+                String[] receiveGps = otherLoc.split(",");
+                Double otherLat = Double.parseDouble(receiveGps[0]);
+                Double otherLog = Double.parseDouble(receiveGps[1]);
+                otherPoint = new TMapPoint(otherLat,otherLog);
+            }
+        };
     }

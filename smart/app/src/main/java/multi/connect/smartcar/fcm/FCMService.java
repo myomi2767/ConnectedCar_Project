@@ -32,7 +32,6 @@ import multi.connect.smartcar.R;
 
 
 public class FCMService extends FirebaseMessagingService {
-    MainActivity mainActivity;
     public static final int MSG_SEND_TO_ACTIVITY = 4;
     public FCMService() {
     }
@@ -68,18 +67,16 @@ public class FCMService extends FirebaseMessagingService {
                         } catch (PendingIntent.CanceledException e) {
                             Toast.makeText(getBaseContext(), e.toString(), Toast.LENGTH_LONG);
                         }
-                    }else if(car_id!=null){
+                    }else {
                         Toast.makeText(getBaseContext(),message,Toast.LENGTH_SHORT).show();
-                        /*Intent intent = new Intent(getBaseContext(),MainActivity.class);
-                        intent.putExtra("gps",message);*/
-                       // setOtherGps(message);
+                        setOtherGps(message);
                     }
                 }
             });
         }
     }
     public void setOtherGps(String message){
-        Intent intent = new Intent(message);
+        Intent intent = new Intent("otherGPS");
         intent.putExtra("gps",message);
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
