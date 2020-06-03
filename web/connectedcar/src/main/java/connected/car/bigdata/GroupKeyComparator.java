@@ -21,6 +21,9 @@ public class GroupKeyComparator extends WritableComparator {
 		if(result == 0) {
 			result = c1.getExpend_type().compareTo(c2.getExpend_type());
 		}
+		if(result == 0) {
+			result = c1.getCar_model_name().compareTo(c2.getCar_model_name());
+		}
 		
 		return result;
 	}
