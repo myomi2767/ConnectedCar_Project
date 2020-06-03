@@ -499,8 +499,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         if (tMapGpsManager.getLocation()!=null) {
                             loc_sendgps = tMapGpsManager.getLocation().getLatitude() + "," + tMapGpsManager.getLocation().getLongitude();
                             Log.d("hgwh", loc_sendgps);
-                            //pw.println("tablet/location/"+loc_sendgps);
-                            //pw.flush();
+                            new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    new FCMActivity.rquestGPSThread(car_id,loc_sendgps).start();
+                                }
+                            }).start();
                         }
                     }
                 };

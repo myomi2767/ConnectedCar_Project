@@ -102,4 +102,29 @@ public class FCMActivity extends AppCompatActivity {
         }
 
     }
+
+    public static class rquestGPSThread extends Thread{
+        String gps;
+        String car_id;
+        public rquestGPSThread(String car_id,String gps) {
+            this.car_id = car_id;
+            this.gps = gps;
+        }
+
+        @Override
+        public void run() {
+            super.run();
+            try {
+                OkHttpClient client = new OkHttpClient();
+                Request.Builder builder = new Request.Builder();
+                builder = builder.url("http://192.168.43.229:8088/connectedcar/fcm/sendClient?car_id="+car_id+"&gps="+gps);
+                Request request = builder.build();
+                Call newcall = client.newCall(request);
+                newcall.execute();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
 }
