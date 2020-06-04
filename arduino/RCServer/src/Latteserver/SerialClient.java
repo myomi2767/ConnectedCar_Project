@@ -1,4 +1,4 @@
-package server;
+package latteserver;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.TooManyListenersException;
 
+import can.CANReadWriteTest;
 import gnu.io.CommPort;
 import gnu.io.CommPortIdentifier;
 import gnu.io.NoSuchPortException;
@@ -21,12 +22,15 @@ public class SerialClient {
 	InputStream in;
 	BufferedInputStream bis;
 	CommPort commPort;
+	CANReadWriteTest canReadWriteTest;
 	//CANReadWriteTest canReadWriteTest;
 	AndroidClient client;
-	public SerialClient(AndroidClient androidClient) {
-		//System.out.println("시리얼클라이언트 포트 불러오는곳");
+	public SerialClient(AndroidClient androidClient,CANReadWriteTest canReadWriteTest) {
+		System.out.println("시리얼클라이언트 포트 불러오는곳");
 		this.client = androidClient;
-		connect("COM10","masterLatte");
+		this.canReadWriteTest = canReadWriteTest;
+		connect("COM14","masterLatte");
+		setSpeedZero();
 	}
 	public void connect(String portName,String appName) {
 		try {
@@ -73,11 +77,12 @@ public class SerialClient {
 		this.androidClient = client;
 	}*/
 	
-	public void sendMessageToArduino(char data) {
+	public void sendMessageToArduino(byte[] data) {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
 				try {
+					System.out.println("char형"+data);
 					out.write(data);
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -85,32 +90,6 @@ public class SerialClient {
 			}
 		}).start();
 	}
-	/*class ReceiveThread extends Thread {
-		@Override
-		public void run() {
-			while(true) {
-				System.out.println("listener.getStatus()"+listener.getStatus());
-				System.out.println("listener.getDto().getMsg()"+listener.getDto().getMsg());
-				if(listener.getStatus()) {
-					msg = listener.getDto().getMsg();
-					System.out.println("------------"+msg);
-				} else {
-					msg = "";
-					System.out.println("+++++++++++++++"+msg);
-				}
-				System.out.println("현재 받은 메시지: " + msg);
-				client.sendMessage(msg);
-				//캔에 보낼 초음파에서 받은 속도
-				//sendUSMsg(msg);//
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}
-	}*/
 	public BufferedInputStream getBis() {
 		return bis;
 	}
@@ -125,11 +104,12 @@ public class SerialClient {
 	public CommPort getCommPort() {
 		return commPort;
 	}
-	/*private void sendUSMsg(String msg){
-		String id = "00000011";//송신할 메시지의 구분 id
-		String data = "0000000000000000";//송신할 데이터 -> 내 마음대로 정해주기, 16글자는 맞춰야함
-		String mesaage = id+data;
+	public void setSpeedZero() {
+		String id = "00000001";// 송신할 메시지의 구분 id
+		String data = "0000000000000011";// 송신할 데이터 -> 내 마음대로 정해주기,
+											// 16글자는 맞춰야함
+		String mesaage = id + data;
 		canReadWriteTest.send(mesaage);
-	}*/
+	}
 
 }

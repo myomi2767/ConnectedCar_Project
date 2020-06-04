@@ -10,15 +10,13 @@ public class ECUControl {
 	SerialConnect canConnect; // CAN시리얼포트 연결
 	SerialConnect arduinoConnect; // arduino시리얼 포트 연결
 	OutputStream out; // CAN과 output통신할 스트림
-	
 	public static void main(String[] args) {
 		ECUControl canObj = new ECUControl();
 	}
 	
 	public ECUControl() {
 		canConnect = new SerialConnect();
-		canConnect.connect("COM9", "Can");
-		
+		canConnect.connect("COM22", "Can");
 		arduinoConnect = new SerialConnect();
 		arduinoConnect.connect("COM5", "Arduino");
 		

@@ -54,7 +54,24 @@ public class ArduinoSerialListener implements SerialPortEventListener {
 						System.out.println("Slave가 보낸 메시지 =>>>" + message);
 						send(message);
 					}
-
+					
+					/*if(aData.trim().length()==3) {
+						canData = "0000000000000"+aData.trim();
+					}else if(aData.trim().length()==2) {
+						canData = "00000000000000"+aData.trim();
+					}else if(aData.trim().length()==1) {
+						canData = "000000000000000"+aData.trim();
+					}*/
+					//canData = "00000000000000"+aData.trim();
+					
+					/*if(aData.trim().equals("success")) {
+						String id = "00000000";
+						String canData = "0000000000001100";
+						String message = id+canData;
+						System.out.println(message);
+						send(message);
+					}*/
+				
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -120,7 +137,9 @@ public class ArduinoSerialListener implements SerialPortEventListener {
 			System.out.println("또 다른 Can에게 보내기 전의 outputdata : " + outputdata);//outputdata는 [B@33e1ab78
 			try {
 				System.out.println("또 다른 Can에게 보낼 데이터 : " + outputdata.toString());//outputdata.toString() [B@33e1ab78
+				
 				canOs.write(outputdata);//can에 데이터 보내는 애
+				
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

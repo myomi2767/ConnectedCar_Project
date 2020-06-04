@@ -1,4 +1,4 @@
-package server;
+package latteserver;
 
 public class DistanceDTO {
 	String msg;

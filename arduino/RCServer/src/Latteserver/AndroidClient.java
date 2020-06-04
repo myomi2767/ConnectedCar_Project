@@ -1,4 +1,4 @@
-package server;
+package latteserver;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -52,23 +52,25 @@ public class AndroidClient {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				st = new StringTokenizer(msg, "/");
+				st = new StringTokenizer(msg, ":");
 				String protocol = st.nextToken();
-				String message = st.nextToken();
-				System.out.println("자르기 전: " + msg);
-				System.out.println("프로토콜:" + protocol + ",메시지:" + message);
+				if (st.hasMoreTokens()) {
+					String message = st.nextToken();
+					//System.out.println("자르기 전: " + msg);
+					System.out.println("프로토콜:" + protocol + ",메시지:" + message);
 
-				if (!msg.equals("")) {
-					if (protocol.equals("sonic")) {
-						if (message != null) {
-							filterUS(message);
+					if (!msg.equals("")) {
+						if (protocol.equals("sonic")) {
+							if (message != null) {
+								filterUS(message);
+								pw.println(msg);
+								pw.flush();
+							}
+						} else if (protocol.equals("speed")) {
+							System.out.println("rc카가 보내는 속도:::>>" + message);
 							pw.println(msg);
 							pw.flush();
 						}
-					} else if (protocol.equals("speed")) {
-						System.out.println("rc카가 보내는 속도:::>>" + message);
-						pw.println(msg);
-						pw.flush();
 					}
 				}
 
@@ -85,19 +87,26 @@ public class AndroidClient {
 					System.out.println(msg+":::::");
 					if (serialClient != null) {
 						
-						if (msg.equals("system/auto_on")) {
+						if (msg.equals("system:auto_on")) {
 							status = "on";
-							// System.out.println(msg+"::::auto on");
-							//serialClient.sendMessageToArduino('1');
-							System.out.println("auto_status111111"+status);
-						} else if (msg.equals("system/auto_off")) {
+							String id = "00000001";// 송신할 메시지의 구분 id
+							String data = "0000000000000008";// 송신할 데이터 -> 내 마음대로 정해주기, 16글자는
+																// 맞춰야함
+							String mesaage = id + data;
+							canReadWriteTest.send(mesaage);
+						} else if (msg.equals("system:auto_off")) {
+							
+							String id = "00000001";// 송신할 메시지의 구분 id
+							String data = "0000000000000009";// 송신할 데이터 -> 내 마음대로 정해주기, 16글자는
+																// 맞춰야함
+							String mesaage = id + data;
+							canReadWriteTest.send(mesaage);
 							status = "off";
-							//serialClient.sendMessageToArduino('0');
 							
 						}
-						System.out.println("auto_status222222"+status);
+						//System.out.println("auto_status222222"+status);
 						if (status.equals("on")) {
-							System.out.println("status"+status);
+							//System.out.println("status"+status);
 							filteringMsg(msg);
 						}
 						
@@ -111,7 +120,7 @@ public class AndroidClient {
 	}
 
 	public void filterUS(String msg) {
-		if (msg.equals("system/auto_on"))
+		if (msg.equals("system:auto_on"))
 			return;
 
 		if (Integer.parseInt(msg) > 50) {
@@ -132,7 +141,10 @@ public class AndroidClient {
 
 	private void filteringMsg(String msg) {// +3 -3 30 60 90구분
 		System.out.println("클라이언트가 받은 메시지" + msg);
-		st = new StringTokenizer(msg, "/");
+		if (msg.equals("system:auto_on"))
+			return;
+
+		st = new StringTokenizer(msg, ":");
 		String protocol = st.nextToken(); // app에게 받은 메시지 수행!!
 		String value = st.nextToken();
 		if (protocol.equals("tablet")) {
@@ -142,21 +154,21 @@ public class AndroidClient {
 													// 16글자는 맞춰야함
 				String mesaage = id + data;
 				canReadWriteTest.send(mesaage);
-				System.out.println("버튼 plus3 누름");
+				//System.out.println("버튼 plus3 누름");
 			} else if (value.equals("minus3")) {
 				String id = "00000001";// 송신할 메시지의 구분 id
 				String data = "0000000000000002";// 송신할 데이터 -> 내 마음대로 정해주기,
 													// 16글자는 맞춰야함
 				String mesaage = id + data;
 				canReadWriteTest.send(mesaage);
-				System.out.println("버튼 minus3 누름");
+				//System.out.println("버튼 minus3 누름");
 			} else if (value.equals("speed30")) {
 				String id = "00000001";// 송신할 메시지의 구분 id
 				String data = "0000000000000003";// 송신할 데이터 -> 내 마음대로 정해주기,
 													// 16글자는 맞춰야함
 				String mesaage = id + data;
 				canReadWriteTest.send(mesaage);
-				System.out.println("버튼 speed30 누름");
+				//System.out.println("버튼 speed30 누름");
 			} else if (value.equals("speed60")) {
 				String id = "00000001";// 송신할 메시지의 구분 id
 				String data = "0000000000000004";// 송신할 데이터 -> 내 마음대로 정해주기,
@@ -169,6 +181,9 @@ public class AndroidClient {
 													// 16글자는 맞춰야함
 				String mesaage = id + data;
 				canReadWriteTest.send(mesaage);
+			} else if (value.equals("speed0")) {
+				
+				//System.out.println("버튼 minus3 누름");
 			}
 		}
 	}

@@ -1,4 +1,4 @@
-package server;
+package latteserver;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -23,6 +23,7 @@ public class SerialCANListener implements SerialPortEventListener {
 	StringTokenizer st;
 	
 	AndroidClient androidClient;
+	SerialClient serialClient;//계기판 속도를 LCD로 넘끼끼
 
 	public SerialCANListener(BufferedInputStream bis) {
 		this.bis = bis;
@@ -48,17 +49,20 @@ public class SerialCANListener implements SerialPortEventListener {
 				// CanListener가 w28과 U28 둘 다 읽기 때문에 나눠줘야한다.
 				if (msg.trim().startsWith(":W2800000001")) {
 					fromMaster = msg.trim();
-					System.out.println("Master가 Can시리얼 포트로 전송한데이터=>"+fromMaster);
+					//System.out.println("Master가 Can시리얼 포트로 전송한데이터=>"+fromMaster);
 				} else if (msg.trim().startsWith(":U2800000002")) {
 					fromSlave = msg.trim();
-					System.out.println("Slave가 Can시리얼 포트로 전송한데이터=>"+fromSlave);
+					//System.out.println("Slave가 Can시리얼 포트로 전송한데이터=>"+fromSlave);
 				}
 				//can에서 읽은 msg가 slave에서 넘어온 데이터와 같을 때
 				if (msg.trim().equals(fromSlave)) {
 					result = getHexToDec(msg);
 					System.out.println("slave에서 보내온 데이터:::> " + result);
-					resultmsg = "speed/"+ result;
+					resultmsg = "speed:"+ result;
 					androidClient.sendMessage(resultmsg);
+					//byte[] speed =  result.GetBytes(result);
+		
+					//serialClient.sendMessageToArduino(speed);
 				} 
 			} catch (IOException e) {
 				e.printStackTrace();
