@@ -17,7 +17,7 @@ public class ECUControl {
 	
 	public ECUControl() {
 		canConnect = new SerialConnect();
-		canConnect.connect("COM6", "CAN");
+		canConnect.connect("COM5", "CAN");
 		
 		arduinoConnect = new SerialConnect();
 		arduinoConnect.connect("COM3", "arduino");

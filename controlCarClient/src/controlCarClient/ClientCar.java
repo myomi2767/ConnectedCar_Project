@@ -36,14 +36,14 @@ public class ClientCar {
 	}
 	public void connect() {
 		try {
-			socket = new Socket("70.12.116.67", 12345);
+			socket = new Socket("192.168.43.175", 12345);
 			System.out.println("접속 성공!!!");
 			if(socket!=null) {
-				carId="34가6773";
+				carId="12가1234";
 				ioWork();
 				
 				//CAN통신 열기
-				canReadWriteTest = new CANReadWriteTest("COM17", socket, carId);
+				canReadWriteTest = new CANReadWriteTest("COM6", socket, carId);
 			}
 			Thread t1 = new Thread(new Runnable() {
 	            @Override
