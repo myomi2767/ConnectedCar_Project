@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity{
         Intent intent = getIntent();
         //main 통신 - 메시지 주고받기
         id = "backCar";
-        carNum = "34가6773";
+        carNum = "12가1234";
         /*infoClient = new InfoClient(this,intent.getStringExtra("carNum"));*/
         infoClient = new InfoClient(this, carNum);
         messageType = getIntent().getStringExtra("messageType");

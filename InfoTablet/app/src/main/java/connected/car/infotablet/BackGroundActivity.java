@@ -32,7 +32,7 @@ public class BackGroundActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_back_ground);
         id = "backCar";
-        carNum = "34가6773";
+        carNum = "12가1234";
         info = new InfoClient(this,carNum);
         //위험 권한 확인
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)

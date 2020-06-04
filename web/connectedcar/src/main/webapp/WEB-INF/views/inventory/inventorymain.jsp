@@ -67,9 +67,11 @@
 	</div>
 	<script type="text/javascript">
 		window.onload = function() {
-			setAnnualChart();
-			setTypeChart();
-			setDoughnutChart();
+			if('${annualList[0]}' != null && '${loginuser}' != null) {
+				setAnnualChart();
+				setTypeChart();
+				setDoughnutChart();
+			}
 		}
 		
 		function setAnnualChart() {

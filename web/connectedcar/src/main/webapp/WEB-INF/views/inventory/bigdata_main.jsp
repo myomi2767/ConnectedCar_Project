@@ -32,7 +32,10 @@
 	</div>
 	<script type="text/javascript">
 		window.onload = function() {
-			setAnnualChart();
+			if('${bList}' != null && '${loginuser}' != null) {
+				setAnnualChart();
+			}
+			
 		}
 		
 		function setAnnualChart() {

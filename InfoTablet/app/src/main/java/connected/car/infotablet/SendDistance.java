@@ -22,7 +22,7 @@ public class SendDistance extends AsyncTask<String,Void,Void> {
     @Override
     protected Void doInBackground(String... strings) {
         try {
-            URL url = new URL("http://192.168.43.232:8088/connectedcar/mycar/update.do");
+            URL url = new URL("http://192.168.43.175:8088/connectedcar/mycar/update.do");
             OkHttpClient client = new OkHttpClient();
             JSONObject json = new JSONObject();
             json.put("car_id", strings[0]);
