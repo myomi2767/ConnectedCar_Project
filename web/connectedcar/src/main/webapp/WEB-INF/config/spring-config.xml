@@ -86,6 +86,7 @@
 			<mapping path="/inventory/**"/>
 			<mapping path="/admin/**"/>
 			<mapping path="/expendable/**"/>
+			<mapping path="/sales/**"/>
 			
 			
 			<beans:bean class="connected.car.owner.LoginCheckInterceptor"/>

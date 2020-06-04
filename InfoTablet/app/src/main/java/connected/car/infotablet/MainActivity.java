@@ -66,6 +66,9 @@ public class MainActivity extends AppCompatActivity {
     //mChatId = getIntent().getStringExtra("chat_Id");
     String messageType = null;
 
+    //주행 거리 추가 버튼
+    Button sendDistance;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +77,50 @@ public class MainActivity extends AppCompatActivity {
         fcmActivity.getToken(car_id);
         connectViews();
         infoClient = new InfoClient(this, car_id);
+
+        Intent intent = getIntent();
+        //main 통신 - 메시지 주고받기
+        id = "backCar";
+        carNum = "12가1234";
+        /*infoClient = new InfoClient(this,intent.getStringExtra("carNum"));*/
+        infoClient = new InfoClient(this, carNum);
+        messageType = getIntent().getStringExtra("messageType");
+        if (messageType != null) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setCancelable(true);
+            final View receiveView = LayoutInflater.from(MainActivity.this).inflate(R.layout.receive_msg, null);
+            final TextView receiveMsg = receiveView.findViewById(R.id.receiveMsg);
+            final Button msgCheck = receiveView.findViewById(R.id.msgCheck);
+            if (messageType.equals("EM")) {
+                String text = "EM";
+                receiveMsg.setText(text);
+            } else if (messageType.equals("TRUNK")) {
+                String text = "TRUNK";
+                receiveMsg.setText(text);
+            } else if (messageType.equals("CAUTION")) {
+                String text = "CAUTION";
+                receiveMsg.setText(text);
+            }
+            msgCheck.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    alertDialog.dismiss();
+                }
+            });
+            builder.setView(receiveView);
+            alertDialog = builder.create();
+
+            alertDialog.show();
+            messageType = null;
+
+        }
+        //이동거리 보내기
+        sendDistance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new SendDistance().execute(carNum);
+            }
+        });
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(permission_list, 1000);
@@ -90,6 +137,8 @@ public class MainActivity extends AppCompatActivity {
         linearLayoutTmap = findViewById(R.id.layoutMapView);
         loading = findViewById(R.id.loading);
         mapViewTotal = findViewById(R.id.mapViewTotal);
+
+        sendDistance = findViewById(R.id.distanceShare);
     }
 
     @Override

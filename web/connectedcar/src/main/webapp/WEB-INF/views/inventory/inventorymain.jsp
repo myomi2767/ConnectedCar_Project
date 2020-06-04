@@ -55,7 +55,7 @@
 				<canvas id="type_chart" width="600" height="500"></canvas>
 			</div>
 			<div class="col-sm-6">
-				<form action="">
+				<form action="/connectedcar/bigdata/result.do">
 					<button id="btn_submit" type="submit" class="btn btn-theme" onclick="" style="margin-left: 150px">내년 예상 구매량 분석 결과 보기</button>
 				</form>
 			</div>
@@ -67,9 +67,11 @@
 	</div>
 	<script type="text/javascript">
 		window.onload = function() {
-			setAnnualChart();
-			setTypeChart();
-			setDoughnutChart();
+			if('${annualList[0]}' != null && '${loginuser}' != null) {
+				setAnnualChart();
+				setTypeChart();
+				setDoughnutChart();
+			}
 		}
 		
 		function setAnnualChart() {
@@ -79,7 +81,7 @@
 				data: {				
 					labels: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
 					datasets: [{
-						label: '월 별 매출액',
+						label: '분기 별 매출액',
 						data: ['${annualList[0]}','${annualList[1]}','${annualList[2]}','${annualList[3]}',
 							'${annualList[4]}','${annualList[5]}','${annualList[6]}','${annualList[7]}',
 							'${annualList[8]}','${annualList[9]}','${annualList[10]}','${annualList[11]}'],
