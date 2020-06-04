@@ -26,14 +26,14 @@ public class InfoClient {
     PrintWriter pw;
     StringTokenizer token;
     //String id;
-    String carNum;
+    String car_id;
 
 
 
-    public InfoClient(Context context,String carNum) {
+    public InfoClient(Context context,String car_id) {
         this.context = context;
        // this.id = id;
-        this.carNum = carNum;
+        this.car_id = car_id;
         new AsyncTaskMain().execute();
 
     }
@@ -42,7 +42,7 @@ public class InfoClient {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                pw.println("message:"+msg+":info:"+carNum);
+                pw.println("message:"+msg+":info:"+car_id);
             }
         }).start();
     }
@@ -56,7 +56,7 @@ public class InfoClient {
             try {
                 //메인서버 아이피 입력
 
-                socket = new Socket("192.168.201.114", 12345);
+                socket = new Socket("192.168.43.229", 12345);
                 Log.d("server","");
                 Log.d("server","소켓소켓"+socket);
                 if (socket != null) {
@@ -98,7 +98,7 @@ public class InfoClient {
             os = socket.getOutputStream();
             pw = new PrintWriter(os,true);
             Log.d("server","xdsafhgjkljeifjlsf들어왔음");
-            pw.println("info:"+carNum);
+            pw.println("info:"+car_id);
             pw.flush();
 
         } catch (IOException e) {
@@ -148,7 +148,7 @@ public class InfoClient {
             }
         }else if (protocol.equals("location")){
             LocationVO vo = ((BackGroundActivity) context).getLocationVO();
-            pw.println("location:search:info:"+carNum+":"+vo.getLatitude()+":"+vo.getLongitude());
+            pw.println("location:search:info:"+car_id+":"+vo.getLatitude()+":"+vo.getLongitude());
         }
     }
 

@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
-            car_id = "82가1007";
+            car_id = "82가1005";
             FCMActivity fcmActivity = new FCMActivity();
             fcmActivity.getToken(car_id);
             //findViewById 호출
@@ -342,11 +342,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         protected String doInBackground(Integer... integers) {
             try {
-                socket = new Socket("192.168.201.107", 50000);
+                socket = new Socket("192.168.43.87", 50000);
                 if (socket != null) {
                     ioWork();
-                    //pw.println("info:" + car_id);
-                    //pw.flush();
+
                 }
                 Thread t1 = new Thread(new Runnable() {
                     @Override
@@ -411,6 +410,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             os = socket.getOutputStream();
             pw = new PrintWriter(os,true);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -427,6 +427,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //gps 반복보내기 종료
         timer1.cancel();
         timer1 = null;
+
+
         //다른 차량 gps 받아오는것 종료
         LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiver);
     }
@@ -520,7 +522,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 };
                 timer1.schedule(TT1, 0, 10000); //Timer 실행
             }
-        },3000);
+        },15000);
 
         //다른 차량 gps LocalBroadcastManager로 FCMService에서 받기
         LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReceiver,new IntentFilter("otherGPS"));

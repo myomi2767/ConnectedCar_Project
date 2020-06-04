@@ -1,18 +1,15 @@
-package multi.connect.smartcar.fcm;
+package connected.car.infotablet.fcm;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.PendingIntent;
-import android.content.Context;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import multi.connect.smartcar.MainActivity;
-import multi.connect.smartcar.R;
+import androidx.appcompat.app.AppCompatActivity;
+
+import connected.car.infotablet.R;
+
 
 public class MsgActivity extends AppCompatActivity {
     String message;
@@ -28,10 +25,10 @@ public class MsgActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         message = extras.getString("message");
         if(message.equals("EM")){
-            text = getString(R.string.EM);
+            text =getString(R.string.EM);
             mediaPlayer = MediaPlayer.create(MsgActivity.this,R.raw.em);
         }else if(message.equals("TRUNK")){
-            text = getString(R.string.TRUNK);
+            text =getString(R.string.TRUNK);
             mediaPlayer = MediaPlayer.create(MsgActivity.this,R.raw.trunk);
         }else if(message.equals("CAUTION")) {
             text = getString(R.string.CAUTION);

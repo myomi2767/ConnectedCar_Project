@@ -21,9 +21,9 @@
 		<typeAlias type="connected.car.control.RemoteVO" alias="remotevo"/>
 		<typeAlias type="connected.car.mycar.MyCarVO" alias="mycarvo"/>
 		<typeAlias type="connected.car.fcm.FCMVO" alias="fcmvo"/>
-		<typeAlias type="connected.car.period.MyexpendVO" alias="myexpendvo"/><!-- App 내 자동차 부품 교환 주기 기능 -->
-		<typeAlias type="connected.car.period.TermVO" alias="termvo"/><!-- 교환 주기 vo -->
-		<typeAlias type="connected.car.period.ChangeVO" alias="changevo"/><!-- ExpendableVO와 동일히지만 매개변수 다른 생성자가 있다. -->
+		<typeAlias type="connected.car.period.MyexpendVO" alias="myexpendvo"/>
+		<typeAlias type="connected.car.period.TermVO" alias="termvo"/>
+		<typeAlias type="connected.car.period.ChangeVO" alias="changevo"/>
 		
 	</typeAliases>
 	<mappers>

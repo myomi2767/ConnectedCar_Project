@@ -53,7 +53,7 @@ public class InfoClient {
             try {
                 //메인서버 아이피 입력
 
-                socket = new Socket("192.168.137.1", 12345);
+                socket = new Socket("192.168.201.173", 12345);
                 Log.d("server","소켓소켓"+socket);
                 if (socket != null) {
 
